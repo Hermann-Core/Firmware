@@ -1,0 +1,34 @@
+/*######################################################################
+# -------------------------------------------------------------------- #
+# | Author : Awatsa Hermann          |     Version : 1.0             | #
+# -------------------------------------------------------------------- #
+# | Date : 07.02.2023                |     File : settings.json      | #
+# ---------------------------------------------------------------------#
+# | Brief : User settings file                                       | #
+# -------------------------------------------------------------------- #
+######################################################################*/
+
+{
+    "cmake.copyCompileCommands": "${workspaceFolder}/compile_commands.json",
+    "cmake.configureOnOpen": false,
+    "sonarlint.pathToCompileCommands": "${workspaceFolder}\\compile_commands.json",
+    "clangd.arguments": [
+        "--query-driver=C:/TI_LLVM_Arm_Embedded_Toolchain/bin/tiarmclang.exe",
+        "--query-driver=C:/GNU_Arm_Embedded_Toolchain/12.2-rel1/bin/arm-none-eabi-g++.exe",
+        "--query-driver=C:/GNU_Arm_Embedded_Toolchain/12.2-rel1/bin/arm-none-eabi-gcc.exe"
+    ],
+    "C_Cpp.intelliSenseEngine": "default",
+    "files.associations": {
+        "array": "c",
+        "initializer_list": "c",
+        "cinttypes": "cpp",
+        "cstdint": "cpp",
+        "peripherals_defs.h": "c",
+        "_ti_config.h": "c",
+        "string.h": "c",
+        "atomic": "c",
+        "cstring": "c",
+        "autoinit.h": "c",
+        "core_cm4.h": "c"
+    }
+}

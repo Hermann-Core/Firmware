@@ -1,0 +1,83 @@
+{
+    "version": 6,
+    "cmakeMinimumRequired": {
+      "major": 3,
+      "minor": 24,
+      "patch": 0
+    },
+    "configurePresets": [
+      {
+        "name": "common",
+        "displayName": "Default Config",
+        "description": "Default build configuration",
+        "hidden": true,
+        "generator": "Ninja",
+        "binaryDir": "${sourceDir}/build/${presetName}",
+        "installDir": "${sourceDir}/build/install/${presetName}",
+        "environment": {
+          "GNU_TOOLCHAIN_PATH": "C:/GNU_Arm_Embedded_Toolchain/12.2-rel1/bin",
+          "TI_TOOLCHAIN_PATH":  "C:/TI_LLVM_Arm_Embedded_Toolchain/bin"
+        },
+        "cacheVariables": {
+            "CMAKE_TOOLCHAIN_FILE": {
+              "type": "FILEPATH",
+              "value": "${sourceDir}/cmake/arm-none-eabi.cmake"
+            },
+            "CMAKE_EXPORT_COMPILE_COMMANDS": {
+                "type": "BOOL",
+                "value": "TRUE"
+            },
+              "CMAKE_RUNTIME_OUTPUT_DIRECTORY": {
+                "type": "FILEPATH",
+                "value": "${sourceDir}/bin/${presetName}"
+            }
+        },
+        "architecture": {
+            "value": "unspecified",
+            "strategy": "external"
+          },
+        "vendor": {
+        "microsoft.com/VisualStudioSettings/CMake/1.0": {
+            "intelliSenseMode": "windows-clang-x64"
+          }
+        }
+      },
+      {
+        "name": "debug",
+        "inherits": "common",
+        "displayName": "debug",
+        "description": "Set debug build type",
+        "cacheVariables": {
+          "CMAKE_BUILD_TYPE": "Debug",
+          "CMAKE_C_FLAGS_DEBUG": "-g -g3 -O0 -ggdb",
+          "CMAKE_ASM_FLAGS_DEBUG": "-g -g3 -O0 -ggdb",
+          "CMAKE_CXX_FLAGS_DEBUG": "-g -g3 -O0 -ggdb"
+        }
+      },
+      {
+        "name": "release",
+        "inherits": "common",
+        "displayName": "release",
+        "description": "Set release build type",
+        "cacheVariables": {
+            "CMAKE_BUILD_TYPE": "Release",
+            "CMAKE_C_FLAGS_RELEASE": "-DNDEBUG -O3",
+            "CMAKE_CXX_FLAGS_RELEASE": "-DNDEBUG -O3"
+        }
+      }
+    ],
+    "buildPresets": [
+      {
+        "name": "debug",
+        "displayName": "Debug",
+        "configurePreset": "debug",
+        "nativeToolOptions": ["-v"]
+      },
+      {
+        "name": "release",
+        "displayName": "Release",
+        "configurePreset": "release",
+        "nativeToolOptions": ["-v"]
+      }
+    ]
+  }

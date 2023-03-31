@@ -1,0 +1,68 @@
+{
+  /*######################################################################
+  # -------------------------------------------------------------------- #
+  # | Author : Awatsa Hermann          |     Version : 1.0             | #
+  # -------------------------------------------------------------------- #
+  # | Date : 07.02.2023                |     File : launch.json        | #
+  # ---------------------------------------------------------------------#
+  # | Brief : debug configuration file                                 | #
+  # -------------------------------------------------------------------- #
+  ######################################################################*/
+
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Application",
+        "request": "launch",
+        "type": "cortex-debug",
+        "cwd": "${workspaceFolder}",
+        "executable": "${workspaceFolder}/bin/debug/main_app.out",
+        "servertype": "jlink",
+        "serverpath": "${env:ProgramFiles}/SEGGER/JLink/JLinkGDBServerCL.exe",
+        "runToEntryPoint": "__Setup_app",
+        "device": "STM32F303VC",
+        "showDevDebugOutput": "none",
+        "rttConfig": {
+          "enabled": true,
+          "address": "auto",
+          "decoders": [
+              {
+                  "label": "",
+                  "port": 0,
+                  "type": "console",
+                  "iencoding": "utf8",
+              }
+          ]
+        },
+        "preLaunchTask": "CMake: build",
+        "svdPath": "${workspaceFolder}/device/SVD_file/STM32F303.svd"
+      },
+
+      {
+        "name": "Bootloader",
+        "request": "launch",
+        "type": "cortex-debug",
+        "cwd": "${workspaceFolder}",
+        "executable": "${workspaceFolder}/bin/debug/bootloader.out",
+        "servertype": "jlink",
+        "serverpath": "${env:ProgramFiles}/SEGGER/JLink/JLinkGDBServerCL.exe",
+        "runToEntryPoint": "main",
+        "device": "STM32F303VC",
+        "showDevDebugOutput": "none",
+        "rttConfig": {
+          "enabled": true,
+          "address": "auto",
+          "decoders": [
+              {
+                  "label": "",
+                  "port": 0,
+                  "type": "console",
+                  "iencoding": "utf8",
+              }
+          ]
+        },
+        "preLaunchTask": "CMake: build",
+        "svdPath": "${workspaceFolder}/device/SVD_file/STM32F303.svd"
+      }
+    ]
+}
