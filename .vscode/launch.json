@@ -21,7 +21,7 @@
         "serverpath": "${env:ProgramFiles}/SEGGER/JLink/JLinkGDBServerCL.exe",
         "runToEntryPoint": "__Setup_app",
         "device": "STM32F303VC",
-        "showDevDebugOutput": "none",
+        "showDevDebugOutput": "raw",
         "rttConfig": {
           "enabled": true,
           "address": "auto",
@@ -48,7 +48,7 @@
         "serverpath": "${env:ProgramFiles}/SEGGER/JLink/JLinkGDBServerCL.exe",
         "runToEntryPoint": "main",
         "device": "STM32F303VC",
-        "showDevDebugOutput": "none",
+        "showDevDebugOutput": "raw",
         "rttConfig": {
           "enabled": true,
           "address": "auto",

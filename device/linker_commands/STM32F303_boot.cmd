@@ -44,6 +44,9 @@ MEMORY
 /* Initial stack value. Define at the end of the RAM memory */
 __INITIAL_SP = SRAM_ORIGIN + SRAM_SIZE;
 
+/* Start address of the application */
+APP_ADDRESS  = 0x0800B000;
+
 
 SECTIONS
 {

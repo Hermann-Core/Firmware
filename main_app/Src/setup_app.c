@@ -43,6 +43,7 @@
 
 /*======================= Type definition ==========================================*/
 
+typedef void (*VECTOR_TABLE_t)(void);
 typedef void (*CONSTRUCTOR_t)(void);
 
 typedef struct
@@ -203,6 +204,13 @@ NO_RETURN void Default_Handler(void)
 }
 
 
+STATIC_INLINE void memcopy(u8 *dest, const u8 *source, u32 size)
+{
+	while(size--)
+		*dest++ = *source++; 
+}
+
+
 /**
  * @brief Call all the C++ static constructors 
  */
@@ -232,12 +240,12 @@ STATIC_INLINE void __copy_table(CopyTable_t const *copy)
   for (u16 i = 0; i < copy->numRecs; i++)
   {
     CopyRecord_t cpyRec = copy->recs[i];
-    char *loadAddr      = (char*)cpyRec.loadAddress;
-    char *runAdrr       = (char*)cpyRec.runAddress;
+    u8 *loadAddr = (u8*)cpyRec.loadAddress;
+    u8 *runAdrr  = (u8*)cpyRec.runAddress;
 
     if (cpyRec.size)
     {
-      memcpy(runAdrr, loadAddr, cpyRec.size);
+      memcopy(runAdrr, loadAddr, cpyRec.size);
     }
   }
 }
@@ -251,27 +259,27 @@ STATIC_INLINE void __zero_init(void)
   if (__sbss != __ebss)
   {
     u8 *idx    = (u8*)&__sbss;
-	  u8 *endBss = (u8*)&__ebss;
-    u32 count  = endBss - idx;
+    u32 count  = (u32)&__ebss - (u32)&__sbss;
 
-    while (count--)
-      *idx++ = 0;
+    while (count--) *idx++ = 0;
   } 
 }
 
 
 /**
- * @brief Start the C/C++ environment
+ * @brief Setup and start the application
  */
 NO_RETURN void __program_start(void)
 {
+  /* Setting up the C/C++ environment */
   if (__binit__ != (CopyTable_t*)-1)
-  {
     __copy_table((CopyTable_t const*)__binit__);
-  }
-  
+
   __zero_init();
   __call_constructors();
+
+  /* Set the stack pointer */
+  __set_MSP((u32)&__STACK_END);
 
   __enable_irq();   /* Enable the global interrupts */
 
@@ -281,15 +289,13 @@ NO_RETURN void __program_start(void)
 }
 
 
-/**
- * @brief Setting up the device
- */
-NO_RETURN void __Setup_app(void)
-{
-  __set_MSP((u32)&__STACK_END);	/* Set the stack pointer */
+/*======================== Application vector table ================================*/
 
-  __program_start();  			/* Run the C/C++ environment */
-}
+const VECTOR_TABLE_t __APP_VECTOR_TABLE[] ATTRIBUTE(retain, section(".app_vector_table")) =
+{
+  (VECTOR_TABLE_t)&__INITIAL_SP,
+  &__program_start
+};
 
 
 #ifdef __cplusplus

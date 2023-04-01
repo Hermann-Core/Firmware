@@ -30,7 +30,7 @@
 
 
 /* Linker options */
---entry_point __Setup_app         /* Entry point of the program */
+--entry_point __program_start     /* Entry point of the program */
 --retain="*(.ccmram)"             /* Do not discard the .ccmram section */
 --retain="*(.init_array)"         /* Do not discard the .init_array section */
 --stack_size=0x1000               /* Define a 4K stack */
@@ -52,6 +52,8 @@ __INITIAL_SP = 0x20000000 + 0xA000;
 
 SECTIONS
 {
+  .app_vector_table : > APP1_ORIGIN   /* Application vector table */
+
   GROUP : > APP1
   {
     .binit : {}         /* Linker generated copy tables section */

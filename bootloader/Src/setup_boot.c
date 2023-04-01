@@ -21,7 +21,6 @@
 /************************************************************************************#
 |                                      INCLUDES                                      |
 #************************************************************************************/
-#include <string.h>
 #include "peripherals_defs.h"
 
 
@@ -216,6 +215,13 @@ NO_RETURN void Default_Handler(void)
 }
 
 
+STATIC_INLINE void memcopy(u8 *dest, const u8 *source, u32 size)
+{
+	while(size--)
+		*dest++ = *source++; 
+}
+
+
 /**
  * @brief Perform the low level initialization of the hardware
  */
@@ -257,12 +263,12 @@ STATIC_INLINE void __copy_table(CopyTable_t const *copy)
   for (u16 i = 0; i < copy->numRecs; i++)
   {
     CopyRecord_t cpyRec = copy->recs[i];
-    char *loadAddr      = (char*)cpyRec.loadAddress;
-    char *runAdrr       = (char*)cpyRec.runAddress;
+    u8 *loadAddr = (u8*)cpyRec.loadAddress;
+    u8 *runAdrr  = (u8*)cpyRec.runAddress;
 
     if (cpyRec.size)
     {
-      memcpy(runAdrr, loadAddr, cpyRec.size);
+      memcopy(runAdrr, loadAddr, cpyRec.size);
     }
   }
 }
@@ -275,12 +281,10 @@ STATIC_INLINE void __zero_init(void)
 {
   if (__sbss != __ebss)
   {
-    u8 *idx    = (u8*)&__sbss;
-	u8 *endBss = (u8*)&__ebss;
-    u32 count  = endBss - idx;
+    u8 *idx   = (u8*)&__sbss;
+    u32 count = (u32)&__ebss - (u32)&__sbss;
 
-    while (count--)
-      *idx++ = 0;
+    while (count--) *idx++ = 0;
   } 
 }
 
@@ -291,9 +295,7 @@ STATIC_INLINE void __zero_init(void)
 NO_RETURN void __program_start(void)
 {
   if (__binit__ != (CopyTable_t*)-1)
-  {
     __copy_table((CopyTable_t const*)__binit__);
-  }
   
   __zero_init();
   __call_constructors();
