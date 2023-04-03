@@ -61,7 +61,8 @@ target_include_directories(
 target_sources(
     ${BOOT_EXECUTABLE} PRIVATE
     ${COMMON_SOURCES}
-    ${CMAKE_SOURCE_DIR}/bootloader/Src/setup_boot.c
-    ${CMAKE_SOURCE_DIR}/bootloader/Src/hardware_init.c
+    ${CMAKE_SOURCE_DIR}/device/Src/setup_boot.c
+    ${CMAKE_SOURCE_DIR}/device/Src/hardware_init.c
+    ${CMAKE_SOURCE_DIR}/bootloader/Src/boot_jump.cpp
     ${CMAKE_SOURCE_DIR}/bootloader/bootloader_main.cpp
 )

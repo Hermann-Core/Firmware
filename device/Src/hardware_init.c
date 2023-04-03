@@ -47,7 +47,7 @@
 
 
 /*================= External references ============================================*/
-extern u32 __VECTOR_TABLE_BASE;
+extern const u32 __VECTOR_TABLE;
 
 
 /************************************************************************************#
@@ -70,7 +70,7 @@ FORCE_INLINE void FPU_Init(void)
 FORCE_INLINE void __set_vector_address(void)
 {
     /* The device points to the vector table defined in RAM */
-    SCB->VTOR = (u32)&__VECTOR_TABLE_BASE;
+    SCB->VTOR = (u32)&__VECTOR_TABLE;
 }
 
 

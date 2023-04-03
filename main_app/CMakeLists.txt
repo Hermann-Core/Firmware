@@ -61,6 +61,6 @@ target_include_directories(
 target_sources(
     ${MAIN_EXECUTABLE} PRIVATE
     ${COMMON_SOURCES}
-    ${CMAKE_SOURCE_DIR}/main_app/Src/setup_app.c
+    ${CMAKE_SOURCE_DIR}/device/Src/setup_app.c
     ${CMAKE_SOURCE_DIR}/main_app/app_main.cpp
 )

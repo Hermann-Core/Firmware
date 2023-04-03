@@ -1,10 +1,10 @@
 /************************************************************************************* 
- * @file 	 bootloader_main.cpp
+ * @file 	   boot_jump.cpp
  * @date     April, 02 2023
  * @author   AWATSA HERMANN
- * @brief	 main bootloader source file
+ * @brief	   bootloader jump source file
  * 
- *           All the main bootloader related calls will be done here
+ *           Contains the functions used to jump to the main application
  * ***********************************************************************************
  * @attention
  * 
@@ -21,21 +21,29 @@
 /************************************************************************************#
 |                                      INCLUDES                                      |
 #************************************************************************************/
-#include "SEGGER_RTT.h"
-#include "features.h"
 #include "boot_jump.hpp"
+#include "hardware_core.h"
+#include "peripherals_defs.h"
 
 
 
 /************************************************************************************#
 |                                       DEFINES                                      |
-#************************************************************************************/ 
+#************************************************************************************/
+#define UNUSED             __attribute__((unused))
+#define NAKED              __attribute__((naked, noreturn)) static
+#define NO_RETURN          __attribute__((noreturn))
+
+#if defined (STM32F303)
+#define MAX_IRQ_NUMBERS    81
+#elif defined (STM32G473)
+#define MAX_IRQ_NUMBERS    101
+#endif
 
 
 /************************************************************************************#
 |                              VARIABLES DECLARATIONS                                |
 #************************************************************************************/
-const u16 a = 3;
 extern const u32 APP_ADDRESS;
 
 
@@ -43,6 +51,7 @@ extern const u32 APP_ADDRESS;
 /************************************************************************************#
 |                              FUNCTIONS DECLARATIONS                                |
 #************************************************************************************/
+NAKED void JumpASM(UNUSED u32 SP, UNUSED u32 PC);
 
 
 
@@ -50,16 +59,43 @@ extern const u32 APP_ADDRESS;
 |                              FUNCTIONS DEFINITIONS                                 |
 #************************************************************************************/
 
-int main (void)
+/**
+ * \brief Used to jump to the application from bootloader
+ * 
+ * \param appAddress the starting address of the application
+ */
+NO_RETURN void JumpToApp(const u32 *appVector)
 {
-    RTT_WriteString(0, "\n\nIci c'est le bootloader\n");
-
-    JumpToApp(&APP_ADDRESS);
-
-    while (true)
+    __disable_irq();                    /* Disable global interrupts */
+    __disable_fault_irq();              /* Disable fault exceptions handlers*/
+    // TODO! Deinit all peripherals (which may trigger an interrupt) and clear all irq pendings flags
+    for (u8 i = 0; i < MAX_IRQ_NUMBERS; i++)
     {
-        RTT_WriteString(0, "\n\nOn est entré dans la boucle\n");
+      IRQ_Disable((IRQn_t)i);         /* Disable all interrupts */
+      IRQ_ClearPending((IRQn_t)i);    /* Clear all pendings requests in NVIC */
     }
+
+    /* Disable the systick and clear its exception pending */
+    SysTick->CTRL = 0x0;
+    SysTick->LOAD = 0x0;
+    SysTick->VAL  = 0x0;
+    SCB->ICSR    |= SCB_ICSR_PENDSTCLR_Msk;
+
+    /* Set the stack pointer and jump to the application */
+    JumpASM(appVector[0], appVector[1]);
+}
+
+
+/**
+ * \brief Set the stack pointer and branch to an address
+ * 
+ * \param SP the stack pointer
+ * \param PC the program counter
+ */
+NAKED void JumpASM(UNUSED u32 SP, UNUSED u32 PC)
+{
+  asm volatile("MSR  MSP,r0");
+  asm volatile("BX   r1");
 }
 
 

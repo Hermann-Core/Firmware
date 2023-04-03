@@ -44,11 +44,15 @@ const u16 var = 2;
 
 int main (void)
 {
-    u16 a = var;
+    SysTick_Config(72000);
 
     while (true)
     {
-        RTT_WriteString(0, "\n\nFirst test\n");
-        RTT_printf(0, "\nLe double de 3 est : %02u", a*2);
+        RTT_WriteString(0, "\n\nNous sommes dans l'application\n\n");
     }
 }
+
+
+/************************************************************************************#
+|                                    END OF FILE                                     |
+#************************************************************************************/

@@ -52,7 +52,6 @@ SECTIONS
 {
   .vector_table : load = BOOT_ORIGIN,
                   run  = SRAM_ORIGIN,
-                  RUN_START(__VECTOR_TABLE_BASE),
                   table(BINIT)
 
   GROUP : > BOOT

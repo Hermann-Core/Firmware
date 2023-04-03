@@ -67,6 +67,13 @@ void IRQ_ClearPending(IRQn_t IRQn);
  */
 void IRQ_Disable(IRQn_t IRQn);
 
+
+/**
+ * @brief Reset the system
+ */
+void SystemReset(void);
+
+
 #ifdef __cplusplus
 }
 #endif

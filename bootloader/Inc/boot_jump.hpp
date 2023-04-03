@@ -1,69 +1,35 @@
 /************************************************************************************* 
- * @file 	   hardware_core.c
- * @date     March, 12 2023
+ * @file 	 boot_jump.hpp
+ * @date     April, 02 2023
  * @author   AWATSA HERMANN
- * @brief	   Hardware core source file
+ * @brief	 bootloader jump header file
  * 
- *           Contains the definitions of
- *           the core hardware functions
+ *           Contains the functions used to jump to the main application
  * ***********************************************************************************
  * @attention
  * 
+ * The functions used in this file have been written mainly for the STM32F303
+ * and STM32G473 MCUs. There is no guarantee of operation for other microcontrollers.
+ * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.03.12   |    1      |  0         |
+ # 2023.04.02   |    1      |  0         |
 
 *************************************************************************************/
+
 
 /************************************************************************************#
 |                                      INCLUDES                                      |
 #************************************************************************************/
-#include "hardware_core.h"
+#include "peripherals_defs.h"
+
 
 
 /************************************************************************************#
-|                              FUNCTIONS DEFINITIONS                                 |
+|                              FUNCTIONS DECLARATIONS                                |
 #************************************************************************************/
 
-void IRQ_Enable(IRQn_t IRQn)
-{
-    if (!__NVIC_GetEnableIRQ(IRQn))
-    {
-      NVIC_EnableIRQ(IRQn);
-    }
-}
-
-
-void IRQ_SetPriority(IRQn_t IRQn, u8 priority)
-{
-    NVIC_SetPriority(IRQn, (u32)priority);
-}
-
-
-void IRQ_ClearPending(IRQn_t IRQn)
-{
-    if (__NVIC_GetPendingIRQ(IRQn))
-    {
-      NVIC_ClearPendingIRQ(IRQn);
-    }
-}
-
-
-void IRQ_Disable(IRQn_t IRQn)
-{
-    while (__NVIC_GetActive(IRQn))
-    {
-      /* wait till the interrupt quit active state */
-    }
-    
-    NVIC_DisableIRQ(IRQn);
-}
-
-
-__attribute__((noreturn)) void SystemReset(void)
-{
-    __NVIC_SystemReset();
-}
+void JumpToApp(const u32 *appAddress);
 
 
 /************************************************************************************#

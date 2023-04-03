@@ -1,22 +1,23 @@
 /************************************************************************************* 
- * @file 	 setup_boot.c
- * @date     March, 31 2023
+ * @file 	   setup_app.c
+ * @date     April, 01 2023
  * @author   AWATSA HERMANN
- * @brief	 Device setup source file
+ * @brief	   Device setup source file
  * 
- *           This file contains the functions used to perform
- *           the early setup of the device just after a reset
+ *           This file contains the functions used to perform some C/C++
+ *           runtime initializations before the execution of the main app
  * ***********************************************************************************
  * @attention
  * 
  * The functions used in this file have been written mainly for the STM32F303
- * and STM32G473 MCUs. There is no guarantee of operation on other microcontrollers.
+ * and STM32G473 MCUs. There is no guarantee of operation for other microcontrollers.
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.03.31   |    1      |  0         |
+ # 2023.04.01   |    1      |  0         |
 
 *************************************************************************************/
+
 
 /************************************************************************************#
 |                                      INCLUDES                                      |
@@ -29,7 +30,7 @@
 #************************************************************************************/
 #define ATTRIBUTE(a, b)            __attribute__((a, b))
 #define NO_RETURN                  __attribute__((noreturn))
-#define STATIC_INLINE              __attribute__((always_inline)) static
+#define STATIC_INLINE               __attribute__((always_inline)) static
 #define SET_WEAK_ALIAS             __attribute__((weak, alias("Default_Handler")))
 
 #define _AEABI_PORTABILITY_LEVEL   1  /* Enable the Arm standard portability level */
@@ -61,6 +62,7 @@ typedef struct
 CopyTable_t;
 
 
+
 /************************************************************************************#
 |                              FUNCTIONS DEFINITIONS                                 |
 #************************************************************************************/
@@ -80,19 +82,6 @@ extern CONSTRUCTOR_t const CONSTRUCTOR_BASE[];
 extern CONSTRUCTOR_t const CONSTRUCTOR_LIMIT[];
 
 extern int  main(void);
-extern void FPU_Init(void);
-extern void SystemClock_Init(void);
-extern void __set_vector_address(void);
-
-extern void NMI_Handler(void);
-extern void HardFault_Handler(void);
-extern void MemManage_Handler(void);
-extern void BusFault_Handler(void);
-extern void UsageFault_Handler(void);
-extern void SVC_Handler(void);
-extern void DebugMon_Handler(void);
-extern void PendSV_Handler(void);
-extern void SysTick_Handler(void);
 
 
 /*================= Internal references ============================================*/
@@ -223,31 +212,17 @@ STATIC_INLINE void memcopy(u8 *dest, const u8 *source, u32 size)
 
 
 /**
- * @brief Perform the low level initialization of the hardware
- */
-STATIC_INLINE void __hardware_init(void)
-{
-  __disable_irq();   	/* Disable interrupts before setting VTOR  */
-
-  FPU_Init();			/* Initialize the Floating point coprocessor */
-  SystemClock_Init();	/* Initialize the system clock */
-}
-
-
-/**
  * @brief Call all the C++ static constructors 
  */
 STATIC_INLINE void __call_constructors(void)
 {
   if (CONSTRUCTOR_BASE != CONSTRUCTOR_LIMIT)
   {
-	u16 i = 0;
+    u16 i = 0;
 
-	while (&(CONSTRUCTOR_BASE[i]) != CONSTRUCTOR_LIMIT)
-	{
-		/* Call the C++ static constructors */
-		CONSTRUCTOR_BASE[i++]();
-	}
+    while (&(CONSTRUCTOR_BASE[i]) != CONSTRUCTOR_LIMIT)
+      /* Call the C++ static constructors */
+      CONSTRUCTOR_BASE[i++]();
   }
 }
 
@@ -267,9 +242,7 @@ STATIC_INLINE void __copy_table(CopyTable_t const *copy)
     u8 *runAdrr  = (u8*)cpyRec.runAddress;
 
     if (cpyRec.size)
-    {
       memcopy(runAdrr, loadAddr, cpyRec.size);
-    }
   }
 }
 
@@ -281,8 +254,8 @@ STATIC_INLINE void __zero_init(void)
 {
   if (__sbss != __ebss)
   {
-    u8 *idx   = (u8*)&__sbss;
-    u32 count = (u32)&__ebss - (u32)&__sbss;
+    u8 *idx    = (u8*)&__sbss;
+    u32 count  = (u32)&__ebss - (u32)&__sbss;
 
     while (count--) *idx++ = 0;
   } 
@@ -290,197 +263,42 @@ STATIC_INLINE void __zero_init(void)
 
 
 /**
- * @brief Start the C/C++ environment
+ * @brief Setup and start the application
  */
 NO_RETURN void __program_start(void)
 {
+  /* Setting up the C/C++ environment */
   if (__binit__ != (CopyTable_t*)-1)
     __copy_table((CopyTable_t const*)__binit__);
-  
+
   __zero_init();
   __call_constructors();
-  __set_vector_address();
 
-  __enable_irq();   /* Reenable the interrupts */
+  /* Set the stack pointer */
+  __set_MSP((u32)&__STACK_END);
 
-  main();           /* Call the main function */
+  __enable_irq();       /* Enable the global interrupts */
+  __enable_fault_irq(); /* Enable fault exceptions handlers */
 
-  while(1);         /* Will normally never be reached */
+  main();     /* Call the main function */
+
+  while(1);   /* Will normally never be reached */
 }
 
 
-/**
- * @brief Setting up the device
- */
-NO_RETURN void __Setup_boot(void)
+/*======================== Application vector table ================================*/
+
+const VECTOR_TABLE_t __APP_VECTOR_TABLE[] ATTRIBUTE(retain, section(".app_vector_table")) =
 {
-  __set_MSP((u32)&__STACK_END);	/* Set the stack pointer */
-  
-  __hardware_init();  			/* Initialize the hardware */
-  __program_start();  			/* Run the C/C++ environment */
-}
-
-
-/*=============================== Vector table =====================================*/
-
-const VECTOR_TABLE_t __VECTOR_TABLE[] ATTRIBUTE(retain, section(".vector_table")) =
-{
-	(VECTOR_TABLE_t)&__INITIAL_SP,
-	&__Setup_boot,
-
-  	/* Cortex exeptions handlers addresses */
-	NMI_Handler,
-	HardFault_Handler,
-	MemManage_Handler,
-	BusFault_Handler,
-	UsageFault_Handler,
-	0,
-	0,
-	0,
-	0,
-	SVC_Handler,
-	DebugMon_Handler,
-	0,
-	PendSV_Handler,
-	SysTick_Handler,
-
-  	/* STM32 specific interrupts handlers addresses */
-  	WWDG_IRQHandler,
-	PVD_IRQHandler,
-	TAMP_STAMP_IRQHandler,
-	RTC_WKUP_IRQHandler,
-	FLASH_IRQHandler,
-	RCC_IRQHandler,
-	EXTI0_IRQHandler,
-	EXTI1_IRQHandler,
-	EXTI2_TSC_IRQHandler,
-	EXTI3_IRQHandler,
-	EXTI4_IRQHandler,
-	DMA1_Channel1_IRQHandler,
-	DMA1_Channel2_IRQHandler,
-	DMA1_Channel3_IRQHandler,
-	DMA1_Channel4_IRQHandler,
-	DMA1_Channel5_IRQHandler,
-	DMA1_Channel6_IRQHandler,
-	DMA1_Channel7_IRQHandler,
-	ADC1_2_IRQHandler,
-#if defined (STM32F303)
-  	USB_HP_CAN_TX_IRQHandler,
-	USB_LP_CAN_RX0_IRQHandler,
-	CAN_RX1_IRQHandler,
-	CAN_SCE_IRQHandler,
-#elif defined (STM32G473)
-  	USB_HP_IRQHandler,
-	USB_LP_IRQHandler,
-	FDCAN1_IT0_IRQHandler,
-	FDCAN1_IT1_IRQHandler,
-#endif
-  	EXTI9_5_IRQHandler,
-	TIM1_BRK_TIM15_IRQHandler,
-	TIM1_UP_TIM16_IRQHandler,
-	TIM1_TRG_COM_TIM17_IRQHandler,
-	TIM1_CC_IRQHandler,
-	TIM2_IRQHandler,
-	TIM3_IRQHandler,
-	TIM4_IRQHandler,
-	I2C1_EV_IRQHandler,
-	I2C1_ER_IRQHandler,
-	I2C2_EV_IRQHandler,
-	I2C2_ER_IRQHandler,
-	SPI1_IRQHandler,
-	SPI2_IRQHandler,
-	USART1_IRQHandler,
-	USART2_IRQHandler,
-	USART3_IRQHandler,
-	EXTI15_10_IRQHandler,
-	RTC_Alarm_IRQHandler,
-	USBWakeUp_IRQHandler,
-	TIM8_BRK_IRQHandler,
-	TIM8_UP_IRQHandler,
-	TIM8_TRG_COM_IRQHandler,
-	TIM8_CC_IRQHandler,
-	ADC3_IRQHandler,
-#if defined (STM32F303)
-	0,
-	0,
-	0,
-#elif defined (STM32G473)
-  	FMC_IRQHandler,
-	LPTIM1_IRQHandler,
-	TIM5_IRQHandler,
-#endif
-  	SPI3_IRQHandler,
-	UART4_IRQHandler,
-	UART5_IRQHandler,
-	TIM6_DAC_IRQHandler,
-	TIM7_DAC_IRQHandler,
-	DMA2_Channel1_IRQHandler,
-	DMA2_Channel2_IRQHandler,
-	DMA2_Channel3_IRQHandler,
-	DMA2_Channel4_IRQHandler,
-	DMA2_Channel5_IRQHandler,
-	ADC4_IRQHandler,
-#if defined (STM32F303)
-	0,
-	0,
-#elif defined (STM32G473)
-  	ADC5_IRQHandler,
-	UCPD1_IRQHandler,
-#endif
-  	COMP1_2_3_IRQHandler,
-	COMP4_5_6_IRQHandler,
-	COMP7_IRQHandler,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-	0,
-#if defined (STM32F303)
-  	USB_HP_IRQHandler,
-	USB_LP_IRQHandler,
-	USBWakeUp_RMP_IRQHandler,
-	0,
-	0,
-	0,
-	0,
-	FPU_IRQHandler,
-#elif defined (STM32G473)
-	0,
-	CRS_IRQHandler,
-	SAI1_IRQHandler,
-	TIM20_BRK_IRQHandler,
-	TIM20_UP_IRQHandler,
-	TIM20_TRG_COM_IRQHandler,
-	TIM20_CC_IRQHandler,
-	FPU_IRQHandler,
-	I2C4_EV_IRQHandler,
-	I2C4_ER_IRQHandler,
-	SPI4_IRQHandler,
-	0,
-	FDCAN2_IT0_IRQHandler,
-	FDCAN2_IT1_IRQHandler,
-	FDCAN3_IT0_IRQHandler,
-	FDCAN3_IT1_IRQHandler,
-	RNG_IRQHandler,
-	LPUART1_IRQHandler,
-	I2C3_EV_IRQHandler,
-	I2C3_ER_IRQHandler,
-	DMAMUX_OVR_IRQHandler,
-	QUADSPI_IRQHandler,
-	DMA1_Channel8_IRQHandler,
-	DMA2_Channel6_IRQHandler,
-	DMA2_Channel7_IRQHandler,
-	DMA2_Channel8_IRQHandler,
-	CORDIC_IRQHandler,
-	FMAC_IRQHandler,
-#endif
+  (VECTOR_TABLE_t)&__STACK_END,
+  &__program_start
 };
+
 
 #ifdef __cplusplus
 }
 #endif
+
 
 /************************************************************************************#
 |                                    END OF FILE                                     |
