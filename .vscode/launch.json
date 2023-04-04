@@ -12,85 +12,68 @@
     "version": "0.2.0",
     "configurations": [
       {
-        "name": "Application",
-        "request": "launch",
-        "type": "cortex-debug",
-        "cwd": "${workspaceFolder}",
-        "executable": "${workspaceFolder}/bin/debug/main_app.out",
-        "servertype": "jlink",
-        "serverpath": "${env:ProgramFiles}/SEGGER/JLink/JLinkGDBServerCL.exe",
-        "runToEntryPoint": "__Setup_app",
-        "device": "STM32F303VC",
-        "showDevDebugOutput": "raw",
-        "rttConfig": {
-          "enabled": true,
-          "address": "auto",
-          "decoders": [
-              {
-                  "label": "",
-                  "port": 0,
-                  "type": "console",
-                  "iencoding": "utf8",
-              }
-          ]
-        },
-        "preLaunchTask": "CMake: build",
-        "svdPath": "${workspaceFolder}/device/SVD_file/STM32F303.svd"
-      },
-
-      {
-        "name": "Bootloader",
-        "request": "launch",
-        "type": "cortex-debug",
-        "cwd": "${workspaceFolder}",
-        "executable": "${workspaceFolder}/bin/debug/bootloader.out",
-        "servertype": "jlink",
-        "serverpath": "${env:ProgramFiles}/SEGGER/JLink/JLinkGDBServerCL.exe",
-        "runToEntryPoint": "main",
-        "device": "STM32F303VC",
-        "liveWatch": {
-          "enabled": true,
-          "samplesPerSecond": 4
-        },
-        "showDevDebugOutput": "raw",
-        "rttConfig": {
-          "enabled": true,
-          "address": "auto",
-          "decoders": [
-              {
-                  "label": "",
-                  "port": 0,
-                  "type": "console",
-                  "iencoding": "utf8",
-              }
-          ]
-        },
-        "preLaunchTask": "CMake: build",
-        "svdPath": "${workspaceFolder}/device/SVD_file/STM32F303.svd"
-      },
-
-      {
-        "name": "Debug",
+        "name": "OpenOCD Debug",
         "request": "launch",
         "type": "cortex-debug",
         "cwd": "${workspaceFolder}",
         "executable": "${workspaceFolder}/bin/debug/bootloader.out",
         "loadFiles": [
           "${workspaceFolder}/bin/debug/bootloader.hex",
-          "${workspaceFolder}/bin/debug/main_app.hex"
+          "${workspaceFolder}/bin/debug/application.hex"
         ],
         "symbolFiles": [
           {"file": "${workspaceFolder}/bin/debug/bootloader.out"},
-          {"file": "${workspaceFolder}/bin/debug/main_app.out"}
+          {"file": "${workspaceFolder}/bin/debug/application.out"}
+        ],
+        "servertype": "openocd",
+        "runToEntryPoint": "main",
+        "showDevDebugOutput": "raw",
+        "configFiles": [
+          "board/stm32f3discovery.cfg"
+        ],
+        "preLaunchTask": "CMake: build",
+        "svdPath": "${workspaceFolder}/device/SVD_file/STM32F303.svd"
+      },
+
+      {
+        "name": "STLink Debug",
+        "request": "launch",
+        "type": "cortex-debug",
+        "cwd": "${workspaceFolder}",
+        "executable": "${workspaceFolder}/bin/debug/bootloader.out",
+        "loadFiles": [
+          "${workspaceFolder}/bin/debug/bootloader.hex",
+          "${workspaceFolder}/bin/debug/application.hex"
+        ],
+        "symbolFiles": [
+          {"file": "${workspaceFolder}/bin/debug/bootloader.out"},
+          {"file": "${workspaceFolder}/bin/debug/application.out"}
+        ],
+        "servertype": "stlink",
+        "runToEntryPoint": "main",
+        "showDevDebugOutput": "raw",
+        "preLaunchTask": "CMake: build",
+        "svdPath": "${workspaceFolder}/device/SVD_file/STM32F303.svd"
+      },
+
+      {
+        "name": "JLink Debug",
+        "request": "launch",
+        "type": "cortex-debug",
+        "cwd": "${workspaceFolder}",
+        "executable": "${workspaceFolder}/bin/debug/bootloader.out",
+        "loadFiles": [
+          "${workspaceFolder}/bin/debug/bootloader.hex",
+          "${workspaceFolder}/bin/debug/application.hex"
+        ],
+        "symbolFiles": [
+          {"file": "${workspaceFolder}/bin/debug/bootloader.out"},
+          {"file": "${workspaceFolder}/bin/debug/application.out"}
         ],
         "servertype": "jlink",
         "serverpath": "${env:ProgramFiles}/SEGGER/JLink/JLinkGDBServerCL.exe",
         "runToEntryPoint": "main",
         "device": "STM32F303VC",
-        "liveWatch": {
-          "enabled": true,
-          "samplesPerSecond": 4
-        },
         "showDevDebugOutput": "raw",
         "rttConfig": {
           "enabled": true,

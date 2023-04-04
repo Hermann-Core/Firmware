@@ -8,7 +8,7 @@
 # -------------------------------------------------------------------- #
 ########################################################################
 
-set(MAIN_EXECUTABLE main_app)
+set(MAIN_EXECUTABLE application)
 
 add_executable(${MAIN_EXECUTABLE})
 add_target_properties(${MAIN_EXECUTABLE})
@@ -54,13 +54,13 @@ endif()
 
 target_include_directories(
     ${MAIN_EXECUTABLE} PRIVATE
-    ${CMAKE_SOURCE_DIR}/main_app
-    ${CMAKE_SOURCE_DIR}/main_app/Inc
+    ${CMAKE_SOURCE_DIR}/${MAIN_EXECUTABLE}
+    ${CMAKE_SOURCE_DIR}/${MAIN_EXECUTABLE}/Inc
 )
 
 target_sources(
     ${MAIN_EXECUTABLE} PRIVATE
     ${COMMON_SOURCES}
     ${CMAKE_SOURCE_DIR}/device/Src/setup_app.c
-    ${CMAKE_SOURCE_DIR}/main_app/app_main.cpp
+    ${CMAKE_SOURCE_DIR}/${MAIN_EXECUTABLE}/app_main.cpp
 )

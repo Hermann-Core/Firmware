@@ -41,4 +41,4 @@ elseif(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{GNU_TOOLCHAIN_PATH}")
 endif()
 
 add_subdirectory(bootloader)
-add_subdirectory(main_app)
+add_subdirectory(application)
