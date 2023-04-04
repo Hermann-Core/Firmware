@@ -30,6 +30,8 @@
 /************************************************************************************#
 |                                       DEFINES                                      |
 #************************************************************************************/
+#define SRAM_BASE          0x20000000
+
 #define UNUSED             __attribute__((unused))
 #define NAKED              __attribute__((naked, noreturn)) static
 #define NO_RETURN          __attribute__((noreturn))
@@ -80,6 +82,9 @@ NO_RETURN void JumpToApp(const u32 *appVector)
     SysTick->LOAD = 0x0;
     SysTick->VAL  = 0x0;
     SCB->ICSR    |= SCB_ICSR_PENDSTCLR_Msk;
+
+    /* Set the vector table address for the application */
+    SCB->VTOR = SRAM_BASE;
 
     /* Set the stack pointer and jump to the application */
     JumpASM(appVector[0], appVector[1]);

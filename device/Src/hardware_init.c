@@ -46,10 +46,6 @@
 
 
 
-/*================= External references ============================================*/
-extern const u32 __VECTOR_TABLE;
-
-
 /************************************************************************************#
 |                              FUNCTIONS DEFINITIONS                                 |
 #************************************************************************************/
@@ -61,16 +57,6 @@ FORCE_INLINE void FPU_Init(void)
 {
     /* set Full Access to the FPU coprocessor */
     SCB->CPACR |= ((0x3U << 20U) | (0x3U << 22U));
-}
-
-
-/**
- * @brief Set the vector table offset register
- */
-FORCE_INLINE void __set_vector_address(void)
-{
-    /* The device points to the vector table defined in RAM */
-    SCB->VTOR = (u32)&__VECTOR_TABLE;
 }
 
 

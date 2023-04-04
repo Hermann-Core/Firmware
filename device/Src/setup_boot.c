@@ -82,7 +82,6 @@ extern CONSTRUCTOR_t const CONSTRUCTOR_LIMIT[];
 extern int  main(void);
 extern void FPU_Init(void);
 extern void SystemClock_Init(void);
-extern void __set_vector_address(void);
 
 extern void NMI_Handler(void);
 extern void HardFault_Handler(void);
@@ -227,7 +226,7 @@ STATIC_INLINE void memcopy(u8 *dest, const u8 *source, u32 size)
  */
 STATIC_INLINE void __hardware_init(void)
 {
-  __disable_irq();   	/* Disable interrupts before setting VTOR  */
+  __disable_irq();   	/* Prevents unexpected interrupts during startup */
 
   FPU_Init();			/* Initialize the Floating point coprocessor */
   SystemClock_Init();	/* Initialize the system clock */
@@ -296,9 +295,8 @@ NO_RETURN void __program_start(void)
   
   __zero_init();
   __call_constructors();
-  __set_vector_address();
 
-  __enable_irq();   /* Reenable the interrupts */
+  __enable_irq();   /* Reactivated global interrupts */
 
   main();           /* Call the main function */
 
@@ -309,7 +307,7 @@ NO_RETURN void __program_start(void)
 /**
  * @brief Setting up the device
  */
-NO_RETURN void __Setup_boot(void)
+NO_RETURN void __setup_boot(void)
 {
   __set_MSP((u32)&__STACK_END);	/* Set the stack pointer */
   
@@ -320,10 +318,11 @@ NO_RETURN void __Setup_boot(void)
 
 /*=============================== Vector table =====================================*/
 
-const VECTOR_TABLE_t __VECTOR_TABLE[] ATTRIBUTE(retain, section(".vector_table")) =
+ATTRIBUTE(retain, section(".vector_table"))
+const VECTOR_TABLE_t __VECTOR_TABLE[] =
 {
 	(VECTOR_TABLE_t)&__INITIAL_SP,
-	&__Setup_boot,
+	&__setup_boot,
 
   	/* Cortex exeptions handlers addresses */
 	NMI_Handler,

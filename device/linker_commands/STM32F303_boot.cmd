@@ -26,7 +26,7 @@
 
 
 /* Linker options */
---entry_point __Setup_boot        /* Entry point of the program */
+--entry_point __setup_boot        /* Entry point of the program */
 --retain="*(.vector_table)"       /* Do not discard the .vector_table section */
 --retain="*(.ccmram)"             /* Do not discard the .ccmram section */
 --retain="*(.init_array)"         /* Do not discard the .init_array section */

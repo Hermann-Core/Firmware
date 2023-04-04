@@ -288,7 +288,8 @@ NO_RETURN void __program_start(void)
 
 /*======================== Application vector table ================================*/
 
-const VECTOR_TABLE_t __APP_VECTOR_TABLE[] ATTRIBUTE(retain, section(".app_vector_table")) =
+ATTRIBUTE(retain, section(".app_vector_table"))
+const VECTOR_TABLE_t __APP_VECTOR_TABLE[] =
 {
   (VECTOR_TABLE_t)&__STACK_END,
   &__program_start
