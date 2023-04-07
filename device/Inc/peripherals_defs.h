@@ -26,11 +26,11 @@ extern "C" {
 
 
 /* Cortex M4 core peripherals configuration */
-#define __Vendor_SysTickConfig 0U
-#define __CM4_REV             0x0001U  /* Core revision r0p1 */
-#define __MPU_PRESENT         1U       /* STM32F303 and STM32G473 devices provide an MPU */
-#define __NVIC_PRIO_BITS      4U       /* 4 Bits for the Priority Levels */
-#define __FPU_PRESENT         1U       /* STM32F303 and STM32G473 devices provide an FPU */
+#define __Vendor_SysTickConfig    0U
+#define __CM4_REV                 0x0001U  /* Core revision r0p1 */
+#define __MPU_PRESENT             1U       /* STM32F303 and STM32G473 devices provide an MPU */
+#define __NVIC_PRIO_BITS          4U       /* 4 Bits for the Priority Levels */
+#define __FPU_PRESENT             1U       /* STM32F303 and STM32G473 devices provide an FPU */
 
 
 /************************************************************************************#
@@ -1254,21 +1254,9 @@ typedef struct {
 
 typedef struct {                     
   
-  union {
-    __IOM u32 DR;               
-    
-    struct {
-      __IOM u32 DR         : 32;
-    } DR_b;
-  } ;
+  __IOM u32 DR;
   
-  union {
-    __IOM u32 IDR;              
-    
-    struct {
-      __IOM u32 IDR        : 32;
-    } IDR_b;
-  } ;
+  __IOM u32 IDR;
   
   union {
     __IOM u32 CR;               
@@ -1283,22 +1271,10 @@ typedef struct {
     } CR_b;
   } ;
   __IM  u32  RESERVED;
-  
-  union {
-    __IOM u32 INIT;             
-    
-    struct {
-      __IOM u32 CRC_INIT   : 32;
-    } INIT_b;
-  } ;
-  
-  union {
-    __IOM u32 POL;              
-    
-    struct {
-      __IOM u32 POL        : 32;
-    } POL_b;
-  } ;
+
+  __IOM u32 INIT;
+ 
+  __IOM u32 POL;
 
 } CRC_HW;
 

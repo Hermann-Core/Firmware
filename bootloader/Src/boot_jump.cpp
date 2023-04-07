@@ -68,8 +68,8 @@ NAKED void JumpASM(UNUSED u32 SP, UNUSED u32 PC);
  */
 NO_RETURN void JumpToApp(const u32 *appVector)
 {
-    __disable_irq();                    /* Disable global interrupts */
-    __disable_fault_irq();              /* Disable fault exceptions handlers*/
+    __disable_irq();                  /* Disable global interrupts */
+    __disable_fault_irq();            /* Disable fault exceptions handlers*/
     // TODO! Deinit all peripherals (which may trigger an interrupt) and clear all irq pendings flags
     for (u8 i = 0; i < MAX_IRQ_NUMBERS; i++)
     {

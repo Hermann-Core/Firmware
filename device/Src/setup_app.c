@@ -278,7 +278,7 @@ NO_RETURN void __program_start(void)
   __set_MSP((u32)&__STACK_END);
 
   __enable_irq();       /* Enable the global interrupts */
-  __enable_fault_irq(); /* Enable fault exceptions handlers */
+  __enable_fault_irq(); /* Enable fault exceptions */
 
   main();     /* Call the main function */
 

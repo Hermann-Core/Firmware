@@ -30,7 +30,7 @@
 #define ATTRIBUTE(a, b)            __attribute__((a, b))
 #define NO_RETURN                  __attribute__((noreturn))
 #define STATIC_INLINE              __attribute__((always_inline)) static
-#define SET_WEAK_ALIAS             __attribute__((weak, alias("Default_Handler")))
+#define WEAK_ALIAS                 __attribute__((weak, alias("Default_Handler")))
 
 #define _AEABI_PORTABILITY_LEVEL   1  /* Enable the Arm standard portability level */
 
@@ -99,110 +99,110 @@ extern void SysTick_Handler(void);
 __attribute__((retain, section(".stack")))
 int __stack;	/* Initialize the user mode stack */
 
-void WWDG_IRQHandler(void) SET_WEAK_ALIAS;
-void PVD_IRQHandler(void) SET_WEAK_ALIAS;
-void TAMP_STAMP_IRQHandler(void) SET_WEAK_ALIAS;
-void RTC_WKUP_IRQHandler(void) SET_WEAK_ALIAS;
-void FLASH_IRQHandler(void) SET_WEAK_ALIAS;
-void RCC_IRQHandler(void) SET_WEAK_ALIAS;
-void EXTI0_IRQHandler(void) SET_WEAK_ALIAS;
-void EXTI1_IRQHandler(void) SET_WEAK_ALIAS;
-void EXTI2_TSC_IRQHandler(void) SET_WEAK_ALIAS;
-void EXTI3_IRQHandler(void) SET_WEAK_ALIAS;
-void EXTI4_IRQHandler(void) SET_WEAK_ALIAS;
-void DMA1_Channel1_IRQHandler(void) SET_WEAK_ALIAS;
-void DMA1_Channel2_IRQHandler(void) SET_WEAK_ALIAS;
-void DMA1_Channel3_IRQHandler(void) SET_WEAK_ALIAS;
-void DMA1_Channel4_IRQHandler(void) SET_WEAK_ALIAS;
-void DMA1_Channel5_IRQHandler(void) SET_WEAK_ALIAS;
-void DMA1_Channel6_IRQHandler(void) SET_WEAK_ALIAS;
-void DMA1_Channel7_IRQHandler(void) SET_WEAK_ALIAS;
-void ADC1_2_IRQHandler (void) SET_WEAK_ALIAS;
+void WWDG_IRQHandler(void) WEAK_ALIAS;
+void PVD_IRQHandler(void) WEAK_ALIAS;
+void TAMP_STAMP_IRQHandler(void) WEAK_ALIAS;
+void RTC_WKUP_IRQHandler(void) WEAK_ALIAS;
+void FLASH_IRQHandler(void) WEAK_ALIAS;
+void RCC_IRQHandler(void) WEAK_ALIAS;
+void EXTI0_IRQHandler(void) WEAK_ALIAS;
+void EXTI1_IRQHandler(void) WEAK_ALIAS;
+void EXTI2_TSC_IRQHandler(void) WEAK_ALIAS;
+void EXTI3_IRQHandler(void) WEAK_ALIAS;
+void EXTI4_IRQHandler(void) WEAK_ALIAS;
+void DMA1_Channel1_IRQHandler(void) WEAK_ALIAS;
+void DMA1_Channel2_IRQHandler(void) WEAK_ALIAS;
+void DMA1_Channel3_IRQHandler(void) WEAK_ALIAS;
+void DMA1_Channel4_IRQHandler(void) WEAK_ALIAS;
+void DMA1_Channel5_IRQHandler(void) WEAK_ALIAS;
+void DMA1_Channel6_IRQHandler(void) WEAK_ALIAS;
+void DMA1_Channel7_IRQHandler(void) WEAK_ALIAS;
+void ADC1_2_IRQHandler (void) WEAK_ALIAS;
 #if defined (STM32F303)
-void USB_HP_CAN_TX_IRQHandler(void) SET_WEAK_ALIAS;
-void USB_LP_CAN_RX0_IRQHandler(void) SET_WEAK_ALIAS;
-void CAN_RX1_IRQHandler(void) SET_WEAK_ALIAS;
-void CAN_SCE_IRQHandler(void) SET_WEAK_ALIAS;
-void USB_HP_IRQHandler(void) SET_WEAK_ALIAS;
-void USB_LP_IRQHandler(void) SET_WEAK_ALIAS;
-void USBWakeUp_RMP_IRQHandler(void) SET_WEAK_ALIAS;
-void FPU_IRQHandler(void) SET_WEAK_ALIAS;
+void USB_HP_CAN_TX_IRQHandler(void) WEAK_ALIAS;
+void USB_LP_CAN_RX0_IRQHandler(void) WEAK_ALIAS;
+void CAN_RX1_IRQHandler(void) WEAK_ALIAS;
+void CAN_SCE_IRQHandler(void) WEAK_ALIAS;
+void USB_HP_IRQHandler(void) WEAK_ALIAS;
+void USB_LP_IRQHandler(void) WEAK_ALIAS;
+void USBWakeUp_RMP_IRQHandler(void) WEAK_ALIAS;
+void FPU_IRQHandler(void) WEAK_ALIAS;
 #elif defined (STM32G473)
-void USB_HP_IRQHandler(void) SET_WEAK_ALIAS;
-void USB_LP_IRQHandler(void) SET_WEAK_ALIAS;
-void FDCAN1_IT0_IRQHandler(void) SET_WEAK_ALIAS;
-void FDCAN1_IT1_IRQHandler(void) SET_WEAK_ALIAS;
-void FMC_IRQHandler(void) SET_WEAK_ALIAS;
-void LPTIM1_IRQHandler(void) SET_WEAK_ALIAS;
-void TIM5_IRQHandler(void) SET_WEAK_ALIAS;
-void ADC5_IRQHandler(void) SET_WEAK_ALIAS;
-void UCPD1_IRQHandler(void) SET_WEAK_ALIAS;
-void CRS_IRQHandler(void) SET_WEAK_ALIAS;
-void SAI1_IRQHandler(void) SET_WEAK_ALIAS;
-void TIM20_BRK_IRQHandler(void) SET_WEAK_ALIAS;
-void TIM20_UP_IRQHandler(void) SET_WEAK_ALIAS;
-void TIM20_TRG_COM_IRQHandler(void) SET_WEAK_ALIAS;
-void TIM20_CC_IRQHandler(void) SET_WEAK_ALIAS;
-void FPU_IRQHandler(void) SET_WEAK_ALIAS;
-void I2C4_EV_IRQHandler(void) SET_WEAK_ALIAS;
-void I2C4_ER_IRQHandler(void) SET_WEAK_ALIAS;
-void SPI4_IRQHandler(void) SET_WEAK_ALIAS;
-void FDCAN2_IT0_IRQHandler(void) SET_WEAK_ALIAS;
-void FDCAN2_IT1_IRQHandler(void) SET_WEAK_ALIAS;
-void FDCAN3_IT0_IRQHandler(void) SET_WEAK_ALIAS;
-void FDCAN3_IT1_IRQHandler(void) SET_WEAK_ALIAS;
-void RNG_IRQHandler(void) SET_WEAK_ALIAS;
-void LPUART1_IRQHandler(void) SET_WEAK_ALIAS;
-void I2C3_EV_IRQHandler(void) SET_WEAK_ALIAS;
-void I2C3_ER_IRQHandler(void) SET_WEAK_ALIAS;
-void DMAMUX_OVR_IRQHandler(void) SET_WEAK_ALIAS;
-void QUADSPI_IRQHandler(void) SET_WEAK_ALIAS;
-void DMA1_Channel8_IRQHandler(void) SET_WEAK_ALIAS;
-void DMA2_Channel6_IRQHandler(void) SET_WEAK_ALIAS;
-void DMA2_Channel7_IRQHandler(void) SET_WEAK_ALIAS;
-void DMA2_Channel8_IRQHandler(void) SET_WEAK_ALIAS;
-void CORDIC_IRQHandler(void) SET_WEAK_ALIAS;
-void FMAC_IRQHandler(void) SET_WEAK_ALIAS;
+void USB_HP_IRQHandler(void) WEAK_ALIAS;
+void USB_LP_IRQHandler(void) WEAK_ALIAS;
+void FDCAN1_IT0_IRQHandler(void) WEAK_ALIAS;
+void FDCAN1_IT1_IRQHandler(void) WEAK_ALIAS;
+void FMC_IRQHandler(void) WEAK_ALIAS;
+void LPTIM1_IRQHandler(void) WEAK_ALIAS;
+void TIM5_IRQHandler(void) WEAK_ALIAS;
+void ADC5_IRQHandler(void) WEAK_ALIAS;
+void UCPD1_IRQHandler(void) WEAK_ALIAS;
+void CRS_IRQHandler(void) WEAK_ALIAS;
+void SAI1_IRQHandler(void) WEAK_ALIAS;
+void TIM20_BRK_IRQHandler(void) WEAK_ALIAS;
+void TIM20_UP_IRQHandler(void) WEAK_ALIAS;
+void TIM20_TRG_COM_IRQHandler(void) WEAK_ALIAS;
+void TIM20_CC_IRQHandler(void) WEAK_ALIAS;
+void FPU_IRQHandler(void) WEAK_ALIAS;
+void I2C4_EV_IRQHandler(void) WEAK_ALIAS;
+void I2C4_ER_IRQHandler(void) WEAK_ALIAS;
+void SPI4_IRQHandler(void) WEAK_ALIAS;
+void FDCAN2_IT0_IRQHandler(void) WEAK_ALIAS;
+void FDCAN2_IT1_IRQHandler(void) WEAK_ALIAS;
+void FDCAN3_IT0_IRQHandler(void) WEAK_ALIAS;
+void FDCAN3_IT1_IRQHandler(void) WEAK_ALIAS;
+void RNG_IRQHandler(void) WEAK_ALIAS;
+void LPUART1_IRQHandler(void) WEAK_ALIAS;
+void I2C3_EV_IRQHandler(void) WEAK_ALIAS;
+void I2C3_ER_IRQHandler(void) WEAK_ALIAS;
+void DMAMUX_OVR_IRQHandler(void) WEAK_ALIAS;
+void QUADSPI_IRQHandler(void) WEAK_ALIAS;
+void DMA1_Channel8_IRQHandler(void) WEAK_ALIAS;
+void DMA2_Channel6_IRQHandler(void) WEAK_ALIAS;
+void DMA2_Channel7_IRQHandler(void) WEAK_ALIAS;
+void DMA2_Channel8_IRQHandler(void) WEAK_ALIAS;
+void CORDIC_IRQHandler(void) WEAK_ALIAS;
+void FMAC_IRQHandler(void) WEAK_ALIAS;
 #endif
-void EXTI9_5_IRQHandler(void) SET_WEAK_ALIAS;
-void TIM1_BRK_TIM15_IRQHandler(void) SET_WEAK_ALIAS;
-void TIM1_UP_TIM16_IRQHandler(void) SET_WEAK_ALIAS;
-void TIM1_TRG_COM_TIM17_IRQHandler(void) SET_WEAK_ALIAS;
-void TIM1_CC_IRQHandler(void) SET_WEAK_ALIAS;
-void TIM2_IRQHandler(void) SET_WEAK_ALIAS;
-void TIM3_IRQHandler(void) SET_WEAK_ALIAS;
-void TIM4_IRQHandler(void) SET_WEAK_ALIAS;
-void I2C1_EV_IRQHandler(void) SET_WEAK_ALIAS;
-void I2C1_ER_IRQHandler(void) SET_WEAK_ALIAS;
-void I2C2_EV_IRQHandler(void) SET_WEAK_ALIAS;
-void I2C2_ER_IRQHandler(void) SET_WEAK_ALIAS;
-void SPI1_IRQHandler(void) SET_WEAK_ALIAS;
-void SPI2_IRQHandler(void) SET_WEAK_ALIAS;
-void USART1_IRQHandler(void) SET_WEAK_ALIAS;
-void USART2_IRQHandler(void) SET_WEAK_ALIAS;
-void USART3_IRQHandler(void) SET_WEAK_ALIAS;
-void EXTI15_10_IRQHandler(void) SET_WEAK_ALIAS;
-void RTC_Alarm_IRQHandler(void) SET_WEAK_ALIAS;
-void USBWakeUp_IRQHandler(void) SET_WEAK_ALIAS;
-void TIM8_BRK_IRQHandler(void) SET_WEAK_ALIAS;
-void TIM8_UP_IRQHandler(void) SET_WEAK_ALIAS;
-void TIM8_TRG_COM_IRQHandler(void) SET_WEAK_ALIAS;
-void TIM8_CC_IRQHandler(void) SET_WEAK_ALIAS;
-void ADC3_IRQHandler(void) SET_WEAK_ALIAS;
-void SPI3_IRQHandler(void) SET_WEAK_ALIAS;
-void UART4_IRQHandler(void) SET_WEAK_ALIAS;
-void UART5_IRQHandler(void) SET_WEAK_ALIAS;
-void TIM6_DAC_IRQHandler(void) SET_WEAK_ALIAS;
-void TIM7_DAC_IRQHandler(void) SET_WEAK_ALIAS;
-void DMA2_Channel1_IRQHandler(void) SET_WEAK_ALIAS;
-void DMA2_Channel2_IRQHandler(void) SET_WEAK_ALIAS;
-void DMA2_Channel3_IRQHandler(void) SET_WEAK_ALIAS;
-void DMA2_Channel4_IRQHandler(void) SET_WEAK_ALIAS;
-void DMA2_Channel5_IRQHandler(void) SET_WEAK_ALIAS;
-void ADC4_IRQHandler(void) SET_WEAK_ALIAS;
-void COMP1_2_3_IRQHandler(void) SET_WEAK_ALIAS;
-void COMP4_5_6_IRQHandler(void) SET_WEAK_ALIAS;
-void COMP7_IRQHandler(void) SET_WEAK_ALIAS;
+void EXTI9_5_IRQHandler(void) WEAK_ALIAS;
+void TIM1_BRK_TIM15_IRQHandler(void) WEAK_ALIAS;
+void TIM1_UP_TIM16_IRQHandler(void) WEAK_ALIAS;
+void TIM1_TRG_COM_TIM17_IRQHandler(void) WEAK_ALIAS;
+void TIM1_CC_IRQHandler(void) WEAK_ALIAS;
+void TIM2_IRQHandler(void) WEAK_ALIAS;
+void TIM3_IRQHandler(void) WEAK_ALIAS;
+void TIM4_IRQHandler(void) WEAK_ALIAS;
+void I2C1_EV_IRQHandler(void) WEAK_ALIAS;
+void I2C1_ER_IRQHandler(void) WEAK_ALIAS;
+void I2C2_EV_IRQHandler(void) WEAK_ALIAS;
+void I2C2_ER_IRQHandler(void) WEAK_ALIAS;
+void SPI1_IRQHandler(void) WEAK_ALIAS;
+void SPI2_IRQHandler(void) WEAK_ALIAS;
+void USART1_IRQHandler(void) WEAK_ALIAS;
+void USART2_IRQHandler(void) WEAK_ALIAS;
+void USART3_IRQHandler(void) WEAK_ALIAS;
+void EXTI15_10_IRQHandler(void) WEAK_ALIAS;
+void RTC_Alarm_IRQHandler(void) WEAK_ALIAS;
+void USBWakeUp_IRQHandler(void) WEAK_ALIAS;
+void TIM8_BRK_IRQHandler(void) WEAK_ALIAS;
+void TIM8_UP_IRQHandler(void) WEAK_ALIAS;
+void TIM8_TRG_COM_IRQHandler(void) WEAK_ALIAS;
+void TIM8_CC_IRQHandler(void) WEAK_ALIAS;
+void ADC3_IRQHandler(void) WEAK_ALIAS;
+void SPI3_IRQHandler(void) WEAK_ALIAS;
+void UART4_IRQHandler(void) WEAK_ALIAS;
+void UART5_IRQHandler(void) WEAK_ALIAS;
+void TIM6_DAC_IRQHandler(void) WEAK_ALIAS;
+void TIM7_DAC_IRQHandler(void) WEAK_ALIAS;
+void DMA2_Channel1_IRQHandler(void) WEAK_ALIAS;
+void DMA2_Channel2_IRQHandler(void) WEAK_ALIAS;
+void DMA2_Channel3_IRQHandler(void) WEAK_ALIAS;
+void DMA2_Channel4_IRQHandler(void) WEAK_ALIAS;
+void DMA2_Channel5_IRQHandler(void) WEAK_ALIAS;
+void ADC4_IRQHandler(void) WEAK_ALIAS;
+void COMP1_2_3_IRQHandler(void) WEAK_ALIAS;
+void COMP4_5_6_IRQHandler(void) WEAK_ALIAS;
+void COMP7_IRQHandler(void) WEAK_ALIAS;
 
 
 /**
@@ -214,6 +214,13 @@ NO_RETURN void Default_Handler(void)
 }
 
 
+/**
+ * @brief Copy a block of memory to another block
+ * 
+ * @param dest   the destination memory
+ * @param source the source memory
+ * @param size   the size of the copy
+ */
 STATIC_INLINE void memcopy(u8 *dest, const u8 *source, u32 size)
 {
 	while(size--)

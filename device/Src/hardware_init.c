@@ -155,7 +155,7 @@ void SystemClock_Init(void)
     RCC->CFGR_b.PPRE1           = OFF;   /* Set the APB1 prescaler to 1 */
     RCC->CCIPR_b.FDCANSEL       = 2;     /* Set the APB clock as FDCAN clock source */
     RCC->CCIPR_b.ADC12SEL       = 2;     /* Set the system clock as ADC1,2 clock source */
-    RCC->CCIPR_b.ADC345SEL      = 2;     /* Set the system clock as ADC1,2,3 clock source */
+    RCC->CCIPR_b.ADC345SEL      = 2;     /* Set the system clock as ADC3,4,5 clock source */
 #endif
     IRQ_Enable(NonMaskableInt_IRQn);
 }
