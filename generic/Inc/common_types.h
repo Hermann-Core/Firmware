@@ -30,6 +30,7 @@
 |                                TYPES DEFINITIONS                                   |
 #************************************************************************************/
 #define _vol        volatile
+#define null        0
 
 typedef int8_t     i8;
 typedef uint8_t    u8;

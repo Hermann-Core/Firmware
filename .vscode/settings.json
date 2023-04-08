@@ -29,6 +29,9 @@
         "atomic": "c",
         "cstring": "c",
         "autoinit.h": "c",
-        "core_cm4.h": "c"
+        "core_cm4.h": "c",
+        "cstddef": "cpp",
+        "exception": "cpp",
+        "memory": "cpp"
     }
 }
