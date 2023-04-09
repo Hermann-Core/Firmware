@@ -1,8 +1,8 @@
 /*************************************************************************************
- * @file 	 STM32F303_app.cmd
- * @date   March, 26 2023
- * @author AWATSA HERMANN
- * @brief	 STM32F303 linker command file
+ * @file 	    STM32F303_app.cmd
+ * @date      March, 26 2023
+ * @author    AWATSA HERMANN
+ * @brief	    STM32F303 linker command file
  * 
  * ***********************************************************************************
  * @attention
@@ -19,14 +19,14 @@
 /* Macros definitions. Only support by the TI linker */
 #define CCMRAM_SIZE           0x2000
 #define CCMRAM_ORIGIN         0x10000000
-#define APP1_SIZE             0x19000
-#define APP2_SIZE             0x19000
-#define APP1_ORIGIN           0x0800B000
-#define APP2_ORIGIN           0x08025000
+#define APP_SIZE              0x19000
+#define SLOT_SIZE             0x19000
+#define APP_ORIGIN            0x0800B000
+#define SLOT_ORIGIN           0x08025000
 #define SRAM_SIZE             0x9E78
 #define SRAM_ORIGIN           0x20000188
-#define RESERVED_ORIGIN       0x0803E800
-#define RESERVED_SIZE         0x1800
+#define CRC_ORIGIN            0x0803E800
+#define CRC_SIZE              0x40
 
 
 /* Linker options */
@@ -39,25 +39,34 @@
 
 MEMORY
 {
+  GROUP
+  {
+    APP (RX) : ORIGIN = APP_ORIGIN,  LENGTH = APP_SIZE
+
+  } crc(__crc_table__, algorithm=CRC32_PRIME)
+
   CCMRAM   (XRW)   : ORIGIN = CCMRAM_ORIGIN,    LENGTH = CCMRAM_SIZE
   RAM      (XRW)   : ORIGIN = SRAM_ORIGIN,      LENGTH = SRAM_SIZE
-  APP1     (RX)    : ORIGIN = APP1_ORIGIN,      LENGTH = APP1_SIZE
-  APP2     (RX)    : ORIGIN = APP2_ORIGIN,      LENGTH = APP2_SIZE
-  RESERVED (RX)    : ORIGIN = RESERVED_ORIGIN,  LENGTH = RESERVED_SIZE
+  SLOT     (RX)    : ORIGIN = SLOT_ORIGIN,      LENGTH = SLOT_SIZE
+  CRC_REG  (RX)    : ORIGIN = CRC_ORIGIN,       LENGTH = CRC_SIZE
 }
 
 /* Initial stack value. Define at the end of the RAM memory region */
 __INITIAL_SP = 0x20000000 + 0xA000;
 
+/* Address of the reset region */
+RESET_BASE = 0x0803F000;
 
+ 
 SECTIONS
 {
-  .app_vector_table : > APP1_ORIGIN   /* Application vector table */
+  .app_vector_table : > APP_ORIGIN   /* Application vector table */
 
-  GROUP : > APP1
+  .TI.memcrc > CRC_REG               /* generated CRC table section */
+
+  GROUP : > APP
   {
     .binit : {}         /* Linker generated copy tables section */
-    .cinit : {}         /* compiler generated C/C++ initialization table section */
 
     .text :
     {
@@ -69,32 +78,32 @@ SECTIONS
 
   /* The read only datas section */
   .rodata : palign(4) {}
-            load = APP1,
+            load = APP,
             run  = RAM,
             table(BINIT)
 
   /* Section containing some switch statements */
   .switch : ALIGN(4) {}
-          load = APP1,
+          load = APP,
           run  = RAM,
           table(BINIT)
 
   /* Initialized global and static variables section */
   .data : ALIGN(4) {}
-          load = APP1,
+          load = APP,
           run  = RAM,
           table(BINIT)
 
   /* C++ global constructors section */
   .init_array : ALIGN(4) {}
-              load = APP1,
+              load = APP,
               run = RAM,
               RUN_START(__init_array_base),
               RUN_END(__init_array_limit),
               table(BINIT)
 
   .ccmram : ALIGN(4) {}
-            load = APP1,
+            load = APP,
             run  = CCMRAM,
             table(BINIT)
 

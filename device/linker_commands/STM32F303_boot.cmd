@@ -1,8 +1,8 @@
 /*************************************************************************************
- * @file 	 STM32F303_boot.cmd
- * @date   March, 26 2023
- * @author AWATSA HERMANN
- * @brief	 STM32F303 bootloader linker command file
+ * @file 	    STM32F303_boot.cmd
+ * @date      April, 09 2023
+ * @author    AWATSA HERMANN
+ * @brief	    STM32F303 bootloader linker command file
  * 
  * ***********************************************************************************
  * @attention
@@ -12,7 +12,7 @@
  *
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.03.26   |     1     |      0     |
+ # 2023.04.09   |     1     |      1     |
 
 *************************************************************************************/
 
@@ -46,6 +46,12 @@ __INITIAL_SP = SRAM_ORIGIN + SRAM_SIZE;
 
 /* Start address of the application */
 APP_ADDRESS  = 0x0800B000;
+
+/* Address of the CRC value */
+CRC_BASE = 0x0803E800;
+
+/* Address of the reset region */
+RESET_BASE = 0x0803F000;
 
 
 SECTIONS
