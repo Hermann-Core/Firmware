@@ -1,0 +1,1 @@
+// todo! erase and program pages for the app, slot and boot resons regions, verify crc,

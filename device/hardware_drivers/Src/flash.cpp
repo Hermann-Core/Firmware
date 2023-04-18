@@ -1,0 +1,1 @@
+// todo! regarder ds le hal (mass erase, page erase, sector erase, program at address)

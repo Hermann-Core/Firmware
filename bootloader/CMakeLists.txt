@@ -65,4 +65,6 @@ target_sources(
     ${CMAKE_SOURCE_DIR}/device/Src/hardware_init.c
     ${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/Src/boot_jump.cpp
     ${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/bootloader_main.cpp
+    ${CMAKE_SOURCE_DIR}/device/hardware_drivers/Src/crc.cpp
+    ${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/Src/flash_config.cpp
 )

@@ -21,6 +21,7 @@ set(COMMON_SOURCES
     ${CMAKE_SOURCE_DIR}/RTT/Src/SEGGER_RTT_ASM_ARMv7M.S
     ${CMAKE_SOURCE_DIR}/RTT/Src/SEGGER_RTT.c
     ${CMAKE_SOURCE_DIR}/RTT/Src/SEGGER_RTT_printf.c
+    ${CMAKE_SOURCE_DIR}/device/hardware_drivers/Src/flash.cpp
 )
 
 include_directories(
