@@ -51,7 +51,8 @@ set(CMAKE_ASM_COMPILER_WORKS           1)
 set(CMAKE_CXX_COMPILER_WORKS           1)
 
 set(ASM_OPTIONS                        "-x assembler-with-cpp")
-set(CPP_OPTIONS                        "-fno-rtti -fno-exceptions -fno-threadsafe-statics")
+set(CPP_OPTIONS                        "-fno-rtti -fno-exceptions -fno-threadsafe-statics -fno-unwind-tables")
+#set(CPP_OPTIONS                        "-nostdlib -fno-rtti -fno-exceptions -fno-threadsafe-statics -fno-unwind-tables")
 
 if(TOOLCHAIN_DIRECTORY PATH_EQUAL     "$ENV{TI_TOOLCHAIN_PATH}")
     set(CMAKE_C_COMPILER               ${TOOLCHAIN_PREFIX}clang${TOOLCHAIN_SUFFIX})

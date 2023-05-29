@@ -18,22 +18,22 @@
 *************************************************************************************/
 
 
-/************************************************************************************#
-|                                      INCLUDES                                      |
-#************************************************************************************/
+/************************************************************************************/
+/*                                      INCLUDES                                    */
+/************************************************************************************/
 #include "boot_jump.hpp"
 #include "hardware_core.h"
 #include "peripherals_defs.h"
 
 
 
-/************************************************************************************#
-|                                       DEFINES                                      |
-#************************************************************************************/
+/************************************************************************************/
+/*                                       DEFINES                                    */
+/************************************************************************************/
 #define SRAM_BASE          0x20000000
 
 #define UNUSED             __attribute__((unused))
-#define NAKED              __attribute__((naked, noreturn)) static
+#define NAKED              __attribute__((naked, noreturn))
 #define NO_RETURN          __attribute__((noreturn))
 
 #if defined (STM32F303)
@@ -44,23 +44,16 @@
 
 
 
-/************************************************************************************#
-|                              FUNCTIONS DECLARATIONS                                |
-#************************************************************************************/
-NAKED void JumpASM(UNUSED u32 SP, UNUSED u32 PC);
-
-
-
-/************************************************************************************#
-|                              FUNCTIONS DEFINITIONS                                 |
-#************************************************************************************/
+/************************************************************************************/
+/*                              FUNCTIONS DEFINITIONS                               */
+/************************************************************************************/
 
 /**
  * \brief Used to jump to the application from bootloader
  * 
  * \param appAddress the starting address of the application
  */
-NO_RETURN void JumpToApp(const u32 *appVector)
+NO_RETURN void jump::JumpToApp(const u32 *appVector)
 {
     __disable_irq();                  /* Disable global interrupts */
     __disable_fault_irq();            /* Disable fault exceptions handlers*/
@@ -72,26 +65,28 @@ NO_RETURN void JumpToApp(const u32 *appVector)
     }
 
     /* Disable the systick and clear its exception pending */
-    SysTick->CTRL = 0x0;
-    SysTick->LOAD = 0x0;
-    SysTick->VAL  = 0x0;
-    SCB->ICSR    |= SCB_ICSR_PENDSTCLR_Msk;
+    SysTick->CTRL   =   0x0;
+    SysTick->LOAD   =   0x0;
+    SysTick->VAL    =   0x0;
+    SCB->ICSR      |=   SCB_ICSR_PENDSTCLR_Msk;
 
     /* Set the vector table address for the application */
     SCB->VTOR = SRAM_BASE;
 
     /* Set the stack pointer and jump to the application */
     JumpASM(appVector[0], appVector[1]);
+
+    while(true);
 }
 
 
 /**
- * \brief Set the stack pointer and branch to an address
+ * \brief Set the stack pointer and branch to a function
  * 
  * \param SP the stack pointer
  * \param PC the program counter
  */
-NAKED void JumpASM(UNUSED u32 SP, UNUSED u32 PC)
+NAKED void jump::JumpASM(UNUSED u32 SP, UNUSED u32 PC)
 {
   asm volatile("MSR  MSP,r0");
   asm volatile("BX   r1");

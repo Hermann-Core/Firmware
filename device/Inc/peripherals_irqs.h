@@ -16,8 +16,8 @@
 *************************************************************************************/
 
 /* Prevent recursive inclusion */
-#ifndef _PERIPHERALS_IRQS_
-#define _PERIPHERALS_IRQS_
+#ifndef _PERIPHERALS_IRQS_H_
+#define _PERIPHERALS_IRQS_H_
 
 #ifdef __cplusplus
 extern "C"
@@ -46,7 +46,7 @@ void SysTick_Handler(void);
 #endif
 
 
-#endif      /* _PERIPHERALS_IRQS_ */
+#endif      /* _PERIPHERALS_IRQS_H_ */
 
 /************************************************************************************#
 |                                    END OF FILE                                     |
