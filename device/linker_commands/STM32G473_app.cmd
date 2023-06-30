@@ -33,7 +33,7 @@
 --entry_point __program_start     /* Entry point of the program */
 --retain="*(.ccmram)"             /* Do not discard the .ccmram section */
 --retain="*(.init_array)"         /* Do not discard the .init_array section */
---stack_size=0x2000               /* Define a 8K stack */
+--stack_size=0x1000               /* Define a 4K stack */
 --heap_size=0x200                 /* Define a 512 Octets heap */
 
 

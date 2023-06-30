@@ -37,11 +37,6 @@
  #include "arm_math.h"
 #endif
 
-/* Defined the use of interrupts or not */
-#ifdef _ENABLE_IRQ
- #include "hardware_core.h"
-#endif
-
 
 #endif      /* _FEATURES_H_ */
 

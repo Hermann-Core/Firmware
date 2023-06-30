@@ -1,10 +1,10 @@
 /************************************************************************************* 
- * @file 	   boot_jump.cpp
- * @date     April, 02 2023
- * @author   AWATSA HERMANN
- * @brief	   bootloader jump source file
+ * @file 	 boot_jump.cpp
+ * @date   April, 02 2023
+ * @author Awatsa Hermann
+ * @brief	 bootloader jump source file
  * 
- *           Contains the functions used to jump to the main application
+ *         Contains the functions used to jump to the main application
  * ***********************************************************************************
  * @attention
  * 
@@ -18,18 +18,18 @@
 *************************************************************************************/
 
 
-/************************************************************************************/
-/*                                      INCLUDES                                    */
-/************************************************************************************/
+/*==================================================================================
+|                                 INCLUDES                                
+===================================================================================*/
 #include "boot_jump.hpp"
-#include "hardware_core.h"
+#include "hardware_core.hpp"
 #include "peripherals_defs.h"
 
 
 
-/************************************************************************************/
-/*                                       DEFINES                                    */
-/************************************************************************************/
+/*==================================================================================
+|                                  DEFINES                                
+===================================================================================*/
 #define SRAM_BASE          0x20000000
 
 #define UNUSED             __attribute__((unused))
@@ -44,24 +44,26 @@
 
 
 
-/************************************************************************************/
-/*                              FUNCTIONS DEFINITIONS                               */
-/************************************************************************************/
+/*==================================================================================
+|                             FUNCTIONS DEFINITIONS                                
+===================================================================================*/
 
 /**
  * \brief Used to jump to the application from bootloader
  * 
  * \param appAddress the starting address of the application
  */
-NO_RETURN void jump::JumpToApp(const u32 *appVector)
+NO_RETURN void boot_jump::jumpToApp(const u32 *appVector)
 {
-    __disable_irq();                  /* Disable global interrupts */
-    __disable_fault_irq();            /* Disable fault exceptions handlers*/
-    // TODO! Deinit all peripherals (which may trigger an interrupt) and clear all irq pendings flags
+    /* Disable global and faults interrupts */
+    hw_core::disable_all_irq();
+    hw_core::disable_fault_irq();
+
     for (u8 i = 0; i < MAX_IRQ_NUMBERS; i++)
     {
-      IRQ_Disable((IRQn_t)i);         /* Disable all interrupts */
-      IRQ_ClearPending((IRQn_t)i);    /* Clear all pendings requests in NVIC */
+      /* Disable and clear all pending interrupts */
+      hw_core::irq_disable((IRQn_t)i);
+      hw_core::irq_clearPending((IRQn_t)i);
     }
 
     /* Disable the systick and clear its exception pending */
@@ -70,11 +72,13 @@ NO_RETURN void jump::JumpToApp(const u32 *appVector)
     SysTick->VAL    =   0x0;
     SCB->ICSR      |=   SCB_ICSR_PENDSTCLR_Msk;
 
+    //! deinit all the configured peripherals
+
     /* Set the vector table address for the application */
     SCB->VTOR = SRAM_BASE;
 
     /* Set the stack pointer and jump to the application */
-    JumpASM(appVector[0], appVector[1]);
+    jumpASM(appVector[0], appVector[1]);
 
     while(true);
 }
@@ -86,13 +90,13 @@ NO_RETURN void jump::JumpToApp(const u32 *appVector)
  * \param SP the stack pointer
  * \param PC the program counter
  */
-NAKED void jump::JumpASM(UNUSED u32 SP, UNUSED u32 PC)
+NAKED void boot_jump::jumpASM(UNUSED u32 SP, UNUSED u32 PC)
 {
   asm volatile("MSR  MSP,r0");
   asm volatile("BX   r1");
 }
 
 
-/************************************************************************************#
-|                                    END OF FILE                                     |
-#************************************************************************************/
+/*==================================================================================
+|                                 END OF FILE                                
+===================================================================================*/

@@ -33,6 +33,10 @@
         "cstddef": "cpp",
         "exception": "cpp",
         "memory": "cpp",
-        "cmsis_tiarmclang.h": "c"
+        "cmsis_tiarmclang.h": "c",
+        "hardware_core.h": "c",
+        "hardware_core.hpp": "c",
+        "peripherals_irqs.h": "c",
+        "vector": "cpp"
     }
 }

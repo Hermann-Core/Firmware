@@ -1,11 +1,11 @@
 /************************************************************************************* 
- * @file 	   peripherals_irqs.h
- * @date       05, March 2023
- * @author     AWATSA HERMANN
- * @brief	   Peripherals interrupts header file
+ * @file   peripherals_irqs.h
+ * @date   05, March 2023
+ * @author AWATSA HERMANN
+ * @brief  Peripherals interrupts header file
  * 
- *             Contains the declarations of the MCU
-               peripherals interrupts handlers
+ *         Contains the declarations of the MCU
+ *         peripherals interrupts handlers
  * ***********************************************************************************
  * @attention
  * 
@@ -25,8 +25,9 @@ extern "C"
 #endif
 
 /*====================================================================================
-|                        Cortex m4 specific exceptions handlers                      |
+|                     Cortex m4 specific exceptions handlers                      
 ====================================================================================*/
+
 void NMI_Handler(void);
 void HardFault_Handler(void);
 void MemManage_Handler(void);
@@ -38,7 +39,7 @@ void PendSV_Handler(void);
 void SysTick_Handler(void);
 
 /*====================================================================================
-|                    STM32G4 and F303 specific interrupts handlers                   |
+|                         STM32 specific interrupts handlers                   
 ====================================================================================*/
 
 #ifdef __cplusplus
@@ -48,6 +49,6 @@ void SysTick_Handler(void);
 
 #endif      /* _PERIPHERALS_IRQS_H_ */
 
-/************************************************************************************#
-|                                    END OF FILE                                     |
-#************************************************************************************/
+/*==================================================================================
+|                                 END OF FILE                                
+===================================================================================*/

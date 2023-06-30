@@ -62,7 +62,7 @@ target_sources(
     ${BOOT_EXECUTABLE} PRIVATE
     ${COMMON_SOURCES}
     ${CMAKE_SOURCE_DIR}/device/Src/setup_boot.c
-    ${CMAKE_SOURCE_DIR}/device/Src/hardware_init.c
+    ${CMAKE_SOURCE_DIR}/device/Src/hardware_init.cpp
     ${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/Src/boot_jump.cpp
     ${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/bootloader_main.cpp
     ${CMAKE_SOURCE_DIR}/device/hardware_drivers/Src/crc.cpp

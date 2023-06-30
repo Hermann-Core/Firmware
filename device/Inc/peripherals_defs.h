@@ -1,17 +1,15 @@
 /*************************************************************************************
- * @file 	   peripherals_defs.h
- * @date     March, 12 2023
- * @author   AWATSA HERMANN
- * @brief	   STM32F303 & STM32G473 peripherals header file
+ * @file 	 peripherals_defs.h
+ * @date   June, 30 2023
+ * @author Awatsa Hermann
+ * @brief	 This file contains the STM32F303 & STM32G473
+ *         peripherals access layer and registers bitfields
  * 
- *           Contains the STM32F303 & STM32G473 peripherals
- *           access layer and registers bitfields
  * ***********************************************************************************
- * @attention
- *
- #   DATE       |  Version  | revision   |
- -----------------------------------------
- # 2023.03.12   |     1     |      0     |
+ * 
+ * #   DATE       |  Version  | revision   |
+ * -----------------------------------------
+ * # 2023.06.30   |     1     |      2     |
 
 *************************************************************************************/
 
@@ -33,9 +31,9 @@ extern "C" {
 #define __FPU_PRESENT             1U       /* STM32F303 and STM32G473 devices provide an FPU */
 
 
-/************************************************************************************/
-/*                              IRQ/EXCEPTIONS NUMBERS                              */
-/************************************************************************************/
+/*==================================================================================
+|                            IRQ/EXCEPTIONS NUMBERS                                
+===================================================================================*/
 
 typedef enum
 {
@@ -163,148 +161,19 @@ typedef enum
 } IRQn_t;
 
 
-/************************************************************************************/
-/*                                     INCLUDES                                     */
-/************************************************************************************/
+/*==================================================================================
+|                                 INCLUDES                                
+===================================================================================*/
 #include "common_types.h"
 #include "core_cm4.h"
 
 
 
-/************************************************************************************/
-/*                           PERIPHERALS BASE ADRRESSES                             */
-/************************************************************************************/
-#define ADC1_BASE_ADDRESS                   (0x50000000UL)
-#define ADC2_BASE_ADDRESS                   (0x50000100UL)
-#define ADC3_BASE_ADDRESS                   (0x50000400UL)
-#define ADC4_BASE_ADDRESS                   (0x50000500UL)
-#define ADC12_COMMON_BASE                   (0x50000300UL)
-#define ADC345_COMMON_BASE                  (0x50000700UL)
+/*==================================================================================
+|                      PERIPHERALS REGISTERS STRUCTURES                                
+===================================================================================*/
 
-#define GPIOA_BASE_ADDRESS                  (0x48000000UL)
-#define GPIOB_BASE_ADDRESS                  (0x48000400UL)
-#define GPIOC_BASE_ADDRESS                  (0x48000800UL)
-#define GPIOD_BASE_ADDRESS                  (0x48000C00UL)
-#define GPIOE_BASE_ADDRESS                  (0x48001000UL)
-#define GPIOF_BASE_ADDRESS                  (0x48001400UL)
-
-#define CRC_BASE_ADDRESS                    (0x40023000UL)
-#define RCC_BASE_ADDRESS                    (0x40021000UL)
-#define DMA1_BASE_ADDRESS                   (0x40020000UL)
-#define DMA2_BASE_ADDRESS                   (0x40020400UL)
-#define DMA1_CHANNEL1_ADDRESS               (0x40020008UL)
-#define DMA1_CHANNEL2_ADDRESS               (0x4002001CUL)
-#define DMA1_CHANNEL3_ADDRESS               (0x40020030UL)
-#define DMA1_CHANNEL4_ADDRESS               (0x40020044UL)
-#define DMA1_CHANNEL5_ADDRESS               (0x40020058UL)
-#define DMA1_CHANNEL6_ADDRESS               (0x4002006CUL)
-#define DMA1_CHANNEL7_ADDRESS               (0x40020080UL)
-#define DMA2_CHANNEL1_ADDRESS               (0x40020408UL)
-#define DMA2_CHANNEL2_ADDRESS               (0x4002041CUL)
-#define DMA2_CHANNEL3_ADDRESS               (0x40020430UL)
-#define DMA2_CHANNEL4_ADDRESS               (0x40020444UL)
-#define DMA2_CHANNEL5_ADDRESS               (0x40020458UL)
-#define FLASH_REG_BASE_ADDRESS              (0x40022000UL)
-
-#define EXTI_BASE_ADDRESS                   (0x40010400UL)
-#define TIM1_BASE_ADDRESS                   (0x40012C00UL)
-#define SPI1_BASE_ADDRESS                   (0x40013000UL)
-#define TIM8_BASE_ADDRESS                   (0x40013400UL)
-#define TIM15_BASE_ADDRESS                  (0x40014000UL)
-#define TIM16_BASE_ADDRESS                  (0x40014400UL)
-#define TIM17_BASE_ADDRESS                  (0x40014800UL)
-#define SYSCFG_BASE_ADDRESS                 (0x40010000UL)
-#define USART1_BASE_ADDRESS                 (0x40013800UL)
-
-#define PWR_BASE_ADDRESS                    (0x40007000UL)
-#define RTC_BASE_ADDRESS                    (0x40002800UL)
-#define TIM2_BASE_ADDRESS                   (0x40000000UL)
-#define TIM3_BASE_ADDRESS                   (0x40000400UL)
-#define TIM4_BASE_ADDRESS                   (0x40000800UL)
-#define TIM6_BASE_ADDRESS                   (0x40001000UL)
-#define TIM7_BASE_ADDRESS                   (0x40001400UL)
-#define WWDG_BASE_ADDRESS                   (0x40002C00UL)
-#define IWDG_BASE_ADDRESS                   (0x40003000UL)
-#define SPI2_BASE_ADDRESS                   (0x40003800UL)
-#define SPI3_BASE_ADDRESS                   (0x40003C00UL)
-#define I2C1_BASE_ADDRESS                   (0x40005400UL)
-#define I2C2_BASE_ADDRESS                   (0x40005800UL)
-#define UART4_BASE_ADDRESS                  (0x40004C00UL)
-#define UART5_BASE_ADDRESS                  (0x40005000UL)
-#define USART2_BASE_ADDRESS                 (0x40004400UL)
-#define USART3_BASE_ADDRESS                 (0x40004800UL)
-
-#define DBGMCU_BASE_ADDRESS                 (0xE0042000UL)
-
-#if defined (STM32G473)     /* STM32G473 specific peripherals base addresses */
-
-#define GPIOG_BASE_ADDRESS                  (0x48001800UL)
-#define ADC5_BASE_ADDRESS                   (0x50000600UL)
-#define DAC1_BASE_ADDRESS                   (0x50000800UL)
-#define DAC2_BASE_ADDRESS                   (0x50000C00UL)
-#define DAC3_BASE_ADDRESS                   (0x50001000UL)
-#define DAC4_BASE_ADDRESS                   (0x50001400UL)
-#define RNG_BASE_ADDRESS                    (0x50060800UL)
-
-#define DMAMUX_BASE_ADDRESS                 (0x40020800UL)
-#define CORDIC_BASE_ADDRESS                 (0x40020C00UL)
-#define DMA1_CHANNEL8_ADDRESS               (0x40020094UL)
-#define DMA2_CHANNEL6_ADDRESS               (0x4002046CUL)
-#define DMA2_CHANNEL7_ADDRESS               (0x40020480UL)
-#define DMA2_CHANNEL8_ADDRESS               (0x40020494UL)
-#define FMAC_BASE_ADDRESS                   (0x40021400UL)
-
-#define VREFBUF_BASE_ADDRESS                (0x40010030UL)
-#define COMP1_BASE_ADDRESS                  (0x40010200UL)
-#define COMP2_BASE_ADDRESS                  (0x40010204UL)
-#define COMP3_BASE_ADDRESS                  (0x40010208UL)
-#define COMP4_BASE_ADDRESS                  (0x4001020CUL)
-#define COMP5_BASE_ADDRESS                  (0x40010210UL)
-#define COMP6_BASE_ADDRESS                  (0x40010214UL)
-#define COMP7_BASE_ADDRESS                  (0x40010218UL)
-#define OPAMP1_BASE_ADDRESS                 (0x40010300UL)
-#define OPAMP2_BASE_ADDRESS                 (0x40010304UL)
-#define OPAMP3_BASE_ADDRESS                 (0x40010308UL)
-#define OPAMP4_BASE_ADDRESS                 (0x4001030CUL)
-#define OPAMP5_BASE_ADDRESS                 (0x40010310UL)
-#define OPAMP6_BASE_ADDRESS                 (0x40010314UL)
-
-#define TIM20_BASE_ADDRESS                  (0x40015000UL)
-#define SAI1_BASE_ADDRESS                   (0x40015400UL)
-#define SAI1_Block_A_BASE                   (0x40015404UL)
-#define SAI1_Block_B_BASE                   (0x40015424UL)
-
-#define TIM5_BASE_ADDRESS                   (0x40000C00UL)
-#define CRS_BASE_ADDRESS                    (0x40002000UL)
-#define TAMP_BASE_ADDRESS                   (0x40002400UL)
-#define LPTIM1_BASE_ADDRESS                 (0x40007C00UL)
-#define LPUART1_BASE_ADDRESS                (0x40008000UL)
-#define I2C3_BASE_ADDRESS                   (0x40007800UL)
-#define I2C4_BASE_ADDRESS                   (0x40008400UL)
-
-#elif defined (STM32F303)   /* STM32F303 specific peripherals base addresses */
-
-#define DAC1_BASE_ADDRESS                   (0x40007400UL)
-#define COMP1_BASE_ADDRESS                  (0x4001001CUL)
-#define COMP2_BASE_ADDRESS                  (0x40010020UL)
-#define COMP3_BASE_ADDRESS                  (0x40010024UL)
-#define COMP4_BASE_ADDRESS                  (0x40010028UL)
-#define COMP5_BASE_ADDRESS                  (0x4001002CUL)
-#define COMP6_BASE_ADDRESS                  (0x40010030UL)
-#define COMP7_BASE_ADDRESS                  (0x40010034UL)
-#define OPAMP1_BASE_ADDRESS                 (0x40010038UL)
-#define OPAMP2_BASE_ADDRESS                 (0x4001003CUL)
-#define OPAMP3_BASE_ADDRESS                 (0x40010040UL)
-#define OPAMP4_BASE_ADDRESS                 (0x40010044UL)
-
-#endif  /* STM32G473 */
-
-
-/************************************************************************************/
-/*                          PERIPHERALS REGISTERS STRUCTURES                        */
-/************************************************************************************/
-
-/*==================== ANALOG TO DIGITAL CONVERTER =================================*/
+/*==================== ANALOG TO DIGITAL CONVERTER ================================*/
 
 typedef struct {                     
   
@@ -1890,6 +1759,31 @@ typedef struct {
   __IOM u32 CMAR;
 
 } DMA_CHANNEL_HW;
+
+
+/*========================= DMA REQUEST MULTIPLEXER  ===============================*/
+
+typedef struct
+{
+  __IO u32   CCR;
+} DMAMUX_CHANNEL_HW;
+
+typedef struct
+{
+  __IO u32   CSR;
+  __IO u32   CFR;
+} DMAMUX_CHANNELSTATUS_HW;
+
+typedef struct
+{
+  __IO u32   RGCR;
+} DMAMUX_REQUESTGEN_HW;
+
+typedef struct
+{
+  __IO u32   RGSR;
+  __IO u32   RGCFR;
+} DMAMUX_REQUESTGENSTATUS_HW; 
 
 
 /*===================== EXTERNAL INTERRUPT/EVENT CONTROLLER ========================*/
@@ -5715,113 +5609,293 @@ typedef struct {
 
 
 
-/************************************************************************************/
-/*                         PERIPHERALS POINTERS DECLARATIONS                        */
-/************************************************************************************/
 
-#define TIM2                ((TIM_HW *) TIM2_BASE_ADDRESS)
-#define TIM3                ((TIM_HW *) TIM3_BASE_ADDRESS)
-#define TIM4                ((TIM_HW *) TIM4_BASE_ADDRESS)
-#define TIM5                ((TIM_HW *) TIM5_BASE_ADDRESS)
-#define TIM6                ((TIM_HW *) TIM6_BASE_ADDRESS)
-#define TIM7                ((TIM_HW *) TIM7_BASE_ADDRESS)
-#define CRS                 ((CRS_HW *) CRS_BASE_ADDRESS)
-#define TAMP                ((TAMP_HW *) TAMP_BASE_ADDRESS)
-#define RTC                 ((RTC_HW *) RTC_BASE_ADDRESS)
-#define WWDG                ((WWDG_HW *) WWDG_BASE_ADDRESS)
-#define IWDG                ((IWDG_HW *) IWDG_BASE_ADDRESS)
-#define SPI2                ((SPI_HW *) SPI2_BASE_ADDRESS)
-#define SPI3                ((SPI_HW *) SPI3_BASE_ADDRESS)
-#define USART2              ((USART_HW *) USART2_BASE_ADDRESS)
-#define USART3              ((USART_HW *) USART3_BASE_ADDRESS)
-#define UART4               ((USART_HW *) UART4_BASE_ADDRESS)
-#define UART5               ((USART_HW *) UART5_BASE_ADDRESS)
-#define I2C1                ((I2C_HW *) I2C1_BASE_ADDRESS)
-#define I2C2                ((I2C_HW *) I2C2_BASE_ADDRESS)
-#define FDCAN1              ((FDCAN_HW *) FDCAN1_BASE_ADDRESS)
-#define FDCAN2              ((FDCAN_HW *) FDCAN2_BASE_ADDRESS)
-#define FDCAN3              ((FDCAN_HW *) FDCAN3_BASE_ADDRESS)
-#define PWR                 ((PWR_HW *) PWR_BASE_ADDRESS)
-#define I2C3                ((I2C_HW *) I2C3_BASE_ADDRESS)
-#define LPTIM1              ((LPTIM_HW *) LPTIM1_BASE_ADDRESS)
-#define LPUART1             ((USART_HW *) LPUART1_BASE_ADDRESS)
-#define I2C4                ((I2C_HW *) I2C4_BASE_ADDRESS)
+/*==================================================================================
+|                           PERIPHERALS BASE ADRRESSES                                
+===================================================================================*/
+#define ADC1_BASE_ADDRESS                   (0x50000000UL)
+#define ADC2_BASE_ADDRESS                   (0x50000100UL)
+#define ADC3_BASE_ADDRESS                   (0x50000400UL)
+#define ADC4_BASE_ADDRESS                   (0x50000500UL)
+#define ADC12_COMMON_BASE                   (0x50000300UL)
+#define ADC345_COMMON_BASE                  (0x50000700UL)
 
-#define SYSCFG              ((SYSCFG_HW *) SYSCFG_BASE_ADDRESS)
-#define VREFBUF             ((VREFBUF_HW *) VREFBUF_BASE_ADDRESS)
-#define COMP1               ((COMP_HW *) COMP1_BASE_ADDRESS)
-#define COMP2               ((COMP_HW *) COMP2_BASE_ADDRESS)
-#define COMP3               ((COMP_HW *) COMP3_BASE_ADDRESS)
-#define COMP4               ((COMP_HW *) COMP4_BASE_ADDRESS)
-#define COMP5               ((COMP_HW *) COMP5_BASE_ADDRESS)
-#define COMP6               ((COMP_HW *) COMP6_BASE_ADDRESS)
-#define COMP7               ((COMP_HW *) COMP7_BASE_ADDRESS)
+#define GPIOA_BASE_ADDRESS                  (0x48000000UL)
+#define GPIOB_BASE_ADDRESS                  (0x48000400UL)
+#define GPIOC_BASE_ADDRESS                  (0x48000800UL)
+#define GPIOD_BASE_ADDRESS                  (0x48000C00UL)
+#define GPIOE_BASE_ADDRESS                  (0x48001000UL)
+#define GPIOF_BASE_ADDRESS                  (0x48001400UL)
 
-#define OPAMP1              ((OPAMP_HW *) OPAMP1_BASE_ADDRESS)
-#define OPAMP2              ((OPAMP_HW *) OPAMP2_BASE_ADDRESS)
-#define OPAMP3              ((OPAMP_HW *) OPAMP3_BASE_ADDRESS)
-#define OPAMP4              ((OPAMP_HW *) OPAMP4_BASE_ADDRESS)
-#define OPAMP5              ((OPAMP_HW *) OPAMP5_BASE_ADDRESS)
-#define OPAMP6              ((OPAMP_HW *) OPAMP6_BASE_ADDRESS)
+#define CRC_BASE_ADDRESS                    (0x40023000UL)
+#define RCC_BASE_ADDRESS                    (0x40021000UL)
+#define DMA1_BASE_ADDRESS                   (0x40020000UL)
+#define DMA2_BASE_ADDRESS                   (0x40020400UL)
+#define DMA1_CHANNEL1_ADDRESS               (0x40020008UL)
+#define DMA1_CHANNEL2_ADDRESS               (0x4002001CUL)
+#define DMA1_CHANNEL3_ADDRESS               (0x40020030UL)
+#define DMA1_CHANNEL4_ADDRESS               (0x40020044UL)
+#define DMA1_CHANNEL5_ADDRESS               (0x40020058UL)
+#define DMA1_CHANNEL6_ADDRESS               (0x4002006CUL)
+#define DMA1_CHANNEL7_ADDRESS               (0x40020080UL)
+#define DMA2_CHANNEL1_ADDRESS               (0x40020408UL)
+#define DMA2_CHANNEL2_ADDRESS               (0x4002041CUL)
+#define DMA2_CHANNEL3_ADDRESS               (0x40020430UL)
+#define DMA2_CHANNEL4_ADDRESS               (0x40020444UL)
+#define DMA2_CHANNEL5_ADDRESS               (0x40020458UL)
+#define FLASH_REG_BASE_ADDRESS              (0x40022000UL)
 
-#define EXTI                ((EXTI_HW *) EXTI_BASE_ADDRESS)
-#define TIM1                ((TIM_HW *) TIM1_BASE_ADDRESS)
-#define SPI1                ((SPI_HW *) SPI1_BASE_ADDRESS)
-#define TIM8                ((TIM_HW *) TIM8_BASE_ADDRESS)
-#define USART1              ((USART_HW *) USART1_BASE_ADDRESS)
-#define SPI4                ((SPI_HW *) SPI4_BASE_ADDRESS)
-#define TIM15               ((TIM_HW *) TIM15_BASE_ADDRESS)
-#define TIM16               ((TIM_HW *) TIM16_BASE_ADDRESS)
-#define TIM17               ((TIM_HW *) TIM17_BASE_ADDRESS)
-#define TIM20               ((TIM_HW *) TIM20_BASE_ADDRESS)
-#define SAI1                ((SAI_HW *) SAI1_BASE_ADDRESS)
-#define DMA1                ((DMA_HW *) DMA1_BASE_ADDRESS)
-#define DMA2                ((DMA_HW *) DMA2_BASE_ADDRESS)
-#define CORDIC              ((CORDIC_HW *) CORDIC_BASE_ADDRESS)
-#define RCC                 ((RCC_HW *) RCC_BASE_ADDRESS)
-#define FMAC                ((FMAC_HW *) FMAC_BASE_ADDRESS)
-#define FLASH               ((FLASH_HW *) FLASH_REG_BASE_ADDRESS)
-#define CRC                 ((CRC_HW *) CRC_BASE_ADDRESS)
+#define EXTI_BASE_ADDRESS                   (0x40010400UL)
+#define TIM1_BASE_ADDRESS                   (0x40012C00UL)
+#define SPI1_BASE_ADDRESS                   (0x40013000UL)
+#define TIM8_BASE_ADDRESS                   (0x40013400UL)
+#define TIM15_BASE_ADDRESS                  (0x40014000UL)
+#define TIM16_BASE_ADDRESS                  (0x40014400UL)
+#define TIM17_BASE_ADDRESS                  (0x40014800UL)
+#define SYSCFG_BASE_ADDRESS                 (0x40010000UL)
+#define USART1_BASE_ADDRESS                 (0x40013800UL)
 
-#define GPIOA               ((GPIO_HW *) GPIOA_BASE_ADDRESS)
-#define GPIOB               ((GPIO_HW *) GPIOB_BASE_ADDRESS)
-#define GPIOC               ((GPIO_HW *) GPIOC_BASE_ADDRESS)
-#define GPIOD               ((GPIO_HW *) GPIOD_BASE_ADDRESS)
-#define GPIOE               ((GPIO_HW *) GPIOE_BASE_ADDRESS)
-#define GPIOF               ((GPIO_HW *) GPIOF_BASE_ADDRESS)
-#define GPIOG               ((GPIO_HW *) GPIOG_BASE_ADDRESS)
-#define ADC1                ((ADC_HW *) ADC1_BASE_ADDRESS)
-#define ADC2                ((ADC_HW *) ADC2_BASE_ADDRESS)
-#define ADC12_COMMON        ((ADC_Common_HW *) ADC12_COMMON_BASE)
-#define ADC3                ((ADC_HW *) ADC3_BASE_ADDRESS)
-#define ADC4                ((ADC_HW *) ADC4_BASE_ADDRESS)
-#define ADC5                ((ADC_HW *) ADC5_BASE_ADDRESS)
-#define ADC345_COMMON       ((ADC_Common_HW *) ADC345_COMMON_BASE)
-#define DAC1                ((DAC_HW *) DAC1_BASE_ADDRESS)
-#define DAC2                ((DAC_HW *) DAC2_BASE_ADDRESS)
-#define DAC3                ((DAC_HW *) DAC3_BASE_ADDRESS)
-#define DAC4                ((DAC_HW *) DAC4_BASE_ADDRESS)
-#define RNG                 ((RNG_HW *) RNG_BASE_ADDRESS)
+#define PWR_BASE_ADDRESS                    (0x40007000UL)
+#define RTC_BASE_ADDRESS                    (0x40002800UL)
+#define TIM2_BASE_ADDRESS                   (0x40000000UL)
+#define TIM3_BASE_ADDRESS                   (0x40000400UL)
+#define TIM4_BASE_ADDRESS                   (0x40000800UL)
+#define TIM6_BASE_ADDRESS                   (0x40001000UL)
+#define TIM7_BASE_ADDRESS                   (0x40001400UL)
+#define WWDG_BASE_ADDRESS                   (0x40002C00UL)
+#define IWDG_BASE_ADDRESS                   (0x40003000UL)
+#define SPI2_BASE_ADDRESS                   (0x40003800UL)
+#define SPI3_BASE_ADDRESS                   (0x40003C00UL)
+#define I2C1_BASE_ADDRESS                   (0x40005400UL)
+#define I2C2_BASE_ADDRESS                   (0x40005800UL)
+#define UART4_BASE_ADDRESS                  (0x40004C00UL)
+#define UART5_BASE_ADDRESS                  (0x40005000UL)
+#define USART2_BASE_ADDRESS                 (0x40004400UL)
+#define USART3_BASE_ADDRESS                 (0x40004800UL)
 
-#define DMA1_CHANNEL1       ((DMA_CHANNEL_HW *) DMA1_CHANNEL1_ADDRESS)
-#define DMA1_CHANNEL2       ((DMA_CHANNEL_HW *) DMA1_CHANNEL2_ADDRESS)
-#define DMA1_CHANNEL3       ((DMA_CHANNEL_HW *) DMA1_CHANNEL3_ADDRESS)
-#define DMA1_CHANNEL4       ((DMA_CHANNEL_HW *) DMA1_CHANNEL4_ADDRESS)
-#define DMA1_CHANNEL5       ((DMA_CHANNEL_HW *) DMA1_CHANNEL5_ADDRESS)
-#define DMA1_CHANNEL6       ((DMA_CHANNEL_HW *) DMA1_CHANNEL6_ADDRESS)
-#define DMA1_CHANNEL7       ((DMA_CHANNEL_HW *) DMA1_CHANNEL7_ADDRESS)
-#define DMA1_CHANNEL8       ((DMA_CHANNEL_HW *) DMA1_CHANNEL8_ADDRESS)
+#define DBGMCU_BASE_ADDRESS                 (0xE0042000UL)
 
-#define DMA2_CHANNEL1       ((DMA_CHANNEL_HW *) DMA2_CHANNEL1_ADDRESS)
-#define DMA2_CHANNEL2       ((DMA_CHANNEL_HW *) DMA2_CHANNEL2_ADDRESS)
-#define DMA2_CHANNEL3       ((DMA_CHANNEL_HW *) DMA2_CHANNEL3_ADDRESS)
-#define DMA2_CHANNEL4       ((DMA_CHANNEL_HW *) DMA2_CHANNEL4_ADDRESS)
-#define DMA2_CHANNEL5       ((DMA_CHANNEL_HW *) DMA2_CHANNEL5_ADDRESS)
-#define DMA2_CHANNEL6       ((DMA_CHANNEL_HW *) DMA2_CHANNEL6_ADDRESS)
-#define DMA2_CHANNEL7       ((DMA_CHANNEL_HW *) DMA2_CHANNEL7_ADDRESS)
-#define DMA2_CHANNEL8       ((DMA_CHANNEL_HW *) DMA2_CHANNEL8_ADDRESS)
+#if defined (STM32G473)     /* STM32G473 specific peripherals base addresses */
 
-#define DBGMCU              ((DBGMCU_HW *) DBGMCU_BASE_ADDRESS)
+#define GPIOG_BASE_ADDRESS                  (0x48001800UL)
+#define ADC5_BASE_ADDRESS                   (0x50000600UL)
+#define DAC1_BASE_ADDRESS                   (0x50000800UL)
+#define DAC2_BASE_ADDRESS                   (0x50000C00UL)
+#define DAC3_BASE_ADDRESS                   (0x50001000UL)
+#define DAC4_BASE_ADDRESS                   (0x50001400UL)
+#define RNG_BASE_ADDRESS                    (0x50060800UL)
+
+#define DMAMUX_BASE_ADDRESS                 (0x40020800UL)
+#define CORDIC_BASE_ADDRESS                 (0x40020C00UL)
+#define DMA1_CHANNEL8_ADDRESS               (0x40020094UL)
+#define DMA2_CHANNEL6_ADDRESS               (0x4002046CUL)
+#define DMA2_CHANNEL7_ADDRESS               (0x40020480UL)
+#define DMA2_CHANNEL8_ADDRESS               (0x40020494UL)
+#define FMAC_BASE_ADDRESS                   (0x40021400UL)
+
+#define VREFBUF_BASE_ADDRESS                (0x40010030UL)
+#define COMP1_BASE_ADDRESS                  (0x40010200UL)
+#define COMP2_BASE_ADDRESS                  (0x40010204UL)
+#define COMP3_BASE_ADDRESS                  (0x40010208UL)
+#define COMP4_BASE_ADDRESS                  (0x4001020CUL)
+#define COMP5_BASE_ADDRESS                  (0x40010210UL)
+#define COMP6_BASE_ADDRESS                  (0x40010214UL)
+#define COMP7_BASE_ADDRESS                  (0x40010218UL)
+#define OPAMP1_BASE_ADDRESS                 (0x40010300UL)
+#define OPAMP2_BASE_ADDRESS                 (0x40010304UL)
+#define OPAMP3_BASE_ADDRESS                 (0x40010308UL)
+#define OPAMP4_BASE_ADDRESS                 (0x4001030CUL)
+#define OPAMP5_BASE_ADDRESS                 (0x40010310UL)
+#define OPAMP6_BASE_ADDRESS                 (0x40010314UL)
+
+#define TIM20_BASE_ADDRESS                  (0x40015000UL)
+#define SAI1_BASE_ADDRESS                   (0x40015400UL)
+#define SAI1_Block_A_BASE                   (0x40015404UL)
+#define SAI1_Block_B_BASE                   (0x40015424UL)
+
+#define TIM5_BASE_ADDRESS                   (0x40000C00UL)
+#define CRS_BASE_ADDRESS                    (0x40002000UL)
+#define TAMP_BASE_ADDRESS                   (0x40002400UL)
+#define LPTIM1_BASE_ADDRESS                 (0x40007C00UL)
+#define LPUART1_BASE_ADDRESS                (0x40008000UL)
+#define I2C3_BASE_ADDRESS                   (0x40007800UL)
+#define I2C4_BASE_ADDRESS                   (0x40008400UL)
+
+#define DMAMUX1_CHANNEL0_BASE_ADDRESS       (0x40020800UL)
+#define DMAMUX1_CHANNEL1_BASE_ADDRESS       (0x40020804UL)
+#define DMAMUX1_CHANNEL2_BASE_ADDRESS       (0x40020808UL)
+#define DMAMUX1_CHANNEL3_BASE_ADDRESS       (0x4002080CUL)
+#define DMAMUX1_CHANNEL4_BASE_ADDRESS       (0x40020810UL)
+#define DMAMUX1_CHANNEL5_BASE_ADDRESS       (0x40020814UL)
+#define DMAMUX1_CHANNEL6_BASE_ADDRESS       (0x40020818UL)
+#define DMAMUX1_CHANNEL7_BASE_ADDRESS       (0x4002081CUL)
+#define DMAMUX1_CHANNEL8_BASE_ADDRESS       (0x40020820UL)
+#define DMAMUX1_CHANNEL9_BASE_ADDRESS       (0x40020824UL)
+#define DMAMUX1_CHANNEL10_BASE_ADDRESS      (0x40020828UL)
+#define DMAMUX1_CHANNEL11_BASE_ADDRESS      (0x4002082CUL)
+#define DMAMUX1_CHANNEL12_BASE_ADDRESS      (0x40020830UL)
+#define DMAMUX1_CHANNEL13_BASE_ADDRESS      (0x40020834UL)
+#define DMAMUX1_CHANNEL14_BASE_ADDRESS      (0x40020838UL)
+#define DMAMUX1_CHANNEL15_BASE_ADDRESS      (0x4002083CUL)
+#define DMAMUX1_REQUESTGEN0_BASE_ADDRESS    (0x40020900UL)
+#define DMAMUX1_REQUESTGEN1_BASE_ADDRESS    (0x40020904UL)
+#define DMAMUX1_REQUESTGEN2_BASE_ADDRESS    (0x40020908UL)
+#define DMAMUX1_REQUESTGEN3_BASE_ADDRESS    (0x4002090CUL)
+
+#define DMAMUX1_CHANNELSTATUS_ADDRESS       (0x40020880UL)
+#define DMAMUX1_REQUESTGENSTATUS_ADDRESS    (0x40020940UL)
+
+#elif defined (STM32F303)   /* STM32F303 specific peripherals base addresses */
+
+#define DAC1_BASE_ADDRESS                   (0x40007400UL)
+#define COMP1_BASE_ADDRESS                  (0x4001001CUL)
+#define COMP2_BASE_ADDRESS                  (0x40010020UL)
+#define COMP3_BASE_ADDRESS                  (0x40010024UL)
+#define COMP4_BASE_ADDRESS                  (0x40010028UL)
+#define COMP5_BASE_ADDRESS                  (0x4001002CUL)
+#define COMP6_BASE_ADDRESS                  (0x40010030UL)
+#define COMP7_BASE_ADDRESS                  (0x40010034UL)
+#define OPAMP1_BASE_ADDRESS                 (0x40010038UL)
+#define OPAMP2_BASE_ADDRESS                 (0x4001003CUL)
+#define OPAMP3_BASE_ADDRESS                 (0x40010040UL)
+#define OPAMP4_BASE_ADDRESS                 (0x40010044UL)
+
+#endif  /* STM32G473 */
+
+
+
+/*==================================================================================
+|                        PERIPHERALS POINTERS DECLARATIONS                                
+===================================================================================*/
+
+#define TIM2                       ((TIM_HW *) TIM2_BASE_ADDRESS)
+#define TIM3                       ((TIM_HW *) TIM3_BASE_ADDRESS)
+#define TIM4                       ((TIM_HW *) TIM4_BASE_ADDRESS)
+#define TIM5                       ((TIM_HW *) TIM5_BASE_ADDRESS)
+#define TIM6                       ((TIM_HW *) TIM6_BASE_ADDRESS)
+#define TIM7                       ((TIM_HW *) TIM7_BASE_ADDRESS)
+#define CRS                        ((CRS_HW *) CRS_BASE_ADDRESS)
+#define TAMP                       ((TAMP_HW *) TAMP_BASE_ADDRESS)
+#define RTC                        ((RTC_HW *) RTC_BASE_ADDRESS)
+#define WWDG                       ((WWDG_HW *) WWDG_BASE_ADDRESS)
+#define IWDG                       ((IWDG_HW *) IWDG_BASE_ADDRESS)
+#define SPI2                       ((SPI_HW *) SPI2_BASE_ADDRESS)
+#define SPI3                       ((SPI_HW *) SPI3_BASE_ADDRESS)
+#define USART2                     ((USART_HW *) USART2_BASE_ADDRESS)
+#define USART3                     ((USART_HW *) USART3_BASE_ADDRESS)
+#define UART4                      ((USART_HW *) UART4_BASE_ADDRESS)
+#define UART5                      ((USART_HW *) UART5_BASE_ADDRESS)
+#define I2C1                       ((I2C_HW *) I2C1_BASE_ADDRESS)
+#define I2C2                       ((I2C_HW *) I2C2_BASE_ADDRESS)
+#define FDCAN1                     ((FDCAN_HW *) FDCAN1_BASE_ADDRESS)
+#define FDCAN2                     ((FDCAN_HW *) FDCAN2_BASE_ADDRESS)
+#define FDCAN3                     ((FDCAN_HW *) FDCAN3_BASE_ADDRESS)
+#define PWR                        ((PWR_HW *) PWR_BASE_ADDRESS)
+#define I2C3                       ((I2C_HW *) I2C3_BASE_ADDRESS)
+#define LPTIM1                     ((LPTIM_HW *) LPTIM1_BASE_ADDRESS)
+#define LPUART1                    ((USART_HW *) LPUART1_BASE_ADDRESS)
+#define I2C4                       ((I2C_HW *) I2C4_BASE_ADDRESS)
+       
+#define SYSCFG                     ((SYSCFG_HW *) SYSCFG_BASE_ADDRESS)
+#define VREFBUF                    ((VREFBUF_HW *) VREFBUF_BASE_ADDRESS)
+#define COMP1                      ((COMP_HW *) COMP1_BASE_ADDRESS)
+#define COMP2                      ((COMP_HW *) COMP2_BASE_ADDRESS)
+#define COMP3                      ((COMP_HW *) COMP3_BASE_ADDRESS)
+#define COMP4                      ((COMP_HW *) COMP4_BASE_ADDRESS)
+#define COMP5                      ((COMP_HW *) COMP5_BASE_ADDRESS)
+#define COMP6                      ((COMP_HW *) COMP6_BASE_ADDRESS)
+#define COMP7                      ((COMP_HW *) COMP7_BASE_ADDRESS)
+       
+#define OPAMP1                     ((OPAMP_HW *) OPAMP1_BASE_ADDRESS)
+#define OPAMP2                     ((OPAMP_HW *) OPAMP2_BASE_ADDRESS)
+#define OPAMP3                     ((OPAMP_HW *) OPAMP3_BASE_ADDRESS)
+#define OPAMP4                     ((OPAMP_HW *) OPAMP4_BASE_ADDRESS)
+#define OPAMP5                     ((OPAMP_HW *) OPAMP5_BASE_ADDRESS)
+#define OPAMP6                     ((OPAMP_HW *) OPAMP6_BASE_ADDRESS)
+       
+#define EXTI                       ((EXTI_HW *) EXTI_BASE_ADDRESS)
+#define TIM1                       ((TIM_HW *) TIM1_BASE_ADDRESS)
+#define SPI1                       ((SPI_HW *) SPI1_BASE_ADDRESS)
+#define TIM8                       ((TIM_HW *) TIM8_BASE_ADDRESS)
+#define USART1                     ((USART_HW *) USART1_BASE_ADDRESS)
+#define SPI4                       ((SPI_HW *) SPI4_BASE_ADDRESS)
+#define TIM15                      ((TIM_HW *) TIM15_BASE_ADDRESS)
+#define TIM16                      ((TIM_HW *) TIM16_BASE_ADDRESS)
+#define TIM17                      ((TIM_HW *) TIM17_BASE_ADDRESS)
+#define TIM20                      ((TIM_HW *) TIM20_BASE_ADDRESS)
+#define SAI1                       ((SAI_HW *) SAI1_BASE_ADDRESS)
+#define DMA1                       ((DMA_HW *) DMA1_BASE_ADDRESS)
+#define DMA2                       ((DMA_HW *) DMA2_BASE_ADDRESS)
+#define CORDIC                     ((CORDIC_HW *) CORDIC_BASE_ADDRESS)
+#define RCC                        ((RCC_HW *) RCC_BASE_ADDRESS)
+#define FMAC                       ((FMAC_HW *) FMAC_BASE_ADDRESS)
+#define FLASH                      ((FLASH_HW *) FLASH_REG_BASE_ADDRESS)
+#define CRC                        ((CRC_HW *) CRC_BASE_ADDRESS)
+       
+#define GPIOA                      ((GPIO_HW *) GPIOA_BASE_ADDRESS)
+#define GPIOB                      ((GPIO_HW *) GPIOB_BASE_ADDRESS)
+#define GPIOC                      ((GPIO_HW *) GPIOC_BASE_ADDRESS)
+#define GPIOD                      ((GPIO_HW *) GPIOD_BASE_ADDRESS)
+#define GPIOE                      ((GPIO_HW *) GPIOE_BASE_ADDRESS)
+#define GPIOF                      ((GPIO_HW *) GPIOF_BASE_ADDRESS)
+#define GPIOG                      ((GPIO_HW *) GPIOG_BASE_ADDRESS)
+#define ADC1                       ((ADC_HW *) ADC1_BASE_ADDRESS)
+#define ADC2                       ((ADC_HW *) ADC2_BASE_ADDRESS)
+#define ADC12_COMMON               ((ADC_Common_HW *) ADC12_COMMON_BASE)
+#define ADC3                       ((ADC_HW *) ADC3_BASE_ADDRESS)
+#define ADC4                       ((ADC_HW *) ADC4_BASE_ADDRESS)
+#define ADC5                       ((ADC_HW *) ADC5_BASE_ADDRESS)
+#define ADC345_COMMON              ((ADC_Common_HW *) ADC345_COMMON_BASE)
+#define DAC1                       ((DAC_HW *) DAC1_BASE_ADDRESS)
+#define DAC2                       ((DAC_HW *) DAC2_BASE_ADDRESS)
+#define DAC3                       ((DAC_HW *) DAC3_BASE_ADDRESS)
+#define DAC4                       ((DAC_HW *) DAC4_BASE_ADDRESS)
+#define RNG                        ((RNG_HW *) RNG_BASE_ADDRESS)
+       
+#define DMA1_CHANNEL1              ((DMA_CHANNEL_HW *) DMA1_CHANNEL1_ADDRESS)
+#define DMA1_CHANNEL2              ((DMA_CHANNEL_HW *) DMA1_CHANNEL2_ADDRESS)
+#define DMA1_CHANNEL3              ((DMA_CHANNEL_HW *) DMA1_CHANNEL3_ADDRESS)
+#define DMA1_CHANNEL4              ((DMA_CHANNEL_HW *) DMA1_CHANNEL4_ADDRESS)
+#define DMA1_CHANNEL5              ((DMA_CHANNEL_HW *) DMA1_CHANNEL5_ADDRESS)
+#define DMA1_CHANNEL6              ((DMA_CHANNEL_HW *) DMA1_CHANNEL6_ADDRESS)
+#define DMA1_CHANNEL7              ((DMA_CHANNEL_HW *) DMA1_CHANNEL7_ADDRESS)
+#define DMA1_CHANNEL8              ((DMA_CHANNEL_HW *) DMA1_CHANNEL8_ADDRESS)
+       
+#define DMA2_CHANNEL1              ((DMA_CHANNEL_HW *) DMA2_CHANNEL1_ADDRESS)
+#define DMA2_CHANNEL2              ((DMA_CHANNEL_HW *) DMA2_CHANNEL2_ADDRESS)
+#define DMA2_CHANNEL3              ((DMA_CHANNEL_HW *) DMA2_CHANNEL3_ADDRESS)
+#define DMA2_CHANNEL4              ((DMA_CHANNEL_HW *) DMA2_CHANNEL4_ADDRESS)
+#define DMA2_CHANNEL5              ((DMA_CHANNEL_HW *) DMA2_CHANNEL5_ADDRESS)
+#define DMA2_CHANNEL6              ((DMA_CHANNEL_HW *) DMA2_CHANNEL6_ADDRESS)
+#define DMA2_CHANNEL7              ((DMA_CHANNEL_HW *) DMA2_CHANNEL7_ADDRESS)
+#define DMA2_CHANNEL8              ((DMA_CHANNEL_HW *) DMA2_CHANNEL8_ADDRESS)
+       
+#define DMAMUX1_CHANNEL0           ((DMAMUX_CHANNEL_HW *) DMAMUX1_CHANNEL0_BASE_ADDRESS)
+#define DMAMUX1_CHANNEL1           ((DMAMUX_CHANNEL_HW *) DMAMUX1_CHANNEL1_BASE_ADDRESS)
+#define DMAMUX1_CHANNEL2           ((DMAMUX_CHANNEL_HW *) DMAMUX1_CHANNEL2_BASE_ADDRESS)
+#define DMAMUX1_CHANNEL3           ((DMAMUX_CHANNEL_HW *) DMAMUX1_CHANNEL3_BASE_ADDRESS)
+#define DMAMUX1_CHANNEL4           ((DMAMUX_CHANNEL_HW *) DMAMUX1_CHANNEL4_BASE_ADDRESS)
+#define DMAMUX1_CHANNEL5           ((DMAMUX_CHANNEL_HW *) DMAMUX1_CHANNEL5_BASE_ADDRESS)
+#define DMAMUX1_CHANNEL6           ((DMAMUX_CHANNEL_HW *) DMAMUX1_CHANNEL6_BASE_ADDRESS)
+#define DMAMUX1_CHANNEL7           ((DMAMUX_CHANNEL_HW *) DMAMUX1_CHANNEL7_BASE_ADDRESS)
+#define DMAMUX1_CHANNEL8           ((DMAMUX_CHANNEL_HW *) DMAMUX1_CHANNEL8_BASE_ADDRESS)
+#define DMAMUX1_CHANNEL9           ((DMAMUX_CHANNEL_HW *) DMAMUX1_CHANNEL9_BASE_ADDRESS)
+#define DMAMUX1_CHANNEL10          ((DMAMUX_CHANNEL_HW *) DMAMUX1_CHANNEL10_BASE_ADDRESS)
+#define DMAMUX1_CHANNEL11          ((DMAMUX_CHANNEL_HW *) DMAMUX1_CHANNEL11_BASE_ADDRESS)
+#define DMAMUX1_CHANNEL12          ((DMAMUX_CHANNEL_HW *) DMAMUX1_CHANNEL12_BASE_ADDRESS)
+#define DMAMUX1_CHANNEL13          ((DMAMUX_CHANNEL_HW *) DMAMUX1_CHANNEL13_BASE_ADDRESS)
+#define DMAMUX1_CHANNEL14          ((DMAMUX_CHANNEL_HW *) DMAMUX1_CHANNEL14_BASE_ADDRESS)
+#define DMAMUX1_CHANNEL15          ((DMAMUX_CHANNEL_HW *) DMAMUX1_CHANNEL15_BASE_ADDRESS)
+
+#define DMAMUX1_REQUESTGEN0        ((DMAMUX_REQUESTGEN_HW *) DMAMUX1_REQUESTGEN0_BASE_ADDRESS)
+#define DMAMUX1_REQUESTGEN1        ((DMAMUX_REQUESTGEN_HW *) DMAMUX1_REQUESTGEN1_BASE_ADDRESS)
+#define DMAMUX1_REQUESTGEN2        ((DMAMUX_REQUESTGEN_HW *) DMAMUX1_REQUESTGEN2_BASE_ADDRESS)
+#define DMAMUX1_REQUESTGEN3        ((DMAMUX_REQUESTGEN_HW *) DMAMUX1_REQUESTGEN3_BASE_ADDRESS)
+
+#define DMAMUX1_CHANNELSTATUS      ((DMAMUX_CHANNELSTATUS_HW *) DMAMUX1_CHANNELSTATUS_ADDRESS)
+#define DMAMUX1_REQUESTGENSTATUS   ((DMAMUX_REQUESTGENSTATUS_HW *) DMAMUX1_REQUESTGENSTATUS_ADDRESS)
+
+#define DBGMCU                     ((DBGMCU_HW *) DBGMCU_BASE_ADDRESS)
 
 
 #ifdef __cplusplus
@@ -5831,6 +5905,6 @@ typedef struct {
 
 #endif      /* _PERIPHERALS_DEFS_H_ */
 
-/************************************************************************************/
-/*                                   END OF FILE                                    */
-/************************************************************************************/
+/*==================================================================================
+|                                 END OF FILE                                
+===================================================================================*/
