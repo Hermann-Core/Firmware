@@ -5468,6 +5468,235 @@ typedef struct {
 } USART_HW;
 
 
+/*============================= USB FULL SPEED =====================================*/
+
+typedef struct {
+  
+  union {
+    __IOM u32 EP0R;
+    
+    struct {
+      __IOM u32 EA         : 4;
+      __IOM u32 STAT_TX    : 2;
+      __IOM u32 DTOG_TX    : 1;
+      __IOM u32 CTR_TX     : 1;
+      __IOM u32 EP_KIND    : 1;
+      __IOM u32 EP_TYPE    : 2;
+      __IOM u32 SETUP      : 1;
+      __IOM u32 STAT_RX    : 2;
+      __IOM u32 DTOG_RX    : 1;
+      __IOM u32 CTR_RX     : 1;
+            u32            : 16;
+    } EP0R_b;
+  } ;
+  
+  union {
+    __IOM u32 EP1R;
+    
+    struct {
+      __IOM u32 EA         : 4;
+      __IOM u32 STAT_TX    : 2;
+      __IOM u32 DTOG_TX    : 1;
+      __IOM u32 CTR_TX     : 1;
+      __IOM u32 EP_KIND    : 1;
+      __IOM u32 EP_TYPE    : 2;
+      __IOM u32 SETUP      : 1;
+      __IOM u32 STAT_RX    : 2;
+      __IOM u32 DTOG_RX    : 1;
+      __IOM u32 CTR_RX     : 1;
+            u32            : 16;
+    } EP1R_b;
+  } ;
+  
+  union {
+    __IOM u32 EP2R;
+    
+    struct {
+      __IOM u32 EA         : 4;
+      __IOM u32 STAT_TX    : 2;
+      __IOM u32 DTOG_TX    : 1;
+      __IOM u32 CTR_TX     : 1;
+      __IOM u32 EP_KIND    : 1;
+      __IOM u32 EP_TYPE    : 2;
+      __IOM u32 SETUP      : 1;
+      __IOM u32 STAT_RX    : 2;
+      __IOM u32 DTOG_RX    : 1;
+      __IOM u32 CTR_RX     : 1;
+            u32            : 16;
+    } EP2R_b;
+  } ;
+  
+  union {
+    __IOM u32 EP3R;
+    
+    struct {
+      __IOM u32 EA         : 4;
+      __IOM u32 STAT_TX    : 2;
+      __IOM u32 DTOG_TX    : 1;
+      __IOM u32 CTR_TX     : 1;
+      __IOM u32 EP_KIND    : 1;
+      __IOM u32 EP_TYPE    : 2;
+      __IOM u32 SETUP      : 1;
+      __IOM u32 STAT_RX    : 2;
+      __IOM u32 DTOG_RX    : 1;
+      __IOM u32 CTR_RX     : 1;
+            u32            : 16;
+    } EP3R_b;
+  } ;
+  
+  union {
+    __IOM u32 EP4R;
+    
+    struct {
+      __IOM u32 EA         : 4;
+      __IOM u32 STAT_TX    : 2;
+      __IOM u32 DTOG_TX    : 1;
+      __IOM u32 CTR_TX     : 1;
+      __IOM u32 EP_KIND    : 1;
+      __IOM u32 EP_TYPE    : 2;
+      __IOM u32 SETUP      : 1;
+      __IOM u32 STAT_RX    : 2;
+      __IOM u32 DTOG_RX    : 1;
+      __IOM u32 CTR_RX     : 1;
+            u32            : 16;
+    } EP4R_b;
+  } ;
+  
+  union {
+    __IOM u32 EP5R;
+    
+    struct {
+      __IOM u32 EA         : 4;
+      __IOM u32 STAT_TX    : 2;
+      __IOM u32 DTOG_TX    : 1;
+      __IOM u32 CTR_TX     : 1;
+      __IOM u32 EP_KIND    : 1;
+      __IOM u32 EP_TYPE    : 2;
+      __IOM u32 SETUP      : 1;
+      __IOM u32 STAT_RX    : 2;
+      __IOM u32 DTOG_RX    : 1;
+      __IOM u32 CTR_RX     : 1;
+            u32            : 16;
+    } EP5R_b;
+  } ;
+  
+  union {
+    __IOM u32 EP6R;
+    
+    struct {
+      __IOM u32 EA         : 4;
+      __IOM u32 STAT_TX    : 2;
+      __IOM u32 DTOG_TX    : 1;
+      __IOM u32 CTR_TX     : 1;
+      __IOM u32 EP_KIND    : 1;
+      __IOM u32 EP_TYPE    : 2;
+      __IOM u32 SETUP      : 1;
+      __IOM u32 STAT_RX    : 2;
+      __IOM u32 DTOG_RX    : 1;
+      __IOM u32 CTR_RX     : 1;
+            u32            : 16;
+    } EP6R_b;
+  } ;
+  
+  union {
+    __IOM u32 EP7R;
+    
+    struct {
+      __IOM u32 EA         : 4;
+      __IOM u32 STAT_TX    : 2;
+      __IOM u32 DTOG_TX    : 1;
+      __IOM u32 CTR_TX     : 1;
+      __IOM u32 EP_KIND    : 1;
+      __IOM u32 EP_TYPE    : 2;
+      __IOM u32 SETUP      : 1;
+      __IOM u32 STAT_RX    : 2;
+      __IOM u32 DTOG_RX    : 1;
+      __IOM u32 CTR_RX     : 1;
+            u32            : 16;
+    } EP7R_b;
+  } ;
+  __IM  u32  RESERVED[8];
+  
+  union {
+    __IOM u32 CNTR;
+    
+    struct {
+      __IOM u32 FRES       : 1;
+      __IOM u32 PDWN       : 1;
+      __IOM u32 LP_MODE    : 1;
+      __IOM u32 FSUSP      : 1;
+      __IOM u32 RESUME     : 1;
+      __IOM u32 L1RESUME   : 1;
+            u32            : 1;
+      __IOM u32 L1REQM     : 1;
+      __IOM u32 ESOFM      : 1;
+      __IOM u32 SOFM       : 1;
+      __IOM u32 RESETM     : 1;
+      __IOM u32 SUSPM      : 1;
+      __IOM u32 WKUPM      : 1;
+      __IOM u32 ERRM       : 1;
+      __IOM u32 PMAOVRM    : 1;
+      __IOM u32 CTRM       : 1;
+            u32            : 16;
+    } CNTR_b;
+  } ;
+  
+  union {
+    __IOM u32 ISTR;
+    
+    struct {
+      __IOM u32 EP_ID      : 4;
+      __IOM u32 DIR        : 1;
+            u32            : 2;
+      __IOM u32 L1REQ      : 1;
+      __IOM u32 ESOF       : 1;
+      __IOM u32 SOF        : 1;
+      __IOM u32 RESET      : 1;
+      __IOM u32 SUSP       : 1;
+      __IOM u32 WKUP       : 1;
+      __IOM u32 ERR        : 1;
+      __IOM u32 PMAOVR     : 1;
+      __IOM u32 CTR        : 1;
+            u32            : 16;
+    } ISTR_b;
+  } ;
+  
+  union {
+    __IM  u32 FNR;
+    
+    struct {
+      __IM  u32 FN         : 11;
+      __IM  u32 LSOF       : 2; 
+      __IM  u32 LCK        : 1; 
+      __IM  u32 RXDM       : 1; 
+      __IM  u32 RXDP       : 1; 
+            u32            : 16;
+    } FNR_b;
+  } ;
+  
+  union {
+    __IOM u32 DADDR;
+    
+    struct {
+      __IOM u32 ADD        : 7;
+      __IOM u32 EF         : 1;
+            u32            : 24;
+    } DADDR_b;
+  } ;
+  
+  union {
+    __IOM u32 BTABLE;
+    
+    struct {
+            u32            : 3;
+      __IOM u32 BTABLE     : 13;
+            u32            : 16;
+    } BTABLE_b;
+  } ;
+
+} USB_HW;
+
+
 /*============================ WINDOW WATCHDDOG ====================================*/
 
 typedef struct {                     
@@ -5613,6 +5842,7 @@ typedef struct {
 /*==================================================================================
 |                           PERIPHERALS BASE ADRRESSES                                
 ===================================================================================*/
+
 #define ADC1_BASE_ADDRESS                   (0x50000000UL)
 #define ADC2_BASE_ADDRESS                   (0x50000100UL)
 #define ADC3_BASE_ADDRESS                   (0x50000400UL)
@@ -5655,6 +5885,7 @@ typedef struct {
 #define SYSCFG_BASE_ADDRESS                 (0x40010000UL)
 #define USART1_BASE_ADDRESS                 (0x40013800UL)
 
+#define USB_BASE_ADDRESS                    (0x40005C00UL)
 #define PWR_BASE_ADDRESS                    (0x40007000UL)
 #define RTC_BASE_ADDRESS                    (0x40002800UL)
 #define TIM2_BASE_ADDRESS                   (0x40000000UL)
@@ -5795,6 +6026,7 @@ typedef struct {
 #define LPTIM1                     ((LPTIM_HW *) LPTIM1_BASE_ADDRESS)
 #define LPUART1                    ((USART_HW *) LPUART1_BASE_ADDRESS)
 #define I2C4                       ((I2C_HW *) I2C4_BASE_ADDRESS)
+#define USB                        ((USB_HW *)USB_BASE_ADDRESS)
        
 #define SYSCFG                     ((SYSCFG_HW *) SYSCFG_BASE_ADDRESS)
 #define VREFBUF                    ((VREFBUF_HW *) VREFBUF_BASE_ADDRESS)

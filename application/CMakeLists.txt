@@ -2,7 +2,7 @@
 # -------------------------------------------------------------------- #
 # | Author : Awatsa Hermann          |     Version : 1.0             | #
 # -------------------------------------------------------------------- #
-# | Date : 07.02.2023                |     File : CmakeLists.txt    s | #
+# | Date : 07.02.2023                |     File : CmakeLists.txt    s| #
 # ---------------------------------------------------------------------#
 # | Brief : Main app CmakeLists.txt file                             | #
 # -------------------------------------------------------------------- #
@@ -32,7 +32,7 @@ if(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{TI_TOOLCHAIN_PATH}")
         ${LINKER_FILE}
         -Wl,--map_file=${MAIN_EXECUTABLE}.map, -v
     )
-    
+
 elseif(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{GNU_TOOLCHAIN_PATH}")
 
     if(DEVICE_DEFINE STREQUAL STM32F303)

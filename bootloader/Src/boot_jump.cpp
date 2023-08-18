@@ -30,16 +30,16 @@
 /*==================================================================================
 |                                  DEFINES                                
 ===================================================================================*/
-#define SRAM_BASE          0x20000000
+constexpr u32 SRAM_BASE = 0x20000000;
 
 #define UNUSED             __attribute__((unused))
 #define NAKED              __attribute__((naked, noreturn))
 #define NO_RETURN          __attribute__((noreturn))
 
 #if defined (STM32F303)
-#define MAX_IRQ_NUMBERS    81
+constexpr u8 MAX_IRQ_NUMBERS = 81;
 #elif defined (STM32G473)
-#define MAX_IRQ_NUMBERS    101
+constexpr u8 MAX_IRQ_NUMBERS = 101;
 #endif
 
 

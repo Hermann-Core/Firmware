@@ -1,8 +1,8 @@
 /*************************************************************************************
- * @file      STM32G473_app  .cmd
- * @date      March, 26 2023
- * @author    AWATSA HERMANN
- * @brief     STM32G473 application linker command file
+ * @file   STM32G473_app.cmd
+ * @date   March, 26 2023
+ * @author Awatsa Hermann
+ * @brief  STM32G473 application linker command file
  * 
  * ***********************************************************************************
  * @attention

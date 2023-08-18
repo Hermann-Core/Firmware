@@ -32,7 +32,7 @@
 ===================================================================================*/
 
 /**
- * @brief core hardware functions interface
+ * @class core hardware functions interface
  */
 class hw_core
 {

@@ -1,11 +1,10 @@
 /************************************************************************************* 
  * @file 	 hardware_core.c
  * @date   March, 12 2023
- * @author AWATSA HERMANN
+ * @author Awatsa Hermann
  * @brief	 Hardware core source file
  * 
- *         Contains the definitions of
- *         the core hardware functions
+ *         Contains the definitions of the core hardware functions
  * ***********************************************************************************
  * @attention
  * 
@@ -28,13 +27,13 @@
 /**
  * @brief Enable an interrupt
  * 
- * @param IRQn interrupt number
+ * @param [in] IRQn : interrupt number
  */
 void hw_core::irq_enable(IRQn_t IRQn)
 {
     if (!__NVIC_GetEnableIRQ(IRQn))
     {
-      NVIC_EnableIRQ(IRQn);
+      __NVIC_EnableIRQ(IRQn);
     }
 }
 
@@ -42,24 +41,24 @@ void hw_core::irq_enable(IRQn_t IRQn)
 /**
  * @brief Disable an interrupt
  * 
- * @param IRQn interrupt number
+ * @param [in] IRQn : interrupt number
  */
 void hw_core::irq_disable(IRQn_t IRQn)
 {
     while (__NVIC_GetActive(IRQn))
     {
-      /* wait till the interrupt quit active state */
+      /* wait till the interrupt release the active state */
     }
     
-    NVIC_DisableIRQ(IRQn);
+    __NVIC_DisableIRQ(IRQn);
 }
 
 
 /**
  * @brief Set an interrupt priority
  * 
- * @param IRQn interrupt number
- * @param u8Priority interrupt priority
+ * @param [in] IRQn : interrupt number
+ * @param [in] u8Priority : interrupt priority
  */
 void hw_core::irq_setPriority(IRQn_t IRQn, u8 priority)
 {
@@ -70,13 +69,13 @@ void hw_core::irq_setPriority(IRQn_t IRQn, u8 priority)
 /**
  * @brief Clear a pending interrupt
  * 
- * @param IRQn interrupt number
+ * @param [in] IRQn : interrupt number
  */
 void hw_core::irq_clearPending(IRQn_t IRQn)
 {
     if (__NVIC_GetPendingIRQ(IRQn))
     {
-      NVIC_ClearPendingIRQ(IRQn);
+      __NVIC_ClearPendingIRQ(IRQn);
     }
 }
 

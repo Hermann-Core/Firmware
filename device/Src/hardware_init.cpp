@@ -1,7 +1,7 @@
 /************************************************************************************* 
  * @file   hardware_init.c
  * @date   March, 31 2023
- * @author AWATSA HERMANN
+ * @author Awatsa Hermann
  * @brief  Hardware initialization source file
  * 
  *         This file Contains the definitions of all the functions
@@ -30,18 +30,18 @@
 #define FORCE_INLINE    __attribute__((always_inline))
 
 #if defined (STM32F303)
-#define FLASH_LATENCY   2
+constexpr uint8_t FLASH_LATENCY = 2 ;
+constexpr uint8_t PLL_SRC       = 2 ;
+constexpr uint8_t PLL_MUL_7     = 7 ;
 #elif defined (STM32G473)
-#define FLASH_LATENCY   4
+constexpr uint8_t FLASH_LATENCY = 4;
+constexpr uint8_t HSE_SRC       = 3 ;
+constexpr uint8_t PLLM_6        = 5 ;
+constexpr uint8_t PLLN_85       = 85;
 #endif
 
-#define SET             1
-#define CLEAR           0
-#define PLL_SRC         2
-#define PLL_MUL_7       7
-#define HSE_SRC         3
-#define PLLM_6          5
-#define PLLN_85         85
+constexpr uint8_t SET           = 1 ;
+constexpr uint8_t CLEAR         = 0 ;
 
 
 

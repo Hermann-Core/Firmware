@@ -1,8 +1,8 @@
 /*************************************************************************************
- * @file      STM32G473_boot.cmd
- * @date      April, 09 2023
- * @author    AWATSA HERMANN
- * @brief     STM32G473 bootloader linker command file
+ * @file   STM32G473_boot.cmd
+ * @date   April, 09 2023
+ * @author Awatsa Hermann
+ * @brief  STM32G473 bootloader linker command file
  * 
  * ***********************************************************************************
  * @attention

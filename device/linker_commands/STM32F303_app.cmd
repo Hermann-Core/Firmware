@@ -1,8 +1,8 @@
 /*************************************************************************************
- * @file 	    STM32F303_app.cmd
- * @date      March, 26 2023
- * @author    AWATSA HERMANN
- * @brief	    STM32F303 linker command file
+ * @file 	 STM32F303_app.cmd
+ * @date   March, 26 2023
+ * @author Awatsa Hermann
+ * @brief	 STM32F303 linker command file
  * 
  * ***********************************************************************************
  * @attention

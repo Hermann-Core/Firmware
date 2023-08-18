@@ -1,7 +1,7 @@
 /************************************************************************************* 
  * @file 	 peripherals_irqs.c
  * @date   05, March 2023
- * @author AWATSA HERMANN
+ * @author Awatsa Hermann
  * @brief	 Peripherals interrupts source file
  * 
  *         Contains the definitions of the MCU

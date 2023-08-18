@@ -1,8 +1,8 @@
 /*************************************************************************************
- * @file 	    STM32F303_boot.cmd
- * @date      April, 09 2023
- * @author    AWATSA HERMANN
- * @brief	    STM32F303 bootloader linker command file
+ * @file 	 STM32F303_boot.cmd
+ * @date   April, 09 2023
+ * @author Awatsa Hermann
+ * @brief	 STM32F303 bootloader linker command file
  * 
  * ***********************************************************************************
  * @attention

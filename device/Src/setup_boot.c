@@ -211,16 +211,16 @@ void COMP7_IRQHandler(void) WEAK_ALIAS;
  */
 NO_RETURN void Default_Handler(void)
 {
-  while(1);     /* infinite loop */
+  	while(1);     /* infinite loop */
 }
 
 
 /**
  * @brief Copy a block of memory to another block
  * 
- * @param dest   the destination memory
- * @param source the source memory
- * @param size   the size of the copy
+ * @param [in] dest   the destination memory
+ * @param [in] source the source memory
+ * @param [in] size   the size of the copy
  */
 STATIC_INLINE void memcopy(u8 *dest, const u8 *source, u32 size)
 {
@@ -234,10 +234,10 @@ STATIC_INLINE void memcopy(u8 *dest, const u8 *source, u32 size)
  */
 STATIC_INLINE void __hardware_init(void)
 {
-  __disable_irq();   	/* Prevents unexpected interrupts during startup */
+	__disable_irq();   	/* Prevent unexpected interrupts during startup */
 
-  FPU_Init();			/* Initialize the Floating point coprocessor */
-  SystemClock_Init();	/* Initialize the system clock */
+	FPU_Init();			/* Initialize the Floating point coprocessor */
+	SystemClock_Init();	/* Initialize the system clock */
 }
 
 
@@ -246,34 +246,34 @@ STATIC_INLINE void __hardware_init(void)
  */
 STATIC_INLINE void __call_constructors(void)
 {
-  if (CONSTRUCTOR_BASE != CONSTRUCTOR_LIMIT)
-  {
-	u16 i = 0;
+	if (CONSTRUCTOR_BASE != CONSTRUCTOR_LIMIT)
+	{
+		u16 i = 0;
 
-	while (&(CONSTRUCTOR_BASE[i]) != CONSTRUCTOR_LIMIT)
-		/* Call the C++ static constructors */
-		CONSTRUCTOR_BASE[i++]();
-  }
+		while (&(CONSTRUCTOR_BASE[i]) != CONSTRUCTOR_LIMIT)
+			/* Call the C++ static constructors */
+			CONSTRUCTOR_BASE[i++]();
+	}
 }
 
 
 /**
- * @brief Perfom the copies of all enties inside
+ * @brief Perfom the copy of all entries inside
  * 		  the linker generated copy table
  * 
- * @param copy the address of the generated copy table
+ * @param [in] copy the address of the generated copy table
  */
 STATIC_INLINE void __copy_table(CopyTable_t const *copy)
 {
-  for (u16 i = 0; i < copy->numRecs; i++)
-  {
-    CopyRecord_t cpyRec = copy->recs[i];
-    u8 *loadAddr = (u8*)cpyRec.loadAddress;
-    u8 *runAdrr  = (u8*)cpyRec.runAddress;
+	for (u16 i = 0; i < copy->numRecs; i++)
+	{
+		CopyRecord_t cpyRec   = copy->recs[i];
+		const u8*    loadAddr = (u8*)cpyRec.loadAddress;
+		u8*          runAdrr  = (u8*)cpyRec.runAddress;
 
-    if (cpyRec.size)
-      memcopy(runAdrr, loadAddr, cpyRec.size);
-  }
+		if (cpyRec.size)
+			memcopy(runAdrr, loadAddr, cpyRec.size);
+	}
 }
 
 
@@ -282,13 +282,13 @@ STATIC_INLINE void __copy_table(CopyTable_t const *copy)
  */
 STATIC_INLINE void __zero_init(void)
 {
-  if (__sbss != __ebss)
-  {
-    u8 *idx   = (u8*)&__sbss;
-    u32 count = (u32)&__ebss - (u32)&__sbss;
+	if (__sbss != __ebss)
+	{
+		u8* idx   = (u8*)&__sbss;
+		u32 count = (u32)(&__ebss - &__sbss);
 
-    while (count--) *idx++ = 0;
-  } 
+		while (count--) *idx++ = 0;
+	} 
 }
 
 
@@ -297,18 +297,18 @@ STATIC_INLINE void __zero_init(void)
  */
 NO_RETURN void __program_start(void)
 {
-  /* Setting up the C/C++ environment */
-  if (__binit__ != (CopyTable_t*)-1)
-    __copy_table((CopyTable_t const*)__binit__);
-  
-  __zero_init();
-  __call_constructors();
+	/* Setting up the C/C++ environment */
+	if (__binit__ != (CopyTable_t*)-1)
+		__copy_table((CopyTable_t const*)__binit__);
+	
+	__zero_init();
+	__call_constructors();
 
-  __enable_irq();   /* Reactivated global interrupts */
+	__enable_irq();   /* Reenabled the global interrupts */
 
-  main();           /* Call the main function */
+	main();           /* Call the main function */
 
-  while(1);         /* Will normally never be reached */
+	while(1);         /* Will normally never be reached */
 }
 
 
@@ -317,10 +317,10 @@ NO_RETURN void __program_start(void)
  */
 NO_RETURN void __setup_boot(void)
 {
-  __set_MSP((u32)&__STACK_END);	/* Set the stack pointer */
-  
-  __hardware_init();  			/* Initialize the hardware */
-  __program_start();  			/* Run the C/C++ environment */
+	__set_MSP((u32)&__STACK_END);	/* Set the stack pointer */
+	
+	__hardware_init();  			/* Initialize the hardware */
+	__program_start();  			/* Run the C/C++ environment */
 }
 
 
