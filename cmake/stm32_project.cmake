@@ -43,7 +43,7 @@ endif()
 target_compile_features(
     ${TARGET_NAME} PUBLIC 
     c_std_17
-    cxx_std_14
+    cxx_std_17
 )
 
 target_link_libraries(
