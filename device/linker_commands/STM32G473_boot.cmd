@@ -71,26 +71,25 @@ SECTIONS
       *(.text)
       . = align(4);     /* 4 bytes aligned the end of the .text section */
     }
-
-    .rodata : palign(4)
-    {
-      . = align(4);
-      *(.rodata)        /* The read only datas section */
-      . = align(4);
-    }
-
-    .switch :
-    {
-      . = align(4);
-      *(.switch)        /* Section containing some switch statements */
-      . = align(4);
-    }
-
-    /* C++ global constructors section. SHT$$INIT_ARRAY$$Base and SHT$$INIT_ARRAY$$Limit symbols */
-    .init_array : {}
-                START(__init_array_base),
-                END(__init_array_limit)
   }
+
+  .rodata : palign(4) {}
+            load = BOOT,
+            run  = RAM,
+            table(BINIT)
+
+  .switch : ALIGN(4) {}
+            load = BOOT,
+            run  = RAM,
+            table(BINIT)
+
+  /* C++ global constructors section. define SHT$$INIT_ARRAY$$Base and SHT$$INIT_ARRAY$$Limit symbols */
+  .init_array : ALIGN(4) {}
+              load = BOOT,
+              run  = RAM,
+              START(__init_array_base),
+              END(__init_array_limit),
+              table(BINIT)
 
   /* Initialized global and static variables section */
   .data : ALIGN(4) {}

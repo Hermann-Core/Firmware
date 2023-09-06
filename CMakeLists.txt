@@ -17,7 +17,7 @@ include(cmake/stm32_project.cmake)
 set(COMMON_SOURCES
     # ${CMAKE_SOURCE_DIR}/device/Src/startup_stm32f303vctx.s
     ${CMAKE_SOURCE_DIR}/device/Src/hardware_core.cpp
-    ${CMAKE_SOURCE_DIR}/device/Src/peripherals_irqs.c
+    ${CMAKE_SOURCE_DIR}/device/Src/peripherals_irqs.cpp
     ${CMAKE_SOURCE_DIR}/RTT/Src/SEGGER_RTT_ASM_ARMv7M.S
     ${CMAKE_SOURCE_DIR}/RTT/Src/SEGGER_RTT.c
     ${CMAKE_SOURCE_DIR}/RTT/Src/SEGGER_RTT_printf.c

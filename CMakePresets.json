@@ -49,9 +49,9 @@
         "description": "Set debug build type",
         "cacheVariables": {
           "CMAKE_BUILD_TYPE": "Debug",
-          "CMAKE_C_FLAGS_DEBUG": "-g -g3 -O0 -ggdb",
-          "CMAKE_ASM_FLAGS_DEBUG": "-g -g3 -O0 -ggdb",
-          "CMAKE_CXX_FLAGS_DEBUG": "-g -g3 -O0 -ggdb"
+          "CMAKE_C_FLAGS_DEBUG": " -gdwarf-3 -g3 -O0 -ggdb",
+          "CMAKE_ASM_FLAGS_DEBUG": " -gdwarf-3 -g3 -O0 -ggdb",
+          "CMAKE_CXX_FLAGS_DEBUG": " -gdwarf-3 -g3 -O0 -ggdb"
         }
       },
       {

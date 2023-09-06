@@ -40,7 +40,7 @@
   */
 NORETURN_CCMRAM void NMI_Handler(void)
 {
-  while (1);
+  while (true);
 }
 
 /**
@@ -48,7 +48,7 @@ NORETURN_CCMRAM void NMI_Handler(void)
   */
 NORETURN_CCMRAM void HardFault_Handler(void)
 {
-  while (1);
+  while (true);
 }
 
 /**
@@ -56,7 +56,7 @@ NORETURN_CCMRAM void HardFault_Handler(void)
   */
 NORETURN_CCMRAM void MemManage_Handler(void)
 {
-  while (1);
+  while (true);
 }
 
 /**
@@ -64,7 +64,7 @@ NORETURN_CCMRAM void MemManage_Handler(void)
   */
 NORETURN_CCMRAM void BusFault_Handler(void)
 {
-  while (1);
+  while (true);
 }
 
 /**
@@ -72,7 +72,7 @@ NORETURN_CCMRAM void BusFault_Handler(void)
   */
 NORETURN_CCMRAM void UsageFault_Handler(void)
 {
-  while (1);
+  while (true);
 }
 
 /**
@@ -80,7 +80,7 @@ NORETURN_CCMRAM void UsageFault_Handler(void)
   */
 NORETURN_CCMRAM void SVC_Handler(void)
 {
-  while (1);
+  while (true);
 }
 
 /**
@@ -88,7 +88,7 @@ NORETURN_CCMRAM void SVC_Handler(void)
   */
 NORETURN_CCMRAM void DebugMon_Handler(void)
 {
-  while (1);
+  while (true);
 }
 
 /**
@@ -96,7 +96,7 @@ NORETURN_CCMRAM void DebugMon_Handler(void)
   */
 NORETURN_CCMRAM void PendSV_Handler(void)
 {
-  while (1);
+  while (true);
 }
 
 /**
