@@ -32,9 +32,9 @@
 ===================================================================================*/
 constexpr u32 SRAM_BASE = 0x20000000;
 
-#define UNUSED             __attribute__((unused))
-#define NAKED              __attribute__((naked, noreturn))
-#define NO_RETURN          __attribute__((noreturn))
+#define unused             __attribute__((unused))
+#define naked              __attribute__((naked, noreturn))
+#define no_return          __attribute__((noreturn))
 
 #if defined (STM32F303)
 constexpr u8 MAX_IRQ_NUMBERS = 81;
@@ -53,7 +53,7 @@ constexpr u8 MAX_IRQ_NUMBERS = 101;
  * 
  * \param appAddress the starting address of the application
  */
-NO_RETURN void boot_jump::jumpToApp(const u32 *appVector)
+no_return void boot_jump::jumpToApp(const u32 *appVector)
 {
     /* Disable global and faults interrupts */
     hw_core::disable_all_irq();
@@ -90,7 +90,7 @@ NO_RETURN void boot_jump::jumpToApp(const u32 *appVector)
  * \param SP the stack pointer
  * \param PC the program counter
  */
-NAKED void boot_jump::jumpASM(UNUSED u32 SP, UNUSED u32 PC)
+naked void boot_jump::jumpASM(unused u32 SP, unused u32 PC)
 {
   asm volatile("MSR  MSP,r0");
   asm volatile("BX   r1");

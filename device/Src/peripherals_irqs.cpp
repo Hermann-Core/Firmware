@@ -26,8 +26,8 @@
 /*==================================================================================
 |                                  DEFINES                                
 ===================================================================================*/
-#define NORETURN_CCMRAM      __attribute__((noreturn, section(".ccmram")))
-#define SECTION_CCMRAM       __attribute__((section(".ccmram")))
+#define noreturn_ccmram      __attribute__((noreturn, section(".ccmram")))
+#define section_ccmram       __attribute__((section(".ccmram")))
 
 
 
@@ -38,7 +38,7 @@
 /**
   * @brief This function handles the non maskable interrupts
   */
-NORETURN_CCMRAM void NMI_Handler(void)
+noreturn_ccmram void NMI_Handler(void)
 {
   while (true);
 }
@@ -46,7 +46,7 @@ NORETURN_CCMRAM void NMI_Handler(void)
 /**
   * @brief This function is used to handle the hardfault exception
   */
-NORETURN_CCMRAM void HardFault_Handler(void)
+noreturn_ccmram void HardFault_Handler(void)
 {
   while (true);
 }
@@ -54,7 +54,7 @@ NORETURN_CCMRAM void HardFault_Handler(void)
 /**
   * @brief This function is used to handle the memory manage exception
   */
-NORETURN_CCMRAM void MemManage_Handler(void)
+noreturn_ccmram void MemManage_Handler(void)
 {
   while (true);
 }
@@ -62,7 +62,7 @@ NORETURN_CCMRAM void MemManage_Handler(void)
 /**
   * @brief This function is used to handle the busfault exception
   */
-NORETURN_CCMRAM void BusFault_Handler(void)
+noreturn_ccmram void BusFault_Handler(void)
 {
   while (true);
 }
@@ -70,7 +70,7 @@ NORETURN_CCMRAM void BusFault_Handler(void)
 /**
   * @brief This function is used to handle the usage fault exception
   */
-NORETURN_CCMRAM void UsageFault_Handler(void)
+noreturn_ccmram void UsageFault_Handler(void)
 {
   while (true);
 }
@@ -78,7 +78,7 @@ NORETURN_CCMRAM void UsageFault_Handler(void)
 /**
   * @brief This function is used to handle the supervisor call exception
   */
-NORETURN_CCMRAM void SVC_Handler(void)
+noreturn_ccmram void SVC_Handler(void)
 {
   while (true);
 }
@@ -86,7 +86,7 @@ NORETURN_CCMRAM void SVC_Handler(void)
 /**
   * @brief This function is used to handle the debug monitor exception
   */
-NORETURN_CCMRAM void DebugMon_Handler(void)
+noreturn_ccmram void DebugMon_Handler(void)
 {
   while (true);
 }
@@ -94,7 +94,7 @@ NORETURN_CCMRAM void DebugMon_Handler(void)
 /**
   * @brief This function is used to handle the Pending supervisor exception
   */
-NORETURN_CCMRAM void PendSV_Handler(void)
+noreturn_ccmram void PendSV_Handler(void)
 {
   while (true);
 }
@@ -102,7 +102,7 @@ NORETURN_CCMRAM void PendSV_Handler(void)
 /**
   * @brief This function handles the systick timer.
   */
-SECTION_CCMRAM void SysTick_Handler(void)
+section_ccmram void SysTick_Handler(void)
 {
   /* will be implement later */
 }
