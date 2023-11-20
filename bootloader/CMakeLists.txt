@@ -21,9 +21,9 @@ list(GET DEFINES 0 DEVICE_DEFINE)
 if(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{TI_TOOLCHAIN_PATH}")
 
     if(DEVICE_DEFINE STREQUAL STM32F303)
-        set(LINKER_FILE   ${CMAKE_SOURCE_DIR}/device/linker_commands/STM32F303_boot.cmd)
+        set(LINKER_FILE   ${CMAKE_SOURCE_DIR}/device/config/linker_commands/STM32F303_boot.cmd)
     elseif(DEVICE_DEFINE STREQUAL STM32G473)
-        set(LINKER_FILE   ${CMAKE_SOURCE_DIR}/device/linker_commands/STM32G473_boot.cmd)
+        set(LINKER_FILE   ${CMAKE_SOURCE_DIR}/device/config/linker_commands/STM32G473_boot.cmd)
     endif()
 
     target_link_options(
@@ -36,9 +36,9 @@ if(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{TI_TOOLCHAIN_PATH}")
 elseif(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{GNU_TOOLCHAIN_PATH}")
 
     if(DEVICE_DEFINE STREQUAL STM32F303)
-        set(LINKER_FILE   ${CMAKE_SOURCE_DIR}/device/linker_scripts/STM32F303_boot.ld)
+        set(LINKER_FILE   ${CMAKE_SOURCE_DIR}/device/config/linker_scripts/STM32F303_boot.ld)
     elseif(DEVICE_DEFINE STREQUAL STM32G473)
-        set(LINKER_FILE   ${CMAKE_SOURCE_DIR}/device/linker_scripts/STM32G473_boot.ld)
+        set(LINKER_FILE   ${CMAKE_SOURCE_DIR}/device/config/linker_scripts/STM32G473_boot.ld)
     endif()
 
     target_link_options(
@@ -54,17 +54,17 @@ endif()
 
 target_include_directories(
     ${BOOT_EXECUTABLE} PRIVATE
-    ${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}
-    ${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/Inc
+    "${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/core"
+    "${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/app"
 )
 
 target_sources(
     ${BOOT_EXECUTABLE} PRIVATE
-    ${COMMON_SOURCES}
-    ${CMAKE_SOURCE_DIR}/device/Src/setup_boot.c
-    ${CMAKE_SOURCE_DIR}/device/Src/hardware_init.cpp
-    ${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/Src/boot_jump.cpp
-    ${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/bootloader_main.cpp
-    ${CMAKE_SOURCE_DIR}/device/hardware_drivers/Src/crc.cpp
-    ${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/Src/flash_config.cpp
+    "${COMMON_SOURCES}"
+    "${CMAKE_SOURCE_DIR}/device/core/src/setup_boot.c"
+    "${CMAKE_SOURCE_DIR}/device/drivers/crc/crc.cpp"
+    "${CMAKE_SOURCE_DIR}/device/core/src/hardware_init.cpp"
+    "${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/app/boot_jump.cpp"
+    "${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/app/flash_config.cpp"
+    "${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/core/bootloader_main.cpp"
 )

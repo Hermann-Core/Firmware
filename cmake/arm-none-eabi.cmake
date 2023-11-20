@@ -23,6 +23,9 @@ if(TOOLCHAIN_DIRECTORIES_COUNT LESS 1)
     message(FATAL_ERROR "Could not find an ARM toolchain installation. Please install a toolchain.")
 else()
     list(GET TOOLCHAIN_DIRECTORIES 0 TOOLCHAIN_DIRECTORY)
+    if (TOOLCHAIN_DIRECTORIES_COUNT GREATER 1)
+        message(STATUS "Found multiple ARM toolchain installations. Using the default \"${TOOLCHAIN_DIRECTORY}\".")
+    endif()
 endif()
 
 # Set the suffix of executables if on Windows
