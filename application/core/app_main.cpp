@@ -46,7 +46,7 @@ int main (void)
 
     while (true)
     {
-        RTT_WriteString(0, "\n\nNous sommes dans l'application\n\n");
+        
     }
 }
 

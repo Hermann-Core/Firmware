@@ -1,9 +1,8 @@
 /************************************************************************************* 
- * @file   rcc.hpp
- * @date   Nov, 26 2023
+ * @file   hardware_init.c
+ * @date   Nov, 29 2023
  * @author Awatsa Hermann
- * @brief  clock interface header file
- * 
+ * @brief  assertion handler file
  * ***********************************************************************************
  * @attention
  * 
@@ -12,48 +11,45 @@
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.26.11   |    1      |  0         |
+ # 2023.30.11   |    1      |  0         |
 
 *************************************************************************************/
-
-#ifndef _RCC_H_
-#define _RCC_H_
-
 
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include "operators.hpp"
+#include "assert.h"
+#include "SEGGER_RTT.h"
+
 
 
 /*==================================================================================
-|                             CLASSES DECLARATIONS                                
+|                             FUNCTIONS DEFINITIONS                                
 ===================================================================================*/
 
-namespace driver
+/**
+ * \brief handle the assertion
+ * 
+ * \param [in] condition : condition to check
+ * \param [in] message : custom message to print at assertion failed
+ * \param [in] file : file name
+ * \param [in] line : line number
+ */
+void assert_handler(bool condition, const char* message,
+                    const char* file, int line)
 {
-    class rcc
+    if (!condition)
     {
-        public:
+        while (1)
+        {
+            RTT_printf(0, "ASSERTION FAILED in %s at line %d : ", file, line);
+            RTT_printf(0, "%s", message);
 
-            static void enableClock(const u32& periphID);
-            static void disableClock(const u32& periphID);
-            static void resetPeriph(const u32& periphID);
-            static u32  getClockFrequency(const u32& periphID);
-
-        private:
-        
-            static constexpr u32 PERIPH_ID_MAX = 143;
-#if defined (STM32F303)
-            static constexpr u32 SYSCLK = 72_mhz;
-#elif defined (STM32G473)
-            static constexpr u32 SYSCLK = 170_mhz;
-#endif
-    };
+            asm("bkpt");    /* we halted the cpu */
+        }
+    }
 }
 
-
-#endif      /* _RCC_H_ */
 
 /*==================================================================================
 |                                 END OF FILE                                

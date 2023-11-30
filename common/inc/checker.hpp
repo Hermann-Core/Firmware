@@ -24,6 +24,7 @@
 |                                 INCLUDES                                
 ===================================================================================*/
 #include "common_types.h"
+#include "assert.h"
 
 
 /*==================================================================================
@@ -34,17 +35,6 @@ template <typename T = u32>
 class checker
 {
     public:
-
-        /**
-         * @brief check if a value is within a specified range 
-         * 
-         * @param [in] value     : value
-         * @param [in] max_value : max accepted value
-         */
-        inline static void check_range(T value, T max_value)
-        {
-            static_assert(value <= max_value, "the value is out of range");
-        }
 
         /**
          * @brief check if an overrun occured and then roll the value to a specified value
@@ -59,28 +49,6 @@ class checker
             {
                 value = ovr_value;
             }
-        }
-
-        /**
-         * @brief check if a pointer is not null
-         * 
-         * @param [in] pointer : pointer of any data type
-         */
-        
-        inline static void check_pointer(const T* pointer)
-        {
-            static_assert(pointer != nullptr, "the pointer is a null pointer");
-        }
-
-        /**
-         * @brief check if a value is out of bound
-         * 
-         * @param [in] value : value
-         * @param [in] bound : bound value
-         */
-        inline static void check_out_of_bound(T value, T bound)
-        {
-            static_assert(value < bound, "the value is out of bound");
         }
 };
 

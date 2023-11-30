@@ -92,6 +92,9 @@
         "algorithm": "cpp",
         "chrono": "cpp",
         "any": "cpp",
-        "__memory": "cpp"
+        "__memory": "cpp",
+        "cassert": "cpp",
+        "__assert": "cpp",
+        "assert.h": "c"
     }
 }

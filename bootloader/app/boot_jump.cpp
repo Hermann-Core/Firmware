@@ -29,18 +29,9 @@
 /*==================================================================================
 |                                  DEFINES                                
 ===================================================================================*/
-constexpr u32 SRAM_BASE = 0x20000000;
-
 #define unused             __attribute__((unused))
 #define naked              __attribute__((naked, noreturn))
 #define no_return          __attribute__((noreturn))
-
-#if defined (STM32F303)
-constexpr u8 MAX_IRQ_NUMBERS = 81;
-#elif defined (STM32G473)
-constexpr u8 MAX_IRQ_NUMBERS = 101;
-#endif
-
 
 
 /*==================================================================================
@@ -54,6 +45,13 @@ constexpr u8 MAX_IRQ_NUMBERS = 101;
  */
 no_return void boot_jump::jumpToApp(const u32 *appVector)
 {
+    constexpr u32 SRAM_BASE = 0x20000000;
+#if defined (STM32F303)
+    constexpr u8 MAX_IRQ_NUMBERS = 81;
+#elif defined (STM32G473)
+    constexpr u8 MAX_IRQ_NUMBERS = 101;
+#endif
+
     /* Disable global and faults interrupts */
     hw_core::disable_all_irq();
     hw_core::disable_fault_irq();

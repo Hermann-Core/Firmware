@@ -23,6 +23,8 @@
 #include "bootloader_main.hpp"
 #include "features.h"
 #include "boot_jump.hpp"
+#include "drivers_const.hpp"
+#include "rcc.hpp"
 
 // Todo! Set bootloader version (major, minor, patch)
 
@@ -52,13 +54,13 @@ int main (void)
 {
     extern const u32 APP_ADDRESS;   /* Symbol defined in the linker script */
 
-    RTT_WriteString(0, "\n\nIci c'est le bootloader\n");
+    // boot_jump::jumpToApp(&APP_ADDRESS);
 
-    boot_jump::jumpToApp(&APP_ADDRESS);
+    u32 temp = driver::rcc::getClockFrequency(200);
 
     while (true)
     {
-        RTT_WriteString(0, "\n\nOn est entré dans la boucle\n");
+        
     }
 }
 

@@ -1,11 +1,11 @@
 /************************************************************************************* 
- * @file   rcc.cpp
- * @date   Nov, 27 2023
- * @author Awatsa Hermann
- * @brief  This file contains the interface used to handle the rcc
+ * \file   rcc.cpp
+ * \date   Nov, 27 2023
+ * \author Awatsa Hermann
+ * \brief  This file contains the interface used to handle the rcc
  * 
  * ***********************************************************************************
- * @attention
+ * \attention
  * 
  * The functions used in this file have been written mainly for the STM32F303
  * and STM32G473 MCUs. There is no guarantee of operation for other microcontrollers.
@@ -21,15 +21,11 @@
 |                                 INCLUDES                                
 ===================================================================================*/
 #include "rcc.hpp"
-#include "checker.hpp"
+#include "assert.h"
+
 #include "common.hpp"
 #include "drivers_const.hpp"
 #include "peripherals_defs.h"
-
-
-/*==================================================================================
-|                                  DEFINES                                
-===================================================================================*/
 
 
 
@@ -46,9 +42,9 @@
 namespace driver{
 
 /**
- * @brief enable the clock for the specified peripheral
+ * \brief enable the clock for the specified peripheral
  * 
- * @param [in] periphID : peripheral ID 
+ * \param [in] periphID : peripheral ID 
  */
 void rcc::enableClock(const u32& periphID)
 {
@@ -58,7 +54,7 @@ void rcc::enableClock(const u32& periphID)
     constexpr u32 AHB1_MAX = periphID::ADC34_ID;
 #endif
 
-    checker<u32>::check_range(periphID, PERIPH_ID_MAX);
+    assert(periphID <= AHB1_MAX, "the value is out of range");
 
     if (periphID <= AHB1_MAX)
     {
@@ -86,9 +82,9 @@ void rcc::enableClock(const u32& periphID)
 
 
 /**
- * @brief disable the clock for the specified peripheral
+ * \brief disable the clock for the specified peripheral
  * 
- * @param [in] periphID : peripheral ID 
+ * \param [in] periphID : peripheral ID 
  */
 void rcc::disableClock(const u32& periphID)
 {
@@ -98,7 +94,7 @@ void rcc::disableClock(const u32& periphID)
     constexpr u32 AHB1_MAX = periphID::ADC34_ID;
 #endif
 
-    checker<u32>::check_range(periphID, PERIPH_ID_MAX);
+    assert(periphID <= PERIPH_ID_MAX, "the value is out of range");
 
     if (periphID <= AHB1_MAX)
     {
@@ -126,9 +122,9 @@ void rcc::disableClock(const u32& periphID)
 
 
 /**
- * @brief reset the specified peripheral
+ * \brief reset the specified peripheral
  * 
- * @param [in] periphID : peripheral ID 
+ * \param [in] periphID : peripheral ID 
  */
 void rcc::resetPeriph(const u32& periphID)
 {
@@ -138,7 +134,7 @@ void rcc::resetPeriph(const u32& periphID)
     constexpr u32 AHB1_MAX = periphID::ADC34_ID;
 #endif
 
-    checker<u32>::check_range(periphID, PERIPH_ID_MAX);
+    assert(periphID <= PERIPH_ID_MAX, "the value is out of range");
 
     if (periphID <= AHB1_MAX)
     {
@@ -166,14 +162,14 @@ void rcc::resetPeriph(const u32& periphID)
 
 
 /**
- * @brief get the clock frequency of the specified peripheral
+ * \brief get the clock frequency of the specified peripheral
  * 
- * @param [in] periphID : peripheral ID 
- * @return the clock frequency of the peripheral
+ * \param [in] periphID : peripheral ID 
+ * \return the clock frequency of the peripheral
  */
 u32 rcc::getClockFrequency(const u32& periphID)
 {
-    checker<u32>::check_range(periphID, PERIPH_ID_MAX);
+    assert(periphID <= PERIPH_ID_MAX, "the value is out of range");
 
     return SYSCLK;
 }
