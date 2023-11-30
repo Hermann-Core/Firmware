@@ -21,6 +21,8 @@
 |                                 INCLUDES                                
 ===================================================================================*/
 #include "bootloader_main.hpp"
+#include "features.h"
+#include "boot_jump.hpp"
 
 // Todo! Set bootloader version (major, minor, patch)
 
@@ -33,7 +35,6 @@
 /*==================================================================================
 |                            VARIABLES DECLARATIONS                                
 ===================================================================================*/
-extern const u32 APP_ADDRESS;   /* Symbol defines in the linker script */
 
 
 
@@ -49,6 +50,8 @@ extern const u32 APP_ADDRESS;   /* Symbol defines in the linker script */
 
 int main (void)
 {
+    extern const u32 APP_ADDRESS;   /* Symbol defined in the linker script */
+
     RTT_WriteString(0, "\n\nIci c'est le bootloader\n");
 
     boot_jump::jumpToApp(&APP_ADDRESS);

@@ -1,6 +1,6 @@
 /*************************************************************************************
  * @file   STM32G473_boot.cmd
- * @date   April, 09 2023
+ * @date   Nov, 29 2023
  * @author Awatsa Hermann
  * @brief  STM32G473 bootloader linker command file
  * 
@@ -12,16 +12,16 @@
  *
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.04.09   |     1     |      1     |
+ # 2023.29.11   |     1     |      2     |
 
 *************************************************************************************/
 
 /* Macros definitions. Only support by the TI linker */
-#define CCMRAM_SIZE           0x8000
+#define CCMRAM_SIZE           0x8000        /* 32K */
 #define CCMRAM_ORIGIN         0x10000000
-#define BOOT_SIZE             0x8000
+#define BOOT_SIZE             0xA800        /* 42KB */
 #define BOOT_ORIGIN           0x08000000
-#define SRAM_SIZE             0x18000
+#define SRAM_SIZE             0x18000       /* 96KB*/
 #define SRAM_ORIGIN           0x20000000
 
 

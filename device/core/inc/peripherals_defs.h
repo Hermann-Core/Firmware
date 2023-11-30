@@ -3346,9 +3346,9 @@ typedef struct {
             u32            : 1;
     } APB1RSTR_b;
   } ;
-  
+
   union {
-    __IOM u32 AHBENR;           
+    __IOM u32 AHB1ENR;           
     
     struct {
       __IOM u32 DMAEN      : 1; 
@@ -3463,7 +3463,7 @@ typedef struct {
   } ;
   
   union {
-    __IOM u32 AHBRSTR;          
+    __IOM u32 AHB1RSTR;          
     
     struct {
             u32            : 5;

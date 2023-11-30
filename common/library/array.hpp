@@ -1,8 +1,8 @@
 /************************************************************************************* 
- * @file   bootloader_main.cpp
- * @date   june, 30 2023
+ * @file   array.hpp
+ * @date   Nov, 29 2023
  * @author Awatsa Hermann
- * @brief  main bootloader header file
+ * @brief  interface used to handle the static objects container.
  * 
  * ***********************************************************************************
  * @attention
@@ -12,23 +12,38 @@
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.06.30   |    1      |  0         |
+ # 2023.29.11   |    1      |  0         |
 
 *************************************************************************************/
+
+#ifndef _ARRAY_H_
+#define _ARRAY_H_
 
 
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-
+#include <cstddef>
+#include "common_types.h"
 
 
 /*==================================================================================
-|                            FUNCTIONS DECLARATIONS                                
+|                             CLASSES DECLARATIONS                                
 ===================================================================================*/
 
-int main(void);
+/**
+ * @class static object container class
+ */
+template <typename T, std::size_t _SIZE>
+class array
+{
+    public:
 
+    private:
+};
+
+
+#endif      /* _ARRAY_H_ */
 
 /*==================================================================================
 |                                 END OF FILE                                

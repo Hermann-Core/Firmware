@@ -1,8 +1,8 @@
 ########################################################################
 # -------------------------------------------------------------------- #
-# | Author : Awatsa Hermann          |     Version : 1.0             | #
+# | Author : Awatsa Hermann          |     Version : 1.0.1           | #
 # -------------------------------------------------------------------- #
-# | Date : 07.02.2023                |     File : CmakeLists.txt     | #
+# | Date : 11.26.2023                |     File : CmakeLists.txt     | #
 # ---------------------------------------------------------------------#
 # | Brief : Top level CmakeLists.txt file                            | #
 # -------------------------------------------------------------------- #
@@ -15,25 +15,28 @@ project("EBIKE" C CXX ASM)
 include(cmake/stm32_project.cmake)
 
 set(COMMON_SOURCES
-    # ${CMAKE_SOURCE_DIR}/device/Src/startup_stm32f303vctx.s
     "${CMAKE_SOURCE_DIR}/device/core/src/hardware_core.cpp"
     "${CMAKE_SOURCE_DIR}/device/core/src/peripherals_irqs.cpp"
     "${CMAKE_SOURCE_DIR}/RTT/src/SEGGER_RTT_ASM_ARMv7M.S"
     "${CMAKE_SOURCE_DIR}/RTT/src/SEGGER_RTT.c"
     "${CMAKE_SOURCE_DIR}/RTT/src/SEGGER_RTT_printf.c"
+    # "${CMAKE_SOURCE_DIR}/device/drivers/rcc/rcc.cpp"
     "${CMAKE_SOURCE_DIR}/device/drivers/flash/flash.cpp"
     "${CMAKE_SOURCE_DIR}/service/protocol.cpp"
 )
 
+# get the list of the include directories
+header_directories(header_dir_list)
+list(LENGTH header_dir_list header_dir_list_count)
+
+if(header_dir_list_count LESS 1)
+    message(FATAL_ERROR "Could not find include directories. Please check your project.")
+else()
+    message(STATUS "[INFO] Found ${header_dir_list_count} header directories.")
+endif()
+
 include_directories(
-    "service"
-    "RTT/inc"
-    "device/CMSIS"
-    "device/core/inc"
-    "common/inc"
-    "common/arm_dsp/inc"
-    "device/drivers/crc"
-    "device/drivers/flash"
+    ${header_dir_list}
 )
 
 link_directories(common/arm_dsp/lib)

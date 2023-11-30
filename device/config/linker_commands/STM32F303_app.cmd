@@ -1,6 +1,6 @@
 /*************************************************************************************
  * @file 	 STM32F303_app.cmd
- * @date   March, 26 2023
+ * @date   Nov, 29 2023
  * @author Awatsa Hermann
  * @brief	 STM32F303 linker command file
  * 
@@ -12,21 +12,21 @@
  *
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.03.26   |     1     |      0     |
+ # 2023.29.11   |     1     |      2     |
 
 *************************************************************************************/
 
 /* Macros definitions. Only support by the TI linker */
-#define CCMRAM_SIZE           0x2000
+#define CCMRAM_SIZE           0x2000      /* 8KB */
 #define CCMRAM_ORIGIN         0x10000000
-#define APP_SIZE              0x19000
-#define SLOT_SIZE             0x19000
+#define APP_SIZE              0x19000     /* 100KB */
+#define SLOT_SIZE             0x19000     /* 100KB */
 #define APP_ORIGIN            0x0800B000
 #define SLOT_ORIGIN           0x08025000
-#define SRAM_SIZE             0x9E78
+#define SRAM_SIZE             0x9E78      /* 39.6KB */
 #define SRAM_ORIGIN           0x20000188
 #define CRC_ORIGIN            0x0803E800
-#define CRC_SIZE              0x40
+#define CRC_SIZE              0x40        /* 64B */
 
 
 /* Linker options */

@@ -19,7 +19,6 @@
 |                                 INCLUDES                                
 ===================================================================================*/
 #include "peripherals_irqs.h"
-#include "peripherals_defs.h"
 
 
 

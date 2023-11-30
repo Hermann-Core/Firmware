@@ -1,8 +1,8 @@
 /************************************************************************************* 
  * @file   hardware_core.hpp
  * @date   March, 12 2023
- * @author AWATSA HERMANN
- * @brief  Core hardware header file
+ * @author Awatsa Hermann
+ * @brief  hardware core functions class
  * 
  *         Contains the declarations of
            the core hardware functions
@@ -32,7 +32,7 @@
 ===================================================================================*/
 
 /**
- * @class core hardware functions interface
+ * \class core hardware functions interface
  */
 class hw_core
 {

@@ -2,7 +2,7 @@
  * @file 	 hardware_core.c
  * @date   March, 12 2023
  * @author Awatsa Hermann
- * @brief	 Hardware core source file
+ * \brief	 Hardware core source file
  * 
  *         Contains the definitions of the core hardware functions
  * ***********************************************************************************
@@ -25,9 +25,9 @@
 ===================================================================================*/
 
 /**
- * @brief Enable an interrupt
+ * \brief Enable an interrupt
  * 
- * @param [in] IRQn : interrupt number
+ * \param [in] IRQn : interrupt number
  */
 void hw_core::irq_enable(IRQn_t IRQn)
 {
@@ -39,9 +39,9 @@ void hw_core::irq_enable(IRQn_t IRQn)
 
 
 /**
- * @brief Disable an interrupt
+ * \brief Disable an interrupt
  * 
- * @param [in] IRQn : interrupt number
+ * \param [in] IRQn : interrupt number
  */
 void hw_core::irq_disable(IRQn_t IRQn)
 {
@@ -55,10 +55,10 @@ void hw_core::irq_disable(IRQn_t IRQn)
 
 
 /**
- * @brief Set an interrupt priority
+ * \brief Set an interrupt priority
  * 
- * @param [in] IRQn : interrupt number
- * @param [in] u8Priority : interrupt priority
+ * \param [in] IRQn : interrupt number
+ * \param [in] u8Priority : interrupt priority
  */
 void hw_core::irq_setPriority(IRQn_t IRQn, u8 priority)
 {
@@ -67,9 +67,9 @@ void hw_core::irq_setPriority(IRQn_t IRQn, u8 priority)
 
 
 /**
- * @brief Clear a pending interrupt
+ * \brief Clear a pending interrupt
  * 
- * @param [in] IRQn : interrupt number
+ * \param [in] IRQn : interrupt number
  */
 void hw_core::irq_clearPending(IRQn_t IRQn)
 {
@@ -81,7 +81,7 @@ void hw_core::irq_clearPending(IRQn_t IRQn)
 
 
 /**
- * @brief disable all global interrupts
+ * \brief disable all global interrupts
  */
 void hw_core::disable_all_irq(void)
 {
@@ -90,7 +90,7 @@ void hw_core::disable_all_irq(void)
 
 
 /**
- * @brief disable the faults exceptions
+ * \brief disable the faults exceptions
  */
 void hw_core::disable_fault_irq(void)
 {
@@ -99,7 +99,7 @@ void hw_core::disable_fault_irq(void)
 
 
 /**
- * @brief Reset the system
+ * \brief Trigger a system reset
  */
 __attribute__((noreturn)) void hw_core::systemReset(void)
 {

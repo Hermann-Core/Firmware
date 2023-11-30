@@ -1,7 +1,7 @@
 /************************************************************************************* 
  * @file   peripherals_irqs.h
  * @date   05, March 2023
- * @author AWATSA HERMANN
+ * @author Awatsa Hermann
  * @brief  Peripherals interrupts header file
  * 
  *         Contains the declarations of the MCU

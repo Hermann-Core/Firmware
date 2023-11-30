@@ -1,8 +1,8 @@
 ########################################################################
 # -------------------------------------------------------------------- #
-# | Author : Awatsa Hermann          |     Version : 1.0             | #
+# | Author : Awatsa Hermann          |     Version : 1.0.1           | #
 # -------------------------------------------------------------------- #
-# | Date : 07.02.2023                |     File : CmakeLists.txt     | #
+# | Date : 11.26.2023                |     File : CmakeLists.txt     | #
 # ---------------------------------------------------------------------#
 # | Brief : Bootloader CmakeLists.txt file                           | #
 # -------------------------------------------------------------------- #
@@ -52,19 +52,14 @@ elseif(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{GNU_TOOLCHAIN_PATH}")
 
 endif()
 
-target_include_directories(
-    ${BOOT_EXECUTABLE} PRIVATE
-    "${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/core"
-    "${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/app"
-)
-
 target_sources(
     ${BOOT_EXECUTABLE} PRIVATE
     "${COMMON_SOURCES}"
     "${CMAKE_SOURCE_DIR}/device/core/src/setup_boot.c"
+    "${CMAKE_SOURCE_DIR}/device/core/src/hardware_init.c"
     "${CMAKE_SOURCE_DIR}/device/drivers/crc/crc.cpp"
-    "${CMAKE_SOURCE_DIR}/device/core/src/hardware_init.cpp"
     "${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/app/boot_jump.cpp"
     "${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/app/flash_config.cpp"
+    "${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/app/crc_compute.cpp"
     "${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/core/bootloader_main.cpp"
 )

@@ -1,13 +1,14 @@
 ########################################################################
 # -------------------------------------------------------------------- #
-# | Author : Awatsa Hermann          |     Version : 1.0             | #
+# | Author : Awatsa Hermann          |     Version : 1.0.1           | #
 # -------------------------------------------------------------------- #
-# | Date : 07.02.2023                |     File: stm32_project.cmake | #
+# | Date : 11.26.2023                |     File: stm32_project.cmake | #
 # ---------------------------------------------------------------------#
 # | This file is use to configure the common stm32 target options    | #
 # -------------------------------------------------------------------- #
 ########################################################################
 
+# function used to add properties to a target
 function(add_target_properties TARGET_NAME)
 
 target_compile_definitions(
@@ -74,3 +75,15 @@ add_custom_command(
 )
 
 endfunction()
+
+# macro used to get the include directories of the project
+macro(header_directories return_list)
+    file(GLOB_RECURSE new_list RELATIVE ${PROJECT_SOURCE_DIR} *.h *.hpp)
+    set(dir_list "")
+    foreach(file_path ${new_list})
+        get_filename_component(dir_path ${file_path} PATH)
+        set(dir_list ${dir_list} ${dir_path})
+    endforeach()
+    list(REMOVE_DUPLICATES dir_list)
+    set(${return_list} ${dir_list})
+endmacro()

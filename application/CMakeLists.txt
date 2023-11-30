@@ -1,8 +1,8 @@
 ########################################################################
 # -------------------------------------------------------------------- #
-# | Author : Awatsa Hermann          |     Version : 1.0             | #
+# | Author : Awatsa Hermann          |     Version : 1.0.1           | #
 # -------------------------------------------------------------------- #
-# | Date : 07.02.2023                |     File : CmakeLists.txt    s| #
+# | Date : 11.26.2023                |     File : CmakeLists.txt    s| #
 # ---------------------------------------------------------------------#
 # | Brief : Main app CmakeLists.txt file                             | #
 # -------------------------------------------------------------------- #
@@ -51,12 +51,6 @@ elseif(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{GNU_TOOLCHAIN_PATH}")
     )
 
 endif()
-
-target_include_directories(
-    ${MAIN_EXECUTABLE} PRIVATE
-    "${CMAKE_SOURCE_DIR}/${MAIN_EXECUTABLE}/app"
-    "${CMAKE_SOURCE_DIR}/${MAIN_EXECUTABLE}/core"
-)
 
 target_sources(
     ${MAIN_EXECUTABLE} PRIVATE

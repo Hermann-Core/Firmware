@@ -81,8 +81,8 @@ extern CONSTRUCTOR_t const CONSTRUCTOR_BASE[];
 extern CONSTRUCTOR_t const CONSTRUCTOR_LIMIT[];
 
 extern int  main(void);
-extern void FPU_Init(void);
-extern void SystemClock_Init(void);
+extern void FPUInit(void);
+extern void systemClockInit(void);
 
 extern void NMI_Handler(void);
 extern void HardFault_Handler(void);
@@ -236,8 +236,8 @@ STATIC_INLINE void __hardware_init(void)
 {
 	__disable_irq();   	/* Prevent unexpected interrupts during startup */
 
-	FPU_Init();			/* Initialize the Floating point coprocessor */
-	SystemClock_Init();	/* Initialize the system clock */
+	FPUInit();			/* Initialize the Floating point coprocessor */
+	systemClockInit();	/* Initialize the system clock */
 }
 
 

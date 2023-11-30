@@ -1,6 +1,6 @@
 /*************************************************************************************
  * @file   STM32G473_app.cmd
- * @date   March, 26 2023
+ * @date   Nov, 29 2023
  * @author Awatsa Hermann
  * @brief  STM32G473 application linker command file
  * 
@@ -12,21 +12,21 @@
  *
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.03.26   |     1     |      0     |
+ # 2023.29.11   |     1     |      1     |
 
 *************************************************************************************/
 
 /* Macros definitions. Only support by the TI linker */
-#define CCMRAM_SIZE           0x8000
+#define CCMRAM_SIZE           0x8000      /* 32KB */
 #define CCMRAM_ORIGIN         0x10000000
-#define APP_SIZE              0x32000
-#define SLOT_SIZE             0x32000
+#define APP_SIZE              0x32000     /* 200KB */
+#define SLOT_SIZE             0x32000     /* 200KB */
 #define APP_ORIGIN            0x0800D000
 #define SLOT_ORIGIN           0x08044000
-#define SRAM_SIZE             0x17E28
+#define SRAM_SIZE             0x17E28     /* 95.54KB */
 #define SRAM_ORIGIN           0x200001D8
-#define CRC_ORIGIN            0x08076800
-#define CRC_SIZE              0x40
+#define CRC_ORIGIN            0x0803F000
+#define CRC_SIZE              0x40        /* 64B */
 
 
 /* Linker options */
@@ -55,7 +55,7 @@ MEMORY
 __INITIAL_SP = 0x20000000 + 0x18000;
 
 /* Address of the reset region */
-RESET_BASE = 0x08077000;
+RESET_BASE = 0x0807B000;
 
 
 SECTIONS

@@ -1,7 +1,7 @@
 /************************************************************************************* 
  * @file   flash.hpp
  * @date   May, 03 2023
- * @author AWATSA HERMANN
+ * @author Awatsa Hermann
  * @brief  flash memory interface header file
  * 
  * ***********************************************************************************

@@ -23,7 +23,6 @@
 ===================================================================================*/
 #include "boot_jump.hpp"
 #include "hardware_core.hpp"
-#include "peripherals_defs.h"
 
 
 
