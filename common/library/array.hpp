@@ -1,6 +1,6 @@
 /************************************************************************************* 
  * @file   array.hpp
- * @date   Nov, 29 2023
+ * @date   Dec, 01 2023
  * @author Awatsa Hermann
  * @brief  interface used to handle the static objects container.
  * 
@@ -12,8 +12,11 @@
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.29.11   |    1      |  0         |
+ # 2023.01.12   |    1      |  0         |
 
+ * Smart Ebike Controller
+ * https://github.com/Hermann-Core/smart-ebike-controller
+ * 
 *************************************************************************************/
 
 #ifndef _ARRAY_H_
@@ -23,7 +26,6 @@
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include <cstddef>
 #include "common_types.h"
 
 
@@ -32,15 +34,31 @@
 ===================================================================================*/
 
 /**
+ * @defgroup library library
+ * @details This group includes several modules and classes providing shared functionality 
+ * 
+ */
+
+/**
  * @class static object container class
  */
-template <typename T, std::size_t _SIZE>
+template <typename T, size_t _size>
 class array
 {
     public:
 
+        using value_type        = T;
+        using size_type         = size_t;
+        using reference         = T&;
+        using const_reference   = const T&;
+        using pointer           = T*;
+        using const_pointer     = const T*;
+
     private:
+
+        value_type buffer_[_size];
 };
+
 
 
 #endif      /* _ARRAY_H_ */

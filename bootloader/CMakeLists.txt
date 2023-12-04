@@ -21,9 +21,9 @@ list(GET DEFINES 0 DEVICE_DEFINE)
 if(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{TI_TOOLCHAIN_PATH}")
 
     if(DEVICE_DEFINE STREQUAL STM32F303)
-        set(LINKER_FILE   ${CMAKE_SOURCE_DIR}/device/config/linker_commands/STM32F303_boot.cmd)
+        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_commands/STM32F303_boot.cmd)
     elseif(DEVICE_DEFINE STREQUAL STM32G473)
-        set(LINKER_FILE   ${CMAKE_SOURCE_DIR}/device/config/linker_commands/STM32G473_boot.cmd)
+        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_commands/STM32G473_boot.cmd)
     endif()
 
     target_link_options(
@@ -36,9 +36,9 @@ if(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{TI_TOOLCHAIN_PATH}")
 elseif(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{GNU_TOOLCHAIN_PATH}")
 
     if(DEVICE_DEFINE STREQUAL STM32F303)
-        set(LINKER_FILE   ${CMAKE_SOURCE_DIR}/device/config/linker_scripts/STM32F303_boot.ld)
+        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_scripts/STM32F303_boot.ld)
     elseif(DEVICE_DEFINE STREQUAL STM32G473)
-        set(LINKER_FILE   ${CMAKE_SOURCE_DIR}/device/config/linker_scripts/STM32G473_boot.ld)
+        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_scripts/STM32G473_boot.ld)
     endif()
 
     target_link_options(
@@ -55,11 +55,11 @@ endif()
 target_sources(
     ${BOOT_EXECUTABLE} PRIVATE
     "${COMMON_SOURCES}"
-    "${CMAKE_SOURCE_DIR}/device/core/src/setup_boot.c"
-    "${CMAKE_SOURCE_DIR}/device/core/src/hardware_init.c"
-    "${CMAKE_SOURCE_DIR}/device/drivers/crc/crc.cpp"
-    "${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/app/boot_jump.cpp"
-    "${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/app/flash_config.cpp"
-    "${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/app/crc_compute.cpp"
-    "${CMAKE_SOURCE_DIR}/${BOOT_EXECUTABLE}/core/bootloader_main.cpp"
+    "${PROJECT_SOURCE_DIR}/device/core/src/setup_boot.c"
+    "${PROJECT_SOURCE_DIR}/device/core/src/hardware_init.c"
+    "${PROJECT_SOURCE_DIR}/device/drivers/crc/crc.cpp"
+    "${PROJECT_SOURCE_DIR}/${BOOT_EXECUTABLE}/app/boot_jump.cpp"
+    "${PROJECT_SOURCE_DIR}/${BOOT_EXECUTABLE}/app/flash_config.cpp"
+    "${PROJECT_SOURCE_DIR}/${BOOT_EXECUTABLE}/app/crc_compute.cpp"
+    "${PROJECT_SOURCE_DIR}/${BOOT_EXECUTABLE}/core/main.cpp"
 )

@@ -15,15 +15,16 @@ project("EBIKE" C CXX ASM)
 include(cmake/stm32_project.cmake)
 
 set(COMMON_SOURCES
-    "${CMAKE_SOURCE_DIR}/device/core/src/hardware_core.cpp"
-    "${CMAKE_SOURCE_DIR}/device/core/src/peripherals_irqs.cpp"
-    "${CMAKE_SOURCE_DIR}/common/src/assert.c"
-    "${CMAKE_SOURCE_DIR}/logging/rtt/SEGGER_RTT_ASM_ARMv7M.S"
-    "${CMAKE_SOURCE_DIR}/logging/rtt/SEGGER_RTT.c"
-    "${CMAKE_SOURCE_DIR}/logging/rtt/SEGGER_RTT_printf.c"
-    "${CMAKE_SOURCE_DIR}/device/drivers/rcc/rcc.cpp"
-    "${CMAKE_SOURCE_DIR}/device/drivers/flash/flash.cpp"
-    "${CMAKE_SOURCE_DIR}/service/protocol.cpp"
+    "${PROJECT_SOURCE_DIR}/device/core/src/hardware_core.cpp"
+    "${PROJECT_SOURCE_DIR}/device/core/src/peripherals_irqs.cpp"
+    "${PROJECT_SOURCE_DIR}/common/src/assert.c"
+    "${PROJECT_SOURCE_DIR}/logging/swo/swo.c"
+    "${PROJECT_SOURCE_DIR}/logging/rtt/SEGGER_RTT_ASM_ARMv7M.S"
+    "${PROJECT_SOURCE_DIR}/logging/rtt/SEGGER_RTT.c"
+    "${PROJECT_SOURCE_DIR}/logging/rtt/SEGGER_RTT_printf.c"
+    "${PROJECT_SOURCE_DIR}/device/drivers/rcc/rcc.cpp"
+    "${PROJECT_SOURCE_DIR}/device/drivers/flash/flash.cpp"
+    "${PROJECT_SOURCE_DIR}/service/protocol.cpp"
 )
 
 # get the list of the include directories

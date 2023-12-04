@@ -19,7 +19,7 @@
 |                                 INCLUDES                                
 ===================================================================================*/
 #include "assert.h"
-#include "SEGGER_RTT.h"
+#include "swo.h"
 
 
 
@@ -42,8 +42,8 @@ void assert_handler(bool condition, const char* message,
     {
         while (1)
         {
-            RTT_printf(0, "ASSERTION FAILED in %s at line %d : ", file, line);
-            RTT_printf(0, "%s", message);
+            swo_printf("ASSERTION FAILED in %s at line %d : ", file, line);
+            swo_printf("%s\n\n", message);
 
             asm("bkpt");    /* we halted the cpu */
         }

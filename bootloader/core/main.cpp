@@ -20,10 +20,11 @@
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include "bootloader_main.hpp"
+#include "main.hpp"
 #include "features.h"
 #include "boot_jump.hpp"
 #include "drivers_const.hpp"
+#include "peripherals_defs.h"
 #include "rcc.hpp"
 
 // Todo! Set bootloader version (major, minor, patch)
@@ -52,16 +53,19 @@
 
 int main (void)
 {
-    extern const u32 APP_ADDRESS;   /* Symbol defined in the linker script */
+    extern const u32 APP_ADDRESS;   /* defined in the linker script */
 
-    // boot_jump::jumpToApp(&APP_ADDRESS);
+    driver::rcc::enableClock(periphID::I2C1_ID);
 
-    u32 temp = driver::rcc::getClockFrequency(200);
+    I2C1->CR1 = 10512154;
+    I2C1->OAR1 = 14124655;
+    I2C1->OAR2 = 52614;
 
-    while (true)
-    {
-        
-    }
+    driver::rcc::resetPeriph(periphID::I2C1_ID);
+
+    boot_jump::jumpToApp(&APP_ADDRESS);     /* jump to the application */
+
+    while (true);
 }
 
 

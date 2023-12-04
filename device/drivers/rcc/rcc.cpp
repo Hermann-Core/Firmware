@@ -39,7 +39,7 @@
 |                         PUBLIC FUNCTIONS DEFINITIONS                                
 ===================================================================================*/
 
-namespace driver{
+using namespace driver;
 
 /**
  * \brief enable the clock for the specified peripheral
@@ -54,7 +54,7 @@ void rcc::enableClock(const u32& periphID)
     constexpr u32 AHB1_MAX = periphID::ADC34_ID;
 #endif
 
-    assert(periphID <= AHB1_MAX, "the value is out of range");
+    assert(periphID <= PERIPH_ID_MAX, "the peripheral ID is out of range");
 
     if (periphID <= AHB1_MAX)
     {
@@ -94,7 +94,7 @@ void rcc::disableClock(const u32& periphID)
     constexpr u32 AHB1_MAX = periphID::ADC34_ID;
 #endif
 
-    assert(periphID <= PERIPH_ID_MAX, "the value is out of range");
+    assert(periphID <= PERIPH_ID_MAX, "the peripheral ID is out of range");
 
     if (periphID <= AHB1_MAX)
     {
@@ -134,7 +134,7 @@ void rcc::resetPeriph(const u32& periphID)
     constexpr u32 AHB1_MAX = periphID::ADC34_ID;
 #endif
 
-    assert(periphID <= PERIPH_ID_MAX, "the value is out of range");
+    assert(periphID <= PERIPH_ID_MAX, "the peripheral ID is out of range");
 
     if (periphID <= AHB1_MAX)
     {
@@ -150,13 +150,13 @@ void rcc::resetPeriph(const u32& periphID)
 #endif  /* STM32G473 */
     else if (periphID <= periphID::I2C1_ID)
     {
-        common::set_reg_bits(RCC->APB1ENR, (0x1UL << (periphID%64)));
-        common::reset_reg_bits(RCC->APB1ENR, (0x1UL << (periphID%64)));
+        common::set_reg_bits(RCC->APB1RSTR, (0x1UL << (periphID%64)));
+        common::reset_reg_bits(RCC->APB1RSTR, (0x1UL << (periphID%64)));
     }
     else if (periphID <= periphID::TIM8_ID)
     {
-        common::set_reg_bits(RCC->APB2ENR, (0x1UL << (periphID%96)));
-        common::reset_reg_bits(RCC->APB2ENR, (0x1UL << (periphID%96)));
+        common::set_reg_bits(RCC->APB2RSTR, (0x1UL << (periphID%96)));
+        common::reset_reg_bits(RCC->APB2RSTR, (0x1UL << (periphID%96)));
     }
 }
 
@@ -169,12 +169,11 @@ void rcc::resetPeriph(const u32& periphID)
  */
 u32 rcc::getClockFrequency(const u32& periphID)
 {
-    assert(periphID <= PERIPH_ID_MAX, "the value is out of range");
+    assert(periphID <= PERIPH_ID_MAX, "the peripheral ID is out of range");
 
     return SYSCLK;
 }
 
-}   /* namespace driver */
 
 
 /*==================================================================================
