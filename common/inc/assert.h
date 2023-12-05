@@ -9,7 +9,11 @@
  #   DATE       |  Version  | revision   |
  -----------------------------------------
  # 2023.30.11   |    1      |  0         |
-
+ *
+ * Smart Ebike Controller
+ * https://github.com/Hermann-Core/smart-ebike-controller
+ * 
+ * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
 
 /* Prevent recursive inclusion */
@@ -38,13 +42,11 @@ extern "C"
     #define assert(expression, message) ((void)0)
 
 #else
-    void assert_handler(bool condition,
-                        const char* message,
-                        const char* file,
-                        int line);
+    void assert_handler(bool condition, const char* message,
+                        const char* file, int line);
 
-    #define assert(expression, message) (void)(                              \
-                                        assert_handler(expression, message,  \
+    #define assert(expression, message) (void)                               \
+                                        (assert_handler(expression, message, \
                                         __FILE__, (unsigned)(__LINE__)))
 
 #endif

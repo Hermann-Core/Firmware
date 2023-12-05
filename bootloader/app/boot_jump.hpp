@@ -21,13 +21,10 @@
 #define _BOOT_JUMP_H_
 
 
-#define UNUSED             __attribute__((unused))
-
-
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include "common_types.h"
+#include "common.hpp"
 
 
 
@@ -38,10 +35,10 @@
 class boot_jump
 {
     public:
-        static void jumpToApp(const u32 *appAddress);
+        static void jumpToApp(const u32* appVector);
 
     private:
-        static void jumpASM(UNUSED u32 SP, UNUSED u32 PC);
+        static void jumpASM(u32 SP, u32 PC);
 };
 
 

@@ -2,7 +2,7 @@
  * @file   main_app.cpp
  * @date   April, 02 2023
  * @author Awatsa Hermann
- * @brief  main application entry point. The main function is defined here 
+ * @brief  Main application entry point. The main function is defined here. 
  * 
  * ***********************************************************************************
  * @attention
@@ -13,7 +13,11 @@
  #   DATE       |  Version  | revision   |
  -----------------------------------------
  # 2023.04.02   |    1      |  0         |
-
+ *
+ * Smart Ebike Controller
+ * https://github.com/Hermann-Core/smart-ebike-controller
+ * 
+ * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
 
 
@@ -21,7 +25,7 @@
 |                                 INCLUDES                                
 ===================================================================================*/
 #include "main.hpp"
-#include "features.h"
+#include "common.hpp"
 
 
 

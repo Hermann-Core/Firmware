@@ -2,7 +2,7 @@
  * @file   bootloader_main.cpp
  * @date   june, 30 2023
  * @author Awatsa Hermann
- * @brief  main bootloader source file
+ * @brief  Bootloader entry point. Comprises the main function of the bootlader
  * 
  * ***********************************************************************************
  * @attention
@@ -13,7 +13,11 @@
  #   DATE       |  Version  | revision   |
  -----------------------------------------
  # 2023.06.30   |    1      |  1         |
-
+ *
+ * Smart Ebike Controller
+ * https://github.com/Hermann-Core/smart-ebike-controller
+ *
+ * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
 
 
@@ -21,10 +25,8 @@
 |                                 INCLUDES                                
 ===================================================================================*/
 #include "main.hpp"
-#include "features.h"
+#include "common.hpp"
 #include "boot_jump.hpp"
-#include "drivers_const.hpp"
-#include "peripherals_defs.h"
 #include "rcc.hpp"
 
 // Todo! Set bootloader version (major, minor, patch)
@@ -55,13 +57,13 @@ int main (void)
 {
     extern const u32 APP_ADDRESS;   /* defined in the linker script */
 
-    driver::rcc::enableClock(periphID::I2C1_ID);
+    driver::rcc::enableClock(common::periphID::I2C1_ID);
 
     I2C1->CR1 = 10512154;
     I2C1->OAR1 = 14124655;
     I2C1->OAR2 = 52614;
 
-    driver::rcc::resetPeriph(periphID::I2C1_ID);
+    driver::rcc::resetPeriph(common::periphID::I2C1_ID);
 
     boot_jump::jumpToApp(&APP_ADDRESS);     /* jump to the application */
 

@@ -41,9 +41,9 @@
 /**
  * \brief Used to jump to the application from bootloader
  * 
- * \param appAddress the starting address of the application
+ * \param appAddress the vector address of the application
  */
-no_return void boot_jump::jumpToApp(const u32 *appVector)
+no_return void boot_jump::jumpToApp(const u32* appVector)
 {
     constexpr u32 SRAM_BASE = 0x20000000;
 #if defined (STM32F303)

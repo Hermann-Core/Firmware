@@ -11,13 +11,25 @@
  #   date       |  Version  | revision   |
  -----------------------------------------
  # 2023.27.11   |    1      |  0         |
-
+ *
+ * Smart Ebike Controller
+ * https://github.com/Hermann-Core/smart-ebike-controller
+ * 
+ * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
 
 /* Prevent recursive inclusion */
 #ifndef _DRIVERS_CONST_H_
 #define _DRIVERS_CONST_H_
 
+
+/**
+ * \defgroup driversConst Drivers Constants
+ * \ingroup common
+ * \brief Defined constants used for the peripherals drivers
+ * 
+ * @{
+ */
 
 /*==================================================================================
 |                                 INCLUDES                                
@@ -30,9 +42,10 @@
 |                             CLASSES DECLARATIONS                                
 ===================================================================================*/
 
-class periphID
+namespace common
 {
-    public:
+    namespace periphID
+    {
 #if defined (STM32G473)
         /*====================== AHB1 ========================*/
         static constexpr u32 DMA1_ID    =  static_cast<u32>(0);
@@ -90,8 +103,10 @@ class periphID
         static constexpr u32 SYSCFG_ID  =  static_cast<u32>(96);
         static constexpr u32 TIM1_ID    =  static_cast<u32>(107);
         static constexpr u32 TIM8_ID    =  static_cast<u32>(109);
-};     
+    };
+};   
 
+/** @} */
 
 
 #endif      /* _DRIVERS_CONST_H_ */

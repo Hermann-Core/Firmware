@@ -11,7 +11,11 @@
  #   DATE       |  Version  | revision   |
  -----------------------------------------
  # 2023.03.03   |    1      |  0         |
-
+ *
+ * Smart Ebike Controller
+ * https://github.com/Hermann-Core/smart-ebike-controller
+ * 
+ * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
 
 /* Prevent recursive inclusion */
@@ -31,7 +35,6 @@
 |                             TYPES DEFINITIONS                                
 ===================================================================================*/
 #define _vol        volatile
-#define null        0
 
 #ifdef __cplusplus
 extern "C" {

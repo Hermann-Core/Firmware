@@ -24,6 +24,7 @@ set(COMMON_SOURCES
     "${PROJECT_SOURCE_DIR}/logging/rtt/SEGGER_RTT_printf.c"
     "${PROJECT_SOURCE_DIR}/device/drivers/rcc/rcc.cpp"
     "${PROJECT_SOURCE_DIR}/device/drivers/flash/flash.cpp"
+    "${PROJECT_SOURCE_DIR}/common/library/string.cpp"
     "${PROJECT_SOURCE_DIR}/service/protocol.cpp"
 )
 

@@ -2,7 +2,6 @@
  * @file   bootloader_main.cpp
  * @date   june, 30 2023
  * @author Awatsa Hermann
- * @brief  main bootloader header file
  * 
  * ***********************************************************************************
  * @attention
@@ -13,7 +12,11 @@
  #   DATE       |  Version  | revision   |
  -----------------------------------------
  # 2023.06.30   |    1      |  0         |
-
+ *
+ * Smart Ebike Controller
+ * https://github.com/Hermann-Core/smart-ebike-controller
+ * 
+ * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
 
 

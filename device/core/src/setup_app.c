@@ -2,10 +2,7 @@
  * \file 	 setup_app.c
  * \date   April, 01 2023
  * \author Awatsa Hermann
- * \brief	 Device setup source file
- * 
- *         This file contains the functions used to perform some C/C++
- *         runtime initializations before the execution of the main app
+ * \brief	 Application setup.
  * ***********************************************************************************
  * \attention
  * 
@@ -15,9 +12,24 @@
  #   DATE       |  Version  | revision   |
  -----------------------------------------
  # 2023.04.01   |    1      |  0         |
-
+ *
+ * Smart Ebike Controller
+ * https://github.com/Hermann-Core/smart-ebike-controller
+ * 
+ * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
 
+
+/**
+ * \defgroup setupApp Application Setup
+ * 
+ * \ingroup core
+ * Perform C/C++ runtime initializations before the execution of the main application.
+ * These functions set up the C/C++ environment, initialize the stack pointer, copy
+ * initialization data, zero-initialize the BSS segment, and call C++ static constructors.
+ * 
+ * @{
+ */
 
 /*==================================================================================
 |                                 INCLUDES                                
@@ -82,7 +94,7 @@ extern CopyTable_t   const __binit__[];
 extern CONSTRUCTOR_t const CONSTRUCTOR_BASE[];
 extern CONSTRUCTOR_t const CONSTRUCTOR_LIMIT[];
 
-extern int  main(void);
+extern int main(void);
 
 
 /*================= Internal references ============================================*/
@@ -197,6 +209,7 @@ const VECTOR_TABLE_t __APP_VECTOR_TABLE[] =
 }
 #endif
 
+/** @} */
 
 /*==================================================================================
 |                                 END OF FILE                                

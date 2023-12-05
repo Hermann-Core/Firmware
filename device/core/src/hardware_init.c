@@ -2,10 +2,7 @@
  * @file   hardware_init.c
  * @date   Nov, 29 2023
  * @author Awatsa Hermann
- * @brief  Hardware initialization source file
- * 
- *         This file Contains the definitions of all the functions
- *         used to performs the low level initialization of the MCU
+ * @brief  Low-level hardware initialization functions.
  * ***********************************************************************************
  * @attention
  * 
@@ -15,8 +12,23 @@
  #   DATE       |  Version  | revision   |
  -----------------------------------------
  # 2023.29.11   |    1      |  1         |
-
+ *
+ * Smart Ebike Controller
+ * https://github.com/Hermann-Core/smart-ebike-controller
+ * 
+ * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
+
+
+/**
+ * \defgroup hardwareInit Hardware Init
+ * \ingroup core
+ * Provides low-level functions for initializing the MCU's hardware, including system
+ * clocks, peripherals, and other essential settings. These functions will be executed
+ * at the beginning of the application to set up the hardware environment.
+ * 
+ * @{
+ */
 
 /*==================================================================================
 |                                 INCLUDES                                
@@ -244,6 +256,8 @@ void systemClockInit(void)
 #ifdef __cplusplus
 }
 #endif
+
+/** @} */
 
 /*==================================================================================
 |                                 END OF FILE                                

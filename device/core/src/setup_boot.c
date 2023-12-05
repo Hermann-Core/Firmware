@@ -2,10 +2,7 @@
  * @file   setup_boot.c
  * @date   March, 31 2023
  * @author Awatsa Hermann
- * @brief  Device setup source file
- * 
- *         This file contains the functions used to perform
- *         the early setup of the device just after a reset
+ * @brief  Device startup code.
  * ***********************************************************************************
  * @attention
  * 
@@ -15,9 +12,25 @@
  #   DATE       |  Version  | revision   |
  -----------------------------------------
  # 2023.03.31   |    1      |  0         |
-
+ *
+ * Smart Ebike Controller
+ * https://github.com/Hermann-Core/smart-ebike-controller
+ * 
+ * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
 
+
+/**
+ * \defgroup startup Device Startup Code
+ * 
+ * \ingroup core
+ * Contains functions used for the early setup of the device just after a reset. These
+ * functions initialize the stack pointer, perform the low-level hardware initialization,
+ * perform the initial C/C++ runtime initialization sets up the vector table including
+ * Cortex and STM32 specific interrupt handlers.
+ * 
+ * @{
+ */
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
@@ -486,6 +499,7 @@ const VECTOR_TABLE_t __VECTOR_TABLE[] =
 }
 #endif
 
+/** @} */
 
 /*==================================================================================
 |                                 END OF FILE                                

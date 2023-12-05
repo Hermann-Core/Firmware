@@ -2,16 +2,18 @@
  * @file 	 hardware_core.c
  * @date   March, 12 2023
  * @author Awatsa Hermann
- * \brief	 Hardware core source file
- * 
- *         Contains the definitions of the core hardware functions
+ * @brief	 Interface to access the core hardware functionalities
  * ***********************************************************************************
  * @attention
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
  # 2023.03.12   |    1      |  0         |
-
+ *
+ * Smart Ebike Controller
+ * https://github.com/Hermann-Core/smart-ebike-controller
+ * 
+ * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
 
 /*==================================================================================
@@ -19,6 +21,18 @@
 ===================================================================================*/
 #include "hardware_core.hpp"
 
+
+/**
+ * \defgroup core Core
+ * \brief Core functionalities and utilities. These functionalities are
+ * designed to provide common services and access to core hardware features
+ * 
+ * \defgroup hardwareCore Hardware Core Features
+ * \ingroup core
+ * Interface to access the core hardware functionalities
+ * 
+ * @{
+ */
 
 /*==================================================================================
 |                             FUNCTIONS DEFINITIONS                                
@@ -106,6 +120,7 @@ __attribute__((noreturn)) void hw_core::systemReset(void)
   __NVIC_SystemReset();
 }
 
+/** @} */
 
 /*==================================================================================
 |                                 END OF FILE                                

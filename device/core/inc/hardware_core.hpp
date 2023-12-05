@@ -12,7 +12,11 @@
  #   DATE       |  Version  | revision   |
  -----------------------------------------
  # 2023.03.12   |    1      |  0         |
-
+ *
+ * Smart Ebike Controller
+ * https://github.com/Hermann-Core/smart-ebike-controller
+ * 
+ * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
 
 /* Prevent recursive inclusion */
@@ -23,7 +27,7 @@
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include "peripherals_defs.h"
+#include "common.hpp"
 
 
 

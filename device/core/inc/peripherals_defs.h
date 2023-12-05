@@ -2,7 +2,7 @@
  * @file 	 peripherals_defs.h
  * @date   June, 30 2023
  * @author Awatsa Hermann
- * @brief	 This file contains the STM32F303 & STM32G473
+ * @brief	 This file comprises the STM32F303 & STM32G473
  *         peripherals access layer and registers bitfields
  * 
  * ***********************************************************************************
@@ -10,7 +10,11 @@
  * #   DATE       |  Version  | revision   |
  * -----------------------------------------
  * # 2023.06.30   |     1     |      2     |
-
+ *
+ * Smart Ebike Controller
+ * https://github.com/Hermann-Core/smart-ebike-controller
+ * 
+ * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
 
 /* Prevent recursive inclusion */
@@ -1546,13 +1550,13 @@ typedef struct {
     
     struct {
       __IOM u32 STRSTTRIGSEL1 : 4; 
-            u32            : 4;
+            u32               : 4;
       __IOM u32 STINCTRIGSEL1 : 4; 
-            u32            : 4;
+            u32               : 4;
       __IOM u32 STRSTTRIGSEL2 : 4; 
-            u32            : 4;
+            u32               : 4;
       __IOM u32 STINCTRIGSEL2 : 4; 
-            u32            : 4;
+            u32               : 4;
     } DAC_STMODR_b;
   } ;
 
@@ -1609,7 +1613,7 @@ typedef struct {
     } APB1FZ_b;
   } ;
 
-  #if defined (STM32G473)
+#if defined (STM32G473)
     union {
     __IOM u32 APB1FZR2;              
     
@@ -1619,7 +1623,7 @@ typedef struct {
             u32            : 30;
      } APB1FZR2_b;
     } ;
-  #endif    /* STM32G473 */
+#endif    /* STM32G473 */
   
   union {
     __IOM u32 APB2FZ;               
@@ -1735,7 +1739,7 @@ typedef struct {
 typedef struct {
 
   union {
-    __IOM u32 CCR;            
+    __IOM u32 CR;            
     
     struct {
       __IOM u32 EN         : 1;
@@ -1751,12 +1755,12 @@ typedef struct {
       __IOM u32 PL         : 2;
       __IOM u32 MEM2MEM    : 1;
             u32            : 17;
-    } CCR_b;
+    } CR_b;
   } ;
   
-  __IOM u32 CNDTR;
-  __IOM u32 CPAR;
-  __IOM u32 CMAR;
+  __IOM u32 NDTR;
+  __IOM u32 PAR;
+  __IOM u32 MAR;
 
 } DMA_CHANNEL_HW;
 
@@ -2671,36 +2675,8 @@ typedef struct {
             u32            : 15;
     } LCKR_b;
   } ;
-  
-  union {
-    __IOM u32 AFRL;              
-    
-    struct {
-      __IOM u32 AFRL0      : 4;  
-      __IOM u32 AFRL1      : 4;  
-      __IOM u32 AFRL2      : 4;  
-      __IOM u32 AFRL3      : 4; 
-      __IOM u32 AFRL4      : 4;  
-      __IOM u32 AFRL5      : 4; 
-      __IOM u32 AFRL6      : 4; 
-      __IOM u32 AFRL7      : 4; 
-    } AFRL_b;
-  } ;
-  
-  union {
-    __IOM u32 AFRH;              
-    
-    struct {
-      __IOM u32 AFRH8      : 4;  
-      __IOM u32 AFRH9      : 4;  
-      __IOM u32 AFRH10     : 4;  
-      __IOM u32 AFRH11     : 4;  
-      __IOM u32 AFRH12     : 4; 
-      __IOM u32 AFRH13     : 4;
-      __IOM u32 AFRH14     : 4; 
-      __IOM u32 AFRH15     : 4; 
-    } AFRH_b;
-  } ;
+ 
+  __IOM u32 AFR[2];
   
   union {
     __OM  u32 BRR;               
@@ -5010,7 +4986,7 @@ typedef struct {
     } BDTR_b;
   } ;
 
-  #if defined (STM32F303)
+#if defined (STM32F303)
   union {
     __IOM u32 DCR;               
     
@@ -5075,7 +5051,7 @@ typedef struct {
     } CCR6_b;
   } ;
 
-  #elif defined (STM32G473)
+#elif defined (STM32G473)
   union {
     __IOM u32 CCR5;              
     

@@ -2,7 +2,7 @@
  * \file   swo.c
  * \date   Dec, 01 2023
  * \author Awatsa Hermann
- * \brief  serial wire output interface file
+ * \brief  serial wire output interface
  * ***********************************************************************************
  * \attention
  * 
@@ -12,8 +12,14 @@
  #   DATE       |  Version  | revision   |
  -----------------------------------------
  # 2023.01.12   |    1      |  0         |
-
+ *
+ * Smart Ebike Controller
+ * https://github.com/Hermann-Core/smart-ebike-controller
+ * 
+ * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
+
+
 
 /*==================================================================================
 |                                 INCLUDES                                
@@ -22,6 +28,21 @@
 #include "common_types.h"
 #include "swo.h"
 
+
+
+/**
+ * @defgroup logging Logging
+ * \brief Data output functionalities. This provide ways for printing data outside
+ * the MCU for various purposes including debugging, logging and so on
+ * 
+ * \defgroup swo Serial Wire Output
+ * \ingroup logging
+ * This file contains an implementation for serial wire output interface functions
+ * that allow printing data to the ITM (Instrumentation Trace Macrocell) of STM32F303
+ * and STM32G473 MCUs using a lighweight version of the printf function.
+ * 
+ * @{
+ */
 
 /*==================================================================================
 |                                 DEFINES                                
@@ -39,7 +60,6 @@
 
 
 
-
 /*==================================================================================
 |                             PRIVATE FUNCTIONS                                
 ===================================================================================*/
@@ -53,7 +73,6 @@
 static u8 count_digits(int value)
 {
     u8 count = 0;
-
     do
     {
         value /= 10;
@@ -64,7 +83,7 @@ static u8 count_digits(int value)
 }
 
 /**
- * \brief store the digits to the buffer
+ * \brief store the digits in the buffer
  * 
  * \param [in] digit  : the decimal digit
  * \param [in] buffer : the buffer
@@ -95,8 +114,9 @@ static void store_digits(int digit, char buffer[], u32 *pos)
 char swo_putchar(char c)
 {
     /* Check if the ITM_TCR.ITMENA bit is set */
-    if ((ITM_TCR & 1) == 0)
+    if ((ITM_TCR & 1) == 0) {
         return 0;
+    }
 
     /* Check if stimulus port is enabled */
     if ((ITM_ENA & 1) == 0) {
@@ -119,8 +139,9 @@ char swo_putchar(char c)
  */
 u32 swo_puts(const char* s)
 {
-    if (s == NULL)
+    if (s == NULL) {
         return 0;
+    }
     
     u32 count = 0;
     do
@@ -142,8 +163,9 @@ u32 swo_puts(const char* s)
  */
 u32 swo_printf(const char* format, ...)
 {
-    if (format == NULL)
+    if (format == NULL) {
         return 0;
+    }
 
     char buffer[PRINTF_BUFFER_SIZE] = {0};
     u32 count = 0;
@@ -181,7 +203,7 @@ u32 swo_printf(const char* format, ...)
                         buffer[count] = '0';
                         count++;
                     }
-                    /* print the actual value */
+                    /* store the actual value */
                     store_digits(value, buffer, &count);
                 }    
                     break;
@@ -195,7 +217,7 @@ u32 swo_printf(const char* format, ...)
                         buffer[count] = '0';
                         count++;
                     }
-                    /* print the actual value */
+                    /* store the actual value */
                     store_digits(value, buffer, &count);
                 }
                     break;
@@ -234,6 +256,7 @@ u32 swo_printf(const char* format, ...)
     return count;
 }
 
+/** @} */
 
 /*==================================================================================
 |                                 END OF FILE                                

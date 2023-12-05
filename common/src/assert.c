@@ -12,8 +12,13 @@
  #   DATE       |  Version  | revision   |
  -----------------------------------------
  # 2023.30.11   |    1      |  0         |
-
+ *
+ * Smart Ebike Controller
+ * https://github.com/Hermann-Core/smart-ebike-controller
+ * 
+ * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
+
 
 /*==================================================================================
 |                                 INCLUDES                                
@@ -22,7 +27,14 @@
 #include "swo.h"
 
 
-
+/**
+ * \defgroup common Common
+ * Collection of common functionalities and utilities that are used across the project.
+ * 
+ * \defgroup assert Assertions Handler
+ * \ingroup common
+ * Assertion handler for error checking
+ */
 /*==================================================================================
 |                             FUNCTIONS DEFINITIONS                                
 ===================================================================================*/
