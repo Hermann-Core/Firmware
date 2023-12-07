@@ -1,5 +1,5 @@
 /************************************************************************************* 
- * @file   drivers_const.hpp
+ * @file   const.hpp
  * @date   Nov, 27 2023
  * @author Awatsa Hermann
  * @brief  this file containts the constants used
@@ -19,8 +19,8 @@
 *************************************************************************************/
 
 /* Prevent recursive inclusion */
-#ifndef _DRIVERS_CONST_H_
-#define _DRIVERS_CONST_H_
+#ifndef _CONST_H_
+#define _CONST_H_
 
 
 /**
@@ -44,6 +44,9 @@
 
 namespace common
 {
+    /**
+     * \brief peripherals ID constants definitions
+     */
     namespace periphID
     {
 #if defined (STM32G473)
@@ -109,7 +112,7 @@ namespace common
 /** @} */
 
 
-#endif      /* _DRIVERS_CONST_H_ */
+#endif      /* _CONST_H_ */
 
 /*==================================================================================
 |                                 END OF FILE                                

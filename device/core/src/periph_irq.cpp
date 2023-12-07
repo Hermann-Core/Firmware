@@ -1,5 +1,5 @@
 /************************************************************************************* 
- * @file 	 peripherals_irqs.c
+ * @file 	 periph_irq.c
  * @date   05, March 2023
  * @author Awatsa Hermann
  * @brief	 Peripherals interrupts handlers

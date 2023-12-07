@@ -1,5 +1,5 @@
 /************************************************************************************* 
- * @file   hardware_init.c
+ * @file   hw_init.c
  * @date   Nov, 29 2023
  * @author Awatsa Hermann
  * @brief  Low-level hardware initialization functions.

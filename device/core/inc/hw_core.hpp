@@ -1,5 +1,5 @@
 /************************************************************************************* 
- * @file   hardware_core.hpp
+ * @file   hw_core.hpp
  * @date   March, 12 2023
  * @author Awatsa Hermann
  * @brief  hardware core functions class

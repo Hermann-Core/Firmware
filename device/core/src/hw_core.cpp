@@ -1,5 +1,5 @@
 /************************************************************************************* 
- * @file 	 hardware_core.c
+ * @file 	 hw_core.c
  * @date   March, 12 2023
  * @author Awatsa Hermann
  * @brief	 Interface to access the core hardware functionalities

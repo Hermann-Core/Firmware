@@ -1,5 +1,5 @@
 /*************************************************************************************
- * @file 	 peripherals_defs.h
+ * @file 	 periph_def.h
  * @date   June, 30 2023
  * @author Awatsa Hermann
  * @brief	 This file comprises the STM32F303 & STM32G473
