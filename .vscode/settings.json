@@ -95,6 +95,7 @@
         "__memory": "cpp",
         "cassert": "cpp",
         "__assert": "cpp",
-        "assert.h": "c"
+        "assert.h": "c",
+        "swo.h": "c"
     }
 }

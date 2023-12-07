@@ -1,17 +1,18 @@
 /************************************************************************************* 
- * @file   hardware_init.c
- * @date   Nov, 29 2023
- * @author Awatsa Hermann
- * @brief  assertion handler file
+ * \file   gpio.cpp
+ * \date   Dec, 06 2023
+ * \author Awatsa Hermann
+ * \brief  gpio driver interface
+ * 
  * ***********************************************************************************
- * @attention
+ * \attention
  * 
  * The functions used in this file have been written mainly for the STM32F303
  * and STM32G473 MCUs. There is no guarantee of operation for other microcontrollers.
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.30.11   |    1      |  0         |
+ # 2023.06.12   |    1      |  0         |
  *
  * Smart Ebike Controller
  * https://github.com/Hermann-Core/smart-ebike-controller
@@ -23,52 +24,36 @@
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include "assert.h"
-#include "swo.h"
+#include "gpio.hpp"
+
 
 
 /**
- * \defgroup common Common
- * Collection of common functionalities and utilities that are used across the project.
- * 
- * @{
- * 
- * \defgroup assert Assertions Handler
- * Assertion handler for error checking
+ * \defgroup gpio GPIO
+ * \ingroup drivers
+ * Provides functions to initialize and control GPIO pins. This driver supports basic
+ * GPIO operations such as pin initialization, setting/clearing pin values, reading
+ * pin states and attach an interrupt to a pin state change.
  * 
  * @{
  */
 
 /*==================================================================================
-|                             FUNCTIONS DEFINITIONS                                
+|                         PRIVATE FUNCTIONS DEFINITIONS                                
 ===================================================================================*/
 
-/**
- * \brief handle the assertion
- * 
- * \param [in] condition : condition to check
- * \param [in] message : custom message to print at assertion failed
- * \param [in] file : file name
- * \param [in] line : line number
- */
-void assert_handler(bool condition, const char* message,
-                    const char* file, int line)
-{
-    if (!condition)
-    {
-        while (1)
-        {
-            swo_printf("ASSERTION FAILED in %s at line %d : ", file, line);
-            swo_printf("%s\n\n", message);
 
-            asm("bkpt");    /* we halted the cpu */
-        }
-    }
-}
 
-/** @} */
+/*==================================================================================
+|                         PUBLIC FUNCTIONS DEFINITIONS                                
+===================================================================================*/
 
-/** @} */
+using namespace driver;
+
+
+
+/**@}*/
+
 
 /*==================================================================================
 |                                 END OF FILE                                

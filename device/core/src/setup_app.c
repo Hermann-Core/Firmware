@@ -22,7 +22,6 @@
 
 /**
  * \defgroup setupApp Application Setup
- * 
  * \ingroup core
  * Perform C/C++ runtime initializations before the execution of the main application.
  * These functions set up the C/C++ environment, initialize the stack pointer, copy
@@ -34,7 +33,7 @@
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include "peripherals_defs.h"
+#include "periph_def.h"
 
 
 /*==================================================================================

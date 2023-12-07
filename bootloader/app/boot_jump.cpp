@@ -22,7 +22,7 @@
 |                                 INCLUDES                                
 ===================================================================================*/
 #include "boot_jump.hpp"
-#include "hardware_core.hpp"
+#include "hw_core.hpp"
 
 
 

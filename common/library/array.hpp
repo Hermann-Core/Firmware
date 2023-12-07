@@ -52,7 +52,7 @@
  * \brief This class provide functionalities for arrays manipulation with some features
  * such as bound check, operators overloading for user friendly manipulation and so on.
  */
-template <typename T, size_t _size>
+template <typename T = char, size_t _size = 256>
 class array
 {
     public:

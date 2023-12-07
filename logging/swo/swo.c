@@ -25,7 +25,8 @@
 |                                 INCLUDES                                
 ===================================================================================*/
 #include <stdarg.h>
-#include "common_types.h"
+
+#include "types.h"
 #include "swo.h"
 
 
@@ -34,6 +35,8 @@
  * @defgroup logging Logging
  * \brief Data output functionalities. This provide ways for printing data outside
  * the MCU for various purposes including debugging, logging and so on
+ * 
+ * @{
  * 
  * \defgroup swo Serial Wire Output
  * \ingroup logging
@@ -255,6 +258,8 @@ u32 swo_printf(const char* format, ...)
     va_end(args);
     return count;
 }
+
+/** @} */
 
 /** @} */
 

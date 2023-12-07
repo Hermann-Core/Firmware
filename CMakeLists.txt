@@ -15,16 +15,16 @@ project("EBIKE" C CXX ASM)
 include(cmake/stm32_project.cmake)
 
 set(COMMON_SOURCES
-    "${PROJECT_SOURCE_DIR}/device/core/src/hardware_core.cpp"
-    "${PROJECT_SOURCE_DIR}/device/core/src/peripherals_irqs.cpp"
+    "${PROJECT_SOURCE_DIR}/device/core/src/hw_core.cpp"
+    "${PROJECT_SOURCE_DIR}/device/core/src/periph_irq.cpp"
     "${PROJECT_SOURCE_DIR}/common/src/assert.c"
     "${PROJECT_SOURCE_DIR}/logging/swo/swo.c"
     "${PROJECT_SOURCE_DIR}/logging/rtt/SEGGER_RTT_ASM_ARMv7M.S"
     "${PROJECT_SOURCE_DIR}/logging/rtt/SEGGER_RTT.c"
     "${PROJECT_SOURCE_DIR}/logging/rtt/SEGGER_RTT_printf.c"
     "${PROJECT_SOURCE_DIR}/device/drivers/rcc/rcc.cpp"
+    "${PROJECT_SOURCE_DIR}/device/drivers/gpio/gpio.cpp"
     "${PROJECT_SOURCE_DIR}/device/drivers/flash/flash.cpp"
-    "${PROJECT_SOURCE_DIR}/common/library/string.cpp"
     "${PROJECT_SOURCE_DIR}/service/protocol.cpp"
 )
 

@@ -33,7 +33,7 @@
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include "peripherals_defs.h"
+#include "periph_def.h"
 
 
 /*==================================================================================
@@ -42,18 +42,24 @@
 #define FORCE_INLINE    __attribute__((always_inline))
 
 #if defined (STM32F303)
+
 #define FLASH_LATENCY        2
 #define PLL_SRC              2
 #define PLL_MUL_9            7
 #define SYSCLK_OUT           4
 #define APB1_PRESC_2         4
+#define CLK_FREQUENCY        72000000UL
+
 #elif defined (STM32G473)
+
 #define PLL_SRC              3 
 #define LSE_SRC              1 
 #define FLASH_LATENCY        4 
 #define HSE_SRC              3 
 #define PLLM_6               5 
 #define PLLN_85              85
+#define CLK_FREQUENCY        170000000UL
+
 #endif
 
 #define SET                  1
@@ -250,6 +256,10 @@ void systemClockInit(void)
     setPrescalers();    /* set the buses and peripherals prescalers */
 
     enablePllClk();     /* enable the pll clock */
+
+    /* Configure the systick for 1ms tick */
+    SysTick_Config(CLK_FREQUENCY / 1000U);
+    NVIC_SetPriority(SysTick_IRQn, 5);
 }
 
 

@@ -1,7 +1,7 @@
 /************************************************************************************* 
- * @file   common-types.h
+ * @file   common_types.h
  * @date   03, March 2023
- * @author AWATSA HERMANN
+ * @author Awatsa Hermann
  * @brief  common C/C++ types redefinition
  * 
  *         Redefinition of the common C/C++ types

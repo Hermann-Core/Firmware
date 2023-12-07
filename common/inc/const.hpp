@@ -1,5 +1,5 @@
 /************************************************************************************* 
- * @file   common-types.h
+ * @file   drivers_const.hpp
  * @date   Nov, 27 2023
  * @author Awatsa Hermann
  * @brief  this file containts the constants used
@@ -34,7 +34,7 @@
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include "common_types.h"
+#include "types.h"
 
 
 

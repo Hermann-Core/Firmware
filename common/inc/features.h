@@ -28,7 +28,7 @@
 /************************************************************************************/
 /*                                     INCLUDES                                     */
 /************************************************************************************/
-#include "peripherals_defs.h"
+#include "periph_def.h"
 
 
 /* Iindicate whether we use the Realtime trace feature or not */

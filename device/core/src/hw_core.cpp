@@ -19,13 +19,15 @@
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include "hardware_core.hpp"
+#include "hw_core.hpp"
 
 
 /**
  * \defgroup core Core
  * \brief Core functionalities and utilities. These functionalities are
  * designed to provide common services and access to core hardware features
+ * 
+ * @{
  * 
  * \defgroup hardwareCore Hardware Core Features
  * \ingroup core
@@ -119,6 +121,8 @@ __attribute__((noreturn)) void hw_core::systemReset(void)
 {
   __NVIC_SystemReset();
 }
+
+/** @} */
 
 /** @} */
 

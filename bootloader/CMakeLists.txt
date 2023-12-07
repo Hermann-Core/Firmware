@@ -56,7 +56,7 @@ target_sources(
     ${BOOT_EXECUTABLE} PRIVATE
     "${COMMON_SOURCES}"
     "${PROJECT_SOURCE_DIR}/device/core/src/setup_boot.c"
-    "${PROJECT_SOURCE_DIR}/device/core/src/hardware_init.c"
+    "${PROJECT_SOURCE_DIR}/device/core/src/hw_init.c"
     "${PROJECT_SOURCE_DIR}/device/drivers/crc/crc.cpp"
     "${PROJECT_SOURCE_DIR}/${BOOT_EXECUTABLE}/app/boot_jump.cpp"
     "${PROJECT_SOURCE_DIR}/${BOOT_EXECUTABLE}/app/flash_config.cpp"

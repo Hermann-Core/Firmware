@@ -1,8 +1,9 @@
 /************************************************************************************* 
- * @file   hardware_init.c
- * @date   Nov, 29 2023
+ * @file   gpio.hpp
+ * @date   Dec, 06 2023
  * @author Awatsa Hermann
- * @brief  assertion handler file
+ * @brief  gpio driver interface
+ * 
  * ***********************************************************************************
  * @attention
  * 
@@ -11,7 +12,7 @@
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.30.11   |    1      |  0         |
+ # 2023.06.12   |    1      |  0         |
  *
  * Smart Ebike Controller
  * https://github.com/Hermann-Core/smart-ebike-controller
@@ -19,56 +20,32 @@
  * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
 
+#ifndef _GPIO_H_
+#define _GPIO_H_
+
 
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include "assert.h"
-#include "swo.h"
+#include "common.hpp"
 
-
-/**
- * \defgroup common Common
- * Collection of common functionalities and utilities that are used across the project.
- * 
- * @{
- * 
- * \defgroup assert Assertions Handler
- * Assertion handler for error checking
- * 
- * @{
- */
 
 /*==================================================================================
-|                             FUNCTIONS DEFINITIONS                                
+|                             CLASSES DECLARATIONS                                
 ===================================================================================*/
 
-/**
- * \brief handle the assertion
- * 
- * \param [in] condition : condition to check
- * \param [in] message : custom message to print at assertion failed
- * \param [in] file : file name
- * \param [in] line : line number
- */
-void assert_handler(bool condition, const char* message,
-                    const char* file, int line)
+namespace driver
 {
-    if (!condition)
+    class gpio
     {
-        while (1)
-        {
-            swo_printf("ASSERTION FAILED in %s at line %d : ", file, line);
-            swo_printf("%s\n\n", message);
+        public:
 
-            asm("bkpt");    /* we halted the cpu */
-        }
-    }
+        private:
+    };
 }
 
-/** @} */
 
-/** @} */
+#endif      /* _GPIO_H_ */
 
 /*==================================================================================
 |                                 END OF FILE                                
