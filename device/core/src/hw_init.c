@@ -175,7 +175,7 @@ static void pllConfig(void)
 #endif
 
     /* Enable the PLL clock */
-    RCC->CR_b.PLLON        = SET;
+    RCC->CR_b.PLLON = SET;
 
     /* wait for the pll to be locked */
     while(RCC->CR_b.PLLRDY != SET);
@@ -208,15 +208,15 @@ static void setPrescalers(void)
 }
 
 /**
- * \brief enable the PLL clock
+ * \brief enable the system clock
  */
-inline static void enablePllClk(void)
+inline static void enableSysClk(void)
 {
-    /* Enable the pll clock */
-    RCC->CFGR_b.SW        = PLL_SRC;
+    /* Set the pll clock as system clock source */
+    RCC->CFGR_b.SW = PLL_SRC;
 
     /* wait for the clock to become ready */
-    while(RCC->CFGR_b.SWS != PLL_SRC){/**/}
+    while(RCC->CFGR_b.SWS != PLL_SRC);
 }
 
 
@@ -239,15 +239,16 @@ void systemClockInit(void)
     enableLSEClk();     /* enable the LSE oscillator */
 
     /* Set the LSE as the RTC and backup registers clock */
-    if (RCC->BDCR_b.RTCSEL     != LSE_SRC)
-        RCC->BDCR_b.RTCSEL      = LSE_SRC;
+    if (RCC->BDCR_b.RTCSEL!= LSE_SRC) {
+        RCC->BDCR_b.RTCSEL = LSE_SRC;
+    }
 
     flashConfig();
 
 #elif defined (STM32F303)
 
     /* Enable the flash memory prefetch buffer */
-    FLASH->ACR_b.PRFTBE         = SET;
+    FLASH->ACR_b.PRFTBE = SET;
 
 #endif
 
@@ -255,7 +256,7 @@ void systemClockInit(void)
 
     setPrescalers();    /* set the buses and peripherals prescalers */
 
-    enablePllClk();     /* enable the pll clock */
+    enableSysClk();     /* enable the system clock */
 
     /* Configure the systick for 1ms tick */
     SysTick_Config(CLK_FREQUENCY / 1000U);

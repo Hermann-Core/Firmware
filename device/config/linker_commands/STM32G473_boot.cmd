@@ -48,10 +48,10 @@ __INITIAL_SP = SRAM_ORIGIN + SRAM_SIZE;
 APP_ADDRESS  = 0x0800D000;
 
 /* Address of the CRC value */
-CRC_BASE = 0x08076800;
+CRC_BASE = 0x0803F000;
 
 /* Address of the reset region */
-RESET_BASE = 0x08077000;
+RESET_BASE = 0x0807B000;
 
 
 SECTIONS
