@@ -164,7 +164,7 @@ u32 swo_puts(const char* s)
  * \param [in] s : string to print
  * \return number of printed characters 
  */
-u32 swo_printf(const char* format, ...)
+size_t swo_printf(const char* format, ...)
 {
     if (format == NULL) {
         return 0;
@@ -196,29 +196,24 @@ u32 swo_printf(const char* format, ...)
                     /* print the sign if necessary */
                     if (value < 0)
                     {
-                        buffer[count] = '-';
-                        count++;
+                        buffer[count++] = '-';
                         value = -value;
                     }
                     /* pad with leading zeros if applicable */
-                    for (u8 i = 0; i < (width - count_digits(value)); i++)
-                    {
-                        buffer[count] = '0';
-                        count++;
+                    for (u8 i = 0; i < (width - count_digits(value)); i++) {
+                        buffer[count++] = '0';
                     }
                     /* store the actual value */
                     store_digits(value, buffer, &count);
-                }    
+                }
                     break;
 
                 case 'u':
                 {
                     uint32_t value = va_arg(args, uint32_t);
                     /* pad with leading zeros if applicable */
-                    for (u8 i = 0; i < (width - count_digits(value)); i++)
-                    {
-                        buffer[count] = '0';
-                        count++;
+                    for (u8 i = 0; i < (width - count_digits(value)); i++) {
+                        buffer[count++] = '0';
                     }
                     /* store the actual value */
                     store_digits(value, buffer, &count);
@@ -229,24 +224,19 @@ u32 swo_printf(const char* format, ...)
                 {
                     const char* str = va_arg(args, char*);
 
-                    while (*str != '\0')
-                    {
-                        buffer[count] = *str++;
-                        count++;
+                    while (*str != '\0') {
+                        buffer[count++] = *str++;
                     }
                 }
                     break;
                 
-                default:
-                    buffer[count] = *format;
-                    count++;
+                default: buffer[count++] = *format;
             }
         }
         else
         {
             /* the character is not a specifier */
-            buffer[count] = *format;
-            count++;
+            buffer[count++] = *format;
         }
 
         format++;
@@ -257,6 +247,11 @@ u32 swo_printf(const char* format, ...)
 
     va_end(args);
     return count;
+}
+
+size_t _sprintf(char buffer[], const char* format, ...)
+{
+    
 }
 
 /** @} */
