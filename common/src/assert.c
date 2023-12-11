@@ -58,7 +58,7 @@ void assert_handler(bool condition, const char* message,
     {
         while (1)
         {
-            swo_printf("ASSERTION FAILED in %s at line %d : ", file, line);
+            swo_printf("ASSERTION FAILED in \"%s\" at line %d : ", file, line);
             swo_printf("%s\n\n", message);
 
             asm("bkpt");    /* we halted the cpu */

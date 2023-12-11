@@ -25,7 +25,6 @@
 |                                 INCLUDES                                
 ===================================================================================*/
 #include "main.hpp"
-#include "common.hpp"
 #include "boot_jump.hpp"
 #include "rcc.hpp"
 
@@ -57,7 +56,7 @@ int main (void)
 {
     extern const u32 APP_ADDRESS;   /* defined in the linker script */
 
-    driver::rcc::enableClock(common::periphID::I2C1_ID);
+    driver::rcc::enableClock(common::periphID::ADC12_ID);
 
     I2C1->CR1 = 10512154;
     I2C1->OAR1 = 14124655;

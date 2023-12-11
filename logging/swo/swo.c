@@ -26,6 +26,7 @@
 ===================================================================================*/
 #include <stdarg.h>
 
+#include "print.h"
 #include "types.h"
 #include "swo.h"
 
@@ -42,7 +43,7 @@
  * \ingroup logging
  * This file contains an implementation for serial wire output interface functions
  * that allow printing data to the ITM (Instrumentation Trace Macrocell) of STM32F303
- * and STM32G473 MCUs using a lighweight version of the printf function.
+ * and STM32G473 MCUs.
  * 
  * @{
  */
@@ -66,41 +67,6 @@
 /*==================================================================================
 |                             PRIVATE FUNCTIONS                                
 ===================================================================================*/
-
-/**
- * \brief count the number of digits in an integer
- * 
- * \param [in] value : integer value
- * \return number of digits 
- */
-static u8 count_digits(int value)
-{
-    u8 count = 0;
-    do
-    {
-        value /= 10;
-        count++;
-    } while (value != 0);
-
-    return count;
-}
-
-/**
- * \brief store the digits in the buffer
- * 
- * \param [in] digit  : the decimal digit
- * \param [in] buffer : the buffer
- * \param [in] pos    : the buffer position
- */
-static void store_digits(int digit, char buffer[], u32 *pos)
-{
-    if (digit >= 10)
-    {
-        store_digits(digit/10, buffer, pos);
-    }
-    buffer[*pos] = (char)((digit % 10) + '0');
-    (*pos)++;
-}
 
 
 
@@ -161,7 +127,7 @@ u32 swo_puts(const char* s)
 /**
  * \brief print a format string to the ITM
  * 
- * \param [in] s : string to print
+ * \param [in] format : string to print
  * \return number of printed characters 
  */
 size_t swo_printf(const char* format, ...)
@@ -171,88 +137,16 @@ size_t swo_printf(const char* format, ...)
     }
 
     char buffer[PRINTF_BUFFER_SIZE] = {0};
-    u32 count = 0;
     va_list args;
     va_start(args, format);
 
-    do
-    {
-        if (*format == '%')
-        {
-            format++;
-            u8 width = 0;
-
-            while (*format >= '0' && *format <= '9')
-            {
-                width = (u8)(width * 10 + (*format - '0'));
-                format++;
-            }
-
-            switch (*format)
-            {
-                case 'd':
-                {
-                    int value = va_arg(args, int);
-                    /* print the sign if necessary */
-                    if (value < 0)
-                    {
-                        buffer[count++] = '-';
-                        value = -value;
-                    }
-                    /* pad with leading zeros if applicable */
-                    for (u8 i = 0; i < (width - count_digits(value)); i++) {
-                        buffer[count++] = '0';
-                    }
-                    /* store the actual value */
-                    store_digits(value, buffer, &count);
-                }
-                    break;
-
-                case 'u':
-                {
-                    uint32_t value = va_arg(args, uint32_t);
-                    /* pad with leading zeros if applicable */
-                    for (u8 i = 0; i < (width - count_digits(value)); i++) {
-                        buffer[count++] = '0';
-                    }
-                    /* store the actual value */
-                    store_digits(value, buffer, &count);
-                }
-                    break;
-
-                case 's':
-                {
-                    const char* str = va_arg(args, char*);
-
-                    while (*str != '\0') {
-                        buffer[count++] = *str++;
-                    }
-                }
-                    break;
-                
-                default: buffer[count++] = *format;
-            }
-        }
-        else
-        {
-            /* the character is not a specifier */
-            buffer[count++] = *format;
-        }
-
-        format++;
-        
-    } while (*format != '\0');
-
-    count = swo_puts(buffer);   /* print the formated string */
+    u32 count = _sprintf(buffer, format, args);
+    swo_puts(buffer);
 
     va_end(args);
     return count;
 }
 
-size_t _sprintf(char buffer[], const char* format, ...)
-{
-    
-}
 
 /** @} */
 

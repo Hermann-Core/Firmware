@@ -139,7 +139,7 @@ namespace common
      */
     constexpr u32 get_reg_bits(volatile u32 const& reg, u32 pos, u32 numOfBits)
     {
-        return ((reg >> pos) & ((1U << numOfBits) - 1U));
+        return ((reg & ((1U << numOfBits) - 1U)) >> pos);
     }
 
     /**

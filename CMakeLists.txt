@@ -18,6 +18,7 @@ set(COMMON_SOURCES
     "${PROJECT_SOURCE_DIR}/device/core/src/hw_core.cpp"
     "${PROJECT_SOURCE_DIR}/device/core/src/periph_irq.cpp"
     "${PROJECT_SOURCE_DIR}/common/src/assert.c"
+    "${PROJECT_SOURCE_DIR}/common/library/print.c"
     "${PROJECT_SOURCE_DIR}/logging/swo/swo.c"
     "${PROJECT_SOURCE_DIR}/logging/rtt/SEGGER_RTT_ASM_ARMv7M.S"
     "${PROJECT_SOURCE_DIR}/logging/rtt/SEGGER_RTT.c"
