@@ -26,6 +26,7 @@
 ===================================================================================*/
 #include "main.hpp"
 #include "boot_jump.hpp"
+#include "periph_def.h"
 #include "rcc.hpp"
 
 // Todo! Set bootloader version (major, minor, patch)
@@ -33,12 +34,6 @@
 /*==================================================================================
 |                                   DEFINES                                
 ===================================================================================*/ 
-
-
-
-/*==================================================================================
-|                            VARIABLES DECLARATIONS                                
-===================================================================================*/
 
 
 
@@ -56,7 +51,7 @@ int main (void)
 {
     extern const u32 APP_ADDRESS;   /* defined in the linker script */
 
-    driver::rcc::enableClock(common::periphID::ADC12_ID);
+    driver::rcc::enableClock(common::periphID::GPIOA_ID);
 
     I2C1->CR1 = 10512154;
     I2C1->OAR1 = 14124655;

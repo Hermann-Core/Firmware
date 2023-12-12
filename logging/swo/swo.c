@@ -136,9 +136,9 @@ size_t swo_printf(const char* format, ...)
         return 0;
     }
 
-    char buffer[PRINTF_BUFFER_SIZE] = {0};
     va_list args;
     va_start(args, format);
+    char buffer[PRINTF_BUFFER_SIZE] = {0};
 
     u32 count = _sprintf(buffer, format, args);
     swo_puts(buffer);

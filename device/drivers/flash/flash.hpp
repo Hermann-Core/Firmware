@@ -13,7 +13,11 @@
  #   DATE       |  Version  | revision   |
  -----------------------------------------
  # 2023.05.03   |    1      |  0         |
-
+ *
+ * Smart Ebike Controller
+ * https://github.com/Hermann-Core/smart-ebike-controller
+ * 
+ * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
 
 #ifndef _FLASH_H_

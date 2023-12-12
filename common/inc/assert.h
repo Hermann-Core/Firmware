@@ -45,9 +45,10 @@ extern "C"
     void assert_handler(bool condition, const char* message,
                         const char* file, int line);
 
-    #define assert(expression, message) (void)                               \
-                                        (assert_handler(expression, message, \
-                                        __FILE__, (unsigned)(__LINE__)))
+    #define assert(expression, message) (void)(assert_handler                   \
+                                              (static_cast<bool>(expression),   \
+                                               message, __FILE__,               \
+                                              (unsigned)(__LINE__)))
 
 #endif
 

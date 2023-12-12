@@ -51,7 +51,6 @@
 
 namespace common
 {
-
     /**
      * \brief Set specific bits in a register at a given position.
      *

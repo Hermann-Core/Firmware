@@ -1,6 +1,6 @@
 /************************************************************************************* 
  * @file   gpio.hpp
- * @date   Dec, 06 2023
+ * @date   Dec, 12 2023
  * @author Awatsa Hermann
  * @brief  gpio driver interface
  * 
@@ -12,7 +12,7 @@
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.06.12   |    1      |  0         |
+ # 2023.12.12   |    1      |  0         |
  *
  * Smart Ebike Controller
  * https://github.com/Hermann-Core/smart-ebike-controller

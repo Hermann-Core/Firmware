@@ -96,6 +96,7 @@ extern CONSTRUCTOR_t const CONSTRUCTOR_LIMIT[];
 
 extern int  main(void);
 extern void FPUInit(void);
+extern void enableFaultsHandlers(void);
 extern void systemClockInit(void);
 
 extern void NMI_Handler(void);
@@ -248,10 +249,11 @@ STATIC_INLINE void memcopy(u8 *dest, const u8 *source, u32 size)
  */
 STATIC_INLINE void __hardware_init(void)
 {
-	__disable_irq();   	/* Prevent unexpected interrupts during startup */
+	__disable_irq();   		/* Prevent unexpected interrupts during startup */
 
-	FPUInit();			/* Initialize the Floating point coprocessor */
-	systemClockInit();	/* Initialize the system clock */
+	FPUInit();				/* Initialize the Floating point coprocessor */
+	enableFaultsHandlers();	/* Enable faults exceptions handlers */
+	systemClockInit();		/* Initialize the system clock */
 }
 
 
