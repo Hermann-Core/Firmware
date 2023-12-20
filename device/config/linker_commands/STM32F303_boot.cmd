@@ -56,9 +56,7 @@ RESET_BASE = 0x0803F000;
 
 SECTIONS
 {
-  .vector_table : load = BOOT_ORIGIN,
-                  run  = SRAM_ORIGIN,
-                  table(BINIT)
+  .vector_table : > BOOT_ORIGIN
 
   GROUP : > BOOT
   {

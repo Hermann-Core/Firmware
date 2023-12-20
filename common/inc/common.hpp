@@ -75,10 +75,41 @@ namespace common
      */
     constexpr void set_reg_bits(volatile u32& reg, u32 mask)
     {
-        if (!(reg & mask))
-        {
-            reg |= mask;
-        }
+        reg |= mask;
+    }
+
+    /**
+     * \brief Set specific bits in a register at a given position.
+     *
+     * The function first clears the bits in the register at the specified
+     * position, and then sets the bits to the desired value.
+     * 
+     * \param [in] reg   : reference to the register.
+     * \param [in] nbOfBits : number of bits to set.
+     * \param [in] value : value to set in the register.
+     * \param [in] pos   : position of the bits to set.
+     */
+    constexpr void modify_reg(volatile u32& reg, u32 nbOfBits, u32 value, u32 pos)
+    {
+        reg &= ~(((1U << nbOfBits) - 1U) << pos);
+        reg |= (value << pos);
+    }
+
+    /**
+     * \brief Sets the specified bits in a register.
+     *
+     * This function modifies the provided register by first clearing the bits
+     * specified by the reset mask and then setting the bits specified by the
+     * mask.
+     *
+     * \param [in] reg       The register to modify.
+     * \param [in] resetMsk  The mask indicating the bits to reset.
+     * \param [in] mask      The mask indicating the bits to set.
+     */
+    constexpr void mofify_reg(volatile u32& reg, u32 resetMsk, u32 mask)
+    {
+        reg &= ~resetMsk;
+        reg |= mask;
     }
 
     /**

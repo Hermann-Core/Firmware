@@ -26,9 +26,12 @@
 ===================================================================================*/
 #include "gpio.hpp"
 #include "const.hpp"
+#include "periph_def.h"
 #include "rcc.hpp"
 #include "hw_core.hpp"
 
+
+#define section_ccmram       __attribute__((section(".ccmram")))
 
 /**
  * \defgroup gpio GPIO
@@ -342,7 +345,7 @@ void gpio::enableIrq(u16 pin, edge edge, cbk_f callback)
         // Enable the system configuration clock
         rcc::enableClock(common::SYSCFG_ID);
         // Configure the interrupt source
-        common::set_reg_bits(SYSCFG->EXTICR[pin>>2], portNum, (pin&0x3)*4);
+        common::modify_reg(SYSCFG->EXTICR[pin>>2], 4, portNum, (pin&0x3)*4);
         // Unmask the corresponding interrupt request
         common::set_reg_bits(EXTI->IMR1, common::SET, pin);
         // Set the triggering edge(s) for the line
@@ -387,7 +390,7 @@ void gpio::disableIrq(u16 pin) const
         // Clear the pending interrupt request if any
         common::set_reg_bits(EXTI->PR1, common::SET, pin);
         // Reset the corresponding interrupt input source
-        common::reset_reg_bits(SYSCFG->EXTICR[pin>>2], 0x4, (pin&0x3)*4);
+        common::reset_reg_bits(SYSCFG->EXTICR[pin>>2], 15, (pin&0x3)*4);
         // Mask the interrupt request for this line
         common::reset_reg_bits(EXTI->IMR1, common::SET, pin);
         // Reset the trigger configuration for the line
@@ -431,8 +434,8 @@ void gpio::enableEvent(u16 pin, edge edge)
         // Enable the system configuration clock
         rcc::enableClock(common::SYSCFG_ID);
         // Configure the event source
-        common::set_reg_bits(SYSCFG->EXTICR[pin>>2], portNum, (pin&0x3)*4);
-        // Unmask the corresponding event request
+        common::modify_reg(SYSCFG->EXTICR[pin>>2], 4, portNum, (pin&0x3)*4);
+        // Unmask the corresponding event source
         common::set_reg_bits(EXTI->EMR1, common::SET, pin);
         // Set the triggering edge(s) for the line
         if (edge == edge::RISING) {
@@ -442,6 +445,7 @@ void gpio::enableEvent(u16 pin, edge edge)
             common::set_reg_bits(EXTI->FTSR1, common::SET, pin);
         }
         else {
+            // Both rising and falling edges
             common::set_reg_bits(EXTI->RTSR1, common::SET, pin);
             common::set_reg_bits(EXTI->FTSR1, common::SET, pin);
         }
@@ -462,32 +466,34 @@ void gpio::disableEvent(u16 pin) const
     if (common::read_reg_bits(EXTI->EMR1, common::SET, pin))
     {
         // Reset the corresponding event source
-        common::reset_reg_bits(SYSCFG->EXTICR[pin>>2], 0x4, (pin&0x3)*4);
+        common::reset_reg_bits(SYSCFG->EXTICR[pin>>2], 15, (pin&0x3)*4);
         // Mask the event request for this line
         common::reset_reg_bits(EXTI->EMR1, common::SET, pin);
         // Reset the trigger configuration for the line
         if (common::read_reg_bits(EXTI->RTSR1, common::SET, pin))
         {
+            // Reset the rising edge trigger for the line
             common::reset_reg_bits(EXTI->RTSR1, common::SET, pin);
         }
         if (common::read_reg_bits(EXTI->FTSR1, common::SET, pin))
         {
+            // Reset the falling edge trigger for the line
             common::reset_reg_bits(EXTI->FTSR1, common::SET, pin);
         }
     }
 }
 
-
+section_ccmram
 extern "C" void EXTI15_10_IRQHandler(void)
 {
     for (auto i = 10; i <= 15; i++)
     {
-        if (common::read_reg_bits(EXTI->PR1, common::SET, i))
-        {
-            common::set_reg_bits(EXTI->PR1, common::SET, i);
+        if (common::read_reg_bits(EXTI->PR1, common::SET, i)) {
+            // Clear the pending bit
+            common::set_reg_bits(EXTI->PR1, common::SET << i);
 
-            if (gpio::cbkArray.at(i) != nullptr)
-            {
+            if (gpio::cbkArray.at(i) != nullptr) {
+                // Call the callback function
                 gpio::cbkArray[i]();
             }
             break;

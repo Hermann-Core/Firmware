@@ -45,7 +45,7 @@
  */
 no_return void boot_jump::jumpToApp(const u32* appVector)
 {
-    constexpr u32 SRAM_BASE = 0x20000000;
+    extern const u32 APP_ADDRESS;   /* defined in the linker script */
 #if defined (STM32F303)
     constexpr u8 MAX_IRQ_NUMBERS = 81;
 #elif defined (STM32G473)
@@ -72,7 +72,7 @@ no_return void boot_jump::jumpToApp(const u32* appVector)
     //! deinit all the configured peripherals
 
     /* Set the vector table address for the application */
-    SCB->VTOR = SRAM_BASE;
+    SCB->VTOR = (u32)&APP_ADDRESS;
 
     /* Set the stack pointer and jump to the application */
     jumpASM(appVector[0], appVector[1]);

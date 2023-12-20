@@ -23,7 +23,7 @@
 #define SLOT_SIZE             0x19000     /* 100KB */
 #define APP_ORIGIN            0x0800B000
 #define SLOT_ORIGIN           0x08025000
-#define SRAM_SIZE             0x9E78      /* 39.6KB */
+#define SRAM_SIZE             0xA000      /* 40KB */
 #define SRAM_ORIGIN           0x20000188
 #define CRC_ORIGIN            0x08024000
 #define CRC_SIZE              0x40        /* 64B */
