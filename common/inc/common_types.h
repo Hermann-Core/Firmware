@@ -1,48 +1,55 @@
 /************************************************************************************* 
- * @file   boot_jump.hpp
- * @date   June, 27 2023
- * @author Awatsa Hermann
- * @brief  bootloader jump header file
+ * @file   common-types.h
+ * @date   03, March 2023
+ * @author AWATSA HERMANN
+ * @brief  common C/C++ types redefinition
  * 
+ *         Redefinition of the common C/C++ types
  * ***********************************************************************************
  * @attention
  * 
- * The functions used in this file have been written mainly for the STM32F303
- * and STM32G473 MCUs. There is no guarantee of operation for other microcontrollers.
- * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.04.02   |    1      |  1         |
+ # 2023.03.03   |    1      |  0         |
 
 *************************************************************************************/
 
 /* Prevent recursive inclusion */
-#ifndef _BOOT_JUMP_H_
-#define _BOOT_JUMP_H_
+#ifndef _COMMON_TYPES_H_
+#define _COMMON_TYPES_H_
 
 
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include "common.hpp"
+#include <stdint.h>
+#include <stddef.h>
 
 
 
 /*==================================================================================
-|                             CLASSES DECLARATIONS                                
+|                             TYPES DEFINITIONS                                
 ===================================================================================*/
+#define _vol        volatile
+#define null        0
 
-class boot_jump
-{
-    public:
-        static void jumpToApp(const u32* appVector);
+#ifdef __cplusplus
+extern "C" {
+#endif
+typedef int8_t     i8;
+typedef uint8_t    u8;
+typedef int16_t    i16;
+typedef uint16_t   u16;
+typedef int32_t    i32;
+typedef uint32_t   u32;
+typedef int64_t    i64;
+typedef uint64_t   u64;
+#ifdef __cplusplus
+}
+#endif
 
-    private:
-        static void jumpASM(u32 SP, u32 PC);
-};
 
-
-#endif  /* _BOOT_JUMP_H_ */
+#endif      /* _COMMON_TYPES_H_ */
 
 /*==================================================================================
 |                                 END OF FILE                                

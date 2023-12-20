@@ -1,48 +1,53 @@
 /************************************************************************************* 
- * @file   boot_jump.hpp
- * @date   June, 27 2023
+ * @file   hardware_core.hpp
+ * @date   March, 12 2023
  * @author Awatsa Hermann
- * @brief  bootloader jump header file
+ * @brief  hardware core functions class
  * 
+ *         Contains the declarations of
+           the core hardware functions
  * ***********************************************************************************
  * @attention
  * 
- * The functions used in this file have been written mainly for the STM32F303
- * and STM32G473 MCUs. There is no guarantee of operation for other microcontrollers.
- * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.04.02   |    1      |  1         |
+ # 2023.03.12   |    1      |  0         |
 
 *************************************************************************************/
 
 /* Prevent recursive inclusion */
-#ifndef _BOOT_JUMP_H_
-#define _BOOT_JUMP_H_
+#ifndef _HARDWARE_CORE_H_
+#define _HARDWARE_CORE_H_
 
 
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include "common.hpp"
+#include "peripherals_defs.h"
 
 
 
 /*==================================================================================
-|                             CLASSES DECLARATIONS                                
+|                             FUNCTIONS DECLARATIONS                                
 ===================================================================================*/
 
-class boot_jump
+/**
+ * \class core hardware functions interface
+ */
+class hw_core
 {
     public:
-        static void jumpToApp(const u32* appVector);
-
-    private:
-        static void jumpASM(u32 SP, u32 PC);
+        static void disable_all_irq(void);
+        static void disable_fault_irq(void);
+        static void irq_enable(IRQn_t IRQn);
+        static void irq_disable(IRQn_t IRQn);
+        static void irq_clearPending(IRQn_t IRQn);
+        static void irq_setPriority(IRQn_t IRQn, u8 priority);
+        static void systemReset(void);
 };
 
 
-#endif  /* _BOOT_JUMP_H_ */
+#endif      /* _HARDWARE_CORE_H_ */
 
 /*==================================================================================
 |                                 END OF FILE                                

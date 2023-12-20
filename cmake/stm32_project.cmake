@@ -15,6 +15,7 @@ target_compile_definitions(
     ${TARGET_NAME} PRIVATE
     STM32F303
     _DSP_LIB
+    _USE_RTT
     _ENABLE_IRQ
 )
 

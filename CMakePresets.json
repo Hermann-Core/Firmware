@@ -16,7 +16,7 @@
             "installDir": "${sourceDir}/build/install/${presetName}",
             "environment": {
                 "GNU_TOOLCHAIN_PATH": "D:/GNU_Arm_Embedded_Toolchain/12.2-rel1/bin",
-                "TI_TOOLCHAIN_PATH": "D:/TI_LLVM_Arm_Embedded_Toolchain/bin"
+                "TI_TOOLCHAIN_PATH": "/Applications/TIArmToolchain/bin"
             },
             "cacheVariables": {
                 "CMAKE_TOOLCHAIN_FILE": {

@@ -65,9 +65,9 @@ class array
         using pointer           = T*;
         using const_pointer     = const T*;
 
-        array() {}
+        array() = default;
         // Constructor taking an initializer list
-        array(std::initializer_list<T> initList)
+        explicit array(std::initializer_list<T> initList)
         {
             // The size of the list must not exceed the array size
             assert(initList.size() <= _size, "out of bounds list");

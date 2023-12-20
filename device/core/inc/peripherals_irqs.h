@@ -1,5 +1,5 @@
 /************************************************************************************* 
- * @file   periph_irq.h
+ * @file   peripherals_irqs.h
  * @date   05, March 2023
  * @author Awatsa Hermann
  * @brief  Peripherals interrupts header file
@@ -12,11 +12,7 @@
  #   DATE       |  Version  | revision   |
  -----------------------------------------
  # 2023.03.05   |    1      |  0         |
- *
- * Smart Ebike Controller
- * https://github.com/Hermann-Core/smart-ebike-controller
- * 
- * @copyright Copyright (c) 2023 Hermann Awatsa
+
 *************************************************************************************/
 
 /* Prevent recursive inclusion */

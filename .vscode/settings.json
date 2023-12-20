@@ -96,7 +96,6 @@
         "cassert": "cpp",
         "__assert": "cpp",
         "assert.h": "c",
-        "swo.h": "c",
-        "stdarg.h": "c"
+        "swo.h": "c"
     }
 }

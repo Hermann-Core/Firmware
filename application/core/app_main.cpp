@@ -1,8 +1,8 @@
 /************************************************************************************* 
- * @file   bootloader_main.cpp
- * @date   june, 30 2023
+ * @file   main_app.cpp
+ * @date   April, 02 2023
  * @author Awatsa Hermann
- * @brief  Bootloader entry point. Comprises the main function of the bootlader
+ * @brief  main application source file 
  * 
  * ***********************************************************************************
  * @attention
@@ -12,34 +12,26 @@
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.06.30   |    1      |  1         |
- *
- * Smart Ebike Controller
- * https://github.com/Hermann-Core/smart-ebike-controller
- *
- * @copyright Copyright (c) 2023 Hermann Awatsa
+ # 2023.04.02   |    1      |  0         |
+
 *************************************************************************************/
 
 
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include "main.hpp"
-#include "boot_jump.hpp"
-#include "const.hpp"
-#include "periph_def.h"
-#include "rcc.hpp"
-
-// Todo! Set bootloader version (major, minor, patch)
-
-/*==================================================================================
-|                                   DEFINES                                
-===================================================================================*/ 
+#include "app_main.hpp"
 
 
 
 /*==================================================================================
-|                            FUNCTIONS DECLARATIONS                                
+|                                  DEFINES                                
+===================================================================================*/
+
+
+
+/*==================================================================================
+|                            VARIABLES DECLARATIONS                                
 ===================================================================================*/
 
 
@@ -50,11 +42,12 @@
 
 int main (void)
 {
-    extern const u32 APP_ADDRESS;   /* defined in the linker script */
+    SysTick_Config(72000);
 
-    boot_jump::jumpToApp(&APP_ADDRESS);     /* jump to the application */
-
-    while (true);
+    while (true)
+    {
+        
+    }
 }
 
 
