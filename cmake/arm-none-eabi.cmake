@@ -11,10 +11,8 @@
 # Find a toolchain installation to use
 file(GLOB TOOLCHAIN_DIRECTORIES
     "$ENV{TI_TOOLCHAIN_PATH}"
-    "/Applications/TIArmToolchain/bin"
     # "$ENV{GNU_TOOLCHAIN_PATH}"
     "/opt/GNU Arm Embedded Toolchain/12.2-rel1/bin"
-    "/Applications/GNU Arm Embedded Toolchain/12.2-rel1/bin"
 )
 
 # Count the available toolchains
