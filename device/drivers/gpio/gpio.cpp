@@ -45,6 +45,8 @@
 ===================================================================================*/
 using namespace driver;
 
+array<gpio::cbk_f, gpio::MAX_PINS> gpio::cbkArray;
+
 /**
  * \brief Clear the configuration of the GPIO pin
  * 
@@ -150,16 +152,20 @@ GPIO_HW* gpio::getPort(u32 gpioID)
  * 
  * \param [in] gpioID : gpio port identifier
  */
-gpio::gpio(u32 gpioID) : portNum(gpioID - 32U),
-                         locGPIO(getPort(gpioID - 32U))
+gpio::gpio(u32 gpioID) : portNum((gpioID >= 32U) ? gpioID-32U : gpioID-17U),
+                         locGPIO(getPort(portNum))
 {
-    assert((gpioID >= 32) && (gpioID <= 38), "Invalid port ID.");
+    #if defined (STM32F303)
+    assert((gpioID >= 17) && (gpioID <= 22), "Invalid port ID.");
+    #elif defined (STM32G473)
+    assert((gpioID >= 32) && (gpioID <= 37), "Invalid port ID.");
+    #endif
 
     rcc::enableClock(gpioID);   // Enable the GPIO clock
     // Reset all the content of the arrays
-    inFlag.erase(false);
-    outFlag.erase(false);
-    cbkArray.erase(nullptr);
+    for (bool& flag : inFlag)  { flag = false; }
+    for (bool& flag : outFlag) { flag = false; }
+    for (cbk_f& cbk : cbkArray) { cbk = nullptr; }
 }
 
 
@@ -336,7 +342,7 @@ void gpio::enableIrq(u16 pin, edge edge, cbk_f callback)
         // Enable the system configuration clock
         rcc::enableClock(common::SYSCFG_ID);
         // Configure the interrupt source
-        common::set_reg_bits(SYSCFG->EXTICR[pin>>2], portNum, pin&0x3);
+        common::set_reg_bits(SYSCFG->EXTICR[pin>>2], portNum, (pin&0x3)*4);
         // Unmask the corresponding interrupt request
         common::set_reg_bits(EXTI->IMR1, common::SET, pin);
         // Set the triggering edge(s) for the line
@@ -381,7 +387,7 @@ void gpio::disableIrq(u16 pin) const
         // Clear the pending interrupt request if any
         common::set_reg_bits(EXTI->PR1, common::SET, pin);
         // Reset the corresponding interrupt input source
-        common::reset_reg_bits(SYSCFG->EXTICR[pin>>2], 0x4, pin&0x3);
+        common::reset_reg_bits(SYSCFG->EXTICR[pin>>2], 0x4, (pin&0x3)*4);
         // Mask the interrupt request for this line
         common::reset_reg_bits(EXTI->IMR1, common::SET, pin);
         // Reset the trigger configuration for the line
@@ -425,7 +431,7 @@ void gpio::enableEvent(u16 pin, edge edge)
         // Enable the system configuration clock
         rcc::enableClock(common::SYSCFG_ID);
         // Configure the event source
-        common::set_reg_bits(SYSCFG->EXTICR[pin>>2], portNum, pin&0x3);
+        common::set_reg_bits(SYSCFG->EXTICR[pin>>2], portNum, (pin&0x3)*4);
         // Unmask the corresponding event request
         common::set_reg_bits(EXTI->EMR1, common::SET, pin);
         // Set the triggering edge(s) for the line
@@ -456,7 +462,7 @@ void gpio::disableEvent(u16 pin) const
     if (common::read_reg_bits(EXTI->EMR1, common::SET, pin))
     {
         // Reset the corresponding event source
-        common::reset_reg_bits(SYSCFG->EXTICR[pin>>2], 0x4, pin&0x3);
+        common::reset_reg_bits(SYSCFG->EXTICR[pin>>2], 0x4, (pin&0x3)*4);
         // Mask the event request for this line
         common::reset_reg_bits(EXTI->EMR1, common::SET, pin);
         // Reset the trigger configuration for the line
@@ -483,8 +489,8 @@ extern "C" void EXTI15_10_IRQHandler(void)
             if (gpio::cbkArray.at(i) != nullptr)
             {
                 gpio::cbkArray[i]();
-                break;
             }
+            break;
         }
     }
 }

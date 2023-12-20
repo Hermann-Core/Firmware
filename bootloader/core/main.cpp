@@ -27,8 +27,7 @@
 #include "main.hpp"
 #include "boot_jump.hpp"
 #include "const.hpp"
-#include "periph_def.h"
-#include "rcc.hpp"
+#include "gpio.hpp"
 
 // Todo! Set bootloader version (major, minor, patch)
 
@@ -52,7 +51,12 @@ int main (void)
 {
     extern const u32 APP_ADDRESS;   /* defined in the linker script */
 
-    boot_jump::jumpToApp(&APP_ADDRESS);     /* jump to the application */
+    driver::gpio gpioTest(common::GPIOD_ID);
+
+    gpioTest.init(common::GPIOCfg::PULLDWN, common::GPIO_PIN10);
+    gpioTest.enableIrq(common::GPIO_PIN10, common::edge::RISING, nullptr);
+
+    // boot_jump::jumpToApp(&APP_ADDRESS);     /* jump to the application */
 
     while (true);
 }
