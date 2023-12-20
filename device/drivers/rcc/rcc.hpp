@@ -27,7 +27,8 @@
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include "common.hpp"
+#include "operators.hpp"
+
 
 
 /*==================================================================================
@@ -48,11 +49,11 @@ namespace driver
         private:
         
             static constexpr u32 PERIPH_ID_MAX = 143;
-#if defined (STM32F303)
+        #if defined (STM32F303)
             static constexpr u32 SYSCLK = 72_mhz;
-#elif defined (STM32G473)
+        #elif defined (STM32G473)
             static constexpr u32 SYSCLK = 170_mhz;
-#endif
+        #endif
     };
 }
 

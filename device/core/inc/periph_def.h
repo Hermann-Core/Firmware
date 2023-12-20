@@ -599,502 +599,6 @@ typedef struct
 } ADC_Common_HW;
 
 
-/*===================== FD CONTROLLER AREA NETWORK =================================*/
-
-typedef struct {                     
-  
-  union {
-    __IM  u32 CREL;             
-    
-    struct {
-      __IM  u32 DAY        : 8; 
-      __IM  u32 MON        : 8; 
-      __IM  u32 YEAR       : 4; 
-      __IM  u32 SUBSTEP    : 4; 
-      __IM  u32 STEP       : 4; 
-      __IM  u32 REL        : 4; 
-    } CREL_b;
-  } ;
-  
-  union {
-    __IM  u32 ENDN;             
-    
-    struct {
-      __IM  u32 ETV        : 32;
-    } ENDN_b;
-  } ;
-  __IM  u32  RESERVED;
-  
-  union {
-    __IOM u32 DBTP; 
-
-    struct {
-      __IOM u32 DSJW       : 4; 
-      __IOM u32 DTSEG2     : 4; 
-      __IOM u32 DTSEG1     : 5; 
-            u32            : 3;
-      __IOM u32 DBRP       : 5; 
-            u32            : 2;
-      __IOM u32 TDC        : 1; 
-            u32            : 8;
-    } DBTP_b;
-  } ;
-  
-  union {
-    __IOM u32 TEST; 
-
-    struct {
-            u32            : 4;
-      __IOM u32 LBCK       : 1; 
-      __IOM u32 TX         : 2; 
-      __IM  u32 RX         : 1; 
-            u32            : 24;
-    } TEST_b;
-  } ;
-  
-  union {
-    __IOM u32 RWD; 
-
-    struct {
-      __IOM u32 WDC        : 8; 
-      __IM  u32 WDV        : 8; 
-            u32            : 16;
-    } RWD_b;
-  } ;
-  
-  union {
-    __IOM u32 CCCR; 
-    
-    struct {
-      __IOM u32 INIT       : 1; 
-      __IOM u32 CCE        : 1; 
-      __IOM u32 ASM        : 1; 
-      __IM  u32 CSA        : 1; 
-      __IOM u32 CSR        : 1; 
-      __IOM u32 MON        : 1; 
-      __IOM u32 DAR        : 1; 
-      __IOM u32 TEST       : 1; 
-      __IOM u32 FDOE       : 1; 
-      __IOM u32 BRSE       : 1; 
-            u32            : 2;
-      __IOM u32 PXHD       : 1; 
-      __IOM u32 EFBI       : 1; 
-      __IOM u32 TXP        : 1; 
-      __IOM u32 NISO       : 1; 
-            u32            : 16;
-    } CCCR_b;
-  } ;
-  
-  union {
-    __IOM u32 NBTP;             
-    
-    struct {
-      __IOM u32 NTSEG2     : 7; 
-            u32            : 1;
-      __IOM u32 NTSEG1     : 8; 
-      __IOM u32 NBRP       : 9; 
-      __IOM u32 NSJW       : 7; 
-    } NBTP_b;
-  } ;
-  
-  union {
-    __IOM u32 TSCC;             
-    
-    struct {
-      __IOM u32 TSS        : 2; 
-            u32            : 14;
-      __IOM u32 TCP        : 4; 
-            u32            : 12;
-    } TSCC_b;
-  } ;
-  
-  union {
-    __IM  u32 TSCV;             
-    
-    struct {
-      __IM  u32 TSC        : 16;
-            u32            : 16;
-    } TSCV_b;
-  } ;
-  
-  union {
-    __IOM u32 TOCC;             
-    
-    struct {
-      __IOM u32 ETOC       : 1; 
-      __IOM u32 TOS        : 2; 
-            u32            : 13;
-      __IOM u32 TOP        : 16;
-    } TOCC_b;
-  } ;
-  
-  union {
-    __IM  u32 TOCV;             
-    
-    struct {
-      __IM  u32 TOC        : 16;
-            u32            : 16;
-    } TOCV_b;
-  } ;
-  __IM  u32  RESERVED1[4];
-  
-  union {
-    __IM  u32 ECR;              
-    
-    struct {
-      __IM  u32 TEC        : 8; 
-      __IM  u32 REC        : 7; 
-      __IM  u32 RP         : 1; 
-      __IM  u32 CEL        : 8; 
-            u32            : 8;
-    } ECR_b;
-  } ;
-  
-  union {
-    __IOM u32 PSR;              
-    
-    struct {
-      __IOM u32 LEC        : 3; 
-      __IM  u32 ACT        : 2; 
-      __IM  u32 EP         : 1; 
-      __IM  u32 EW         : 1; 
-      __IM  u32 BO         : 1; 
-      __IOM u32 DLEC       : 3; 
-      __IOM u32 RESI       : 1; 
-      __IOM u32 RBRS       : 1; 
-      __IOM u32 REDL       : 1; 
-      __IOM u32 PXE        : 1; 
-            u32            : 1;
-      __IOM u32 TDCV       : 7; 
-            u32            : 9;
-    } PSR_b;
-  } ;
-  
-  union {
-    __IOM u32 TDCR;             
-    
-    struct {
-      __IOM u32 TDCF       : 7; 
-            u32            : 1;
-      __IOM u32 TDCO       : 7; 
-            u32            : 17;
-    } TDCR_b;
-  } ;
-  __IM  u32  RESERVED2;
-  
-  union {
-    __IOM u32 IR; 
-
-    struct {
-      __IOM u32 RF0N       : 1; 
-      __IOM u32 RF0F       : 1; 
-      __IOM u32 RF0L       : 1; 
-      __IOM u32 RF1N       : 1; 
-      __IOM u32 RF1F       : 1; 
-      __IOM u32 RF1L       : 1; 
-      __IOM u32 HPM        : 1; 
-      __IOM u32 TC         : 1; 
-      __IOM u32 TCF        : 1; 
-      __IOM u32 TFE        : 1; 
-      __IOM u32 TEFN       : 1; 
-      __IOM u32 TEFF       : 1; 
-      __IOM u32 TEFL       : 1; 
-      __IOM u32 TSW        : 1; 
-      __IOM u32 MRAF       : 1; 
-      __IOM u32 TOO        : 1; 
-      __IOM u32 ELO        : 1; 
-      __IOM u32 EP         : 1; 
-      __IOM u32 EW         : 1; 
-      __IOM u32 BO         : 1; 
-      __IOM u32 WDI        : 1; 
-      __IOM u32 PEA        : 1; 
-      __IOM u32 PED        : 1; 
-      __IOM u32 ARA        : 1; 
-            u32            : 8;
-    } IR_b;
-  } ;
-  
-  union {
-    __IOM u32 IE;  
-
-    struct {
-      __IOM u32 RF0NE      : 1; 
-      __IOM u32 RF0FE      : 1; 
-      __IOM u32 RF0LE      : 1; 
-      __IOM u32 RF1NE      : 1; 
-      __IOM u32 RF1FE      : 1; 
-      __IOM u32 RF1LE      : 1; 
-      __IOM u32 HPME       : 1; 
-      __IOM u32 TCE        : 1; 
-      __IOM u32 TCFE       : 1; 
-      __IOM u32 TFEE       : 1; 
-      __IOM u32 TEFNE      : 1; 
-      __IOM u32 TEFFE      : 1; 
-      __IOM u32 TEFLE      : 1; 
-      __IOM u32 TSWE       : 1; 
-      __IOM u32 MRAFE      : 1; 
-      __IOM u32 TOOE       : 1; 
-      __IOM u32 ELOE       : 1; 
-      __IOM u32 EPE        : 1; 
-      __IOM u32 EWE        : 1; 
-      __IOM u32 BOE        : 1; 
-      __IOM u32 WDIE       : 1; 
-      __IOM u32 PEAE       : 1; 
-      __IOM u32 PEDE       : 1; 
-      __IOM u32 ARAE       : 1; 
-            u32            : 8;
-    } IE_b;
-  } ;
-  
-  union {
-    __IOM u32 ILS; 
-
-    struct {
-      __IOM u32 RxFIFO0    : 1; 
-      __IOM u32 RxFIFO1    : 1; 
-      __IOM u32 SMSG       : 1; 
-      __IOM u32 TFERR      : 1; 
-      __IOM u32 MISC       : 1; 
-      __IOM u32 BERR       : 1; 
-      __IOM u32 PERR       : 1; 
-            u32            : 25;
-    } ILS_b;
-  } ;
-  
-  union {
-    __IOM u32 ILE;
-
-    struct {
-      __IOM u32 EINT0      : 1; 
-      __IOM u32 EINT1      : 1; 
-            u32            : 30;
-    } ILE_b;
-  } ;
-  __IM  u32  RESERVED3[8];
-  
-  union {
-    __IOM u32 RXGFC; 
-    
-    struct {
-      __IOM u32 RRFE       : 1; 
-      __IOM u32 RRFS       : 1; 
-      __IOM u32 ANFE       : 2; 
-      __IOM u32 ANFS       : 2; 
-            u32            : 2;
-      __IOM u32 F1OM       : 1; 
-      __IOM u32 F0OM       : 1; 
-            u32            : 6;
-      __IOM u32 LSS        : 5; 
-            u32            : 3;
-      __IOM u32 LSE        : 4; 
-            u32            : 4;
-    } RXGFC_b;
-  } ;
-  
-  union {
-    __IOM u32 XIDAM;            
-    
-    struct {
-      __IOM u32 EIDM       : 29;
-            u32            : 3;
-    } XIDAM_b;
-  } ;
-  
-  union {
-    __IM  u32 HPMS;
-    
-    struct {
-      __IM  u32 BIDX       : 3; 
-            u32            : 3;
-      __IM  u32 MSI        : 2; 
-      __IM  u32 FIDX       : 5; 
-            u32            : 2;
-      __IM  u32 FLST       : 1; 
-            u32            : 16;
-    } HPMS_b;
-  } ;
-  __IM  u32  RESERVED4;
-  
-  union {
-    __IM  u32 RXF0S;            
-    
-    struct {
-      __IM  u32 F0FL       : 4; 
-            u32            : 4;
-      __IM  u32 F0GI       : 2; 
-            u32            : 6;
-      __IM  u32 F0PI       : 2; 
-            u32            : 6;
-      __IM  u32 F0F        : 1; 
-      __IM  u32 RF0L       : 1; 
-            u32            : 6;
-    } RXF0S_b;
-  } ;
-  
-  union {
-    __IOM u32 RXF0A;            
-    
-    struct {
-      __IOM u32 F0AI       : 3; 
-            u32            : 29;
-    } RXF0A_b;
-  } ;
-  
-  union {
-    __IM  u32 RXF1S;            
-    
-    struct {
-      __IM  u32 F1FL       : 4; 
-            u32            : 4;
-      __IM  u32 F1GI       : 2; 
-            u32            : 6;
-      __IM  u32 F1PI       : 2; 
-            u32            : 6;
-      __IM  u32 F1F        : 1; 
-      __IM  u32 RF1L       : 1; 
-            u32            : 6;
-    } RXF1S_b;
-  } ;
-  
-  union {
-    __IOM u32 RXF1A;            
-    
-    struct {
-      __IOM u32 F1AI       : 3; 
-            u32            : 29;
-    } RXF1A_b;
-  } ;
-  __IM  u32  RESERVED5[8];
-  
-  union {
-    __IOM u32 TXBC;             
-    
-    struct {
-            u32            : 24;
-      __IOM u32 TFQM       : 1; 
-            u32            : 7;
-    } TXBC_b;
-  } ;
-  
-  union {
-    __IM  u32 TXFQS;
-    
-    struct {
-      __IM  u32 TFFL       : 3; 
-            u32            : 5;
-      __IM  u32 TFGI       : 2; 
-            u32            : 6;
-      __IM  u32 TFQPI      : 2; 
-            u32            : 3;
-      __IM  u32 TFQF       : 1; 
-            u32            : 10;
-    } TXFQS_b;
-  } ;
-  
-  union {
-    __IM  u32 TXBRP;            
-    
-    struct {
-      __IM  u32 TRP        : 3; 
-            u32            : 29;
-    } TXBRP_b;
-  } ;
-  
-  union {
-    __IOM u32 TXBAR;            
-    
-    struct {
-      __IOM u32 AR         : 3; 
-            u32            : 29;
-    } TXBAR_b;
-  } ;
-  
-  union {
-    __IOM u32 TXBCR;            
-    
-    struct {
-      __IOM u32 CR         : 3; 
-            u32            : 29;
-    } TXBCR_b;
-  } ;
-  
-  union {
-    __IM  u32 TXBTO;            
-    
-    struct {
-      __IM  u32 TO         : 3; 
-            u32            : 29;
-    } TXBTO_b;
-  } ;
-  
-  union {
-    __IM  u32 TXBCF;            
-    
-    struct {
-      __IM  u32 CF         : 3; 
-            u32            : 29;
-    } TXBCF_b;
-  } ;
-  
-  union {
-    __IOM u32 TXBTIE;
-      
-    
-    struct {
-      __IOM u32 TIE        : 3; 
-            u32            : 29;
-    } TXBTIE_b;
-  } ;
-  
-  union {
-    __IOM u32 TXBCIE; 
-      
-    
-    struct {
-      __IOM u32 CFIE       : 3; 
-            u32            : 29;
-    } TXBCIE_b;
-  } ;
-  
-  union {
-    __IM  u32 TXEFS;            
-    
-    struct {
-      __IM  u32 EFFL       : 3; 
-            u32            : 5;
-      __IM  u32 EFGI       : 2; 
-            u32            : 6;
-      __IM  u32 EFPI       : 2; 
-            u32            : 6;
-      __IM  u32 EFF        : 1; 
-      __IM  u32 TEFL       : 1; 
-            u32            : 6;
-    } TXEFS_b;
-  } ;
-  
-  union {
-    __IOM u32 TXEFA;            
-    
-    struct {
-      __IOM u32 EFAI       : 2; 
-            u32            : 30;
-    } TXEFA_b;
-  } ;
-  __IM  u32  RESERVED6[5];
-  
-  union {
-    __IOM u32 CKDIV;            
-    
-    struct {
-      __IOM u32 PDIV       : 4; 
-                      
-            u32            : 28;
-    } CKDIV_b;
-  } ;
-
-} FDCAN_HW;
-
-
 /*===================== COMPARATOR AND STATUS REGISTER =============================*/
 
 typedef struct {                    
@@ -4417,53 +3921,7 @@ typedef struct {
     } RCR_b;
   } ;
   
-  union {
-    __IOM u32 EXTICR1;         
-    
-    struct {
-      __IOM u32 EXTI0      : 4;       
-      __IOM u32 EXTI1      : 4;       
-      __IOM u32 EXTI2      : 4;       
-      __IOM u32 EXTI3      : 4;       
-            u32            : 16;
-    } EXTICR1_b;
-  } ;
-  
-  union {
-    __IOM u32 EXTICR2;         
-    
-    struct {
-      __IOM u32 EXTI4      : 4;       
-      __IOM u32 EXTI5      : 4;       
-      __IOM u32 EXTI6      : 4;       
-      __IOM u32 EXTI7      : 4;       
-            u32            : 16;
-    } EXTICR2_b;
-  } ;
-  
-  union {
-    __IOM u32 EXTICR3;         
-    
-    struct {
-      __IOM u32 EXTI8      : 4;       
-      __IOM u32 EXTI9      : 4;       
-      __IOM u32 EXTI10     : 4;       
-      __IOM u32 EXTI11     : 4;       
-            u32            : 16;
-    } EXTICR3_b;
-  } ;
-  
-  union {
-    __IOM u32 EXTICR4;         
-    
-    struct {
-      __IOM u32 EXTI12     : 4;       
-      __IOM u32 EXTI13     : 4;       
-      __IOM u32 EXTI14     : 4;       
-      __IOM u32 EXTI15     : 4;       
-            u32            : 16;
-    } EXTICR4_b;
-  } ;
+  __IOM u32 EXTICR[4];
   
   union {
     __IOM u32 CFGR2;           
@@ -4513,53 +3971,7 @@ typedef struct {
     } CFGR1_b;
   } ;
   
-  union {
-    __IOM u32 EXTICR1;           
-    
-    struct {
-      __IOM u32 EXTI0      : 4;  
-      __IOM u32 EXTI1      : 4;  
-      __IOM u32 EXTI2      : 4;  
-      __IOM u32 EXTI3      : 4;  
-            u32            : 16;
-    } EXTICR1_b;
-  } ;
-  
-  union {
-    __IOM u32 EXTICR2;           
-    
-    struct {
-      __IOM u32 EXTI4      : 4;  
-      __IOM u32 EXTI5      : 4;  
-      __IOM u32 EXTI6      : 4;  
-      __IOM u32 EXTI7      : 4;  
-            u32            : 16;
-    } EXTICR2_b;
-  } ;
-  
-  union {
-    __IOM u32 EXTICR3;           
-    
-    struct {
-      __IOM u32 EXTI8      : 4;  
-      __IOM u32 EXTI9      : 4;  
-      __IOM u32 EXTI10     : 4;  
-      __IOM u32 EXTI11     : 4;  
-            u32            : 16;
-    } EXTICR3_b;
-  } ;
-  
-  union {
-    __IOM u32 EXTICR4;           
-    
-    struct {
-      __IOM u32 EXTI12     : 4;  
-      __IOM u32 EXTI13     : 4;  
-      __IOM u32 EXTI14     : 4;  
-      __IOM u32 EXTI15     : 4;  
-            u32            : 16;
-    } EXTICR4_b;
-  } ;
+  __IOM u32 EXTICR[4];
   
   union {
     __IOM u32 SCSR;              
@@ -6104,6 +5516,988 @@ typedef struct {
 #define DMAMUX1_REQUESTGENSTATUS   ((DMAMUX_REQUESTGENSTATUS_HW *) DMAMUX1_REQUESTGENSTATUS_ADDRESS)
 
 #define DBGMCU                     ((DBGMCU_HW *) DBGMCU_BASE_ADDRESS)
+
+
+
+/*==================================================================================
+|                      PERIPHERALS REGISTERS BITS DEFINITIONS                                
+===================================================================================*/
+
+/*==================== ANALOG TO DIGITAL CONVERTER ================================*/
+#define ADC_ISR_ADRDY_Pos              (0U)
+#define ADC_ISR_ADRDY_Msk              (0x1UL << ADC_ISR_ADRDY_Pos)            
+#define ADC_ISR_ADRDY                  ADC_ISR_ADRDY_Msk                       
+#define ADC_ISR_EOSMP_Pos              (1U)
+#define ADC_ISR_EOSMP_Msk              (0x1UL << ADC_ISR_EOSMP_Pos)            
+#define ADC_ISR_EOSMP                  ADC_ISR_EOSMP_Msk                       
+#define ADC_ISR_EOC_Pos                (2U)
+#define ADC_ISR_EOC_Msk                (0x1UL << ADC_ISR_EOC_Pos)              
+#define ADC_ISR_EOC                    ADC_ISR_EOC_Msk                         
+#define ADC_ISR_EOS_Pos                (3U)
+#define ADC_ISR_EOS_Msk                (0x1UL << ADC_ISR_EOS_Pos)              
+#define ADC_ISR_EOS                    ADC_ISR_EOS_Msk                         
+#define ADC_ISR_OVR_Pos                (4U)
+#define ADC_ISR_OVR_Msk                (0x1UL << ADC_ISR_OVR_Pos)              
+#define ADC_ISR_OVR                    ADC_ISR_OVR_Msk                         
+#define ADC_ISR_JEOC_Pos               (5U)
+#define ADC_ISR_JEOC_Msk               (0x1UL << ADC_ISR_JEOC_Pos)             
+#define ADC_ISR_JEOC                   ADC_ISR_JEOC_Msk                        
+#define ADC_ISR_JEOS_Pos               (6U)
+#define ADC_ISR_JEOS_Msk               (0x1UL << ADC_ISR_JEOS_Pos)             
+#define ADC_ISR_JEOS                   ADC_ISR_JEOS_Msk                        
+#define ADC_ISR_AWD1_Pos               (7U)
+#define ADC_ISR_AWD1_Msk               (0x1UL << ADC_ISR_AWD1_Pos)             
+#define ADC_ISR_AWD1                   ADC_ISR_AWD1_Msk                        
+#define ADC_ISR_AWD2_Pos               (8U)
+#define ADC_ISR_AWD2_Msk               (0x1UL << ADC_ISR_AWD2_Pos)             
+#define ADC_ISR_AWD2                   ADC_ISR_AWD2_Msk                        
+#define ADC_ISR_AWD3_Pos               (9U)
+#define ADC_ISR_AWD3_Msk               (0x1UL << ADC_ISR_AWD3_Pos)             
+#define ADC_ISR_AWD3                   ADC_ISR_AWD3_Msk                        
+#define ADC_ISR_JQOVF_Pos              (10U)
+#define ADC_ISR_JQOVF_Msk              (0x1UL << ADC_ISR_JQOVF_Pos)            
+#define ADC_ISR_JQOVF                  ADC_ISR_JQOVF_Msk                       
+
+#define ADC_IER_ADRDYIE_Pos            (0U)
+#define ADC_IER_ADRDYIE_Msk            (0x1UL << ADC_IER_ADRDYIE_Pos)          
+#define ADC_IER_ADRDYIE                ADC_IER_ADRDYIE_Msk                     
+#define ADC_IER_EOSMPIE_Pos            (1U)
+#define ADC_IER_EOSMPIE_Msk            (0x1UL << ADC_IER_EOSMPIE_Pos)          
+#define ADC_IER_EOSMPIE                ADC_IER_EOSMPIE_Msk                     
+#define ADC_IER_EOCIE_Pos              (2U)
+#define ADC_IER_EOCIE_Msk              (0x1UL << ADC_IER_EOCIE_Pos)            
+#define ADC_IER_EOCIE                  ADC_IER_EOCIE_Msk                       
+#define ADC_IER_EOSIE_Pos              (3U)
+#define ADC_IER_EOSIE_Msk              (0x1UL << ADC_IER_EOSIE_Pos)            
+#define ADC_IER_EOSIE                  ADC_IER_EOSIE_Msk                       
+#define ADC_IER_OVRIE_Pos              (4U)
+#define ADC_IER_OVRIE_Msk              (0x1UL << ADC_IER_OVRIE_Pos)            
+#define ADC_IER_OVRIE                  ADC_IER_OVRIE_Msk                       
+#define ADC_IER_JEOCIE_Pos             (5U)
+#define ADC_IER_JEOCIE_Msk             (0x1UL << ADC_IER_JEOCIE_Pos)           
+#define ADC_IER_JEOCIE                 ADC_IER_JEOCIE_Msk                      
+#define ADC_IER_JEOSIE_Pos             (6U)
+#define ADC_IER_JEOSIE_Msk             (0x1UL << ADC_IER_JEOSIE_Pos)           
+#define ADC_IER_JEOSIE                 ADC_IER_JEOSIE_Msk                      
+#define ADC_IER_AWD1IE_Pos             (7U)
+#define ADC_IER_AWD1IE_Msk             (0x1UL << ADC_IER_AWD1IE_Pos)           
+#define ADC_IER_AWD1IE                 ADC_IER_AWD1IE_Msk                      
+#define ADC_IER_AWD2IE_Pos             (8U)
+#define ADC_IER_AWD2IE_Msk             (0x1UL << ADC_IER_AWD2IE_Pos)           
+#define ADC_IER_AWD2IE                 ADC_IER_AWD2IE_Msk                      
+#define ADC_IER_AWD3IE_Pos             (9U)
+#define ADC_IER_AWD3IE_Msk             (0x1UL << ADC_IER_AWD3IE_Pos)           
+#define ADC_IER_AWD3IE                 ADC_IER_AWD3IE_Msk                      
+#define ADC_IER_JQOVFIE_Pos            (10U)
+#define ADC_IER_JQOVFIE_Msk            (0x1UL << ADC_IER_JQOVFIE_Pos)          
+#define ADC_IER_JQOVFIE                ADC_IER_JQOVFIE_Msk                     
+
+#define ADC_CR_ADEN_Pos                (0U)
+#define ADC_CR_ADEN_Msk                (0x1UL << ADC_CR_ADEN_Pos)              
+#define ADC_CR_ADEN                    ADC_CR_ADEN_Msk                         
+#define ADC_CR_ADDIS_Pos               (1U)
+#define ADC_CR_ADDIS_Msk               (0x1UL << ADC_CR_ADDIS_Pos)             
+#define ADC_CR_ADDIS                   ADC_CR_ADDIS_Msk                        
+#define ADC_CR_ADSTART_Pos             (2U)
+#define ADC_CR_ADSTART_Msk             (0x1UL << ADC_CR_ADSTART_Pos)           
+#define ADC_CR_ADSTART                 ADC_CR_ADSTART_Msk                      
+#define ADC_CR_JADSTART_Pos            (3U)
+#define ADC_CR_JADSTART_Msk            (0x1UL << ADC_CR_JADSTART_Pos)          
+#define ADC_CR_JADSTART                ADC_CR_JADSTART_Msk                     
+#define ADC_CR_ADSTP_Pos               (4U)
+#define ADC_CR_ADSTP_Msk               (0x1UL << ADC_CR_ADSTP_Pos)             
+#define ADC_CR_ADSTP                   ADC_CR_ADSTP_Msk                        
+#define ADC_CR_JADSTP_Pos              (5U)
+#define ADC_CR_JADSTP_Msk              (0x1UL << ADC_CR_JADSTP_Pos)            
+#define ADC_CR_JADSTP                  ADC_CR_JADSTP_Msk                       
+#define ADC_CR_ADVREGEN_Pos            (28U)
+#define ADC_CR_ADVREGEN_Msk            (0x1UL << ADC_CR_ADVREGEN_Pos)          
+#define ADC_CR_ADVREGEN                ADC_CR_ADVREGEN_Msk                     
+#define ADC_CR_DEEPPWD_Pos             (29U)
+#define ADC_CR_DEEPPWD_Msk             (0x1UL << ADC_CR_DEEPPWD_Pos)           
+#define ADC_CR_DEEPPWD                 ADC_CR_DEEPPWD_Msk                      
+#define ADC_CR_ADCALDIF_Pos            (30U)
+#define ADC_CR_ADCALDIF_Msk            (0x1UL << ADC_CR_ADCALDIF_Pos)          
+#define ADC_CR_ADCALDIF                ADC_CR_ADCALDIF_Msk                     
+#define ADC_CR_ADCAL_Pos               (31U)
+#define ADC_CR_ADCAL_Msk               (0x1UL << ADC_CR_ADCAL_Pos)             
+#define ADC_CR_ADCAL                   ADC_CR_ADCAL_Msk                        
+
+#define ADC_CFGR_DMAEN_Pos             (0U)
+#define ADC_CFGR_DMAEN_Msk             (0x1UL << ADC_CFGR_DMAEN_Pos)           
+#define ADC_CFGR_DMAEN                 ADC_CFGR_DMAEN_Msk                      
+#define ADC_CFGR_DMACFG_Pos            (1U)
+#define ADC_CFGR_DMACFG_Msk            (0x1UL << ADC_CFGR_DMACFG_Pos)          
+#define ADC_CFGR_DMACFG                ADC_CFGR_DMACFG_Msk                     
+
+#define ADC_CFGR_RES_Pos               (3U)
+#define ADC_CFGR_RES_Msk               (0x3UL << ADC_CFGR_RES_Pos)             
+#define ADC_CFGR_RES                   ADC_CFGR_RES_Msk                        
+#define ADC_CFGR_RES_0                 (0x1UL << ADC_CFGR_RES_Pos)             
+#define ADC_CFGR_RES_1                 (0x2UL << ADC_CFGR_RES_Pos)             
+
+#define ADC_CFGR_EXTSEL_Pos            (5U)
+#define ADC_CFGR_EXTSEL_Msk            (0x1FUL << ADC_CFGR_EXTSEL_Pos)         
+#define ADC_CFGR_EXTSEL                ADC_CFGR_EXTSEL_Msk                     
+#define ADC_CFGR_EXTSEL_0              (0x1UL << ADC_CFGR_EXTSEL_Pos)          
+#define ADC_CFGR_EXTSEL_1              (0x2UL << ADC_CFGR_EXTSEL_Pos)          
+#define ADC_CFGR_EXTSEL_2              (0x4UL << ADC_CFGR_EXTSEL_Pos)          
+#define ADC_CFGR_EXTSEL_3              (0x8UL << ADC_CFGR_EXTSEL_Pos)          
+#define ADC_CFGR_EXTSEL_4              (0x10UL << ADC_CFGR_EXTSEL_Pos)         
+
+#define ADC_CFGR_EXTEN_Pos             (10U)
+#define ADC_CFGR_EXTEN_Msk             (0x3UL << ADC_CFGR_EXTEN_Pos)           
+#define ADC_CFGR_EXTEN                 ADC_CFGR_EXTEN_Msk                      
+#define ADC_CFGR_EXTEN_0               (0x1UL << ADC_CFGR_EXTEN_Pos)           
+#define ADC_CFGR_EXTEN_1               (0x2UL << ADC_CFGR_EXTEN_Pos)           
+
+#define ADC_CFGR_OVRMOD_Pos            (12U)
+#define ADC_CFGR_OVRMOD_Msk            (0x1UL << ADC_CFGR_OVRMOD_Pos)          
+#define ADC_CFGR_OVRMOD                ADC_CFGR_OVRMOD_Msk                     
+#define ADC_CFGR_CONT_Pos              (13U)
+#define ADC_CFGR_CONT_Msk              (0x1UL << ADC_CFGR_CONT_Pos)            
+#define ADC_CFGR_CONT                  ADC_CFGR_CONT_Msk                       
+#define ADC_CFGR_AUTDLY_Pos            (14U)
+#define ADC_CFGR_AUTDLY_Msk            (0x1UL << ADC_CFGR_AUTDLY_Pos)        
+#define ADC_CFGR_AUTDLY                ADC_CFGR_AUTDLY_Msk                   
+#define ADC_CFGR_ALIGN_Pos             (15U)
+#define ADC_CFGR_ALIGN_Msk             (0x1UL << ADC_CFGR_ALIGN_Pos)         
+#define ADC_CFGR_ALIGN                 ADC_CFGR_ALIGN_Msk                    
+#define ADC_CFGR_DISCEN_Pos            (16U)
+#define ADC_CFGR_DISCEN_Msk            (0x1UL << ADC_CFGR_DISCEN_Pos)        
+#define ADC_CFGR_DISCEN                ADC_CFGR_DISCEN_Msk                   
+
+#define ADC_CFGR_DISCNUM_Pos           (17U)
+#define ADC_CFGR_DISCNUM_Msk           (0x7UL << ADC_CFGR_DISCNUM_Pos)       
+#define ADC_CFGR_DISCNUM               ADC_CFGR_DISCNUM_Msk                 
+#define ADC_CFGR_DISCNUM_0             (0x1UL << ADC_CFGR_DISCNUM_Pos)       
+#define ADC_CFGR_DISCNUM_1             (0x2UL << ADC_CFGR_DISCNUM_Pos)       
+#define ADC_CFGR_DISCNUM_2             (0x4UL << ADC_CFGR_DISCNUM_Pos)       
+
+#define ADC_CFGR_JDISCEN_Pos           (20U)
+#define ADC_CFGR_JDISCEN_Msk           (0x1UL << ADC_CFGR_JDISCEN_Pos)       
+#define ADC_CFGR_JDISCEN               ADC_CFGR_JDISCEN_Msk                  
+#define ADC_CFGR_JQM_Pos               (21U)
+#define ADC_CFGR_JQM_Msk               (0x1UL << ADC_CFGR_JQM_Pos)           
+#define ADC_CFGR_JQM                   ADC_CFGR_JQM_Msk                      
+#define ADC_CFGR_AWD1SGL_Pos           (22U)
+#define ADC_CFGR_AWD1SGL_Msk           (0x1UL << ADC_CFGR_AWD1SGL_Pos)       
+#define ADC_CFGR_AWD1SGL               ADC_CFGR_AWD1SGL_Msk                 
+#define ADC_CFGR_AWD1EN_Pos            (23U)
+#define ADC_CFGR_AWD1EN_Msk            (0x1UL << ADC_CFGR_AWD1EN_Pos)        
+#define ADC_CFGR_AWD1EN                ADC_CFGR_AWD1EN_Msk                
+#define ADC_CFGR_JAWD1EN_Pos           (24U)
+#define ADC_CFGR_JAWD1EN_Msk           (0x1UL << ADC_CFGR_JAWD1EN_Pos)       
+#define ADC_CFGR_JAWD1EN               ADC_CFGR_JAWD1EN_Msk              
+#define ADC_CFGR_JAUTO_Pos             (25U)
+#define ADC_CFGR_JAUTO_Msk             (0x1UL << ADC_CFGR_JAUTO_Pos)         
+#define ADC_CFGR_JAUTO                 ADC_CFGR_JAUTO_Msk                    
+
+#define ADC_CFGR_AWD1CH_Pos            (26U)
+#define ADC_CFGR_AWD1CH_Msk            (0x1FUL << ADC_CFGR_AWD1CH_Pos)       
+#define ADC_CFGR_AWD1CH                ADC_CFGR_AWD1CH_Msk                  
+#define ADC_CFGR_AWD1CH_0              (0x01UL << ADC_CFGR_AWD1CH_Pos)       
+#define ADC_CFGR_AWD1CH_1              (0x02UL << ADC_CFGR_AWD1CH_Pos)       
+#define ADC_CFGR_AWD1CH_2              (0x04UL << ADC_CFGR_AWD1CH_Pos)       
+#define ADC_CFGR_AWD1CH_3              (0x08UL << ADC_CFGR_AWD1CH_Pos)       
+#define ADC_CFGR_AWD1CH_4              (0x10UL << ADC_CFGR_AWD1CH_Pos)       
+
+#define ADC_CFGR_JQDIS_Pos             (31U)
+#define ADC_CFGR_JQDIS_Msk             (0x1UL << ADC_CFGR_JQDIS_Pos)         
+#define ADC_CFGR_JQDIS                 ADC_CFGR_JQDIS_Msk                    
+
+#define ADC_CFGR2_ROVSE_Pos            (0U)
+#define ADC_CFGR2_ROVSE_Msk            (0x1UL << ADC_CFGR2_ROVSE_Pos)          
+#define ADC_CFGR2_ROVSE                ADC_CFGR2_ROVSE_Msk                     
+#define ADC_CFGR2_JOVSE_Pos            (1U)
+#define ADC_CFGR2_JOVSE_Msk            (0x1UL << ADC_CFGR2_JOVSE_Pos)          
+#define ADC_CFGR2_JOVSE                ADC_CFGR2_JOVSE_Msk                     
+
+#define ADC_CFGR2_OVSR_Pos             (2U)
+#define ADC_CFGR2_OVSR_Msk             (0x7UL << ADC_CFGR2_OVSR_Pos)           
+#define ADC_CFGR2_OVSR                 ADC_CFGR2_OVSR_Msk                      
+#define ADC_CFGR2_OVSR_0               (0x1UL << ADC_CFGR2_OVSR_Pos)           
+#define ADC_CFGR2_OVSR_1               (0x2UL << ADC_CFGR2_OVSR_Pos)           
+#define ADC_CFGR2_OVSR_2               (0x4UL << ADC_CFGR2_OVSR_Pos)           
+
+#define ADC_CFGR2_OVSS_Pos             (5U)
+#define ADC_CFGR2_OVSS_Msk             (0xFUL << ADC_CFGR2_OVSS_Pos)           
+#define ADC_CFGR2_OVSS                 ADC_CFGR2_OVSS_Msk                      
+#define ADC_CFGR2_OVSS_0               (0x1UL << ADC_CFGR2_OVSS_Pos)           
+#define ADC_CFGR2_OVSS_1               (0x2UL << ADC_CFGR2_OVSS_Pos)           
+#define ADC_CFGR2_OVSS_2               (0x4UL << ADC_CFGR2_OVSS_Pos)           
+#define ADC_CFGR2_OVSS_3               (0x8UL << ADC_CFGR2_OVSS_Pos)           
+
+#define ADC_CFGR2_TROVS_Pos            (9U)
+#define ADC_CFGR2_TROVS_Msk            (0x1UL << ADC_CFGR2_TROVS_Pos)          
+#define ADC_CFGR2_TROVS                ADC_CFGR2_TROVS_Msk                     
+#define ADC_CFGR2_ROVSM_Pos            (10U)
+#define ADC_CFGR2_ROVSM_Msk            (0x1UL << ADC_CFGR2_ROVSM_Pos)          
+#define ADC_CFGR2_ROVSM                ADC_CFGR2_ROVSM_Msk                   
+
+#define ADC_CFGR2_GCOMP_Pos            (16U)
+#define ADC_CFGR2_GCOMP_Msk            (0x1UL << ADC_CFGR2_GCOMP_Pos)          
+#define ADC_CFGR2_GCOMP                ADC_CFGR2_GCOMP_Msk                     
+
+#define ADC_CFGR2_SWTRIG_Pos           (25U)
+#define ADC_CFGR2_SWTRIG_Msk           (0x1UL << ADC_CFGR2_SWTRIG_Pos)         
+#define ADC_CFGR2_SWTRIG               ADC_CFGR2_SWTRIG_Msk                    
+#define ADC_CFGR2_BULB_Pos             (26U)
+#define ADC_CFGR2_BULB_Msk             (0x1UL << ADC_CFGR2_BULB_Pos)           
+#define ADC_CFGR2_BULB                 ADC_CFGR2_BULB_Msk                      
+#define ADC_CFGR2_SMPTRIG_Pos          (27U)
+#define ADC_CFGR2_SMPTRIG_Msk          (0x1UL << ADC_CFGR2_SMPTRIG_Pos)        
+#define ADC_CFGR2_SMPTRIG              ADC_CFGR2_SMPTRIG_Msk                   
+
+#define ADC_SMPR1_SMP0_Pos             (0U)
+#define ADC_SMPR1_SMP0_Msk             (0x7UL << ADC_SMPR1_SMP0_Pos)           
+#define ADC_SMPR1_SMP0                 ADC_SMPR1_SMP0_Msk                      
+#define ADC_SMPR1_SMP0_0               (0x1UL << ADC_SMPR1_SMP0_Pos)           
+#define ADC_SMPR1_SMP0_1               (0x2UL << ADC_SMPR1_SMP0_Pos)           
+#define ADC_SMPR1_SMP0_2               (0x4UL << ADC_SMPR1_SMP0_Pos)           
+
+#define ADC_SMPR1_SMP1_Pos             (3U)
+#define ADC_SMPR1_SMP1_Msk             (0x7UL << ADC_SMPR1_SMP1_Pos)           
+#define ADC_SMPR1_SMP1                 ADC_SMPR1_SMP1_Msk                      
+#define ADC_SMPR1_SMP1_0               (0x1UL << ADC_SMPR1_SMP1_Pos)           
+#define ADC_SMPR1_SMP1_1               (0x2UL << ADC_SMPR1_SMP1_Pos)           
+#define ADC_SMPR1_SMP1_2               (0x4UL << ADC_SMPR1_SMP1_Pos)           
+
+#define ADC_SMPR1_SMP2_Pos             (6U)
+#define ADC_SMPR1_SMP2_Msk             (0x7UL << ADC_SMPR1_SMP2_Pos)           
+#define ADC_SMPR1_SMP2                 ADC_SMPR1_SMP2_Msk                      
+#define ADC_SMPR1_SMP2_0               (0x1UL << ADC_SMPR1_SMP2_Pos)           
+#define ADC_SMPR1_SMP2_1               (0x2UL << ADC_SMPR1_SMP2_Pos)           
+#define ADC_SMPR1_SMP2_2               (0x4UL << ADC_SMPR1_SMP2_Pos)           
+
+#define ADC_SMPR1_SMP3_Pos             (9U)
+#define ADC_SMPR1_SMP3_Msk             (0x7UL << ADC_SMPR1_SMP3_Pos)           
+#define ADC_SMPR1_SMP3                 ADC_SMPR1_SMP3_Msk                      
+#define ADC_SMPR1_SMP3_0               (0x1UL << ADC_SMPR1_SMP3_Pos)           
+#define ADC_SMPR1_SMP3_1               (0x2UL << ADC_SMPR1_SMP3_Pos)           
+#define ADC_SMPR1_SMP3_2               (0x4UL << ADC_SMPR1_SMP3_Pos)           
+
+#define ADC_SMPR1_SMP4_Pos             (12U)
+#define ADC_SMPR1_SMP4_Msk             (0x7UL << ADC_SMPR1_SMP4_Pos)           
+#define ADC_SMPR1_SMP4                 ADC_SMPR1_SMP4_Msk                      
+#define ADC_SMPR1_SMP4_0               (0x1UL << ADC_SMPR1_SMP4_Pos)           
+#define ADC_SMPR1_SMP4_1               (0x2UL << ADC_SMPR1_SMP4_Pos)           
+#define ADC_SMPR1_SMP4_2               (0x4UL << ADC_SMPR1_SMP4_Pos)           
+
+#define ADC_SMPR1_SMP5_Pos             (15U)
+#define ADC_SMPR1_SMP5_Msk             (0x7UL << ADC_SMPR1_SMP5_Pos)           
+#define ADC_SMPR1_SMP5                 ADC_SMPR1_SMP5_Msk                      
+#define ADC_SMPR1_SMP5_0               (0x1UL << ADC_SMPR1_SMP5_Pos)           
+#define ADC_SMPR1_SMP5_1               (0x2UL << ADC_SMPR1_SMP5_Pos)           
+#define ADC_SMPR1_SMP5_2               (0x4UL << ADC_SMPR1_SMP5_Pos)           
+
+#define ADC_SMPR1_SMP6_Pos             (18U)
+#define ADC_SMPR1_SMP6_Msk             (0x7UL << ADC_SMPR1_SMP6_Pos)           
+#define ADC_SMPR1_SMP6                 ADC_SMPR1_SMP6_Msk                      
+#define ADC_SMPR1_SMP6_0               (0x1UL << ADC_SMPR1_SMP6_Pos)           
+#define ADC_SMPR1_SMP6_1               (0x2UL << ADC_SMPR1_SMP6_Pos)           
+#define ADC_SMPR1_SMP6_2               (0x4UL << ADC_SMPR1_SMP6_Pos)           
+
+#define ADC_SMPR1_SMP7_Pos             (21U)
+#define ADC_SMPR1_SMP7_Msk             (0x7UL << ADC_SMPR1_SMP7_Pos)           
+#define ADC_SMPR1_SMP7                 ADC_SMPR1_SMP7_Msk                      
+#define ADC_SMPR1_SMP7_0               (0x1UL << ADC_SMPR1_SMP7_Pos)           
+#define ADC_SMPR1_SMP7_1               (0x2UL << ADC_SMPR1_SMP7_Pos)           
+#define ADC_SMPR1_SMP7_2               (0x4UL << ADC_SMPR1_SMP7_Pos)           
+
+#define ADC_SMPR1_SMP8_Pos             (24U)
+#define ADC_SMPR1_SMP8_Msk             (0x7UL << ADC_SMPR1_SMP8_Pos)           
+#define ADC_SMPR1_SMP8                 ADC_SMPR1_SMP8_Msk                      
+#define ADC_SMPR1_SMP8_0               (0x1UL << ADC_SMPR1_SMP8_Pos)           
+#define ADC_SMPR1_SMP8_1               (0x2UL << ADC_SMPR1_SMP8_Pos)           
+#define ADC_SMPR1_SMP8_2               (0x4UL << ADC_SMPR1_SMP8_Pos)           
+
+#define ADC_SMPR1_SMP9_Pos             (27U)
+#define ADC_SMPR1_SMP9_Msk             (0x7UL << ADC_SMPR1_SMP9_Pos)           
+#define ADC_SMPR1_SMP9                 ADC_SMPR1_SMP9_Msk                      
+#define ADC_SMPR1_SMP9_0               (0x1UL << ADC_SMPR1_SMP9_Pos)           
+#define ADC_SMPR1_SMP9_1               (0x2UL << ADC_SMPR1_SMP9_Pos)           
+#define ADC_SMPR1_SMP9_2               (0x4UL << ADC_SMPR1_SMP9_Pos)           
+
+#define ADC_SMPR1_SMPPLUS_Pos          (31U)
+#define ADC_SMPR1_SMPPLUS_Msk          (0x1UL << ADC_SMPR1_SMPPLUS_Pos)        
+#define ADC_SMPR1_SMPPLUS              ADC_SMPR1_SMPPLUS_Msk                   
+
+#define ADC_SMPR2_SMP10_Pos            (0U)
+#define ADC_SMPR2_SMP10_Msk            (0x7UL << ADC_SMPR2_SMP10_Pos)          
+#define ADC_SMPR2_SMP10                ADC_SMPR2_SMP10_Msk                     
+#define ADC_SMPR2_SMP10_0              (0x1UL << ADC_SMPR2_SMP10_Pos)          
+#define ADC_SMPR2_SMP10_1              (0x2UL << ADC_SMPR2_SMP10_Pos)          
+#define ADC_SMPR2_SMP10_2              (0x4UL << ADC_SMPR2_SMP10_Pos)          
+
+#define ADC_SMPR2_SMP11_Pos            (3U)
+#define ADC_SMPR2_SMP11_Msk            (0x7UL << ADC_SMPR2_SMP11_Pos)          
+#define ADC_SMPR2_SMP11                ADC_SMPR2_SMP11_Msk                     
+#define ADC_SMPR2_SMP11_0              (0x1UL << ADC_SMPR2_SMP11_Pos)          
+#define ADC_SMPR2_SMP11_1              (0x2UL << ADC_SMPR2_SMP11_Pos)          
+#define ADC_SMPR2_SMP11_2              (0x4UL << ADC_SMPR2_SMP11_Pos)          
+
+#define ADC_SMPR2_SMP12_Pos            (6U)
+#define ADC_SMPR2_SMP12_Msk            (0x7UL << ADC_SMPR2_SMP12_Pos)          
+#define ADC_SMPR2_SMP12                ADC_SMPR2_SMP12_Msk                     
+#define ADC_SMPR2_SMP12_0              (0x1UL << ADC_SMPR2_SMP12_Pos)          
+#define ADC_SMPR2_SMP12_1              (0x2UL << ADC_SMPR2_SMP12_Pos)          
+#define ADC_SMPR2_SMP12_2              (0x4UL << ADC_SMPR2_SMP12_Pos)          
+
+#define ADC_SMPR2_SMP13_Pos            (9U)
+#define ADC_SMPR2_SMP13_Msk            (0x7UL << ADC_SMPR2_SMP13_Pos)         
+#define ADC_SMPR2_SMP13                ADC_SMPR2_SMP13_Msk                    
+#define ADC_SMPR2_SMP13_0              (0x1UL << ADC_SMPR2_SMP13_Pos)         
+#define ADC_SMPR2_SMP13_1              (0x2UL << ADC_SMPR2_SMP13_Pos)         
+#define ADC_SMPR2_SMP13_2              (0x4UL << ADC_SMPR2_SMP13_Pos)         
+
+#define ADC_SMPR2_SMP14_Pos            (12U)
+#define ADC_SMPR2_SMP14_Msk            (0x7UL << ADC_SMPR2_SMP14_Pos)         
+#define ADC_SMPR2_SMP14                ADC_SMPR2_SMP14_Msk                    
+#define ADC_SMPR2_SMP14_0              (0x1UL << ADC_SMPR2_SMP14_Pos)         
+#define ADC_SMPR2_SMP14_1              (0x2UL << ADC_SMPR2_SMP14_Pos)         
+#define ADC_SMPR2_SMP14_2              (0x4UL << ADC_SMPR2_SMP14_Pos)         
+
+#define ADC_SMPR2_SMP15_Pos            (15U)
+#define ADC_SMPR2_SMP15_Msk            (0x7UL << ADC_SMPR2_SMP15_Pos)         
+#define ADC_SMPR2_SMP15                ADC_SMPR2_SMP15_Msk                    
+#define ADC_SMPR2_SMP15_0              (0x1UL << ADC_SMPR2_SMP15_Pos)         
+#define ADC_SMPR2_SMP15_1              (0x2UL << ADC_SMPR2_SMP15_Pos)         
+#define ADC_SMPR2_SMP15_2              (0x4UL << ADC_SMPR2_SMP15_Pos)         
+
+#define ADC_SMPR2_SMP16_Pos            (18U)
+#define ADC_SMPR2_SMP16_Msk            (0x7UL << ADC_SMPR2_SMP16_Pos)         
+#define ADC_SMPR2_SMP16                ADC_SMPR2_SMP16_Msk                    
+#define ADC_SMPR2_SMP16_0              (0x1UL << ADC_SMPR2_SMP16_Pos)         
+#define ADC_SMPR2_SMP16_1              (0x2UL << ADC_SMPR2_SMP16_Pos)         
+#define ADC_SMPR2_SMP16_2              (0x4UL << ADC_SMPR2_SMP16_Pos)         
+
+#define ADC_SMPR2_SMP17_Pos            (21U)
+#define ADC_SMPR2_SMP17_Msk            (0x7UL << ADC_SMPR2_SMP17_Pos)         
+#define ADC_SMPR2_SMP17                ADC_SMPR2_SMP17_Msk                    
+#define ADC_SMPR2_SMP17_0              (0x1UL << ADC_SMPR2_SMP17_Pos)         
+#define ADC_SMPR2_SMP17_1              (0x2UL << ADC_SMPR2_SMP17_Pos)         
+#define ADC_SMPR2_SMP17_2              (0x4UL << ADC_SMPR2_SMP17_Pos)         
+
+#define ADC_SMPR2_SMP18_Pos            (24U)
+#define ADC_SMPR2_SMP18_Msk            (0x7UL << ADC_SMPR2_SMP18_Pos)         
+#define ADC_SMPR2_SMP18                ADC_SMPR2_SMP18_Msk                    
+#define ADC_SMPR2_SMP18_0              (0x1UL << ADC_SMPR2_SMP18_Pos)         
+#define ADC_SMPR2_SMP18_1              (0x2UL << ADC_SMPR2_SMP18_Pos)         
+#define ADC_SMPR2_SMP18_2              (0x4UL << ADC_SMPR2_SMP18_Pos)         
+
+#define ADC_TR1_LT1_Pos                (0U)
+#define ADC_TR1_LT1_Msk                (0xFFFUL << ADC_TR1_LT1_Pos)            
+#define ADC_TR1_LT1                    ADC_TR1_LT1_Msk                         
+
+#define ADC_TR1_AWDFILT_Pos            (12U)
+#define ADC_TR1_AWDFILT_Msk            (0x7UL << ADC_TR1_AWDFILT_Pos)          
+#define ADC_TR1_AWDFILT                ADC_TR1_AWDFILT_Msk                     
+#define ADC_TR1_AWDFILT_0              (0x1UL << ADC_TR1_AWDFILT_Pos)          
+#define ADC_TR1_AWDFILT_1              (0x2UL << ADC_TR1_AWDFILT_Pos)          
+#define ADC_TR1_AWDFILT_2              (0x4UL << ADC_TR1_AWDFILT_Pos)          
+
+#define ADC_TR1_HT1_Pos                (16U)
+#define ADC_TR1_HT1_Msk                (0xFFFUL << ADC_TR1_HT1_Pos)            
+#define ADC_TR1_HT1                    ADC_TR1_HT1_Msk                         
+
+#define ADC_TR2_LT2_Pos                (0U)
+#define ADC_TR2_LT2_Msk                (0xFFUL << ADC_TR2_LT2_Pos)             
+#define ADC_TR2_LT2                    ADC_TR2_LT2_Msk                         
+
+#define ADC_TR2_HT2_Pos                (16U)
+#define ADC_TR2_HT2_Msk                (0xFFUL << ADC_TR2_HT2_Pos)             
+#define ADC_TR2_HT2                    ADC_TR2_HT2_Msk                         
+
+#define ADC_TR3_LT3_Pos                (0U)
+#define ADC_TR3_LT3_Msk                (0xFFUL << ADC_TR3_LT3_Pos)             
+#define ADC_TR3_LT3                    ADC_TR3_LT3_Msk                         
+
+#define ADC_TR3_HT3_Pos                (16U)
+#define ADC_TR3_HT3_Msk                (0xFFUL << ADC_TR3_HT3_Pos)             
+#define ADC_TR3_HT3                    ADC_TR3_HT3_Msk                         
+
+#define ADC_SQR1_L_Pos                 (0U)
+#define ADC_SQR1_L_Msk                 (0xFUL << ADC_SQR1_L_Pos)               
+#define ADC_SQR1_L                     ADC_SQR1_L_Msk                          
+#define ADC_SQR1_L_0                   (0x1UL << ADC_SQR1_L_Pos)               
+#define ADC_SQR1_L_1                   (0x2UL << ADC_SQR1_L_Pos)               
+#define ADC_SQR1_L_2                   (0x4UL << ADC_SQR1_L_Pos)               
+#define ADC_SQR1_L_3                   (0x8UL << ADC_SQR1_L_Pos)               
+
+#define ADC_SQR1_SQ1_Pos               (6U)
+#define ADC_SQR1_SQ1_Msk               (0x1FUL << ADC_SQR1_SQ1_Pos)            
+#define ADC_SQR1_SQ1                   ADC_SQR1_SQ1_Msk                        
+#define ADC_SQR1_SQ1_0                 (0x01UL << ADC_SQR1_SQ1_Pos)            
+#define ADC_SQR1_SQ1_1                 (0x02UL << ADC_SQR1_SQ1_Pos)            
+#define ADC_SQR1_SQ1_2                 (0x04UL << ADC_SQR1_SQ1_Pos)            
+#define ADC_SQR1_SQ1_3                 (0x08UL << ADC_SQR1_SQ1_Pos)            
+#define ADC_SQR1_SQ1_4                 (0x10UL << ADC_SQR1_SQ1_Pos)            
+
+#define ADC_SQR1_SQ2_Pos               (12U)
+#define ADC_SQR1_SQ2_Msk               (0x1FUL << ADC_SQR1_SQ2_Pos)            
+#define ADC_SQR1_SQ2                   ADC_SQR1_SQ2_Msk                        
+#define ADC_SQR1_SQ2_0                 (0x01UL << ADC_SQR1_SQ2_Pos)            
+#define ADC_SQR1_SQ2_1                 (0x02UL << ADC_SQR1_SQ2_Pos)            
+#define ADC_SQR1_SQ2_2                 (0x04UL << ADC_SQR1_SQ2_Pos)            
+#define ADC_SQR1_SQ2_3                 (0x08UL << ADC_SQR1_SQ2_Pos)            
+#define ADC_SQR1_SQ2_4                 (0x10UL << ADC_SQR1_SQ2_Pos)            
+
+#define ADC_SQR1_SQ3_Pos               (18U)
+#define ADC_SQR1_SQ3_Msk               (0x1FUL << ADC_SQR1_SQ3_Pos)            
+#define ADC_SQR1_SQ3                   ADC_SQR1_SQ3_Msk                        
+#define ADC_SQR1_SQ3_0                 (0x01UL << ADC_SQR1_SQ3_Pos)            
+#define ADC_SQR1_SQ3_1                 (0x02UL << ADC_SQR1_SQ3_Pos)            
+#define ADC_SQR1_SQ3_2                 (0x04UL << ADC_SQR1_SQ3_Pos)            
+#define ADC_SQR1_SQ3_3                 (0x08UL << ADC_SQR1_SQ3_Pos)            
+#define ADC_SQR1_SQ3_4                 (0x10UL<< ADC_SQR1_SQ3_Pos)             
+
+#define ADC_SQR1_SQ4_Pos               (24U)
+#define ADC_SQR1_SQ4_Msk               (0x1FUL << ADC_SQR1_SQ4_Pos)            
+#define ADC_SQR1_SQ4                   ADC_SQR1_SQ4_Msk                        
+#define ADC_SQR1_SQ4_0                 (0x01UL << ADC_SQR1_SQ4_Pos)            
+#define ADC_SQR1_SQ4_1                 (0x02UL << ADC_SQR1_SQ4_Pos)            
+#define ADC_SQR1_SQ4_2                 (0x04UL << ADC_SQR1_SQ4_Pos)            
+#define ADC_SQR1_SQ4_3                 (0x08UL << ADC_SQR1_SQ4_Pos)            
+#define ADC_SQR1_SQ4_4                 (0x10UL << ADC_SQR1_SQ4_Pos)            
+
+#define ADC_SQR2_SQ5_Pos               (0U)
+#define ADC_SQR2_SQ5_Msk               (0x1FUL << ADC_SQR2_SQ5_Pos)            
+#define ADC_SQR2_SQ5                   ADC_SQR2_SQ5_Msk                        
+#define ADC_SQR2_SQ5_0                 (0x01UL << ADC_SQR2_SQ5_Pos)            
+#define ADC_SQR2_SQ5_1                 (0x02UL << ADC_SQR2_SQ5_Pos)            
+#define ADC_SQR2_SQ5_2                 (0x04UL << ADC_SQR2_SQ5_Pos)            
+#define ADC_SQR2_SQ5_3                 (0x08UL << ADC_SQR2_SQ5_Pos)            
+#define ADC_SQR2_SQ5_4                 (0x10UL << ADC_SQR2_SQ5_Pos)            
+
+#define ADC_SQR2_SQ6_Pos               (6U)
+#define ADC_SQR2_SQ6_Msk               (0x1FUL << ADC_SQR2_SQ6_Pos)            
+#define ADC_SQR2_SQ6                   ADC_SQR2_SQ6_Msk                        
+#define ADC_SQR2_SQ6_0                 (0x01UL << ADC_SQR2_SQ6_Pos)            
+#define ADC_SQR2_SQ6_1                 (0x02UL << ADC_SQR2_SQ6_Pos)            
+#define ADC_SQR2_SQ6_2                 (0x04UL << ADC_SQR2_SQ6_Pos)            
+#define ADC_SQR2_SQ6_3                 (0x08UL << ADC_SQR2_SQ6_Pos)            
+#define ADC_SQR2_SQ6_4                 (0x10UL << ADC_SQR2_SQ6_Pos)            
+
+#define ADC_SQR2_SQ7_Pos               (12U)
+#define ADC_SQR2_SQ7_Msk               (0x1FUL << ADC_SQR2_SQ7_Pos)            
+#define ADC_SQR2_SQ7                   ADC_SQR2_SQ7_Msk                        
+#define ADC_SQR2_SQ7_0                 (0x01UL << ADC_SQR2_SQ7_Pos)            
+#define ADC_SQR2_SQ7_1                 (0x02UL << ADC_SQR2_SQ7_Pos)            
+#define ADC_SQR2_SQ7_2                 (0x04UL << ADC_SQR2_SQ7_Pos)            
+#define ADC_SQR2_SQ7_3                 (0x08UL << ADC_SQR2_SQ7_Pos)            
+#define ADC_SQR2_SQ7_4                 (0x10UL << ADC_SQR2_SQ7_Pos)            
+
+#define ADC_SQR2_SQ8_Pos               (18U)
+#define ADC_SQR2_SQ8_Msk               (0x1FUL << ADC_SQR2_SQ8_Pos)            
+#define ADC_SQR2_SQ8                   ADC_SQR2_SQ8_Msk                        
+#define ADC_SQR2_SQ8_0                 (0x01UL << ADC_SQR2_SQ8_Pos)            
+#define ADC_SQR2_SQ8_1                 (0x02UL << ADC_SQR2_SQ8_Pos)            
+#define ADC_SQR2_SQ8_2                 (0x04UL << ADC_SQR2_SQ8_Pos)            
+#define ADC_SQR2_SQ8_3                 (0x08UL << ADC_SQR2_SQ8_Pos)            
+#define ADC_SQR2_SQ8_4                 (0x10UL << ADC_SQR2_SQ8_Pos)            
+
+#define ADC_SQR2_SQ9_Pos               (24U)
+#define ADC_SQR2_SQ9_Msk               (0x1FUL << ADC_SQR2_SQ9_Pos)            
+#define ADC_SQR2_SQ9                   ADC_SQR2_SQ9_Msk                        
+#define ADC_SQR2_SQ9_0                 (0x01UL << ADC_SQR2_SQ9_Pos)            
+#define ADC_SQR2_SQ9_1                 (0x02UL << ADC_SQR2_SQ9_Pos)            
+#define ADC_SQR2_SQ9_2                 (0x04UL << ADC_SQR2_SQ9_Pos)            
+#define ADC_SQR2_SQ9_3                 (0x08UL << ADC_SQR2_SQ9_Pos)            
+#define ADC_SQR2_SQ9_4                 (0x10UL << ADC_SQR2_SQ9_Pos)            
+
+#define ADC_SQR3_SQ10_Pos              (0U)
+#define ADC_SQR3_SQ10_Msk              (0x1FUL << ADC_SQR3_SQ10_Pos)           
+#define ADC_SQR3_SQ10                  ADC_SQR3_SQ10_Msk                       
+#define ADC_SQR3_SQ10_0                (0x01UL << ADC_SQR3_SQ10_Pos)           
+#define ADC_SQR3_SQ10_1                (0x02UL << ADC_SQR3_SQ10_Pos)           
+#define ADC_SQR3_SQ10_2                (0x04UL << ADC_SQR3_SQ10_Pos)           
+#define ADC_SQR3_SQ10_3                (0x08UL << ADC_SQR3_SQ10_Pos)           
+#define ADC_SQR3_SQ10_4                (0x10UL << ADC_SQR3_SQ10_Pos)           
+
+#define ADC_SQR3_SQ11_Pos              (6U)
+#define ADC_SQR3_SQ11_Msk              (0x1FUL << ADC_SQR3_SQ11_Pos)           
+#define ADC_SQR3_SQ11                  ADC_SQR3_SQ11_Msk                       
+#define ADC_SQR3_SQ11_0                (0x01UL << ADC_SQR3_SQ11_Pos)           
+#define ADC_SQR3_SQ11_1                (0x02UL << ADC_SQR3_SQ11_Pos)           
+#define ADC_SQR3_SQ11_2                (0x04UL << ADC_SQR3_SQ11_Pos)           
+#define ADC_SQR3_SQ11_3                (0x08UL << ADC_SQR3_SQ11_Pos)           
+#define ADC_SQR3_SQ11_4                (0x10UL << ADC_SQR3_SQ11_Pos)           
+
+#define ADC_SQR3_SQ12_Pos              (12U)
+#define ADC_SQR3_SQ12_Msk              (0x1FUL << ADC_SQR3_SQ12_Pos)           
+#define ADC_SQR3_SQ12                  ADC_SQR3_SQ12_Msk                       
+#define ADC_SQR3_SQ12_0                (0x01UL << ADC_SQR3_SQ12_Pos)           
+#define ADC_SQR3_SQ12_1                (0x02UL << ADC_SQR3_SQ12_Pos)           
+#define ADC_SQR3_SQ12_2                (0x04UL << ADC_SQR3_SQ12_Pos)           
+#define ADC_SQR3_SQ12_3                (0x08UL << ADC_SQR3_SQ12_Pos)           
+#define ADC_SQR3_SQ12_4                (0x10UL << ADC_SQR3_SQ12_Pos)           
+
+#define ADC_SQR3_SQ13_Pos              (18U)
+#define ADC_SQR3_SQ13_Msk              (0x1FUL << ADC_SQR3_SQ13_Pos)           
+#define ADC_SQR3_SQ13                  ADC_SQR3_SQ13_Msk                       
+#define ADC_SQR3_SQ13_0                (0x01UL << ADC_SQR3_SQ13_Pos)           
+#define ADC_SQR3_SQ13_1                (0x02UL << ADC_SQR3_SQ13_Pos)           
+#define ADC_SQR3_SQ13_2                (0x04UL << ADC_SQR3_SQ13_Pos)           
+#define ADC_SQR3_SQ13_3                (0x08UL << ADC_SQR3_SQ13_Pos)           
+#define ADC_SQR3_SQ13_4                (0x10UL << ADC_SQR3_SQ13_Pos)           
+
+#define ADC_SQR3_SQ14_Pos              (24U)
+#define ADC_SQR3_SQ14_Msk              (0x1FUL << ADC_SQR3_SQ14_Pos)           
+#define ADC_SQR3_SQ14                  ADC_SQR3_SQ14_Msk                       
+#define ADC_SQR3_SQ14_0                (0x01UL << ADC_SQR3_SQ14_Pos)           
+#define ADC_SQR3_SQ14_1                (0x02UL << ADC_SQR3_SQ14_Pos)           
+#define ADC_SQR3_SQ14_2                (0x04UL << ADC_SQR3_SQ14_Pos)           
+#define ADC_SQR3_SQ14_3                (0x08UL << ADC_SQR3_SQ14_Pos)           
+#define ADC_SQR3_SQ14_4                (0x10UL << ADC_SQR3_SQ14_Pos)           
+
+#define ADC_SQR4_SQ15_Pos              (0U)
+#define ADC_SQR4_SQ15_Msk              (0x1FUL << ADC_SQR4_SQ15_Pos)
+#define ADC_SQR4_SQ15                  ADC_SQR4_SQ15_Msk            
+#define ADC_SQR4_SQ15_0                (0x01UL << ADC_SQR4_SQ15_Pos)
+#define ADC_SQR4_SQ15_1                (0x02UL << ADC_SQR4_SQ15_Pos)
+#define ADC_SQR4_SQ15_2                (0x04UL << ADC_SQR4_SQ15_Pos)
+#define ADC_SQR4_SQ15_3                (0x08UL << ADC_SQR4_SQ15_Pos)
+#define ADC_SQR4_SQ15_4                (0x10UL << ADC_SQR4_SQ15_Pos)
+
+#define ADC_SQR4_SQ16_Pos              (6U)
+#define ADC_SQR4_SQ16_Msk              (0x1FUL << ADC_SQR4_SQ16_Pos)
+#define ADC_SQR4_SQ16                  ADC_SQR4_SQ16_Msk            
+#define ADC_SQR4_SQ16_0                (0x01UL << ADC_SQR4_SQ16_Pos)
+#define ADC_SQR4_SQ16_1                (0x02UL << ADC_SQR4_SQ16_Pos)
+#define ADC_SQR4_SQ16_2                (0x04UL << ADC_SQR4_SQ16_Pos)
+#define ADC_SQR4_SQ16_3                (0x08UL << ADC_SQR4_SQ16_Pos)
+#define ADC_SQR4_SQ16_4                (0x10UL << ADC_SQR4_SQ16_Pos)
+
+#define ADC_DR_RDATA_Pos               (0U)
+#define ADC_DR_RDATA_Msk               (0xFFFFUL << ADC_DR_RDATA_Pos)         
+#define ADC_DR_RDATA                   ADC_DR_RDATA_Msk                       
+
+#define ADC_JSQR_JL_Pos                (0U)
+#define ADC_JSQR_JL_Msk                (0x3UL << ADC_JSQR_JL_Pos)      
+#define ADC_JSQR_JL                    ADC_JSQR_JL_Msk                 
+#define ADC_JSQR_JL_0                  (0x1UL << ADC_JSQR_JL_Pos)      
+#define ADC_JSQR_JL_1                  (0x2UL << ADC_JSQR_JL_Pos)      
+
+#define ADC_JSQR_JEXTSEL_Pos           (2U)
+#define ADC_JSQR_JEXTSEL_Msk           (0x1FUL << ADC_JSQR_JEXTSEL_Pos)
+#define ADC_JSQR_JEXTSEL               ADC_JSQR_JEXTSEL_Msk            
+#define ADC_JSQR_JEXTSEL_0             (0x1UL << ADC_JSQR_JEXTSEL_Pos) 
+#define ADC_JSQR_JEXTSEL_1             (0x2UL << ADC_JSQR_JEXTSEL_Pos) 
+#define ADC_JSQR_JEXTSEL_2             (0x4UL << ADC_JSQR_JEXTSEL_Pos) 
+#define ADC_JSQR_JEXTSEL_3             (0x8UL << ADC_JSQR_JEXTSEL_Pos) 
+#define ADC_JSQR_JEXTSEL_4             (0x10UL << ADC_JSQR_JEXTSEL_Pos)
+
+#define ADC_JSQR_JEXTEN_Pos            (7U)
+#define ADC_JSQR_JEXTEN_Msk            (0x3UL << ADC_JSQR_JEXTEN_Pos)  
+#define ADC_JSQR_JEXTEN                ADC_JSQR_JEXTEN_Msk             
+#define ADC_JSQR_JEXTEN_0              (0x1UL << ADC_JSQR_JEXTEN_Pos)  
+#define ADC_JSQR_JEXTEN_1              (0x2UL << ADC_JSQR_JEXTEN_Pos)  
+
+#define ADC_JSQR_JSQ1_Pos              (9U)
+#define ADC_JSQR_JSQ1_Msk              (0x1FUL << ADC_JSQR_JSQ1_Pos)
+#define ADC_JSQR_JSQ1                  ADC_JSQR_JSQ1_Msk            
+#define ADC_JSQR_JSQ1_0                (0x01UL << ADC_JSQR_JSQ1_Pos)
+#define ADC_JSQR_JSQ1_1                (0x02UL << ADC_JSQR_JSQ1_Pos)
+#define ADC_JSQR_JSQ1_2                (0x04UL << ADC_JSQR_JSQ1_Pos)
+#define ADC_JSQR_JSQ1_3                (0x08UL << ADC_JSQR_JSQ1_Pos)
+#define ADC_JSQR_JSQ1_4                (0x10UL << ADC_JSQR_JSQ1_Pos)
+
+#define ADC_JSQR_JSQ2_Pos              (15U)
+#define ADC_JSQR_JSQ2_Msk              (0x1FUL << ADC_JSQR_JSQ2_Pos)
+#define ADC_JSQR_JSQ2                  ADC_JSQR_JSQ2_Msk            
+#define ADC_JSQR_JSQ2_0                (0x01UL << ADC_JSQR_JSQ2_Pos)
+#define ADC_JSQR_JSQ2_1                (0x02UL << ADC_JSQR_JSQ2_Pos)
+#define ADC_JSQR_JSQ2_2                (0x04UL << ADC_JSQR_JSQ2_Pos)
+#define ADC_JSQR_JSQ2_3                (0x08UL << ADC_JSQR_JSQ2_Pos)
+#define ADC_JSQR_JSQ2_4                (0x10UL << ADC_JSQR_JSQ2_Pos)
+
+#define ADC_JSQR_JSQ3_Pos              (21U)
+#define ADC_JSQR_JSQ3_Msk              (0x1FUL << ADC_JSQR_JSQ3_Pos)
+#define ADC_JSQR_JSQ3                  ADC_JSQR_JSQ3_Msk            
+#define ADC_JSQR_JSQ3_0                (0x01UL << ADC_JSQR_JSQ3_Pos)
+#define ADC_JSQR_JSQ3_1                (0x02UL << ADC_JSQR_JSQ3_Pos)
+#define ADC_JSQR_JSQ3_2                (0x04UL << ADC_JSQR_JSQ3_Pos)
+#define ADC_JSQR_JSQ3_3                (0x08UL << ADC_JSQR_JSQ3_Pos)
+#define ADC_JSQR_JSQ3_4                (0x10UL << ADC_JSQR_JSQ3_Pos)
+
+#define ADC_JSQR_JSQ4_Pos              (27U)
+#define ADC_JSQR_JSQ4_Msk              (0x1FUL << ADC_JSQR_JSQ4_Pos)
+#define ADC_JSQR_JSQ4                  ADC_JSQR_JSQ4_Msk            
+#define ADC_JSQR_JSQ4_0                (0x01UL << ADC_JSQR_JSQ4_Pos)
+#define ADC_JSQR_JSQ4_1                (0x02UL << ADC_JSQR_JSQ4_Pos)
+#define ADC_JSQR_JSQ4_2                (0x04UL << ADC_JSQR_JSQ4_Pos)
+#define ADC_JSQR_JSQ4_3                (0x08UL << ADC_JSQR_JSQ4_Pos)
+#define ADC_JSQR_JSQ4_4                (0x10UL << ADC_JSQR_JSQ4_Pos)
+
+#define ADC_OFR1_OFFSET1_Pos           (0U)
+#define ADC_OFR1_OFFSET1_Msk           (0xFFFUL << ADC_OFR1_OFFSET1_Pos)       
+#define ADC_OFR1_OFFSET1               ADC_OFR1_OFFSET1_Msk                    
+
+#define ADC_OFR1_OFFSETPOS_Pos         (24U)
+#define ADC_OFR1_OFFSETPOS_Msk         (0x1UL << ADC_OFR1_OFFSETPOS_Pos)       
+#define ADC_OFR1_OFFSETPOS             ADC_OFR1_OFFSETPOS_Msk                  
+#define ADC_OFR1_SATEN_Pos             (25U)
+#define ADC_OFR1_SATEN_Msk             (0x1UL << ADC_OFR1_SATEN_Pos)           
+#define ADC_OFR1_SATEN                 ADC_OFR1_SATEN_Msk                      
+
+#define ADC_OFR1_OFFSET1_CH_Pos        (26U)
+#define ADC_OFR1_OFFSET1_CH_Msk        (0x1FUL << ADC_OFR1_OFFSET1_CH_Pos)     
+#define ADC_OFR1_OFFSET1_CH            ADC_OFR1_OFFSET1_CH_Msk                 
+#define ADC_OFR1_OFFSET1_CH_0          (0x01UL << ADC_OFR1_OFFSET1_CH_Pos)     
+#define ADC_OFR1_OFFSET1_CH_1          (0x02UL << ADC_OFR1_OFFSET1_CH_Pos)     
+#define ADC_OFR1_OFFSET1_CH_2          (0x04UL << ADC_OFR1_OFFSET1_CH_Pos)     
+#define ADC_OFR1_OFFSET1_CH_3          (0x08UL << ADC_OFR1_OFFSET1_CH_Pos)     
+#define ADC_OFR1_OFFSET1_CH_4          (0x10UL << ADC_OFR1_OFFSET1_CH_Pos)     
+
+#define ADC_OFR1_OFFSET1_EN_Pos        (31U)
+#define ADC_OFR1_OFFSET1_EN_Msk        (0x1UL << ADC_OFR1_OFFSET1_EN_Pos)      
+#define ADC_OFR1_OFFSET1_EN            ADC_OFR1_OFFSET1_EN_Msk                 
+
+#define ADC_OFR2_OFFSET2_Pos           (0U)
+#define ADC_OFR2_OFFSET2_Msk           (0xFFFUL << ADC_OFR2_OFFSET2_Pos)       
+#define ADC_OFR2_OFFSET2               ADC_OFR2_OFFSET2_Msk                    
+
+#define ADC_OFR2_OFFSETPOS_Pos         (24U)
+#define ADC_OFR2_OFFSETPOS_Msk         (0x1UL << ADC_OFR2_OFFSETPOS_Pos)       
+#define ADC_OFR2_OFFSETPOS             ADC_OFR2_OFFSETPOS_Msk                  
+#define ADC_OFR2_SATEN_Pos             (25U)
+#define ADC_OFR2_SATEN_Msk             (0x1UL << ADC_OFR2_SATEN_Pos)           
+#define ADC_OFR2_SATEN                 ADC_OFR2_SATEN_Msk                      
+
+#define ADC_OFR2_OFFSET2_CH_Pos        (26U)
+#define ADC_OFR2_OFFSET2_CH_Msk        (0x1FUL << ADC_OFR2_OFFSET2_CH_Pos)     
+#define ADC_OFR2_OFFSET2_CH            ADC_OFR2_OFFSET2_CH_Msk                 
+#define ADC_OFR2_OFFSET2_CH_0          (0x01UL << ADC_OFR2_OFFSET2_CH_Pos)     
+#define ADC_OFR2_OFFSET2_CH_1          (0x02UL << ADC_OFR2_OFFSET2_CH_Pos)     
+#define ADC_OFR2_OFFSET2_CH_2          (0x04UL << ADC_OFR2_OFFSET2_CH_Pos)     
+#define ADC_OFR2_OFFSET2_CH_3          (0x08UL << ADC_OFR2_OFFSET2_CH_Pos)     
+#define ADC_OFR2_OFFSET2_CH_4          (0x10UL << ADC_OFR2_OFFSET2_CH_Pos)     
+
+#define ADC_OFR2_OFFSET2_EN_Pos        (31U)
+#define ADC_OFR2_OFFSET2_EN_Msk        (0x1UL << ADC_OFR2_OFFSET2_EN_Pos)      
+#define ADC_OFR2_OFFSET2_EN            ADC_OFR2_OFFSET2_EN_Msk                 
+
+#define ADC_OFR3_OFFSET3_Pos           (0U)
+#define ADC_OFR3_OFFSET3_Msk           (0xFFFUL << ADC_OFR3_OFFSET3_Pos)       
+#define ADC_OFR3_OFFSET3               ADC_OFR3_OFFSET3_Msk                    
+
+#define ADC_OFR3_OFFSETPOS_Pos         (24U)
+#define ADC_OFR3_OFFSETPOS_Msk         (0x1UL << ADC_OFR3_OFFSETPOS_Pos)       
+#define ADC_OFR3_OFFSETPOS             ADC_OFR3_OFFSETPOS_Msk                  
+#define ADC_OFR3_SATEN_Pos             (25U)
+#define ADC_OFR3_SATEN_Msk             (0x1UL << ADC_OFR3_SATEN_Pos)           
+#define ADC_OFR3_SATEN                 ADC_OFR3_SATEN_Msk                      
+
+#define ADC_OFR3_OFFSET3_CH_Pos        (26U)
+#define ADC_OFR3_OFFSET3_CH_Msk        (0x1FUL << ADC_OFR3_OFFSET3_CH_Pos)     
+#define ADC_OFR3_OFFSET3_CH            ADC_OFR3_OFFSET3_CH_Msk                 
+#define ADC_OFR3_OFFSET3_CH_0          (0x01UL << ADC_OFR3_OFFSET3_CH_Pos)     
+#define ADC_OFR3_OFFSET3_CH_1          (0x02UL << ADC_OFR3_OFFSET3_CH_Pos)     
+#define ADC_OFR3_OFFSET3_CH_2          (0x04UL << ADC_OFR3_OFFSET3_CH_Pos)     
+#define ADC_OFR3_OFFSET3_CH_3          (0x08UL << ADC_OFR3_OFFSET3_CH_Pos)     
+#define ADC_OFR3_OFFSET3_CH_4          (0x10UL << ADC_OFR3_OFFSET3_CH_Pos)     
+
+#define ADC_OFR3_OFFSET3_EN_Pos        (31U)
+#define ADC_OFR3_OFFSET3_EN_Msk        (0x1UL << ADC_OFR3_OFFSET3_EN_Pos)      
+#define ADC_OFR3_OFFSET3_EN            ADC_OFR3_OFFSET3_EN_Msk                 
+
+#define ADC_OFR4_OFFSET4_Pos           (0U)
+#define ADC_OFR4_OFFSET4_Msk           (0xFFFUL << ADC_OFR4_OFFSET4_Pos)       
+#define ADC_OFR4_OFFSET4               ADC_OFR4_OFFSET4_Msk                    
+
+#define ADC_OFR4_OFFSETPOS_Pos         (24U)
+#define ADC_OFR4_OFFSETPOS_Msk         (0x1UL << ADC_OFR4_OFFSETPOS_Pos)       
+#define ADC_OFR4_OFFSETPOS             ADC_OFR4_OFFSETPOS_Msk                  
+#define ADC_OFR4_SATEN_Pos             (25U)
+#define ADC_OFR4_SATEN_Msk             (0x1UL << ADC_OFR4_SATEN_Pos)           
+#define ADC_OFR4_SATEN                 ADC_OFR4_SATEN_Msk                      
+
+#define ADC_OFR4_OFFSET4_CH_Pos        (26U)
+#define ADC_OFR4_OFFSET4_CH_Msk        (0x1FUL << ADC_OFR4_OFFSET4_CH_Pos)     
+#define ADC_OFR4_OFFSET4_CH            ADC_OFR4_OFFSET4_CH_Msk                 
+#define ADC_OFR4_OFFSET4_CH_0          (0x01UL << ADC_OFR4_OFFSET4_CH_Pos)     
+#define ADC_OFR4_OFFSET4_CH_1          (0x02UL << ADC_OFR4_OFFSET4_CH_Pos)     
+#define ADC_OFR4_OFFSET4_CH_2          (0x04UL << ADC_OFR4_OFFSET4_CH_Pos)     
+#define ADC_OFR4_OFFSET4_CH_3          (0x08UL << ADC_OFR4_OFFSET4_CH_Pos)     
+#define ADC_OFR4_OFFSET4_CH_4          (0x10UL << ADC_OFR4_OFFSET4_CH_Pos)     
+
+#define ADC_OFR4_OFFSET4_EN_Pos        (31U)
+#define ADC_OFR4_OFFSET4_EN_Msk        (0x1UL << ADC_OFR4_OFFSET4_EN_Pos)      
+#define ADC_OFR4_OFFSET4_EN            ADC_OFR4_OFFSET4_EN_Msk                 
+
+#define ADC_AWD2CR_AWD2CH_Pos          (0U)
+#define ADC_AWD2CR_AWD2CH_Msk          (0x7FFFFUL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH              ADC_AWD2CR_AWD2CH_Msk               
+#define ADC_AWD2CR_AWD2CH_0            (0x00001UL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH_1            (0x00002UL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH_2            (0x00004UL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH_3            (0x00008UL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH_4            (0x00010UL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH_5            (0x00020UL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH_6            (0x00040UL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH_7            (0x00080UL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH_8            (0x00100UL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH_9            (0x00200UL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH_10           (0x00400UL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH_11           (0x00800UL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH_12           (0x01000UL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH_13           (0x02000UL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH_14           (0x04000UL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH_15           (0x08000UL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH_16           (0x10000UL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH_17           (0x20000UL << ADC_AWD2CR_AWD2CH_Pos)
+#define ADC_AWD2CR_AWD2CH_18           (0x40000UL << ADC_AWD2CR_AWD2CH_Pos)
+
+#define ADC_AWD3CR_AWD3CH_Pos          (0U)
+#define ADC_AWD3CR_AWD3CH_Msk          (0x7FFFFUL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH              ADC_AWD3CR_AWD3CH_Msk               
+#define ADC_AWD3CR_AWD3CH_0            (0x00001UL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH_1            (0x00002UL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH_2            (0x00004UL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH_3            (0x00008UL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH_4            (0x00010UL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH_5            (0x00020UL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH_6            (0x00040UL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH_7            (0x00080UL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH_8            (0x00100UL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH_9            (0x00200UL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH_10           (0x00400UL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH_11           (0x00800UL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH_12           (0x01000UL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH_13           (0x02000UL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH_14           (0x04000UL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH_15           (0x08000UL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH_16           (0x10000UL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH_17           (0x20000UL << ADC_AWD3CR_AWD3CH_Pos)
+#define ADC_AWD3CR_AWD3CH_18           (0x40000UL << ADC_AWD3CR_AWD3CH_Pos)
+
+#define ADC_DIFSEL_DIFSEL_Pos          (0U)
+#define ADC_DIFSEL_DIFSEL_Msk          (0x7FFFFUL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL              ADC_DIFSEL_DIFSEL_Msk               
+#define ADC_DIFSEL_DIFSEL_0            (0x00001UL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL_1            (0x00002UL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL_2            (0x00004UL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL_3            (0x00008UL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL_4            (0x00010UL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL_5            (0x00020UL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL_6            (0x00040UL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL_7            (0x00080UL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL_8            (0x00100UL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL_9            (0x00200UL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL_10           (0x00400UL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL_11           (0x00800UL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL_12           (0x01000UL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL_13           (0x02000UL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL_14           (0x04000UL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL_15           (0x08000UL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL_16           (0x10000UL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL_17           (0x20000UL << ADC_DIFSEL_DIFSEL_Pos)
+#define ADC_DIFSEL_DIFSEL_18           (0x40000UL << ADC_DIFSEL_DIFSEL_Pos)
+
+#define ADC_CALFACT_CALFACT_S_Pos      (0U)
+#define ADC_CALFACT_CALFACT_S_Msk      (0x7FUL << ADC_CALFACT_CALFACT_S_Pos)
+#define ADC_CALFACT_CALFACT_S          ADC_CALFACT_CALFACT_S_Msk            
+#define ADC_CALFACT_CALFACT_S_0        (0x01UL << ADC_CALFACT_CALFACT_S_Pos)
+#define ADC_CALFACT_CALFACT_S_1        (0x02UL << ADC_CALFACT_CALFACT_S_Pos)
+#define ADC_CALFACT_CALFACT_S_2        (0x04UL << ADC_CALFACT_CALFACT_S_Pos)
+#define ADC_CALFACT_CALFACT_S_3        (0x08UL << ADC_CALFACT_CALFACT_S_Pos)
+#define ADC_CALFACT_CALFACT_S_4        (0x10UL << ADC_CALFACT_CALFACT_S_Pos)
+#define ADC_CALFACT_CALFACT_S_5        (0x20UL << ADC_CALFACT_CALFACT_S_Pos)
+#define ADC_CALFACT_CALFACT_S_6        (0x40UL << ADC_CALFACT_CALFACT_S_Pos)
+
+#define ADC_CALFACT_CALFACT_D_Pos      (16U)
+#define ADC_CALFACT_CALFACT_D_Msk      (0x7FUL << ADC_CALFACT_CALFACT_D_Pos)
+#define ADC_CALFACT_CALFACT_D          ADC_CALFACT_CALFACT_D_Msk            
+#define ADC_CALFACT_CALFACT_D_0        (0x01UL << ADC_CALFACT_CALFACT_D_Pos)
+#define ADC_CALFACT_CALFACT_D_1        (0x02UL << ADC_CALFACT_CALFACT_D_Pos)
+#define ADC_CALFACT_CALFACT_D_2        (0x04UL << ADC_CALFACT_CALFACT_D_Pos)
+#define ADC_CALFACT_CALFACT_D_3        (0x08UL << ADC_CALFACT_CALFACT_D_Pos)
+#define ADC_CALFACT_CALFACT_D_4        (0x10UL << ADC_CALFACT_CALFACT_D_Pos)
+#define ADC_CALFACT_CALFACT_D_5        (0x20UL << ADC_CALFACT_CALFACT_D_Pos)
+#define ADC_CALFACT_CALFACT_D_6        (0x40UL << ADC_CALFACT_CALFACT_D_Pos)
+#define ADC_GCOMP_GCOMPCOEFF_Pos       (0U)
+#define ADC_GCOMP_GCOMPCOEFF_Msk       (0x3FFFUL << ADC_GCOMP_GCOMPCOEFF_Pos)
+#define ADC_GCOMP_GCOMPCOEFF           ADC_GCOMP_GCOMPCOEFF_Msk              
+
+/*************************  ADC Common registers  *****************************/
+#define ADC_CSR_ADRDY_MST_Pos          (0U)
+#define ADC_CSR_ADRDY_MST_Msk          (0x1UL << ADC_CSR_ADRDY_MST_Pos)        
+#define ADC_CSR_ADRDY_MST              ADC_CSR_ADRDY_MST_Msk                   
+#define ADC_CSR_EOSMP_MST_Pos          (1U)
+#define ADC_CSR_EOSMP_MST_Msk          (0x1UL << ADC_CSR_EOSMP_MST_Pos)        
+#define ADC_CSR_EOSMP_MST              ADC_CSR_EOSMP_MST_Msk                   
+#define ADC_CSR_EOC_MST_Pos            (2U)
+#define ADC_CSR_EOC_MST_Msk            (0x1UL << ADC_CSR_EOC_MST_Pos)          
+#define ADC_CSR_EOC_MST                ADC_CSR_EOC_MST_Msk                     
+#define ADC_CSR_EOS_MST_Pos            (3U)
+#define ADC_CSR_EOS_MST_Msk            (0x1UL << ADC_CSR_EOS_MST_Pos)          
+#define ADC_CSR_EOS_MST                ADC_CSR_EOS_MST_Msk                     
+#define ADC_CSR_OVR_MST_Pos            (4U)
+#define ADC_CSR_OVR_MST_Msk            (0x1UL << ADC_CSR_OVR_MST_Pos)          
+#define ADC_CSR_OVR_MST                ADC_CSR_OVR_MST_Msk                     
+#define ADC_CSR_JEOC_MST_Pos           (5U)
+#define ADC_CSR_JEOC_MST_Msk           (0x1UL << ADC_CSR_JEOC_MST_Pos)         
+#define ADC_CSR_JEOC_MST               ADC_CSR_JEOC_MST_Msk                    
+#define ADC_CSR_JEOS_MST_Pos           (6U)
+#define ADC_CSR_JEOS_MST_Msk           (0x1UL << ADC_CSR_JEOS_MST_Pos)         
+#define ADC_CSR_JEOS_MST               ADC_CSR_JEOS_MST_Msk                    
+#define ADC_CSR_AWD1_MST_Pos           (7U)
+#define ADC_CSR_AWD1_MST_Msk           (0x1UL << ADC_CSR_AWD1_MST_Pos)         
+#define ADC_CSR_AWD1_MST               ADC_CSR_AWD1_MST_Msk                    
+#define ADC_CSR_AWD2_MST_Pos           (8U)
+#define ADC_CSR_AWD2_MST_Msk           (0x1UL << ADC_CSR_AWD2_MST_Pos)         
+#define ADC_CSR_AWD2_MST               ADC_CSR_AWD2_MST_Msk                    
+#define ADC_CSR_AWD3_MST_Pos           (9U)
+#define ADC_CSR_AWD3_MST_Msk           (0x1UL << ADC_CSR_AWD3_MST_Pos)         
+#define ADC_CSR_AWD3_MST               ADC_CSR_AWD3_MST_Msk                    
+#define ADC_CSR_JQOVF_MST_Pos          (10U)
+#define ADC_CSR_JQOVF_MST_Msk          (0x1UL << ADC_CSR_JQOVF_MST_Pos)        
+#define ADC_CSR_JQOVF_MST              ADC_CSR_JQOVF_MST_Msk                   
+
+#define ADC_CSR_ADRDY_SLV_Pos          (16U)
+#define ADC_CSR_ADRDY_SLV_Msk          (0x1UL << ADC_CSR_ADRDY_SLV_Pos)        
+#define ADC_CSR_ADRDY_SLV              ADC_CSR_ADRDY_SLV_Msk                   
+#define ADC_CSR_EOSMP_SLV_Pos          (17U)
+#define ADC_CSR_EOSMP_SLV_Msk          (0x1UL << ADC_CSR_EOSMP_SLV_Pos)        
+#define ADC_CSR_EOSMP_SLV              ADC_CSR_EOSMP_SLV_Msk                   
+#define ADC_CSR_EOC_SLV_Pos            (18U)
+#define ADC_CSR_EOC_SLV_Msk            (0x1UL << ADC_CSR_EOC_SLV_Pos)          
+#define ADC_CSR_EOC_SLV                ADC_CSR_EOC_SLV_Msk                     
+#define ADC_CSR_EOS_SLV_Pos            (19U)
+#define ADC_CSR_EOS_SLV_Msk            (0x1UL << ADC_CSR_EOS_SLV_Pos)          
+#define ADC_CSR_EOS_SLV                ADC_CSR_EOS_SLV_Msk                     
+#define ADC_CSR_OVR_SLV_Pos            (20U)
+#define ADC_CSR_OVR_SLV_Msk            (0x1UL << ADC_CSR_OVR_SLV_Pos)          
+#define ADC_CSR_OVR_SLV                ADC_CSR_OVR_SLV_Msk                     
+#define ADC_CSR_JEOC_SLV_Pos           (21U)
+#define ADC_CSR_JEOC_SLV_Msk           (0x1UL << ADC_CSR_JEOC_SLV_Pos)         
+#define ADC_CSR_JEOC_SLV               ADC_CSR_JEOC_SLV_Msk                    
+#define ADC_CSR_JEOS_SLV_Pos           (22U)
+#define ADC_CSR_JEOS_SLV_Msk           (0x1UL << ADC_CSR_JEOS_SLV_Pos)         
+#define ADC_CSR_JEOS_SLV               ADC_CSR_JEOS_SLV_Msk                    
+#define ADC_CSR_AWD1_SLV_Pos           (23U)
+#define ADC_CSR_AWD1_SLV_Msk           (0x1UL << ADC_CSR_AWD1_SLV_Pos)         
+#define ADC_CSR_AWD1_SLV               ADC_CSR_AWD1_SLV_Msk                    
+#define ADC_CSR_AWD2_SLV_Pos           (24U)
+#define ADC_CSR_AWD2_SLV_Msk           (0x1UL << ADC_CSR_AWD2_SLV_Pos)         
+#define ADC_CSR_AWD2_SLV               ADC_CSR_AWD2_SLV_Msk                    
+#define ADC_CSR_AWD3_SLV_Pos           (25U)
+#define ADC_CSR_AWD3_SLV_Msk           (0x1UL << ADC_CSR_AWD3_SLV_Pos)         
+#define ADC_CSR_AWD3_SLV               ADC_CSR_AWD3_SLV_Msk                    
+#define ADC_CSR_JQOVF_SLV_Pos          (26U)
+#define ADC_CSR_JQOVF_SLV_Msk          (0x1UL << ADC_CSR_JQOVF_SLV_Pos)        
+#define ADC_CSR_JQOVF_SLV              ADC_CSR_JQOVF_SLV_Msk                   
+
+#define ADC_CCR_DUAL_Pos               (0U)
+#define ADC_CCR_DUAL_Msk               (0x1FUL << ADC_CCR_DUAL_Pos)            
+#define ADC_CCR_DUAL                   ADC_CCR_DUAL_Msk                        
+#define ADC_CCR_DUAL_0                 (0x01UL << ADC_CCR_DUAL_Pos)            
+#define ADC_CCR_DUAL_1                 (0x02UL << ADC_CCR_DUAL_Pos)            
+#define ADC_CCR_DUAL_2                 (0x04UL << ADC_CCR_DUAL_Pos)            
+#define ADC_CCR_DUAL_3                 (0x08UL << ADC_CCR_DUAL_Pos)            
+#define ADC_CCR_DUAL_4                 (0x10UL << ADC_CCR_DUAL_Pos)            
+
+#define ADC_CCR_DELAY_Pos              (8U)
+#define ADC_CCR_DELAY_Msk              (0xFUL << ADC_CCR_DELAY_Pos)            
+#define ADC_CCR_DELAY                  ADC_CCR_DELAY_Msk                       
+#define ADC_CCR_DELAY_0                (0x1UL << ADC_CCR_DELAY_Pos)            
+#define ADC_CCR_DELAY_1                (0x2UL << ADC_CCR_DELAY_Pos)            
+#define ADC_CCR_DELAY_2                (0x4UL << ADC_CCR_DELAY_Pos)            
+#define ADC_CCR_DELAY_3                (0x8UL << ADC_CCR_DELAY_Pos)            
+
+#define ADC_CCR_DMACFG_Pos             (13U)
+#define ADC_CCR_DMACFG_Msk             (0x1UL << ADC_CCR_DMACFG_Pos)           
+#define ADC_CCR_DMACFG                 ADC_CCR_DMACFG_Msk                      
+
+#define ADC_CCR_MDMA_Pos               (14U)
+#define ADC_CCR_MDMA_Msk               (0x3UL << ADC_CCR_MDMA_Pos)             
+#define ADC_CCR_MDMA                   ADC_CCR_MDMA_Msk                        
+#define ADC_CCR_MDMA_0                 (0x1UL << ADC_CCR_MDMA_Pos)             
+#define ADC_CCR_MDMA_1                 (0x2UL << ADC_CCR_MDMA_Pos)             
+
+#define ADC_CCR_CKMODE_Pos             (16U)
+#define ADC_CCR_CKMODE_Msk             (0x3UL << ADC_CCR_CKMODE_Pos)           
+#define ADC_CCR_CKMODE                 ADC_CCR_CKMODE_Msk                    
+#define ADC_CCR_CKMODE_0               (0x1UL << ADC_CCR_CKMODE_Pos)           
+#define ADC_CCR_CKMODE_1               (0x2UL << ADC_CCR_CKMODE_Pos)           
+
+#define ADC_CCR_PRESC_Pos              (18U)
+#define ADC_CCR_PRESC_Msk              (0xFUL << ADC_CCR_PRESC_Pos)            
+#define ADC_CCR_PRESC                  ADC_CCR_PRESC_Msk                       
+#define ADC_CCR_PRESC_0                (0x1UL << ADC_CCR_PRESC_Pos)            
+#define ADC_CCR_PRESC_1                (0x2UL << ADC_CCR_PRESC_Pos)            
+#define ADC_CCR_PRESC_2                (0x4UL << ADC_CCR_PRESC_Pos)            
+#define ADC_CCR_PRESC_3                (0x8UL << ADC_CCR_PRESC_Pos)            
+
+#define ADC_CCR_VREFEN_Pos             (22U)
+#define ADC_CCR_VREFEN_Msk             (0x1UL << ADC_CCR_VREFEN_Pos)           
+#define ADC_CCR_VREFEN                 ADC_CCR_VREFEN_Msk                      
+#define ADC_CCR_VSENSESEL_Pos          (23U)
+#define ADC_CCR_VSENSESEL_Msk          (0x1UL << ADC_CCR_VSENSESEL_Pos)        
+#define ADC_CCR_VSENSESEL              ADC_CCR_VSENSESEL_Msk                   
+#define ADC_CCR_VBATSEL_Pos            (24U)
+#define ADC_CCR_VBATSEL_Msk            (0x1UL << ADC_CCR_VBATSEL_Pos)          
+#define ADC_CCR_VBATSEL                ADC_CCR_VBATSEL_Msk                     
+
+#define ADC_CDR_RDATA_MST_Pos          (0U)
+#define ADC_CDR_RDATA_MST_Msk          (0xFFFFUL << ADC_CDR_RDATA_MST_Pos)
+#define ADC_CDR_RDATA_MST              ADC_CDR_RDATA_MST_Msk              
+
+#define ADC_CDR_RDATA_SLV_Pos          (16U)
+#define ADC_CDR_RDATA_SLV_Msk          (0xFFFFUL << ADC_CDR_RDATA_SLV_Pos)
+#define ADC_CDR_RDATA_SLV              ADC_CDR_RDATA_SLV_Msk            
+
+/*===================== COMPARATOR AND STATUS REGISTER =============================*/
+#define COMP_CSR_EN_Pos            (0U)
+#define COMP_CSR_EN_Msk            (0x1UL << COMP_CSR_EN_Pos)                  
+#define COMP_CSR_EN                COMP_CSR_EN_Msk                             
+
+#define COMP_CSR_INMSEL_Pos        (4U)
+#define COMP_CSR_INMSEL_Msk        (0xFUL << COMP_CSR_INMSEL_Pos)              
+#define COMP_CSR_INMSEL            COMP_CSR_INMSEL_Msk                         
+#define COMP_CSR_INMSEL_0          (0x1UL << COMP_CSR_INMSEL_Pos)              
+#define COMP_CSR_INMSEL_1          (0x2UL << COMP_CSR_INMSEL_Pos)              
+#define COMP_CSR_INMSEL_2          (0x4UL << COMP_CSR_INMSEL_Pos)              
+#define COMP_CSR_INMSEL_3          (0x8UL << COMP_CSR_INMSEL_Pos)              
+
+#define COMP_CSR_INPSEL_Pos        (8U)
+#define COMP_CSR_INPSEL_Msk        (0x1UL << COMP_CSR_INPSEL_Pos)              
+#define COMP_CSR_INPSEL            COMP_CSR_INPSEL_Msk                         
+
+#define COMP_CSR_POLARITY_Pos      (15U)
+#define COMP_CSR_POLARITY_Msk      (0x1UL << COMP_CSR_POLARITY_Pos)            
+#define COMP_CSR_POLARITY          COMP_CSR_POLARITY_Msk                       
+
+#define COMP_CSR_HYST_Pos          (16U)
+#define COMP_CSR_HYST_Msk          (0x7UL << COMP_CSR_HYST_Pos)                
+#define COMP_CSR_HYST              COMP_CSR_HYST_Msk                           
+#define COMP_CSR_HYST_0            (0x1UL << COMP_CSR_HYST_Pos)                
+#define COMP_CSR_HYST_1            (0x2UL << COMP_CSR_HYST_Pos)                
+#define COMP_CSR_HYST_2            (0x4UL << COMP_CSR_HYST_Pos)                
+
+#define COMP_CSR_BLANKING_Pos      (19U)
+#define COMP_CSR_BLANKING_Msk      (0x7UL << COMP_CSR_BLANKING_Pos)            
+#define COMP_CSR_BLANKING          COMP_CSR_BLANKING_Msk                       
+#define COMP_CSR_BLANKING_0        (0x1UL << COMP_CSR_BLANKING_Pos)            
+#define COMP_CSR_BLANKING_1        (0x2UL << COMP_CSR_BLANKING_Pos)            
+#define COMP_CSR_BLANKING_2        (0x4UL << COMP_CSR_BLANKING_Pos)            
+
+#define COMP_CSR_BRGEN_Pos         (22U)
+#define COMP_CSR_BRGEN_Msk         (0x1UL << COMP_CSR_BRGEN_Pos)               
+#define COMP_CSR_BRGEN             COMP_CSR_BRGEN_Msk                          
+
+#define COMP_CSR_SCALEN_Pos        (23U)
+#define COMP_CSR_SCALEN_Msk        (0x1UL << COMP_CSR_SCALEN_Pos)              
+#define COMP_CSR_SCALEN            COMP_CSR_SCALEN_Msk                         
+
+#define COMP_CSR_VALUE_Pos         (30U)
+#define COMP_CSR_VALUE_Msk         (0x1UL << COMP_CSR_VALUE_Pos)               
+#define COMP_CSR_VALUE             COMP_CSR_VALUE_Msk                          
+
+#define COMP_CSR_LOCK_Pos          (31U)
+#define COMP_CSR_LOCK_Msk          (0x1UL << COMP_CSR_LOCK_Pos)                
+#define COMP_CSR_LOCK              COMP_CSR_LOCK_Msk                           
 
 
 #ifdef __cplusplus

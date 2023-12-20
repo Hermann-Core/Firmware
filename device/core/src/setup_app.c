@@ -49,6 +49,13 @@
 #define CONSTRUCTOR_BASE           __init_array_base
 #define CONSTRUCTOR_LIMIT          __init_array_limit
 
+#if defined (STM32F303)
+#define CLK_FREQUENCY        72000000UL
+#elif defined (STM32G473)
+#define CLK_FREQUENCY        170000000UL
+#endif
+
+
 
 
 /*======================= Type definition ==========================================*/
@@ -175,7 +182,8 @@ STATIC_INLINE void __zero_init(void)
  */
 NO_RETURN void __program_start(void)
 {
-    /* Setting up the C/C++ environment */
+    /*============ Setting up the C/C++ environment ===========*/
+    
     if (__binit__ != (CopyTable_t*)-1)
       __copy_table((CopyTable_t const*)__binit__);
 
@@ -187,6 +195,10 @@ NO_RETURN void __program_start(void)
 
     __enable_irq();       /* Enable the global interrupts */
     __enable_fault_irq(); /* Enable fault exceptions */
+
+    /* Configure the systick for 1ms tick */
+    SysTick_Config(CLK_FREQUENCY / 1000U);
+    NVIC_SetPriority(SysTick_IRQn, 2);
 
     main();     /* Call the main function */
 

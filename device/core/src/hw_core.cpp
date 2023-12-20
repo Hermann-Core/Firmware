@@ -122,6 +122,11 @@ __attribute__((noreturn)) void hw_core::systemReset(void)
   __NVIC_SystemReset();
 }
 
+void hw_core::initTicks(u32 ticks)
+{
+    SysTick_Config(ticks);
+}
+
 /** @} */
 
 /** @} */

@@ -35,6 +35,7 @@
  * 
  * @{
  */
+
 /*==================================================================================
 |                                NAMESPACE                                 
 ===================================================================================*/
@@ -42,7 +43,7 @@
 namespace common
 {
     /**
-     * \brief check if an overrun occured and then roll the value to a specified value
+     * \brief check if an overrun occured and then roll the value to the limit
      * 
      * \tparam T template parameter
      * \param [in] value     : value
@@ -50,7 +51,7 @@ namespace common
      * \param [in] ovr_value : roll value
      */
     template <typename T>
-    constexpr void check_overrun(T& value, T max_value, T ovr_value)
+    constexpr void handle_overrun(T& value, T max_value, T ovr_value)
     {
         if (value > max_value)
         {

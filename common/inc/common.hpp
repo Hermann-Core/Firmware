@@ -43,6 +43,7 @@
 #include "features.h"
 #include "checker.hpp"
 #include "operators.hpp"
+#include "periph_def.h"
 
 
 /*==================================================================================
@@ -78,6 +79,17 @@ namespace common
         {
             reg |= mask;
         }
+    }
+
+    /**
+     * \brief Write the a value into a register.
+     *
+     * \param [in] reg  : reference to the register.
+     * \param [in] mask : mask indicating the bits to set.
+     */
+    constexpr void write_reg(volatile u32& reg, u32 value)
+    {
+        reg = value;
     }
 
     /**

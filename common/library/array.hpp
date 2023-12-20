@@ -40,6 +40,8 @@
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
+#include <initializer_list>
+
 #include "common.hpp"
 
 
@@ -52,11 +54,10 @@
  * \brief This class provide functionalities for arrays manipulation with some features
  * such as bound check, operators overloading for user friendly manipulation and so on.
  */
-template <typename T = char, size_t _size = 256>
+template <typename T, size_t _size>
 class array
 {
     public:
-
         using value_type        = T;
         using size_type         = size_t;
         using reference         = T&;
@@ -64,8 +65,22 @@ class array
         using pointer           = T*;
         using const_pointer     = const T*;
 
+        array() {}
+        // Constructor taking an initializer list
+        array(std::initializer_list<T> initList)
+        {
+            // The size of the list must not exceed the array size
+            assert(initList.size() <= _size, "out of bounds list");
+
+            size_t index = 0;
+            for (const T& value : initList) {
+                buffer_[index++] = value;
+            }
+        }
+
         /**
-         * \brief Access an element at the specified index with bounds checking.
+         * \brief Access an element at the specified index
+         *        with bounds checking.
          *
          * \param [in] i : index of the element to access.
          * \return reference to the element at the specified index.
@@ -78,7 +93,8 @@ class array
         }
 
         /**
-         * \brief Access an element at the specified index with bounds checking (const version).
+         * \brief Access an element at the specified index
+         *        with bounds checking (const version).
          *
          * \param [in] i : index of the element to access.
          * \return constant reference to the element at the specified index.
@@ -91,7 +107,8 @@ class array
         }
 
         /**
-         * \brief Access to the element at a specific index using the familiar array-like syntax.
+         * \brief Access to the element at a specific index
+         *        using the familiar array-like syntax.
          *
          * \param [in] i : index of the element to access.
          * \return reference to the element at the specified index.
@@ -102,7 +119,8 @@ class array
         }
 
         /**
-         * \brief Access to the element at a specific index using the familiar array-like syntax (const version).
+         * \brief Access to the element at a specific index using
+         *        the familiar array-like syntax (const version).
          *
          * \param [in] i : index of the element to access.
          * \return constant reference to the element at the specified index.
@@ -110,6 +128,46 @@ class array
         constexpr const_reference operator[](size_t i) const
         {
             return buffer_[i];
+        }
+
+        /**
+         * \brief Return an iterator to the begining of the array.
+         *
+         * \return iterator to the begining of the array.
+         */
+        pointer begin()
+        {
+            return &buffer_[0];
+        }
+
+        /**
+         * \brief Return a constant iterator to the begining of the array.
+         *
+         * \return constant iterator to the begining of the array.
+         */
+        constexpr pointer begin() const
+        {
+            return &buffer_[0];
+        }
+
+        /**
+         * \brief Return an iterator to the end of the array.
+         *
+         * \return iterator to the end of the array.
+         */
+        pointer end()
+        {
+            return buffer_ + _size;
+        }
+
+        /**
+         * \brief Return a const iterator to the end of the array.
+         *
+         * \return constant iterator to the end of the array.
+         */
+        constexpr pointer end() const
+        {
+            return buffer_ + _size;
         }
 
         /**
@@ -145,9 +203,9 @@ class array
         /**
          * \brief Erase the contents of the array by setting all elements to zero.
          */
-        inline void erase()
+        inline void erase(value_type value)
         {
-            common::fill(buffer_, buffer_ + _size, 0);
+            common::fill(buffer_, buffer_ + _size, value);
         }
 
         /**
@@ -155,10 +213,10 @@ class array
          *
          * \param [in] position : index at which to start erasing.
          */
-        inline void erase_at(size_t position)
+        inline void erase_at(size_t position, value_type value)
         {
             assert(position < _size, "the position is out of bound");
-            common::fill(&buffer_[position], buffer_ + _size, 0);
+            common::fill(&buffer_[position], buffer_ + _size, value);
         }
 
         /**
@@ -167,7 +225,7 @@ class array
          * \param [in] position : index at which to add the value.
          * \param [in] value    : value to add to the array.
          */
-        inline void add(size_t position, size_t value)
+        inline void add(size_t position, value_type value)
         {
             assert(position < _size, "the position is out of bound");
             buffer_[position] = value;

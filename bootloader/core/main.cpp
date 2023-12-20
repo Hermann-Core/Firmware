@@ -26,6 +26,7 @@
 ===================================================================================*/
 #include "main.hpp"
 #include "boot_jump.hpp"
+#include "const.hpp"
 #include "periph_def.h"
 #include "rcc.hpp"
 
@@ -50,14 +51,6 @@
 int main (void)
 {
     extern const u32 APP_ADDRESS;   /* defined in the linker script */
-
-    driver::rcc::enableClock(common::periphID::GPIOA_ID);
-
-    I2C1->CR1 = 10512154;
-    I2C1->OAR1 = 14124655;
-    I2C1->OAR2 = 52614;
-
-    driver::rcc::resetPeriph(common::periphID::I2C1_ID);
 
     boot_jump::jumpToApp(&APP_ADDRESS);     /* jump to the application */
 

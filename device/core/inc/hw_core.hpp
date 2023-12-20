@@ -1,17 +1,14 @@
 /************************************************************************************* 
  * @file   hw_core.hpp
- * @date   March, 12 2023
+ * @date   Dec, 14 2023
  * @author Awatsa Hermann
- * @brief  hardware core functions class
- * 
- *         Contains the declarations of
-           the core hardware functions
+ * @brief  hardware core functionalities
  * ***********************************************************************************
  * @attention
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.03.12   |    1      |  0         |
+ # 2023.12.14   |    1      |  0         |
  *
  * Smart Ebike Controller
  * https://github.com/Hermann-Core/smart-ebike-controller
@@ -27,7 +24,7 @@
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include "common.hpp"
+#include "periph_def.h"
 
 
 
@@ -36,18 +33,18 @@
 ===================================================================================*/
 
 /**
- * \class core hardware functions interface
+ * \brief Core hardware utilities functions
  */
-class hw_core
+namespace hw_core
 {
-    public:
-        static void disable_all_irq(void);
-        static void disable_fault_irq(void);
-        static void irq_enable(IRQn_t IRQn);
-        static void irq_disable(IRQn_t IRQn);
-        static void irq_clearPending(IRQn_t IRQn);
-        static void irq_setPriority(IRQn_t IRQn, u8 priority);
-        static void systemReset(void);
+    void disable_all_irq(void);
+    void disable_fault_irq(void);
+    void irq_enable(IRQn_t IRQn);
+    void irq_disable(IRQn_t IRQn);
+    void irq_clearPending(IRQn_t IRQn);
+    void irq_setPriority(IRQn_t IRQn, u8 priority);
+    void systemReset(void);
+    void initTicks(u32 ticks);
 };
 
 

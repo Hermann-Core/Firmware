@@ -156,14 +156,12 @@ static void pllConfig(void)
     RCC->PLLCFGR_b.PLLN    = PLLN_85;
     RCC->PLLCFGR_b.PLLR    = CLEAR;
     RCC->PLLCFGR_b.PLLREN  = SET;
-    RCC->CFGR_b.MCOSEL     = SET;           // Sysclk as MCO output clock
 
     #elif defined (STM32F303)
     /* Configure the phase lock loop (PLL) for 72 Mhz clock operation */
     RCC->CFGR_b.PLLSRC     = PLL_SRC;
     RCC->CFGR_b.PLLXTPRE   = CLEAR;
     RCC->CFGR_b.PLLMUL     = PLL_MUL_9;
-    RCC->CFGR_b.MCO        = SYSCLK_OUT;    // Sysclk as MCO output clock
     #endif
 
     /* Enable the PLL clock */
@@ -171,6 +169,19 @@ static void pllConfig(void)
 
     /* Wait for the pll to be locked */
     while(RCC->CR_b.PLLRDY != SET);
+}
+
+/**
+ * \brief Set the clock that will be output
+ *        to the MCU clock output pin
+ */
+inline static void setClkOutput(void)
+{
+    #if defined (STM32G473)
+    RCC->CFGR_b.MCOSEL = SET;        // Sysclk as MCO output clock
+    #elif defined (STM32F303)
+    RCC->CFGR_b.MCO    = SYSCLK_OUT; // Sysclk as MCO output clock
+    #endif
 }
 
 /**
@@ -228,6 +239,7 @@ FORCE_INLINE void enableFaultsHandlers(void)
                   SCB_SHCSR_USGFAULTENA_Msk ;
 }
 
+
 /**
  * \brief Initialize the floating point coprocessor 
  */
@@ -246,15 +258,14 @@ void systemClockInit(void)
     /* Clear all the reset interrupts flags */
     RCC->CSR_b.RMVF = SET;
 
-    setFlashLatency();  /* set the flash latency */
+    setFlashLatency();  /* Set the flash latency */
 
-    enableHSEClk();     /* enable the HSE oscillator */
+    enableHSEClk();     /* Enable the HSE oscillator */
 
-    rtcConfig();        /* configure the rtc backup domain */
+    rtcConfig();        /* Configure the rtc backup domain */
 
     #if defined (STM32G473)
-
-    enableLSEClk();     /* enable the LSE oscillator */
+    enableLSEClk();     /* Enable the LSE oscillator */
 
     /* Set the LSE as the RTC and backup registers clock */
     if (RCC->BDCR_b.RTCSEL!= LSE_SRC) {
@@ -264,21 +275,20 @@ void systemClockInit(void)
     flashConfig();
 
     #elif defined (STM32F303)
-
     /* Enable the flash memory prefetch buffer */
     FLASH->ACR_b.PRFTBE = SET;
-
     #endif
 
-    pllConfig();        /* configure the phase lock loop */
+    pllConfig();        /* Configure the phase lock loop */
 
-    setPrescalers();    /* set the buses and peripherals prescalers */
+    setPrescalers();    /* Set the buses and peripherals prescalers */
+    setClkOutput();     /* Set the MCO clock output */
 
-    enableSysClk();     /* enable the system clock */
+    enableSysClk();     /* Enable the system clock */
 
     /* Configure the systick for 1ms tick */
     SysTick_Config(CLK_FREQUENCY / 1000U);
-    NVIC_SetPriority(SysTick_IRQn, 5);
+    NVIC_SetPriority(SysTick_IRQn, 2);
 }
 
 
