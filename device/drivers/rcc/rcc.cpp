@@ -78,7 +78,7 @@ void rcc::enableClock(const u32 periphID)
     if (periphID <= AHB1_MAX) {
         if (!common::read_reg_bits(RCC->AHB1ENR, common::SET, periphID))
         {
-            common::set_reg_bits(RCC->AHB1ENR, common::SET, periphID);
+            common::set_reg_bit(RCC->AHB1ENR, common::SET, periphID);
             /* dummy read in order to set a delay after enabling the clock */
             temp = common::read_reg_bits(RCC->AHB1ENR, common::SET, periphID);
         }
@@ -98,7 +98,7 @@ void rcc::enableClock(const u32 periphID)
     else if (periphID <= common::periphID::PWR_ID) {
         if (!common::read_reg_bits(RCC->APB1ENR, common::SET, periphID-64U))
         {
-            common::set_reg_bits(RCC->APB1ENR, common::SET, periphID-64U);
+            common::set_reg_bit(RCC->APB1ENR, common::SET, periphID-64U);
             /* dummy read in order to set a delay after enabling the clock */
             temp = common::read_reg_bits(RCC->APB1ENR, common::SET, periphID-64U);
         }
@@ -106,7 +106,7 @@ void rcc::enableClock(const u32 periphID)
     else if (periphID <= common::periphID::TIM8_ID) {
         if (!common::read_reg_bits(RCC->APB2ENR, common::SET, periphID-96U))
         {
-            common::set_reg_bits(RCC->APB2ENR, common::SET, periphID-96U);
+            common::set_reg_bit(RCC->APB2ENR, common::SET, periphID-96U);
             /* dummy read in order to set a delay after enabling the clock */
             temp = common::read_reg_bits(RCC->APB2ENR, common::SET, periphID-96U);
         }
@@ -180,7 +180,7 @@ void rcc::resetPeriph(const u32 periphID)
 
     if (periphID <= AHB1_MAX)
     {
-        common::set_reg_bits(RCC->AHB1RSTR, common::SET, periphID);
+        common::set_reg_bit(RCC->AHB1RSTR, common::SET, periphID);
         common::reset_reg_bits(RCC->AHB1RSTR, common::SET, periphID);
     }
     #if defined (STM32G473)
@@ -192,12 +192,12 @@ void rcc::resetPeriph(const u32 periphID)
     #endif  /* STM32G473 */
     else if (periphID <= common::periphID::PWR_ID)
     {
-        common::set_reg_bits(RCC->APB1RSTR, common::SET, periphID%64);
+        common::set_reg_bit(RCC->APB1RSTR, common::SET, periphID%64);
         common::reset_reg_bits(RCC->APB1RSTR, common::SET, periphID%64);
     }
     else if (periphID <= common::periphID::TIM8_ID)
     {
-        common::set_reg_bits(RCC->APB2RSTR, common::SET, periphID%96);
+        common::set_reg_bit(RCC->APB2RSTR, common::SET, periphID%96);
         common::reset_reg_bits(RCC->APB2RSTR, common::SET, periphID%96);
     }
 }
@@ -206,13 +206,10 @@ void rcc::resetPeriph(const u32 periphID)
 /**
  * \brief get the clock frequency of the specified peripheral
  * 
- * \param [in] periphID : peripheral identifier
  * \return the clock frequency of the peripheral
  */
-u32 rcc::getClockFrequency(const u32 periphID)
+u32 rcc::getClockFrequency()
 {
-    assert(periphID <= PERIPH_ID_MAX, "the peripheral ID is out of range");
-
     return SYSCLK;
 }
 

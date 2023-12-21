@@ -59,7 +59,7 @@ namespace common
      * \param [in] value : value to set in the register.
      * \param [in] pos   : position of the bits to set.
      */
-    constexpr void set_reg_bits(volatile u32& reg, u32 value, u32 pos)
+    constexpr void set_reg_bit(volatile u32& reg, u32 value, u32 pos)
     {
         if (!(reg & (value << pos)))
         {
@@ -73,7 +73,7 @@ namespace common
      * \param [in] reg  : reference to the register.
      * \param [in] mask : mask indicating the bits to set.
      */
-    constexpr void set_reg_bits(volatile u32& reg, u32 mask)
+    constexpr void set_reg_bit(volatile u32& reg, u32 mask)
     {
         reg |= mask;
     }

@@ -25,6 +25,7 @@
 |                                 INCLUDES                                
 ===================================================================================*/
 #include "gpio.hpp"
+#include "common.hpp"
 #include "const.hpp"
 #include "periph_def.h"
 #include "rcc.hpp"
@@ -60,11 +61,11 @@ void gpio::clearCfg(u16 pin)
     assert((pin < MAX_PINS), "Invalid pin number.");
 
     // Reset the pin configuration
-    locGPIO->MODER      &= ~(0x1UL << (pin * 2));
-    locGPIO->OTYPER     &= ~(0x1UL << pin);
-    locGPIO->OSPEEDR    &= ~(0x1UL << (pin * 2));
-    locGPIO->PUPDR      &= ~(0x1UL << (pin * 2));
-    locGPIO->AFR[pin/8] &= ~(0x1UL << (pin * 4));
+    common::reset_reg_bits(locGPIO->MODER, 0b11, pin*2);
+    common::reset_reg_bits(locGPIO->OTYPER, common::SET, pin);
+    common::reset_reg_bits(locGPIO->OSPEEDR, 0b11, pin*2);
+    common::reset_reg_bits(locGPIO->PUPDR, 0b11, pin*2);
+    common::reset_reg_bits((locGPIO->AFR[pin>>3]), 0xF, (pin%8)*4);
 }
 
 /**
@@ -81,15 +82,15 @@ void gpio::cfgInput(u16 config, u16 pin)
     {
         case 1: case 2:
             // Set the pin as input pull-up or pull-down pin
-            common::set_reg_bits(locGPIO->PUPDR, config, pin*2);
+            common::modify_reg(locGPIO->PUPDR, 2, config, pin*2);
             break;
         default:
             // Set the pin as analog or input floating pin
-            common::set_reg_bits(locGPIO->MODER, config, pin*2);
+            common::modify_reg(locGPIO->MODER, 2, config, pin*2);
             break;
     }
     // Set the GPIO speed to the highest speed
-    common::set_reg_bits(locGPIO->OSPEEDR, HIGH_SPEED, pin*2);
+    common::modify_reg(locGPIO->OSPEEDR, 2, HIGH_SPEED, pin*2);
     inFlag.at(pin) = true;  // Set the input flag configuation
 }
 
@@ -104,11 +105,11 @@ void gpio::cfgOutput(u16 config, u16 pin)
 {
     this->clearCfg(pin);    // Clear the pin configuration
     // Set the pin as general purpose output pin
-    common::set_reg_bits(locGPIO->MODER, (0x1UL << (pin*2)));
+    common::set_reg_bit(locGPIO->MODER, (0x1UL << (pin*2)));
     // Set the output mode (push-pull or opain drain)
-    common::set_reg_bits(locGPIO->OTYPER, (config << (pin*2)));
+    common::modify_reg(locGPIO->OTYPER, 2, config, pin*2);
     // Set the GPIO speed to the highest speed
-    common::set_reg_bits(locGPIO->OSPEEDR, HIGH_SPEED, pin*2);
+    common::modify_reg(locGPIO->OSPEEDR, 2, HIGH_SPEED, pin*2);
     outFlag.at(pin) = true; // Set the output flag configuration
 }
 
@@ -123,11 +124,11 @@ void gpio::cfgAlt(u16 config, u16 pin)
 {
     this->clearCfg(pin);    // Clear the pin configuration
     // Set the pin as alternate function pin
-    common::set_reg_bits(locGPIO->MODER, (0x2UL << (pin*2)));
+    common::modify_reg(locGPIO->MODER, 2, 0x2UL, pin*2);
     // Set the GPIO speed to the highest speed
-    common::set_reg_bits(locGPIO->OSPEEDR, HIGH_SPEED, pin*2);
+    common::modify_reg(locGPIO->OSPEEDR, 2, HIGH_SPEED, pin*2);
     // Set the alternate function number
-    common::set_reg_bits(locGPIO->AFR[pin/8], config, (pin%8)*4);
+    common::modify_reg(locGPIO->AFR[pin>>3], 4, config, (pin%8)*4);
 }
 
 /**
@@ -316,7 +317,7 @@ bool gpio::lock(u16 pin)
         u32 temp = common::LOCK_MASK;
 
         /* Applying the lock sequence */
-        common::set_reg_bits(temp, common::SET, pin);
+        common::set_reg_bit(temp, common::SET, pin);
         common::write_reg(locGPIO->LCKR, temp);
         common::write_reg(locGPIO->LCKR, common::SET << pin);
         common::write_reg(locGPIO->LCKR, temp);
@@ -347,17 +348,17 @@ void gpio::enableIrq(u16 pin, edge edge, cbk_f callback)
         // Configure the interrupt source
         common::modify_reg(SYSCFG->EXTICR[pin>>2], 4, portNum, (pin&0x3)*4);
         // Unmask the corresponding interrupt request
-        common::set_reg_bits(EXTI->IMR1, common::SET, pin);
+        common::set_reg_bit(EXTI->IMR1, common::SET, pin);
         // Set the triggering edge(s) for the line
         if (edge == edge::RISING) {
-            common::set_reg_bits(EXTI->RTSR1, common::SET, pin);
+            common::set_reg_bit(EXTI->RTSR1, common::SET, pin);
         }
         else if (edge == edge::FALLING) {
-            common::set_reg_bits(EXTI->FTSR1, common::SET, pin);
+            common::set_reg_bit(EXTI->FTSR1, common::SET, pin);
         }
         else {
-            common::set_reg_bits(EXTI->RTSR1, common::SET, pin);
-            common::set_reg_bits(EXTI->FTSR1, common::SET, pin);
+            common::set_reg_bit(EXTI->RTSR1, common::SET, pin);
+            common::set_reg_bit(EXTI->FTSR1, common::SET, pin);
         }
 
         if (callback != nullptr) {
@@ -388,7 +389,7 @@ void gpio::disableIrq(u16 pin) const
 
     if (common::read_reg_bits(EXTI->IMR1, common::SET, pin)) {
         // Clear the pending interrupt request if any
-        common::set_reg_bits(EXTI->PR1, common::SET, pin);
+        common::set_reg_bit(EXTI->PR1, common::SET, pin);
         // Reset the corresponding interrupt input source
         common::reset_reg_bits(SYSCFG->EXTICR[pin>>2], 15, (pin&0x3)*4);
         // Mask the interrupt request for this line
@@ -436,18 +437,18 @@ void gpio::enableEvent(u16 pin, edge edge)
         // Configure the event source
         common::modify_reg(SYSCFG->EXTICR[pin>>2], 4, portNum, (pin&0x3)*4);
         // Unmask the corresponding event source
-        common::set_reg_bits(EXTI->EMR1, common::SET, pin);
+        common::set_reg_bit(EXTI->EMR1, common::SET, pin);
         // Set the triggering edge(s) for the line
         if (edge == edge::RISING) {
-            common::set_reg_bits(EXTI->RTSR1, common::SET, pin);
+            common::set_reg_bit(EXTI->RTSR1, common::SET, pin);
         }
         else if (edge == edge::FALLING) {
-            common::set_reg_bits(EXTI->FTSR1, common::SET, pin);
+            common::set_reg_bit(EXTI->FTSR1, common::SET, pin);
         }
         else {
             // Both rising and falling edges
-            common::set_reg_bits(EXTI->RTSR1, common::SET, pin);
-            common::set_reg_bits(EXTI->FTSR1, common::SET, pin);
+            common::set_reg_bit(EXTI->RTSR1, common::SET, pin);
+            common::set_reg_bit(EXTI->FTSR1, common::SET, pin);
         }
     }
 }
@@ -490,7 +491,7 @@ extern "C" void EXTI15_10_IRQHandler(void)
     {
         if (common::read_reg_bits(EXTI->PR1, common::SET, i)) {
             // Clear the pending bit
-            common::set_reg_bits(EXTI->PR1, common::SET << i);
+            common::set_reg_bit(EXTI->PR1, common::SET << i);
 
             if (gpio::cbkArray.at(i) != nullptr) {
                 // Call the callback function

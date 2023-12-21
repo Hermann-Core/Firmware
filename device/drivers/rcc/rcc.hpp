@@ -44,7 +44,7 @@ namespace driver
             static void enableClock(const u32 periphID);
             static void disableClock(const u32 periphID);
             static void resetPeriph(const u32 periphID);
-            static u32  getClockFrequency(const u32 periphID);
+            static u32  getClockFrequency();
 
         private:
         

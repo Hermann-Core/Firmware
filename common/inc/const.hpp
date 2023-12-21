@@ -164,6 +164,14 @@ namespace common
         /*=============== Registers bits mask =================*/
         constexpr auto LOCK_MASK  = static_cast<u32>(0x1UL << 16U);
     }
+
+    /**
+     * \brief Flash specific constants definitions
+     */
+    inline namespace flash_const
+    {
+        enum class pgmSize { HALF, DOUBLE };
+    }
 };   
 
 /** @} */
