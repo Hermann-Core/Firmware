@@ -1,18 +1,16 @@
 /************************************************************************************* 
- * @file   rcc.hpp
- * @date   Nov, 26 2023
+ * @file   types.h
+ * @date   03, March 2023
  * @author Awatsa Hermann
- * @brief  clock interface header file
+ * @brief  common C/C++ types redefinition
  * 
+ *         Redefinition of the common C/C++ types
  * ***********************************************************************************
  * @attention
  * 
- * The functions used in this file have been written mainly for the STM32F303
- * and STM32G474 MCUs. There is no guarantee of operation for other microcontrollers.
- * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.26.11   |    1      |  0         |
+ # 2023.03.03   |    1      |  0         |
  *
  * Smart Ebike Controller
  * https://github.com/Hermann-Core/smart-ebike-controller
@@ -20,45 +18,41 @@
  * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
 
-#ifndef _RCC_H_
-#define _RCC_H_
+/* Prevent recursive inclusion */
+#ifndef _COMMON_TYPES_H_
+#define _COMMON_TYPES_H_
 
 
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include "operators.hpp"
+#include <stdint.h>
+#include <stddef.h>
 
 
 
 /*==================================================================================
-|                             CLASSES DECLARATIONS                                
+|                             TYPES DEFINITIONS                                
 ===================================================================================*/
+#define _vol        volatile
 
-namespace drivers
-{
-    class rcc
-    {
-        public:
-
-            static void enableClock(const u32 periphID);
-            static void disableClock(const u32 periphID);
-            static void resetPeriph(const u32 periphID);
-            static u32  getClockFrequency();
-
-        private:
-        
-            static constexpr u32 PERIPH_ID_MAX = 143;
-        #if defined (STM32F303)
-            static constexpr u32 SYSCLK = 72_mhz;
-        #elif defined (STM32G474)
-            static constexpr u32 SYSCLK = 170_mhz;
-        #endif
-    };
+#ifdef __cplusplus
+extern "C" {
+#endif
+typedef int8_t     i8;
+typedef uint8_t    u8;
+typedef int16_t    i16;
+typedef uint16_t   u16;
+typedef int32_t    i32;
+typedef uint32_t   u32;
+typedef int64_t    i64;
+typedef uint64_t   u64;
+#ifdef __cplusplus
 }
+#endif
 
 
-#endif      /* _RCC_H_ */
+#endif      /* _COMMON_TYPES_H_ */
 
 /*==================================================================================
 |                                 END OF FILE                                

@@ -1,68 +1,48 @@
 /************************************************************************************* 
- * @file   checker.hpp
- * @date   Nov, 28 2023
+ * @file   boot_jump.hpp
+ * @date   June, 27 2023
  * @author Awatsa Hermann
- * @brief  various checkers interface
+ * @brief  bootloader jump header file
  * 
  * ***********************************************************************************
  * @attention
  * 
  * The functions used in this file have been written mainly for the STM32F303
- * and STM32G473 MCUs. There is no guarantee of operation for other microcontrollers.
+ * and STM32G474 MCUs. There is no guarantee of operation for other microcontrollers.
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.28.11   |    1      |  0         |
- *
- * Smart Ebike Controller
- * https://github.com/Hermann-Core/smart-ebike-controller
- * 
- * @copyright Copyright (c) 2023 Hermann Awatsa
+ # 2023.04.02   |    1      |  1         |
+
 *************************************************************************************/
 
-#ifndef _CHECKER_H_
-#define _CHECKER_H_
+/* Prevent recursive inclusion */
+#ifndef _BOOT_JUMP_H_
+#define _BOOT_JUMP_H_
 
 
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
+#include "common.hpp"
 
 
-/**
- * \addtogroup common
- * Various checkers used accross the project
- * 
- * @{
- */
 
 /*==================================================================================
-|                                NAMESPACE                                 
+|                             CLASSES DECLARATIONS                                
 ===================================================================================*/
 
-namespace common
+class boot_jump
 {
-    /**
-     * \brief check if an overrun occured and then roll the value to the limit
-     * 
-     * \tparam T template parameter
-     * \param [in] value     : value
-     * \param [in] max_value : max permitted value
-     * \param [in] ovr_value : roll value
-     */
-    template <typename T>
-    constexpr void handle_overrun(T& value, T max_value, T ovr_value)
-    {
-        if (value > max_value)
-        {
-            value = ovr_value;
-        }
-    }
+    public:
+        static void jumpToApp(const u32* appVector);
+
+    private:
+        static void jumpASM(u32 SP, u32 PC);
 };
 
-/** @} */
 
-#endif      /* _CHECKER_H_ */
+#endif  /* _BOOT_JUMP_H_ */
 
 /*==================================================================================
 |                                 END OF FILE                                

@@ -8,7 +8,7 @@
  * @attention
  * 
  * The functions used in this file have been written mainly for the STM32F303
- * and STM32G473 MCUs. There is no guarantee of operation for other microcontrollers.
+ * and STM32G474 MCUs. There is no guarantee of operation for other microcontrollers.
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------

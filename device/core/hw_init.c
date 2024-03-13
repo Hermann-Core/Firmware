@@ -7,7 +7,7 @@
  * @attention
  * 
  * The functions used in this file have been written mainly for the STM32F303
- * and STM32G473 MCUs. There is no guarantee of operation for other microcontrollers.
+ * and STM32G474 MCUs. There is no guarantee of operation for other microcontrollers.
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
@@ -51,7 +51,7 @@
 #define APB1_PRESC_2         4
 #define CLK_FREQUENCY        72000000UL
 
-#elif defined (STM32G473)
+#elif defined (STM32G474)
 
 #define PLL_SRC              3 
 #define LSE_SRC              1 
@@ -120,7 +120,7 @@ static void rtcConfig(void)
 /**
  * \brief Enable the LSE oscillator
  */
-#if defined (STM32G473)
+#if defined (STM32G474)
 inline static void enableLSEClk(void)
 {
     /* Enable the LSE oscillator */
@@ -129,12 +129,12 @@ inline static void enableLSEClk(void)
     /* wait for the LSE to become stable */
     while(RCC->BDCR_b.LSERDY != SET);
 }
-#endif  /* STM32G473 */
+#endif  /* STM32G474 */
 
 /**
  * \brief Configure the flash memory interface
  */
-#if defined (STM32G473)
+#if defined (STM32G474)
 static void flashConfig(void)
 {
     FLASH->ACR_b.DCEN   = SET;  /* enable the data cache lines */
@@ -142,14 +142,14 @@ static void flashConfig(void)
     FLASH->ACR_b.PRFTEN = SET;  /* enable the prefetch buffer */
     PWR->CR5 &= ~(0x1 << 8U);   /* set the clock full speed */
 }
-#endif  /* STM32G473 */
+#endif  /* STM32G474 */
 
 /**
  * \brief Configure the phase locked loop
  */
 static void pllConfig(void)
 {
-    #if defined (STM32G473)
+    #if defined (STM32G474)
     /* Configure the phase lock loop (PLL) for 170 Mhz clock operation */
     RCC->PLLCFGR_b.PLLSRC  = HSE_SRC;
     RCC->PLLCFGR_b.PLLM    = PLLM_6;
@@ -177,7 +177,7 @@ static void pllConfig(void)
  */
 inline static void setClkOutput(void)
 {
-    #if defined (STM32G473)
+    #if defined (STM32G474)
     RCC->CFGR_b.MCOSEL = SET;        // Sysclk as MCO output clock
     #elif defined (STM32F303)
     RCC->CFGR_b.MCO    = SYSCLK_OUT; // Sysclk as MCO output clock
@@ -202,7 +202,7 @@ static void setPrescalers(void)
     RCC->CFGR3_b.USART3SW       = SET;           /* Set System clock as USART3 clock source */
     RCC->CFGR3_b.UART4SW        = SET;           /* Set System clock as UART4 clock source */
     RCC->CFGR3_b.UART5SW        = SET;           /* Set System clock as UART5 clock source */
-    #elif defined (STM32G473)
+    #elif defined (STM32G474)
     RCC->CFGR_b.PPRE1           = CLEAR;         /* Set the APB1 prescaler to 1 */
     RCC->CCIPR_b.FDCANSEL       = 2;             /* Set the APB clock as FDCAN clock source */
     RCC->CCIPR_b.ADC12SEL       = 2;             /* Set the system clock as ADC1,2 clock source */
@@ -264,7 +264,7 @@ void systemClockInit(void)
 
     rtcConfig();        /* Configure the rtc backup domain */
 
-    #if defined (STM32G473)
+    #if defined (STM32G474)
     enableLSEClk();     /* Enable the LSE oscillator */
 
     /* Set the LSE as the RTC and backup registers clock */

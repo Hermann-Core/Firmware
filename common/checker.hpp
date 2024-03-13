@@ -1,17 +1,18 @@
 /************************************************************************************* 
- * @file   hardware_init.c
- * @date   Nov, 29 2023
+ * @file   checker.hpp
+ * @date   Nov, 28 2023
  * @author Awatsa Hermann
- * @brief  assertion handler file
+ * @brief  various checkers interface
+ * 
  * ***********************************************************************************
  * @attention
  * 
  * The functions used in this file have been written mainly for the STM32F303
- * and STM32G473 MCUs. There is no guarantee of operation for other microcontrollers.
+ * and STM32G474 MCUs. There is no guarantee of operation for other microcontrollers.
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.30.11   |    1      |  0         |
+ # 2023.28.11   |    1      |  0         |
  *
  * Smart Ebike Controller
  * https://github.com/Hermann-Core/smart-ebike-controller
@@ -19,56 +20,49 @@
  * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
 
+#ifndef _CHECKER_H_
+#define _CHECKER_H_
+
 
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include "assert.h"
-#include "swo.h"
 
 
 /**
- * \defgroup common Common
- * Collection of common functionalities and utilities that are used across the project.
- * 
- * @{
- * 
- * \defgroup assert Assertions Handler
- * Assertion handler for error checking
+ * \addtogroup common
+ * Various checkers used accross the project
  * 
  * @{
  */
 
 /*==================================================================================
-|                             FUNCTIONS DEFINITIONS                                
+|                                NAMESPACE                                 
 ===================================================================================*/
 
-/**
- * \brief handle the assertion
- * 
- * \param [in] condition : condition to check
- * \param [in] message : custom message to print at assertion failed
- * \param [in] file : file name
- * \param [in] line : line number
- */
-void assert_handler(bool condition, const char* message,
-                    const char* file, int line)
+namespace common
 {
-    if (!condition)
+    /**
+     * \brief check if an overrun occured and then roll the value to the limit
+     * 
+     * \tparam T template parameter
+     * \param [in] value     : value
+     * \param [in] max_value : max permitted value
+     * \param [in] ovr_value : roll value
+     */
+    template <typename T>
+    constexpr void handle_overrun(T& value, T max_value, T ovr_value)
     {
-        while (1)
+        if (value > max_value)
         {
-            swo_printf("ASSERTION FAILED in \"%s\" at line %d : ", file, line);
-            swo_printf("%s\n\n", message);
-
-            asm("bkpt");    /* we halted the cpu */
+            value = ovr_value;
         }
     }
-}
+};
 
 /** @} */
 
-/** @} */
+#endif      /* _CHECKER_H_ */
 
 /*==================================================================================
 |                                 END OF FILE                                

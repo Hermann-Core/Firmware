@@ -1,8 +1,8 @@
 /************************************************************************************* 
- * @file   rcc.hpp
- * @date   Nov, 26 2023
+ * @file   operators.hpp
+ * @date   Nov, 27 2023
  * @author Awatsa Hermann
- * @brief  clock interface header file
+ * @brief  operators declarations file
  * 
  * ***********************************************************************************
  * @attention
@@ -12,7 +12,7 @@
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
- # 2023.26.11   |    1      |  0         |
+ # 2023.27.11   |    1      |  0         |
  *
  * Smart Ebike Controller
  * https://github.com/Hermann-Core/smart-ebike-controller
@@ -20,45 +20,63 @@
  * @copyright Copyright (c) 2023 Hermann Awatsa
 *************************************************************************************/
 
-#ifndef _RCC_H_
-#define _RCC_H_
+#ifndef _OPERATORS_H_
+#define _OPERATORS_H_
 
+/**
+ * \defgroup operator Operators
+ * \ingroup common
+ * Declarations of operators
+ * 
+ * @{
+ */
 
 /*==================================================================================
 |                                 INCLUDES                                
 ===================================================================================*/
-#include "operators.hpp"
-
+#include "types.h"
 
 
 /*==================================================================================
-|                             CLASSES DECLARATIONS                                
+|                             FUNCTIONS DECLARATIONS                                
 ===================================================================================*/
 
-namespace drivers
+/**
+ * \brief Converts a value to megahertz.
+ *
+ * \param [in] val : Value to be converted.
+ * \return Converted value in megahertz.
+ */
+constexpr u32 operator"" _mhz(uint64_t val)
 {
-    class rcc
-    {
-        public:
-
-            static void enableClock(const u32 periphID);
-            static void disableClock(const u32 periphID);
-            static void resetPeriph(const u32 periphID);
-            static u32  getClockFrequency();
-
-        private:
-        
-            static constexpr u32 PERIPH_ID_MAX = 143;
-        #if defined (STM32F303)
-            static constexpr u32 SYSCLK = 72_mhz;
-        #elif defined (STM32G474)
-            static constexpr u32 SYSCLK = 170_mhz;
-        #endif
-    };
+    return static_cast<uint32_t>(val * 1'000'000);
 }
 
+/**
+ * \brief Converts a value to kilohertz.
+ *
+ * \param [in] val : Value to be converted.
+ * \return Converted value in kilohertz.
+ */
+constexpr u32 operator"" _khz(uint64_t val)
+{
+    return static_cast<uint32_t>(val * 1'000);
+}
 
-#endif      /* _RCC_H_ */
+/**
+ * \brief Converts a value to hertz.
+ *
+ * \param [in] val : Value to be converted.
+ * \return Converted value in hertz.
+ */
+constexpr u32 operator"" _hz(uint64_t val)
+{
+    return static_cast<uint32_t>(val);
+}
+
+/** @} */
+
+#endif      /* _OPERATORS_H_ */
 
 /*==================================================================================
 |                                 END OF FILE                                

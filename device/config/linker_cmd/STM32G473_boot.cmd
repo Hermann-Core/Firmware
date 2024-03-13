@@ -1,14 +1,14 @@
 /*************************************************************************************
- * @file   STM32G473_boot.cmd
+ * @file   STM32G474_boot.cmd
  * @date   Nov, 29 2023
  * @author Awatsa Hermann
- * @brief  STM32G473 bootloader linker command file
+ * @brief  STM32G474 bootloader linker command file
  * 
  * ***********************************************************************************
  * @attention
  * 
  * This file is a linker description command file used by the TI linker
- * to produce an output file for the STM32G473 MCU
+ * to produce an output file for the STM32G474 MCU
  *
  #   DATE       |  Version  | revision   |
  -----------------------------------------

@@ -60,7 +60,7 @@ namespace drivers
      */
     inline namespace periphID
     {
-        #if defined (STM32G473)
+        #if defined (STM32G474)
         /*====================== AHB1 ========================*/
         static constexpr auto DMA1_ID    =  static_cast<u32>(0);
         static constexpr auto DMA2_ID    =  static_cast<u32>(1);

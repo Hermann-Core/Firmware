@@ -21,9 +21,9 @@ list(GET DEFINES 0 DEVICE_DEFINE)
 if(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{TI_TOOLCHAIN_PATH}")
 
     if(DEVICE_DEFINE STREQUAL STM32F303)
-        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_commands/STM32F303_app.cmd)
-    elseif(DEVICE_DEFINE STREQUAL STM32G473)
-        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_commands/STM32G473_app.cmd)
+        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_cmd/STM32F303_app.cmd)
+    elseif(DEVICE_DEFINE STREQUAL STM32G474)
+        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_cmd/STM32G474_app.cmd)
     endif()
 
     target_link_options(
@@ -37,8 +37,8 @@ elseif(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{GNU_TOOLCHAIN_PATH}")
 
     if(DEVICE_DEFINE STREQUAL STM32F303)
         set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_scripts/STM32F303_app.ld)
-    elseif(DEVICE_DEFINE STREQUAL STM32G473)
-        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_scripts/STM32G473_app.ld)
+    elseif(DEVICE_DEFINE STREQUAL STM32G474)
+        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_scripts/STM32G474_app.ld)
     endif()
 
     target_link_options(
@@ -55,6 +55,6 @@ endif()
 target_sources(
     ${MAIN_EXECUTABLE} PRIVATE
     "${COMMON_SOURCES}"
-    "${PROJECT_SOURCE_DIR}/device/core/src/setup_app.c"
+    "${PROJECT_SOURCE_DIR}/device/core/setup_app.c"
     "${PROJECT_SOURCE_DIR}/${MAIN_EXECUTABLE}/core/main.cpp"
 )

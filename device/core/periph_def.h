@@ -2,7 +2,7 @@
  * @file 	 periph_def.h
  * @date   June, 30 2023
  * @author Awatsa Hermann
- * @brief	 This file comprises the STM32F303 & STM32G473
+ * @brief	 This file comprises the STM32F303 & STM32G474
  *         peripherals access layer and registers bitfields
  * 
  * ***********************************************************************************
@@ -30,9 +30,9 @@ extern "C" {
 /* Cortex M4 core peripherals configuration */
 #define __Vendor_SysTickConfig    0U
 #define __CM4_REV                 0x0001U  /* Core revision r0p1 */
-#define __MPU_PRESENT             1U       /* STM32F303 and STM32G473 devices provide an MPU */
+#define __MPU_PRESENT             1U       /* STM32F303 and STM32G474 devices provide an MPU */
 #define __NVIC_PRIO_BITS          4U       /* 4 Bits for the Priority Levels */
-#define __FPU_PRESENT             1U       /* STM32F303 and STM32G473 devices provide an FPU */
+#define __FPU_PRESENT             1U       /* STM32F303 and STM32G474 devices provide an FPU */
 
 
 /*==================================================================================
@@ -76,7 +76,7 @@ typedef enum
   #if defined (STM32F303)               /* STM32F303 specific interrupts numbers */
   CAN_RX1_IRQn                = 21,     /*!< CAN RX1 Interrupt                                                 */
   CAN_SCE_IRQn                = 22,     /*!< CAN SCE Interrupt                                                 */
-  #elif defined (STM32G473)             /* STM32G473 specific interrupts numbers */
+  #elif defined (STM32G474)             /* STM32G474 specific interrupts numbers */
   FDCAN1_IT0_IRQn             = 21,     /*!< FDCAN1 IT0 Interrupt                                              */
   FDCAN1_IT1_IRQn             = 22,     /*!< FDCAN1 IT1 Interrupt                                              */
   #endif    /* STM32F303 */
@@ -105,11 +105,11 @@ typedef enum
   TIM8_TRG_COM_IRQn           = 45,     /*!< TIM8 Trigger and Commutation Interrupt                            */
   TIM8_CC_IRQn                = 46,     /*!< TIM8 Capture Compare Interrupt                                    */
   ADC3_IRQn                   = 47,     /*!< ADC3 global Interrupt                                             */
-  #if defined (STM32G473)               /* STM32G473 specific interrupts */
+  #if defined (STM32G474)               /* STM32G474 specific interrupts */
   FMC_IRQn                    = 48,     /*!< FMC global interrupt                                              */
   LPTIM1_IRQn                 = 49,     /*!< LPTIM1 global interrupt                                           */
   TIM5_IRQn                   = 50,     /*!< TIM5 global interrupt                                             */
-  #endif      /* STM32G473 */
+  #endif      /* STM32G474 */
   SPI3_IRQn                   = 51,     /*!< SPI3 global Interrupt                                             */
   UART4_IRQn                  = 52,     /*!< UART4 global Interrupt & EXTI Line34 Interrupt (UART4 wakeup)     */
   UART5_IRQn                  = 53,     /*!< UART5 global Interrupt & EXTI Line35 Interrupt (UART5 wakeup)     */
@@ -121,10 +121,10 @@ typedef enum
   DMA2_Channel4_IRQn          = 59,     /*!< DMA2 Channel 4 global Interrupt                                   */
   DMA2_Channel5_IRQn          = 60,     /*!< DMA2 Channel 5 global Interrupt                                   */
   ADC4_IRQn                   = 61,     /*!< ADC4  global Interrupt                                            */
-  #if defined (STM32G473)               /* STM32G473 specific interrupts */
+  #if defined (STM32G474)               /* STM32G474 specific interrupts */
   ADC5_IRQn                   = 62,     /*!< ADC5 global Interrupt                                             */
   UCPD1_IRQn                  = 63,     /*!< UCPD global Interrupt                                             */
-  #endif      /* STM32G473 */
+  #endif      /* STM32G474 */
   COMP1_2_3_IRQn              = 64,     /*!< COMP1, COMP2 and COMP3 global Interrupt via EXTI Line21, 22 and 29*/
   COMP4_5_6_IRQn              = 65,     /*!< COMP4, COMP5 and COMP6 global Interrupt via EXTI Line30, 31 and 32*/
   COMP7_IRQn                  = 66,     /*!< COMP7 global Interrupt via EXTI Line33                            */
@@ -133,7 +133,7 @@ typedef enum
   USB_LP_IRQn                 = 75,     /*!< USB Low Priority global Interrupt                                 */
   USBWakeUp_RMP_IRQn          = 76,     /*!< USB Wakeup Interrupt remap                                        */
   FPU_IRQn                    = 81,     /*!< Floating point Interrupt                                          */
-  #elif defined (STM32G473)             /* STM32G473 specific interrupts numbers */
+  #elif defined (STM32G474)             /* STM32G474 specific interrupts numbers */
   CRS_IRQn                    = 75,     /*!< CRS global interrupt                                              */
   SAI1_IRQn                   = 76,     /*!< Serial Audio Interface global interrupt                           */
   TIM20_BRK_IRQn              = 77,     /*!< TIM20 Break, Transition error and Index error Interrupt           */
@@ -1117,7 +1117,7 @@ typedef struct {
     } APB1FZ_b;
   } ;
 
-#if defined (STM32G473)
+#if defined (STM32G474)
     union {
     __IOM u32 APB1FZR2;              
     
@@ -1127,7 +1127,7 @@ typedef struct {
             u32            : 30;
      } APB1FZR2_b;
     } ;
-#endif    /* STM32G473 */
+#endif    /* STM32G474 */
   
   union {
     __IOM u32 APB2FZ;               
@@ -1679,7 +1679,7 @@ typedef struct {
   
   __IM  u32 WRPR; 
 
-  #elif defined (STM32G473)
+  #elif defined (STM32G474)
   union {
     __IOM u32 ACR;               
     
@@ -1862,7 +1862,7 @@ typedef struct {
             u32            : 15;
     } SEC2R_b;
   } ;
-  #endif    /* STM32G473*/
+  #endif    /* STM32G474*/
 
 } FLASH_HW;
 
@@ -2649,7 +2649,7 @@ typedef struct{
             u32            : 22;
     } CSR_b;
   } ;
-  #elif defined (STM32G473)
+  #elif defined (STM32G474)
   union {
     __IOM u32 CR;               
     
@@ -2997,7 +2997,7 @@ typedef struct {
     } CFGR3_b;
   } ;
 
-  #elif defined (STM32G473)
+  #elif defined (STM32G474)
   union {
     __IOM u32 CR;
     
@@ -3655,7 +3655,7 @@ typedef struct
   __IO u32 BKP14R;  
   __IO u32 BKP15R;
 
-#elif defined (STM32G473)
+#elif defined (STM32G474)
   __IO u32 TR;       
   __IO u32 DR;       
   __IO u32 SSR;      
@@ -3938,7 +3938,7 @@ typedef struct {
     } CFGR2_b;
   } ;
 
-  #elif defined (STM32G473)
+  #elif defined (STM32G474)
   union {
     __IOM u32 MEMRMP;            
     
@@ -4463,7 +4463,7 @@ typedef struct {
     } CCR6_b;
   } ;
 
-#elif defined (STM32G473)
+#elif defined (STM32G474)
   union {
     __IOM u32 CCR5;              
     
@@ -5294,7 +5294,7 @@ typedef struct {
 
 #define DBGMCU_BASE_ADDRESS                 (0xE0042000UL)
 
-#if defined (STM32G473)     /* STM32G473 specific peripherals base addresses */
+#if defined (STM32G474)     /* STM32G474 specific peripherals base addresses */
 
 #define GPIOG_BASE_ADDRESS                  (0x48001800UL)
 #define ADC5_BASE_ADDRESS                   (0x50000600UL)
@@ -5379,7 +5379,7 @@ typedef struct {
 #define OPAMP3_BASE_ADDRESS                 (0x40010040UL)
 #define OPAMP4_BASE_ADDRESS                 (0x40010044UL)
 
-#endif  /* STM32G473 */
+#endif  /* STM32G474 */
 
 
 

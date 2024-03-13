@@ -8,7 +8,7 @@
  * \attention
  * 
  * The functions used in this file have been written mainly for the STM32F303
- * and STM32G473 MCUs. There is no guarantee of operation for other microcontrollers.
+ * and STM32G474 MCUs. There is no guarantee of operation for other microcontrollers.
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
@@ -161,7 +161,7 @@ gpio::gpio(u32 gpioID) : portNum((gpioID >= 32U) ? gpioID-32U : gpioID-17U),
 {
     #if defined (STM32F303)
     assert((gpioID >= 17) && (gpioID <= 22), "Invalid port ID.");
-    #elif defined (STM32G473)
+    #elif defined (STM32G474)
     assert((gpioID >= 32) && (gpioID <= 37), "Invalid port ID.");
     #endif
 

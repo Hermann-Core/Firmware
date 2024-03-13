@@ -21,9 +21,9 @@ list(GET DEFINES 0 DEVICE_DEFINE)
 if(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{TI_TOOLCHAIN_PATH}")
 
     if(DEVICE_DEFINE STREQUAL STM32F303)
-        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_commands/STM32F303_boot.cmd)
-    elseif(DEVICE_DEFINE STREQUAL STM32G473)
-        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_commands/STM32G473_boot.cmd)
+        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_cmd/STM32F303_boot.cmd)
+    elseif(DEVICE_DEFINE STREQUAL STM32G474)
+        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_cmd/STM32G474_boot.cmd)
     endif()
 
     target_link_options(
@@ -37,8 +37,8 @@ elseif(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{GNU_TOOLCHAIN_PATH}")
 
     if(DEVICE_DEFINE STREQUAL STM32F303)
         set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_scripts/STM32F303_boot.ld)
-    elseif(DEVICE_DEFINE STREQUAL STM32G473)
-        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_scripts/STM32G473_boot.ld)
+    elseif(DEVICE_DEFINE STREQUAL STM32G474)
+        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_scripts/STM32G474_boot.ld)
     endif()
 
     target_link_options(
@@ -55,11 +55,11 @@ endif()
 target_sources(
     ${BOOT_EXECUTABLE} PRIVATE
     "${COMMON_SOURCES}"
-    "${PROJECT_SOURCE_DIR}/device/core/src/setup_boot.c"
-    "${PROJECT_SOURCE_DIR}/device/core/src/hw_init.c"
+    "${PROJECT_SOURCE_DIR}/device/core/setup_boot.c"
+    "${PROJECT_SOURCE_DIR}/device/core/hw_init.c"
     "${PROJECT_SOURCE_DIR}/device/drivers/crc/crc.cpp"
-    "${PROJECT_SOURCE_DIR}/${BOOT_EXECUTABLE}/app/boot_jump.cpp"
-    "${PROJECT_SOURCE_DIR}/${BOOT_EXECUTABLE}/app/flash_config.cpp"
-    "${PROJECT_SOURCE_DIR}/${BOOT_EXECUTABLE}/app/crc_compute.cpp"
+    "${PROJECT_SOURCE_DIR}/${BOOT_EXECUTABLE}/boot/boot_jump.cpp"
+    "${PROJECT_SOURCE_DIR}/${BOOT_EXECUTABLE}/boot/flash_config.cpp"
+    "${PROJECT_SOURCE_DIR}/${BOOT_EXECUTABLE}/boot/crc_compute.cpp"
     "${PROJECT_SOURCE_DIR}/${BOOT_EXECUTABLE}/core/main.cpp"
 )

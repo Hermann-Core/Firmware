@@ -15,10 +15,10 @@ project("EBIKE" C CXX ASM)
 include(cmake/stm32_project.cmake)
 
 set(COMMON_SOURCES
-    "${PROJECT_SOURCE_DIR}/device/core/src/hw_core.cpp"
-    "${PROJECT_SOURCE_DIR}/device/core/src/periph_irq.cpp"
-    "${PROJECT_SOURCE_DIR}/common/src/assert.c"
-    "${PROJECT_SOURCE_DIR}/common/library/print.c"
+    "${PROJECT_SOURCE_DIR}/device/core/hw_core.cpp"
+    "${PROJECT_SOURCE_DIR}/device/core/periph_irq.cpp"
+    "${PROJECT_SOURCE_DIR}/common/assert.c"
+    "${PROJECT_SOURCE_DIR}/library/print.c"
     "${PROJECT_SOURCE_DIR}/logging/swo/swo.c"
     "${PROJECT_SOURCE_DIR}/logging/rtt/SEGGER_RTT_ASM_ARMv7M.S"
     "${PROJECT_SOURCE_DIR}/logging/rtt/SEGGER_RTT.c"
@@ -43,7 +43,7 @@ include_directories(
     ${header_dir_list}
 )
 
-link_directories(common/arm_dsp/lib)
+link_directories(library/arm_dsp/lib)
 
 if(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{TI_TOOLCHAIN_PATH}")
     link_libraries(arm_cortexM4lf_math.lib)

@@ -42,7 +42,7 @@ endif()
 
 target_compile_features(
     ${TARGET_NAME} PUBLIC 
-    c_std_17
+    c_std_11
     cxx_std_17
 )
 

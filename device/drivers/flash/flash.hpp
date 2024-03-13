@@ -8,7 +8,7 @@
  * @attention
  * 
  * The functions used in this file have been written mainly for the STM32F303
- * and STM32G473 MCUs. There is no guarantee of operation for other microcontrollers.
+ * and STM32G474 MCUs. There is no guarantee of operation for other microcontrollers.
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
@@ -56,7 +56,7 @@ namespace driver
         private:
             
             static void IRQ_Handler();
-            #if defined (STM32G473)
+            #if defined (STM32G474)
             static constexpr auto PAGE_SIZE = 0x1000;
             #elif defined (STM32F303)
             static constexpr auto PAGE_SIZE = 0x800;

@@ -47,11 +47,6 @@ if(DEFINED TOOLCHAIN_DIRECTORY)
     set(TOOLCHAIN_PREFIX               "${TOOLCHAIN_DIRECTORY}/${TOOLCHAIN_PREFIX}")
 endif()
 
-# CMake doesn't supports the TI toolchain now so we bypass the compiler check
-set(CMAKE_C_COMPILER_WORKS             1)
-set(CMAKE_ASM_COMPILER_WORKS           1)
-set(CMAKE_CXX_COMPILER_WORKS           1)
-
 set(ASM_OPTIONS                        "-x assembler-with-cpp")
 set(CPP_OPTIONS                        "-fno-rtti -fno-exceptions -fno-threadsafe-statics -fno-unwind-tables")
 

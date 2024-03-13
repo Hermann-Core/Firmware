@@ -8,7 +8,7 @@
  * \attention
  * 
  * The functions used in this file have been written mainly for the STM32F303
- * and STM32G473 MCUs. There is no guarantee of operation for other microcontrollers.
+ * and STM32G474 MCUs. There is no guarantee of operation for other microcontrollers.
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
@@ -67,7 +67,7 @@ void rcc::enableClock(const u32 periphID)
 {
     _vol u32 temp;  /* temporary variable */
 
-    #if defined (STM32G473)
+    #if defined (STM32G474)
     constexpr u32 AHB1_MAX = common::periphID::CRC_ID;
     #elif defined (STM32F303)
     constexpr u32 AHB1_MAX = periphID::ADC34_ID;
@@ -84,7 +84,7 @@ void rcc::enableClock(const u32 periphID)
         }
     }
 
-    #if defined (STM32G473)
+    #if defined (STM32G474)
     else if (periphID <= common::periphID::DAC4_ID) {
         if (!common::read_reg_bits(RCC->AHB2ENR, common::SET,(periphID-32U))
         {
@@ -93,7 +93,7 @@ void rcc::enableClock(const u32 periphID)
             temp = common::read_reg_bits(RCC->AHB2ENR, common::SET, periphID-32U);
         }
     }
-    #endif  /* STM32G473 */
+    #endif  /* STM32G474 */
 
     else if (periphID <= periphID::PWR_ID) {
         if (!common::read_reg_bits(RCC->APB1ENR, SET, periphID-64U))
@@ -125,7 +125,7 @@ void rcc::enableClock(const u32 periphID)
  */
 void rcc::disableClock(const u32 periphID)
 {
-    #if defined (STM32G473)
+    #if defined (STM32G474)
     constexpr u32 AHB1_MAX = common::periphID::CRC_ID;
     #elif defined (STM32F303)
     constexpr u32 AHB1_MAX = periphID::ADC34_ID;
@@ -139,13 +139,13 @@ void rcc::disableClock(const u32 periphID)
         }
     }
 
-    #if defined (STM32G473)
+    #if defined (STM32G474)
     else if (periphID <= common::periphID::DAC4_ID) {
         if (common::read_reg_bits(RCC->AHB2ENR, common::SET, periphID-32U)) {
             common::reset_reg_bits(RCC->AHB2ENR, common::SET, periphID-32U);
         }
     }
-    #endif  /* STM32G473 */
+    #endif  /* STM32G474 */
 
     else if (periphID <= periphID::PWR_ID) {
         if (common::read_reg_bits(RCC->APB1ENR, SET, periphID-64U)) {
@@ -170,7 +170,7 @@ void rcc::disableClock(const u32 periphID)
  */
 void rcc::resetPeriph(const u32 periphID)
 {
-    #if defined (STM32G473)
+    #if defined (STM32G474)
     constexpr u32 AHB1_MAX = common::periphID::CRC_ID;
     #elif defined (STM32F303)
     constexpr u32 AHB1_MAX = periphID::ADC34_ID;
@@ -183,13 +183,13 @@ void rcc::resetPeriph(const u32 periphID)
         common::set_reg_bit(RCC->AHB1RSTR, SET, periphID);
         common::reset_reg_bits(RCC->AHB1RSTR, SET, periphID);
     }
-    #if defined (STM32G473)
+    #if defined (STM32G474)
     else if (periphID <= periphID::DAC4_ID)
     {
         common::set_reg_bits(RCC->AHB2RSTR, common::SET, periphID%32);
         common::reset_reg_bits(RCC->AHB2RSTR, common::SET, periphID%32);
     }
-    #endif  /* STM32G473 */
+    #endif  /* STM32G474 */
     else if (periphID <= periphID::PWR_ID)
     {
         common::set_reg_bit(RCC->APB1RSTR, SET, periphID%64);

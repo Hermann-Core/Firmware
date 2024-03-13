@@ -7,7 +7,7 @@
  * \attention
  * 
  * The functions used in this file have been written mainly for the STM32F303
- * and STM32G473 MCUs. There is no guarantee of operation for other microcontrollers.
+ * and STM32G474 MCUs. There is no guarantee of operation for other microcontrollers.
  * 
  #   DATE       |  Version  | revision   |
  -----------------------------------------
@@ -51,7 +51,7 @@
 
 #if defined (STM32F303)
 #define CLK_FREQUENCY        72000000UL
-#elif defined (STM32G473)
+#elif defined (STM32G474)
 #define CLK_FREQUENCY        170000000UL
 #endif
 
@@ -145,7 +145,7 @@ void USB_HP_IRQHandler(void) WEAK_ALIAS;
 void USB_LP_IRQHandler(void) WEAK_ALIAS;
 void USBWakeUp_RMP_IRQHandler(void) WEAK_ALIAS;
 void FPU_IRQHandler(void) WEAK_ALIAS;
-#elif defined (STM32G473)
+#elif defined (STM32G474)
 void USB_HP_IRQHandler(void) WEAK_ALIAS;
 void USB_LP_IRQHandler(void) WEAK_ALIAS;
 void FDCAN1_IT0_IRQHandler(void) WEAK_ALIAS;
@@ -369,7 +369,7 @@ const VECTOR_TABLE_t __APP_VECTOR_TABLE[] =
     USB_LP_CAN_RX0_IRQHandler,
     CAN_RX1_IRQHandler,
     CAN_SCE_IRQHandler,
-#elif defined (STM32G473)
+#elif defined (STM32G474)
   	USB_HP_IRQHandler,
     USB_LP_IRQHandler,
     FDCAN1_IT0_IRQHandler,
@@ -404,7 +404,7 @@ const VECTOR_TABLE_t __APP_VECTOR_TABLE[] =
     0,
     0,
     0,
-#elif defined (STM32G473)
+#elif defined (STM32G474)
   	FMC_IRQHandler,
     LPTIM1_IRQHandler,
     TIM5_IRQHandler,
@@ -423,7 +423,7 @@ const VECTOR_TABLE_t __APP_VECTOR_TABLE[] =
 #if defined (STM32F303)
     0,
     0,
-#elif defined (STM32G473)
+#elif defined (STM32G474)
   	ADC5_IRQHandler,
 	  UCPD1_IRQHandler,
 #endif
@@ -446,7 +446,7 @@ const VECTOR_TABLE_t __APP_VECTOR_TABLE[] =
     0,
     0,
     FPU_IRQHandler,
-#elif defined (STM32G473)
+#elif defined (STM32G474)
     0,
     CRS_IRQHandler,
     SAI1_IRQHandler,
