@@ -25,7 +25,7 @@
 
 /**
  * \defgroup driversConst Drivers Constants
- * \ingroup common
+ * \ingroup drivers
  * \brief Defined constants used for the peripherals drivers
  * 
  * @{
@@ -42,7 +42,7 @@
 |                             CLASSES DECLARATIONS                                
 ===================================================================================*/
 
-namespace common
+namespace drivers
 {
     /**
      * \brief Common constants definitions
@@ -164,15 +164,38 @@ namespace common
         /*=============== Registers bits mask =================*/
         constexpr auto LOCK_MASK  = static_cast<u32>(0x1UL << 16U);
     }
+}
 
-    /**
-     * \brief Flash specific constants definitions
-     */
-    inline namespace flash_const
-    {
-        enum class pgmSize { HALF, DOUBLE };
-    }
-};   
+/** @} */
+
+
+/**
+ * \defgroup board Board Constants
+ * \ingroup drivers
+ * \brief Defined the constants used to configure the board
+ * 
+ * @{
+ */
+
+namespace board
+{
+    
+}
+
+/** @} */
+
+
+/**
+ * \defgroup foc Foc Constants
+ * \ingroup drivers
+ * \brief Defined the constants used by the field oriented control algorithm
+ * 
+ * @{
+ */
+namespace foc
+{
+    
+}
 
 /** @} */
 

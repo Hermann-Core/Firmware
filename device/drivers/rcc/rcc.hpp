@@ -35,7 +35,7 @@
 |                             CLASSES DECLARATIONS                                
 ===================================================================================*/
 
-namespace driver
+namespace drivers
 {
     class rcc
     {

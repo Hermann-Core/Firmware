@@ -34,10 +34,8 @@
 |                             CLASSES DECLARATIONS                                
 ===================================================================================*/
 
-namespace driver
+namespace drivers
 {
-    using namespace common;
-
     class gpio
     {
         public:

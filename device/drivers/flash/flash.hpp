@@ -55,6 +55,7 @@ namespace driver
         
         private:
             
+            static void IRQ_Handler();
             #if defined (STM32G473)
             static constexpr auto PAGE_SIZE = 0x1000;
             #elif defined (STM32F303)

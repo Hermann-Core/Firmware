@@ -51,10 +51,10 @@ int main (void)
 {
     extern const u32 APP_ADDRESS;   /* defined in the linker script */
 
-    driver::gpio gpioTest(common::GPIOD_ID);
+    drivers::gpio gpioTest(drivers::GPIOD_ID);
 
-    gpioTest.init(common::GPIOCfg::PULLDWN, common::GPIO_PIN10);
-    gpioTest.enableIrq(common::GPIO_PIN10, common::edge::RISING, nullptr);
+    gpioTest.init(drivers::GPIOCfg::PULLDWN, drivers::GPIO_PIN10);
+    gpioTest.enableIrq(drivers::GPIO_PIN10, drivers::edge::RISING, nullptr);
 
     // boot_jump::jumpToApp(&APP_ADDRESS);     /* jump to the application */
 

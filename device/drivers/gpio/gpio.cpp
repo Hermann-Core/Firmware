@@ -47,7 +47,7 @@
 /*==================================================================================
 |                                PRIVATE FUNCTIONS                                
 ===================================================================================*/
-using namespace driver;
+using namespace drivers;
 
 array<gpio::cbk_f, gpio::MAX_PINS> gpio::cbkArray;
 
@@ -62,7 +62,7 @@ void gpio::clearCfg(u16 pin)
 
     // Reset the pin configuration
     common::reset_reg_bits(locGPIO->MODER, 0b11, pin*2);
-    common::reset_reg_bits(locGPIO->OTYPER, common::SET, pin);
+    common::reset_reg_bits(locGPIO->OTYPER, SET, pin);
     common::reset_reg_bits(locGPIO->OSPEEDR, 0b11, pin*2);
     common::reset_reg_bits(locGPIO->PUPDR, 0b11, pin*2);
     common::reset_reg_bits((locGPIO->AFR[pin>>3]), 0xF, (pin%8)*4);
@@ -235,7 +235,7 @@ void gpio::set(u16 pin)
     assert((pin < this->MAX_PINS), "Invalid pin number.");
 
     if (outFlag.at(pin) == true) {
-        common::write_reg(locGPIO->BSRR, common::SET << pin);
+        common::write_reg(locGPIO->BSRR, SET << pin);
     }
 }
 
@@ -251,7 +251,7 @@ void gpio::reset(u16 pin)
     assert((pin < this->MAX_PINS), "Invalid pin number.");
 
     if (outFlag.at(pin) == true) {
-        common::write_reg(locGPIO->BRR, common::SET << pin);
+        common::write_reg(locGPIO->BRR, SET << pin);
     }
 }
 
@@ -268,12 +268,12 @@ void gpio::toggle(u16 pin)
 
     if (outFlag.at(pin) == true)
     {
-        if (common::read_reg_bits(locGPIO->ODR, common::SET << pin))
+        if (common::read_reg_bits(locGPIO->ODR, SET << pin))
         {
-            common::write_reg(locGPIO->BRR, common::SET << pin);
+            common::write_reg(locGPIO->BRR, SET << pin);
         }
         else {
-            common::write_reg(locGPIO->BSRR, common::SET << pin);
+            common::write_reg(locGPIO->BSRR, SET << pin);
         }
     }
 }
@@ -293,7 +293,7 @@ bool gpio::read(u16 pin)
     if (inFlag.at(pin)  == true || 
         outFlag.at(pin) == true)
     {
-        return common::read_reg_bits(locGPIO->IDR, common::SET, pin);
+        return common::read_reg_bits(locGPIO->IDR, SET, pin);
     }
     return false;
 }
@@ -314,15 +314,15 @@ bool gpio::lock(u16 pin)
     if (inFlag.at(pin)  == true || 
         outFlag.at(pin) == true)
     {
-        u32 temp = common::LOCK_MASK;
+        u32 temp = drivers::LOCK_MASK;
 
         /* Applying the lock sequence */
-        common::set_reg_bit(temp, common::SET, pin);
+        common::set_reg_bit(temp, SET, pin);
         common::write_reg(locGPIO->LCKR, temp);
-        common::write_reg(locGPIO->LCKR, common::SET << pin);
+        common::write_reg(locGPIO->LCKR, SET << pin);
         common::write_reg(locGPIO->LCKR, temp);
         temp = locGPIO->LCKR;
-        if (temp & common::LOCK_MASK) {
+        if (temp & LOCK_MASK) {
             return true;
         }
     }
@@ -344,21 +344,21 @@ void gpio::enableIrq(u16 pin, edge edge, cbk_f callback)
 
     if (inFlag.at(pin) == true) {
         // Enable the system configuration clock
-        rcc::enableClock(common::SYSCFG_ID);
+        rcc::enableClock(drivers::SYSCFG_ID);
         // Configure the interrupt source
         common::modify_reg(SYSCFG->EXTICR[pin>>2], 4, portNum, (pin&0x3)*4);
         // Unmask the corresponding interrupt request
-        common::set_reg_bit(EXTI->IMR1, common::SET, pin);
+        common::set_reg_bit(EXTI->IMR1, SET, pin);
         // Set the triggering edge(s) for the line
         if (edge == edge::RISING) {
-            common::set_reg_bit(EXTI->RTSR1, common::SET, pin);
+            common::set_reg_bit(EXTI->RTSR1, SET, pin);
         }
         else if (edge == edge::FALLING) {
-            common::set_reg_bit(EXTI->FTSR1, common::SET, pin);
+            common::set_reg_bit(EXTI->FTSR1, SET, pin);
         }
         else {
-            common::set_reg_bit(EXTI->RTSR1, common::SET, pin);
-            common::set_reg_bit(EXTI->FTSR1, common::SET, pin);
+            common::set_reg_bit(EXTI->RTSR1, SET, pin);
+            common::set_reg_bit(EXTI->FTSR1, SET, pin);
         }
 
         if (callback != nullptr) {
@@ -387,21 +387,21 @@ void gpio::disableIrq(u16 pin) const
     // Ensure the pin number is within valid range
     assert((pin < this->MAX_PINS), "Invalid pin number.");
 
-    if (common::read_reg_bits(EXTI->IMR1, common::SET, pin)) {
+    if (common::read_reg_bits(EXTI->IMR1, SET, pin)) {
         // Clear the pending interrupt request if any
-        common::set_reg_bit(EXTI->PR1, common::SET, pin);
+        common::set_reg_bit(EXTI->PR1, SET, pin);
         // Reset the corresponding interrupt input source
         common::reset_reg_bits(SYSCFG->EXTICR[pin>>2], 15, (pin&0x3)*4);
         // Mask the interrupt request for this line
-        common::reset_reg_bits(EXTI->IMR1, common::SET, pin);
+        common::reset_reg_bits(EXTI->IMR1, SET, pin);
         // Reset the trigger configuration for the line
-        if (common::read_reg_bits(EXTI->RTSR1, common::SET, pin))
+        if (common::read_reg_bits(EXTI->RTSR1, SET, pin))
         {
-            common::reset_reg_bits(EXTI->RTSR1, common::SET, pin);
+            common::reset_reg_bits(EXTI->RTSR1, SET, pin);
         }
-        if (common::read_reg_bits(EXTI->FTSR1, common::SET, pin))
+        if (common::read_reg_bits(EXTI->FTSR1, SET, pin))
         {
-            common::reset_reg_bits(EXTI->FTSR1, common::SET, pin);
+            common::reset_reg_bits(EXTI->FTSR1, SET, pin);
         }
 
         if (cbkArray.at(pin) != nullptr) {
@@ -433,22 +433,22 @@ void gpio::enableEvent(u16 pin, edge edge)
     if (inFlag.at(pin) == true)
     {
         // Enable the system configuration clock
-        rcc::enableClock(common::SYSCFG_ID);
+        rcc::enableClock(drivers::SYSCFG_ID);
         // Configure the event source
         common::modify_reg(SYSCFG->EXTICR[pin>>2], 4, portNum, (pin&0x3)*4);
         // Unmask the corresponding event source
-        common::set_reg_bit(EXTI->EMR1, common::SET, pin);
+        common::set_reg_bit(EXTI->EMR1, SET, pin);
         // Set the triggering edge(s) for the line
         if (edge == edge::RISING) {
-            common::set_reg_bit(EXTI->RTSR1, common::SET, pin);
+            common::set_reg_bit(EXTI->RTSR1, SET, pin);
         }
         else if (edge == edge::FALLING) {
-            common::set_reg_bit(EXTI->FTSR1, common::SET, pin);
+            common::set_reg_bit(EXTI->FTSR1, SET, pin);
         }
         else {
             // Both rising and falling edges
-            common::set_reg_bit(EXTI->RTSR1, common::SET, pin);
-            common::set_reg_bit(EXTI->FTSR1, common::SET, pin);
+            common::set_reg_bit(EXTI->RTSR1, SET, pin);
+            common::set_reg_bit(EXTI->FTSR1, SET, pin);
         }
     }
 }
@@ -464,22 +464,22 @@ void gpio::disableEvent(u16 pin) const
     // Ensure the pin number is within valid range
     assert((pin < this->MAX_PINS), "Invalid pin number.");
 
-    if (common::read_reg_bits(EXTI->EMR1, common::SET, pin))
+    if (common::read_reg_bits(EXTI->EMR1, SET, pin))
     {
         // Reset the corresponding event source
         common::reset_reg_bits(SYSCFG->EXTICR[pin>>2], 15, (pin&0x3)*4);
         // Mask the event request for this line
-        common::reset_reg_bits(EXTI->EMR1, common::SET, pin);
+        common::reset_reg_bits(EXTI->EMR1, SET, pin);
         // Reset the trigger configuration for the line
-        if (common::read_reg_bits(EXTI->RTSR1, common::SET, pin))
+        if (common::read_reg_bits(EXTI->RTSR1, SET, pin))
         {
             // Reset the rising edge trigger for the line
-            common::reset_reg_bits(EXTI->RTSR1, common::SET, pin);
+            common::reset_reg_bits(EXTI->RTSR1, SET, pin);
         }
-        if (common::read_reg_bits(EXTI->FTSR1, common::SET, pin))
+        if (common::read_reg_bits(EXTI->FTSR1, SET, pin))
         {
             // Reset the falling edge trigger for the line
-            common::reset_reg_bits(EXTI->FTSR1, common::SET, pin);
+            common::reset_reg_bits(EXTI->FTSR1, SET, pin);
         }
     }
 }
@@ -489,9 +489,9 @@ extern "C" void EXTI15_10_IRQHandler(void)
 {
     for (auto i = 10; i <= 15; i++)
     {
-        if (common::read_reg_bits(EXTI->PR1, common::SET, i)) {
+        if (common::read_reg_bits(EXTI->PR1, SET, i)) {
             // Clear the pending bit
-            common::set_reg_bit(EXTI->PR1, common::SET << i);
+            common::set_reg_bit(EXTI->PR1, SET << i);
 
             if (gpio::cbkArray.at(i) != nullptr) {
                 // Call the callback function

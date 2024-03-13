@@ -50,6 +50,11 @@
 ===================================================================================*/
 using namespace driver;
 
+void flash::IRQ_Handler()
+{
+    
+}
+
 
 /*==================================================================================
 |                         PUBLIC FUNCTIONS DEFINITIONS                                
@@ -157,6 +162,12 @@ bool flash::program(const u32 address, const T value)
  * @return true if the operation was successful, false otherwise
  */
 bool flash::protect(const u32 startAddress, const size_t size)
+{
+    
+}
+
+
+extern "C" void FLASH_IRQHandler(void)
 {
     
 }
