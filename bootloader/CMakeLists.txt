@@ -1,8 +1,8 @@
 ########################################################################
 # -------------------------------------------------------------------- #
-# | Author : Awatsa Hermann          |     Version : 1.0.1           | #
+# | Author : Awatsa Hermann          |     Version : 1.1             | #
 # -------------------------------------------------------------------- #
-# | Date : 11.26.2023                |     File : CmakeLists.txt     | #
+# | Date : 06.12.2024                |     File : CmakeLists.txt     | #
 # ---------------------------------------------------------------------#
 # | Brief : Bootloader CmakeLists.txt file                           | #
 # -------------------------------------------------------------------- #
@@ -18,39 +18,18 @@ get_target_property(DEFINES ${BOOT_EXECUTABLE} COMPILE_DEFINITIONS)
 # Get the first macro defined
 list(GET DEFINES 0 DEVICE_DEFINE)
 
-if(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{TI_TOOLCHAIN_PATH}")
-
-    if(DEVICE_DEFINE STREQUAL STM32F303)
-        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_cmd/STM32F303_boot.cmd)
-    elseif(DEVICE_DEFINE STREQUAL STM32G474)
-        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_cmd/STM32G474_boot.cmd)
-    endif()
-
-    target_link_options(
-        ${BOOT_EXECUTABLE} PRIVATE
-        -mcpu=cortex-m4 -mthumb -mfloat-abi=hard
-        ${LINKER_FILE}
-        -Wl,--map_file=${BOOT_EXECUTABLE}.map, -v
-    )
-    
-elseif(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{GNU_TOOLCHAIN_PATH}")
-
-    if(DEVICE_DEFINE STREQUAL STM32F303)
-        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_scripts/STM32F303_boot.ld)
-    elseif(DEVICE_DEFINE STREQUAL STM32G474)
-        set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_scripts/STM32G474_boot.ld)
-    endif()
-
-    target_link_options(
-        ${BOOT_EXECUTABLE} PRIVATE
-        -mcpu=cortex-m4 -mthumb -mfloat-abi=hard
-        -specs=nano.specs -specs=nosys.specs
-        -T${LINKER_FILE}
-        -Wl,--gc-sections
-        -Wl,--Map=${BOOT_EXECUTABLE}.map,--cref
-    )
-
+if(DEVICE_DEFINE STREQUAL STM32F303)
+    set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_cmd/STM32F303_boot.cmd)
+elseif(DEVICE_DEFINE STREQUAL STM32G474)
+    set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_cmd/STM32G474_boot.cmd)
 endif()
+
+target_link_options(
+    ${BOOT_EXECUTABLE} PRIVATE
+    -mcpu=cortex-m4 -mthumb -mfloat-abi=hard
+    ${LINKER_FILE}
+    -Wl,--map_file=${BOOT_EXECUTABLE}.map, -v
+)
 
 target_sources(
     ${BOOT_EXECUTABLE} PRIVATE

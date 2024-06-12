@@ -1,8 +1,8 @@
 ########################################################################
 # -------------------------------------------------------------------- #
-# | Author : Awatsa Hermann          |     Version : 1.0.1           | #
+# | Author : Awatsa Hermann          |     Version : 1.1             | #
 # -------------------------------------------------------------------- #
-# | Date : 11.26.2023                |     File: stm32_project.cmake | #
+# | Date : 06.12.2024                |     File: stm32_project.cmake | #
 # ---------------------------------------------------------------------#
 # | This file is use to configure the common stm32 target options    | #
 # -------------------------------------------------------------------- #
@@ -18,27 +18,12 @@ target_compile_definitions(
     _ENABLE_IRQ
 )
 
-if(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{TI_TOOLCHAIN_PATH}")
-
-    target_compile_options(
-        ${TARGET_NAME} PRIVATE
-        -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
-        -flto -fno-common -ffunction-sections -fdata-sections -fstack-usage
-        -Wall -Wextra -Wshadow -Wdouble-promotion -Wno-strict-aliasing
-    )
-
-elseif(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{GNU_TOOLCHAIN_PATH}")
-
-    target_compile_options(
-        ${TARGET_NAME} PRIVATE
-        -fdiagnostics-color=always
-        -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
-        -specs=nano.specs -specs=nosys.specs
-        -fno-common -ffunction-sections -fdata-sections -fstack-usage
-        -Wall -Wextra -Wshadow -Wdouble-promotion -Wno-strict-aliasing
-    )
-
-endif()
+target_compile_options(
+    ${TARGET_NAME} PRIVATE
+    -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
+    -flto -fno-common -ffunction-sections -fdata-sections -fstack-usage
+    -Wall -Wextra -Wshadow -Wdouble-promotion -Wno-strict-aliasing
+)
 
 target_compile_features(
     ${TARGET_NAME} PUBLIC 
