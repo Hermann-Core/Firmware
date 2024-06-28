@@ -92,8 +92,12 @@ static void store_digits(int digit, char buffer[], u32 *pos)
  * \param [in] args   : va_list arguments
  * \return number of printed characters
  */
-size_t _sprintf(char buffer[], const char* format, va_list args)
+size_t _sprintf(char *buffer, const char *format, va_list args)
 {
+    if (buffer == NULL || format == NULL) {
+        return 0;
+    }
+
     size_t count = 0;
 
     for (; *format != '\0'; ++format)
@@ -143,7 +147,11 @@ size_t _sprintf(char buffer[], const char* format, va_list args)
             }
             case 's':
             {
-                const char* str = va_arg(args, char*);
+                const char* str = va_arg(args, const char*);
+                if (str == NULL) {
+                    buffer[count++] = '\0';
+                    break;
+                }
                 while (*str != '\0') {
                     buffer[count++] = *str++;
                 }
@@ -154,6 +162,7 @@ size_t _sprintf(char buffer[], const char* format, va_list args)
                 break;
         }
     }
+    buffer[count] = '\0';  // null terminate the buffer
     return count;
 }
 
