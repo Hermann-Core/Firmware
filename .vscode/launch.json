@@ -26,7 +26,6 @@
           {"file": "${workspaceFolder}/bin/debug/application.out"}
         ],
         "servertype": "jlink",
-        "serverpath": "${env:ProgramFiles}/SEGGER/JLink/JLinkGDBServerCL.exe",
         "runToEntryPoint": "main",
         "device": "STM32F303VC",
         "showDevDebugOutput": "raw",

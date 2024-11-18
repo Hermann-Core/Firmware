@@ -12,6 +12,7 @@
 file(GLOB TOOLCHAIN_DIRECTORIES
     "C:/TI_LLVM_Arm_Embedded_Toolchain/bin"
     "/home/hermann-core/TI_LLVM_ARM_TOOLCHAIN/bin"
+    "/Applications/ti/bin"
 )
 
 # Count the available toolchains
