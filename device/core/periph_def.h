@@ -162,7 +162,7 @@ typedef enum
   FMAC_IRQn                   = 101     /*!< FMAC global Interrupt                                             */
   #endif    /* STM32F303 */
   
-} IRQn_t;
+} IRQn_Type;
 
 
 /*==================================================================================

@@ -45,7 +45,7 @@
  * 
  * \param [in] IRQn : interrupt number
  */
-void hw_core::irq_enable(IRQn_t IRQn)
+void hw_core::irq_enable(IRQn_Type IRQn)
 {
     if (!__NVIC_GetEnableIRQ(IRQn))
     {
@@ -59,7 +59,7 @@ void hw_core::irq_enable(IRQn_t IRQn)
  * 
  * \param [in] IRQn : interrupt number
  */
-void hw_core::irq_disable(IRQn_t IRQn)
+void hw_core::irq_disable(IRQn_Type IRQn)
 {
     while (__NVIC_GetActive(IRQn))
     {
@@ -76,7 +76,7 @@ void hw_core::irq_disable(IRQn_t IRQn)
  * \param [in] IRQn : interrupt number
  * \param [in] u8Priority : interrupt priority
  */
-void hw_core::irq_setPriority(IRQn_t IRQn, u8 priority)
+void hw_core::irq_setPriority(IRQn_Type IRQn, u8 priority)
 {
   NVIC_SetPriority(IRQn, (u32)priority);
 }
@@ -87,7 +87,7 @@ void hw_core::irq_setPriority(IRQn_t IRQn, u8 priority)
  * 
  * \param [in] IRQn : interrupt number
  */
-void hw_core::irq_clearPending(IRQn_t IRQn)
+void hw_core::irq_clearPending(IRQn_Type IRQn)
 {
     if (__NVIC_GetPendingIRQ(IRQn))
     {

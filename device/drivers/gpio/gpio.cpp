@@ -366,7 +366,7 @@ void gpio::enableIrq(u16 pin, edge edge, cbk_f callback)
             cbkArray.add(pin, callback);
         }
 
-        auto extIrq = static_cast<IRQn_t>((pin >= 10 && pin <= 15) ?
+        auto extIrq = static_cast<IRQn_Type>((pin >= 10 && pin <= 15) ?
                       EXTI15_10_IRQn : (pin >= 5 && pin <= 9) ?
                       EXTI9_5_IRQn   : EXTI0_IRQn + pin);
         
@@ -409,7 +409,7 @@ void gpio::disableIrq(u16 pin) const
             cbkArray.at(pin) = nullptr;
         }
         
-        auto extIrq = static_cast<IRQn_t>((pin >= 10 && pin <= 15) ?
+        auto extIrq = static_cast<IRQn_Type>((pin >= 10 && pin <= 15) ?
                       EXTI15_10_IRQn : (pin >= 5 && pin <= 9) ?
                       EXTI9_5_IRQn   : EXTI0_IRQn + pin);
 

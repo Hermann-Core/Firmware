@@ -39,10 +39,10 @@ namespace hw_core
 {
     void disable_all_irq(void);
     void disable_fault_irq(void);
-    void irq_enable(IRQn_t IRQn);
-    void irq_disable(IRQn_t IRQn);
-    void irq_clearPending(IRQn_t IRQn);
-    void irq_setPriority(IRQn_t IRQn, u8 priority);
+    void irq_enable(IRQn_Type IRQn);
+    void irq_disable(IRQn_Type IRQn);
+    void irq_clearPending(IRQn_Type IRQn);
+    void irq_setPriority(IRQn_Type IRQn, u8 priority);
     void systemReset(void);
     void initTicks(u32 ticks);
 };
