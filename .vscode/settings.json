@@ -16,8 +16,6 @@
         "--query-driver=/Applications/ti/bin/tiarmclang",
         "--query-driver=/home/hermann-core/TI_LLVM_ARM_TOOLCHAIN/bin/tiarmclang",
         "--query-driver=D:/TI_LLVM_Arm_Embedded_Toolchain/bin/tiarmclang.exe",
-        "--query-driver=D:/GNU_Arm_Embedded_Toolchain/12.2-rel1/bin/arm-none-eabi-g++.exe",
-        "--query-driver=D:/GNU_Arm_Embedded_Toolchain/12.2-rel1/bin/arm-none-eabi-gcc.exe"
     ],
     "C_Cpp.intelliSenseEngine": "default",
     "files.associations": {

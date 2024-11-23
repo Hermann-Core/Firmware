@@ -25,12 +25,6 @@ target_compile_options(
     -Wall -Wextra -Wshadow -Wdouble-promotion -Wno-strict-aliasing
 )
 
-target_compile_features(
-    ${TARGET_NAME} PUBLIC 
-    c_std_11
-    cxx_std_17
-)
-
 target_link_libraries(
     ${TARGET_NAME} PRIVATE
 )

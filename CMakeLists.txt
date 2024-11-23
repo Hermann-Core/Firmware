@@ -8,7 +8,7 @@
 # -------------------------------------------------------------------- #
 ########################################################################
 
-cmake_minimum_required(VERSION 3.24)
+cmake_minimum_required(VERSION 3.24 FATAL_ERROR)
 
 project("EBIKE" C CXX ASM)
 
@@ -44,12 +44,7 @@ include_directories(
 )
 
 link_directories(library/arm_dsp/lib)
-
-if(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{TI_TOOLCHAIN_PATH}")
-    link_libraries(arm_cortexM4lf_math.lib)
-elseif(TOOLCHAIN_DIRECTORY PATH_EQUAL "$ENV{GNU_TOOLCHAIN_PATH}")
-    link_libraries(libarm_cortexM4lf_math.a)
-endif()
+link_libraries(arm_cortexM4lf_math.lib)
 
 add_subdirectory(bootloader)
 add_subdirectory(application)
