@@ -59,8 +59,8 @@ no_return void boot_jump::jumpToApp(const u32* appVector)
     for (u8 i = 0; i < MAX_IRQ_NUMBERS; i++)
     {
       /* Disable and clear all pending interrupts */
-      hw_core::irq_disable((IRQn_t)i);
-      hw_core::irq_clearPending((IRQn_t)i);
+      hw_core::irq_disable((IRQn_Type)i);
+      hw_core::irq_clearPending((IRQn_Type)i);
     }
 
     /* Disable the systick and clear its exception pending */
