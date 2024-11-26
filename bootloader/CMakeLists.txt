@@ -1,4 +1,4 @@
-########################################################################
+# #######################################################################
 # -------------------------------------------------------------------- #
 # | Author : Awatsa Hermann          |     Version : 1.1             | #
 # -------------------------------------------------------------------- #
@@ -6,7 +6,7 @@
 # ---------------------------------------------------------------------#
 # | Brief : Bootloader CmakeLists.txt file                           | #
 # -------------------------------------------------------------------- #
-########################################################################
+# #######################################################################
 
 set(BOOT_EXECUTABLE bootloader)
 
@@ -19,9 +19,9 @@ get_target_property(DEFINES ${BOOT_EXECUTABLE} COMPILE_DEFINITIONS)
 list(GET DEFINES 0 DEVICE_DEFINE)
 
 if(DEVICE_DEFINE STREQUAL STM32F303)
-    set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_cmd/STM32F303_boot.cmd)
+    set(LINKER_FILE ${PROJECT_SOURCE_DIR}/device/config/linker_cmd/STM32F303_boot.cmd)
 elseif(DEVICE_DEFINE STREQUAL STM32G474)
-    set(LINKER_FILE   ${PROJECT_SOURCE_DIR}/device/config/linker_cmd/STM32G474_boot.cmd)
+    set(LINKER_FILE ${PROJECT_SOURCE_DIR}/device/config/linker_cmd/STM32G474_boot.cmd)
 endif()
 
 target_link_options(
