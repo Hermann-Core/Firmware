@@ -49,9 +49,9 @@
             "description": "Set debug build type",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Debug",
-                "CMAKE_C_FLAGS_DEBUG": "-std=gnu11 -gdwarf-3 -g3 -O0 -ggdb",
-                "CMAKE_ASM_FLAGS_DEBUG": "-gdwarf-3 -g3 -O0 -ggdb",
-                "CMAKE_CXX_FLAGS_DEBUG": "-std=gnu++17 -gdwarf-3 -g3 -O0 -ggdb"
+                "CMAKE_ASM_FLAGS_DEBUG": "-O1 -gdwarf-3 -ggdb",
+                "CMAKE_C_FLAGS_DEBUG": "-std=gnu11 -O1 -gdwarf-3 -ggdb",
+                "CMAKE_CXX_FLAGS_DEBUG": "-std=gnu++17 -O1 -gdwarf-3 -ggdb"
             }
         },
         {
@@ -61,8 +61,8 @@
             "description": "Set release build type",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release",
-                "CMAKE_C_FLAGS_RELEASE": "-DNDEBUG -O3",
-                "CMAKE_CXX_FLAGS_RELEASE": "-DNDEBUG -O3"
+                "CMAKE_C_FLAGS_RELEASE": "-DNDEBUG -Ofast",
+                "CMAKE_CXX_FLAGS_RELEASE": "-DNDEBUG -Ofast"
             }
         }
     ],
