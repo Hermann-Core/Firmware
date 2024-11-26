@@ -20,6 +20,7 @@ target_compile_definitions(
 
 target_compile_options(
     ${TARGET_NAME} PRIVATE
+    -U__APPLE_CC__
     -mcpu=cortex-m4 -mthumb -mfloat-abi=hard -mfpu=fpv4-sp-d16
     -flto -fno-common -ffunction-sections -fdata-sections -fstack-usage
     -Wall -Wextra -Wshadow -Wdouble-promotion -Wno-strict-aliasing
