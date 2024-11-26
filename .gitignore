@@ -6,3 +6,6 @@ build
 .vscode/.cortex-debug**
 .cache
 compile_commands.json
+
+# Apple generated files
+.DS_Store
